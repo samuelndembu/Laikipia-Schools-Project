@@ -1,0 +1,63 @@
+{
+	"schemaVersion": 3,
+	"schema": {
+		"type": "container",
+		"initialHeight": 300,
+		"layout": "vertical",
+		"children": [{
+				"type": "text",
+				"paddingLeft": 10,
+				"paddingRight": 10,
+				"paddingTop": 10,
+				"paddingBottom": 10,
+				"string": "${Form.properties[title].value}",
+				"fontSize": 15,
+				"fontStyle": "bold",
+				"textColor": "#721c24",
+				"backgroundColor": "#f8d7da",
+				"textAlignment": "center",
+				"maxNumberOfLines": 1,
+				"marginBottom": 10
+			},
+			{
+				"type": "text",
+				"paddingLeft": 10,
+				"paddingRight": 10,
+				"string": "${Form.properties[message].value}",
+				"fontSize": 14,
+				"fontStyle": "regular",
+				"textColor": "#155724",
+				"backgroundColor": "#d4edda",
+				"textAlignment": "center",
+				"maxNumberOfLines": 5,
+				"marginBottom": 8
+			},
+			{
+				"type": "text",
+				"paddingLeft": 10,
+				"paddingRight": 10,
+				"string": "From: ${Form.properties[fromDate].value}",
+				"fontSize": 12,
+				"fontStyle": "regular",
+				"textColor": "#000000",
+				"backgroundColor": "#ffffff",
+				"textAlignment": "center",
+				"maxNumberOfLines": 5,
+				"marginBottom": 8
+			},
+			{
+				"type": "text",
+				"paddingLeft": 10,
+				"paddingRight": 10,
+				"string": "To: ${Form.properties[toDate].value}",
+				"fontSize": 12,
+				"fontStyle": "regular",
+				"textColor": "#000000",
+				"backgroundColor": "#ffffff",
+				"textAlignment": "center",
+				"maxNumberOfLines": 5,
+				"marginBottom": 8
+			}
+		]
+	}
+}

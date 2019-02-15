@@ -1,0 +1,99 @@
+<?php
+class Partners_model extends CI_Model
+{
+    public function add_partners()
+    {
+        $data = array(
+            "partner_type_id" => $this->input->post("partner_type"),
+            "partner_name" => $this->input->post("partner_name"),
+            "partner_email" => $this->input->post("partner_email"),
+            "partner_logo" => $this->input->post("partner_logo"),
+
+        );
+
+        if ($this->db->insert("partner", $data)) {
+            return $this->db->insert_id();
+        } else {
+            return false;
+        }
+
+    }
+
+    public function get_partners()
+    {
+        $where = "partner.deleted=0";
+        $this->db->select("*");
+        $this->db->from("partner");
+        $this->db->where($where);
+        $this->db->join("partner_type", "partner.partner_type_id=partner_type.partner_type_id");
+     
+        $this->db->order_by("partner.created_on", "DESC");
+        return $this->db->get();
+    }
+
+    public function get_single_partner($partner_id)
+    {
+        $this->db->where("partner_id", $partner_id);
+        return $this->db->get("partner");
+    }
+    public function all_partner_types(){
+        $this->db->select("*");
+        $this->db->from("partner_type");
+        return $this->db->get();
+
+    }
+
+    //  public function deletepartner($partner_id){
+    //     {
+    //         $this->db->where('partner_id', $partner_id);
+    //         $this->db->delete('partner');
+    //     }
+
+    public function get_partner_types()
+    {
+        $this->db->select("*");
+        $this->db->from("partner_type");
+        return $this->db->get();
+    }
+    
+    public function update_partner($partner_id){
+        $data = array(
+            "partner_type_id" => $this->input->post("partner_type"),
+            "partner_name" => $this->input->post("partner_name"),
+            "partner_email" => $this->input->post("partner_email"),
+            
+           
+        );
+        $this->db->set($data);
+        $this->db->where('partner_id',$partner_id);
+
+        if($this->db->update('partner'))
+        {
+            return TRUE;
+        }else
+        {
+            return FALSE;
+        }
+
+
+    }
+    public function delete_partners($partner_id)
+    {
+        $data = array(
+            'deleted' => 1,
+            'deleted_by' => 1,
+            'deleted_on' => date("Y-m-d H:i:s"),
+        );
+
+        $this->db->set($data);
+        $this->db->where('partner_id', $partner_id);
+        if ($this->db->update('partner')) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+ 
+
+}
