@@ -13,8 +13,7 @@
 						</button>
 					</div>
 					<div class="modal-body">
-						<?php echo form_open($this->uri->uri_string()); ?>
-
+						<?php echo form_open_multipart($this->uri->uri_string()); ?>
 						<div class="form-group row">
 							<div class="col-sm-12 col-md-12">
 								<input type="text" class="form-control" id="school_name" name="school_name" placeholder="School Name" required>
@@ -27,7 +26,7 @@
 						</div>
 						<div class="form-group row">
 							<div class="col-sm-12 col-md-12">
-								<input type="number" class="form-control" id="school_boys_number" name="school_boys_number" placeholder="School Write up" required>
+								<input type="number" class="form-control" id="school_boys_number" name="school_boys_number" placeholder="Number of Boys" required>
 							</div>
 						</div>
 						<div class="form-group row">
@@ -37,7 +36,7 @@
 						</div>
 						<div class="form-group row">
 							<div class="col-sm-12 col-md-12">
-								<input type="text" class="form-control" id="school_location_name" name="school_location_name" placeholder="Locaion Name" required>
+								<input type="text" class="form-control" id="school_location_name" name="school_location_name" placeholder="Location Description" required>
 							</div>
 						</div>
 						<div class="form-group row">
@@ -50,6 +49,13 @@
 								<input type="text" class="form-control" id="school_longitude" name="school_longitude" placeholder="Longitude" required>
 							</div>
 						</div>
+						<div class="form-group">
+						<div class="col-sm-12 col-md-12">
+							<label for="school_name" class="col-sm-2 col-form-label">Profile Image</label>
+							<input type="file" id="school_image" name="school_image">
+						</div>
+						</div>
+
 						 <fieldset class="form-group">
 								<div class="row">
 								<legend class="col-form-label col-sm-2 pt-0">Status</legend>
@@ -90,6 +96,7 @@
 				<thead class="thead-dark">
 					<tr>
 						<th>#</th>
+							<th> School Picture</th>
 						<th>School Name</th>
 						<th>School Writeup</th>
 						<th>Number of Boys</th>
@@ -100,6 +107,7 @@
 				<tfoot class="thead-light">
 					<tr>
 						<th>#</th>
+						<th> School Picture</th>
 						<th>School Name</th>
 						<th>School Writeup</th>
 						<th>Number of Boys</th>
@@ -112,10 +120,10 @@
 
 				<?php
 
-if ($all_schools->num_rows() > 0) {
+if ($query->num_rows() > 0) {
     $count = 0;
 
-    foreach ($all_schools->result() as $row) {
+    foreach ($query->result() as $row) {
         $id = $row->school_id;
 
         $count++;
@@ -123,6 +131,9 @@ if ($all_schools->num_rows() > 0) {
 				<tr>
 						<td>
 							<?php echo $count ?>
+						</td>
+						<td>
+							<?php echo $row->school_image; ?>
 						</td>
 						<td>
 							<?php echo $row->school_name; ?>

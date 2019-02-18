@@ -17,7 +17,7 @@ form_open($this->uri->uri_string()); ?>
     <div class="col-sm-10">
       <input type="numeric" class="form-control" id="school_boys_number" placeholder="Number of boys, eg. 10">
     </div>
-  
+
   <div class="form-group row">
     <label for="school_girls_number" class="col-sm-2 col-form-label">Number of Girls</label>
     <div class="col-sm-10">
@@ -34,10 +34,11 @@ form_open($this->uri->uri_string()); ?>
       <input type="numeric" class="form-control" id="school_Longitude" placeholder="Longitude">
     </div>
     <div class="form-group row">
-    <label for="school_location_name" class="col-sm-2 col-form-label">Longitude</label>
+    <label for="school_location_name" class="col-sm-2 col-form-label">Location Name</label>
     <div class="col-sm-10">
       <input type="text" class="form-control" id="school_location_name" placeholder="Location Name">
     </div>
+
   <fieldset class="form-group">
     <div class="row">
       <legend class="col-form-label col-sm-2 pt-0">School Status</legend>
@@ -57,7 +58,7 @@ form_open($this->uri->uri_string()); ?>
       </div>
     </div>
   </fieldset>
-  
+
   </div>
   <div class="form-group row">
     <div class="col-sm-10">
