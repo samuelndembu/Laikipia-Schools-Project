@@ -6,16 +6,105 @@ require_once "./application/modules/admin/controllers/Admin.php";
 
 class Schools extends admin
 {
+    public $upload_path;
+    public $upload_location;
     public function __construct()
     {
         parent::__construct();
+        $this->upload_path = realpath(APPPATH . '../assets/uploads');
+
+        //get the location to upload images
+        $this->upload_location = base_url() . 'assets/uploads';
+
         $this->load->model("laikipiaschools/schools_model");
+        $this->load->library("image_lib");
+
+        $this->load->model("laikipiaschools/schools_model");
+        $this->load->model("laikipiaschools/site_model");
+        $this->load->model("laikipiaschools/file_model");
+
         // $this->load->model("laikipiaschools/payments_model");
     }
-    public function index($start = null)
+    public function index($order = 'school.school_name', $order_method = 'ASC')
     {
-        // echo 1;die();
+//         // echo 1;die();
+        // $where = 'school_id > 0';
+        //         $table = 'school';
+        //         $school_search = $this->session->userdata('school_search');
+        //         $search_title = $this->session->userdata('school_search_title');
 
+//         if(!empty($school_search) && $school_search != NULL)
+        //         {
+        //             $where .= $school_search;
+        //         }
+
+//         //pagination
+        //         $segment = 5;
+        //         $this->load->library('pagination');
+        //         $config['base_url'] = site_url().'laikipiaschools/school/'.$order.'/'.$order_method;
+        //         $config['total_rows'] = $this->site_model->count_items($table, $where);
+        //         $config['uri_segment'] = $segment;
+        //         $config['per_page'] = 3;
+        //         $config['num_links'] = 5;
+
+//         $config['full_tag_open'] = '<ul class="pagination">';
+        //         $config['full_tag_close'] = '</ul>';
+
+//         $config['first_tag_open'] = '<li>';
+        //         $config['first_tag_close'] = '</li>';
+
+//         $config['last_tag_open'] = '<li>';
+        //         $config['last_tag_close'] = '</li>';
+
+//         $config['next_tag_open'] = '<li>';
+        //         $config['next_link'] = 'Next';
+        //         $config['next_tag_close'] = '</span>';
+
+//         $config['prev_tag_open'] = '<li page-item disabled>';
+        //         $config['prev_link'] = 'Prev';
+        //         $config['prev_tag_close'] = '</li>';
+
+//         $config['cur_tag_open'] = '<li class="page-link"><a href="#">';
+        //         $config['cur_tag_close'] = '</a></li>';
+
+//         $config['num_tag_open'] = '<li>';
+        //         $config['num_tag_close'] = '</li>';
+        //         $this->pagination->initialize($config);
+
+//         $page = ($this->uri->segment($segment)) ? $this->uri->segment($segment) : 0;
+        //         $v_data["links"] = $this->pagination->create_links();
+        //         $query = $this->schools_model->get_all_school($table, $where, $config["per_page"], $page, $order, $order_method);
+
+//         //change of order method
+        //         if($order_method == 'DESC')
+        //         {
+        //             $order_method = 'ASC';
+        //         }
+
+//         else
+        //         {
+        //             $order_method = 'DESC';
+        //         }
+
+//         $data['title'] = 'Lakipia Schools';
+
+//         if(!empty($search_title) && $search_title != NULL)
+        //         {
+        //             $data['title'] = 'school filtered by '.$search_title;
+        //         }
+        //         $v_data['title'] = $data['title'];
+
+//         $v_data['order'] = $order;
+        //         $v_data['order_method'] = $order_method;
+        //         $v_data['transacted_agents'] = $this->schools_model->get_transacted_agents();
+        //         $v_data['transacted_locations'] = $this->schools_model->get_transacted_locations();
+        //         $v_data['transacted_customers'] = $this->payments_model->get_transacted_customers();
+        //         $v_data['query'] = $query;
+        //         $v_data['page'] = $page;
+        //         $data['content'] = $this->load->view('laikipiaschools/all_school', $v_data, true);
+
+//         $this->load->view('laikipiaschools/layouts/layout', $data);
+        //     }
         $this->form_validation->set_rules("school_name", "School Name", "required");
         $this->form_validation->set_rules("school_write_up", "School Write Up", "required");
         $this->form_validation->set_rules("school_boys_number", "Number of Boys", "required");
@@ -35,9 +124,10 @@ class Schools extends admin
             $school_id = $this->schools_model->add_school();
             // echo $school_id;die();
             if ($school_id > 0) {
-                $this->session->flashdata("success_message", "New school ID" . $school_id . "has been added");
 
                 redirect("laikipiaschools/schools");
+                $this->session->flashdata("success_message", "New school ID" . $school_id . "has been added");
+
             } else {
                 $this->session->flashdata("error_message", "Unable to add  school");
                 redirect("laikipiaschools/schools");
@@ -47,16 +137,82 @@ class Schools extends admin
 //             echo validation_errors();
             // ;die();
 
-            $config["base_url"] = base_url() . "schools/schools/index";
-            $config["total_rows"] = $this->schools_model->countAll();
-            $config["per_page"] = 4;
+            // $config["base_url"] = base_url() . "schools/schools/index";
+            // $config["total_rows"] = $this->schools_model->countAll();
+            // $config["per_page"] = 4;
 
-            $v_data["all_schools"] = $this->schools_model->get_all_schools($config["per_page"], $start);
+            // $v_data["all_schools"] = $this->schools_model->get_all_schools($config["per_page"], $start);
 
+            // $this->pagination->initialize($config);
+
+            // $v_data['links'] = $this->pagination->create_links();
+            // $v_data['counter'] = $start;
+
+            // echo 1;die();
+            $where = 'school_id > 0';
+            $table = 'school';
+            $school_search = $this->session->userdata('school_search');
+            $search_title = $this->session->userdata('school_search_title');
+
+            if (!empty($school_search) && $school_search != null) {
+                $where .= $school_search;
+            }
+
+            //pagination
+            $segment = 5;
+            $this->load->library('pagination');
+            $config['base_url'] = site_url() . 'laikipiaschools/school/' . $order . '/' . $order_method;
+            $config['total_rows'] = $this->site_model->count_items($table, $where);
+            $config['uri_segment'] = $segment;
+            $config['per_page'] = 3;
+            $config['num_links'] = 5;
+
+            $config['full_tag_open'] = '<ul class="pagination">';
+            $config['full_tag_close'] = '</ul>';
+
+            $config['first_tag_open'] = '<li>';
+            $config['first_tag_close'] = '</li>';
+
+            $config['last_tag_open'] = '<li>';
+            $config['last_tag_close'] = '</li>';
+
+            $config['next_tag_open'] = '<li>';
+            $config['next_link'] = 'Next';
+            $config['next_tag_close'] = '</span>';
+
+            $config['prev_tag_open'] = '<li page-item disabled>';
+            $config['prev_link'] = 'Prev';
+            $config['prev_tag_close'] = '</li>';
+
+            $config['cur_tag_open'] = '<li class="page-link"><a href="#">';
+            $config['cur_tag_close'] = '</a></li>';
+
+            $config['num_tag_open'] = '<li>';
+            $config['num_tag_close'] = '</li>';
             $this->pagination->initialize($config);
 
-            $v_data['links'] = $this->pagination->create_links();
-            $v_data['counter'] = $start;
+            $page = ($this->uri->segment($segment)) ? $this->uri->segment($segment) : 0;
+            $v_data["links"] = $this->pagination->create_links();
+            $query = $this->schools_model->get_all_schools($table, $where, $config["per_page"], $page, $order, $order_method);
+
+            //change of order method
+            if ($order_method == 'DESC') {
+                $order_method = 'ASC';
+            } else {
+                $order_method = 'DESC';
+            }
+
+            $data['title'] = 'Lakipia Schools';
+
+            if (!empty($search_title) && $search_title != null) {
+                $data['title'] = 'school filtered by ' . $search_title;
+            }
+            $v_data['title'] = $data['title'];
+
+            $v_data['order'] = $order;
+            $v_data['order_method'] = $order_method;
+            $v_data['query'] = $query;
+            $v_data['page'] = $page;
 
             $data = array(
                 "title" => $this->site_model->display_page_title(),
@@ -75,6 +231,7 @@ class Schools extends admin
         if ($school->num_rows() > 0) {
             //  $age, $gender, $hobby
             $row = $school->row();
+            $school_image = $row->school_image;
             $school_name = $row->school_name;
             $School_write_up = $row->School_write_up;
             $school_boys_number = $row->school_boys_number;
@@ -84,6 +241,7 @@ class Schools extends admin
             $school_longitude = $row->school_longitude;
             $school_status = $row->school_status;
             $data = array(
+                'school_image' => $school_image,
                 'school_name' => $school_name,
                 'School_write_up' => $School_write_up,
                 'school_boys_number' => $school_boys_number,
@@ -116,6 +274,17 @@ class Schools extends admin
         $form_errors = "";
 
         if ($this->form_validation->run()) {
+            if ($upload_response['check'] == false) {
+                $this->session->set_flashdata('error', $upload_response['message']);
+            } else {
+                if ($this->schools_model->add_school($upload_response['file_name'], $upload_response['thumb_name'])) {
+                    $this->session->set_flashdata('success', 'School Added successfully!!');
+                    redirect('schools');
+                } else {
+                    $this->session->flashdata("error_message", "Unable to add  school");
+                }
+
+            }
             $school_id = $this->schools_model->add_school();
             if ($school_id > 0) {
                 $this->session->flashdata("success_message", "New school ID" . $school_id . "has been added");
