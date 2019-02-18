@@ -56,23 +56,9 @@ $route['translate_uri_dashes'] = false;
 /**
  * Merchant Routes
  */
-$route['merchant/login'] = 'auth/login_merchant';
-$route['merchants/login'] = 'auth/login_merchant';
-$route['mpesa/login'] = "merchants/registers/login";
-$route['mpesa/logout'] = "auth/logout_merchant";
-$route['mpesa/merchant'] = "merchants/registers/login_merchant";
-$route['mpesa/profile'] = "merchants/registers/merchant_profile";
-$route['merchant/profile'] = "merchants/registers/merchant_profile";
-$route['mpesa/create-client'] = "merchants/registers/create_client";
-$route['mpesa/save-client'] = "merchants/registers/save_client";
-$route['merchant/change-password'] = "merchants/registers/change_password";
-$route['update-customers'] = 'webservice/update_customers';
-
 /**
  * Auth
  */
-$route['login'] = 'auth/login_admin';
-$route['logout'] = 'auth/logout';
 
 $route['laikipia/login'] = 'auth/laikipiaauth/login_admin';
 $route['laikipia/logout'] = 'auth/laikipiaauth/logout';
