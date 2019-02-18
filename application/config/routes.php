@@ -53,27 +53,6 @@ $route['default_controller'] = 'laikipia/login';
 // $route['404_override'] = 'auth/login_merchant';
 $route['translate_uri_dashes'] = false;
 
-/**
- * Merchant Routes
- */
-$route['merchant/login'] = 'auth/login_merchant';
-$route['merchants/login'] = 'auth/login_merchant';
-$route['mpesa/login'] = "merchants/registers/login";
-$route['mpesa/logout'] = "auth/logout_merchant";
-$route['mpesa/merchant'] = "merchants/registers/login_merchant";
-$route['mpesa/profile'] = "merchants/registers/merchant_profile";
-$route['merchant/profile'] = "merchants/registers/merchant_profile";
-$route['mpesa/create-client'] = "merchants/registers/create_client";
-$route['mpesa/save-client'] = "merchants/registers/save_client";
-$route['merchant/change-password'] = "merchants/registers/change_password";
-$route['update-customers'] = 'webservice/update_customers';
-
-/**
- * Auth
- */
-$route['login'] = 'auth/login_admin';
-$route['logout'] = 'auth/logout';
-
 $route['laikipia/login'] = 'auth/laikipiaauth/login_admin';
 $route['laikipia/logout'] = 'auth/laikipiaauth/logout';
 
@@ -100,98 +79,7 @@ $route['administration/activate-section/(:num)/(:num)'] = 'admin/sections/activa
 $route['administration/deactivate-section/(:num)'] = 'admin/sections/deactivate_section/$1';
 $route['administration/deactivate-section/(:num)/(:num)'] = 'admin/sections/deactivate_section/$1/$2';
 
-/**
- * Reports - Transactions
- */
-$route['reports/update-merchants/(:num)/(:num)'] = 'reports/transactions/update_merchant_info/$1/$2';
-$route['reports/transactions'] = 'reports/transactions/index';
-$route['reports/test-page'] = 'reports/transactions/test_page';
-$route['reports/search-transactions'] = 'reports/transactions/search_transactions';
-$route['reports/close-search'] = 'reports/transactions/close_search';
-$route['reports/export-transactions'] = 'reports/transactions/export_transactions';
-$route['reports/transactions/(:any)/(:any)/(:num)'] = 'reports/transactions/index/$1/$2/$3';
-$route['reports/transactions/(:any)/(:any)'] = 'reports/transactions/index/$1/$2';
-$route['reports/transactions/bulk-actions'] = 'reports/transactions/bulk_actions';
 
-/**
- * Reports - Payments
- */
-$route['reports/payments'] = 'reports/payments/index';
-$route['reports/search-payments'] = 'reports/payments/search_payments';
-$route['reports/close-payments-search'] = 'reports/payments/close_search';
-$route['reports/export-payments'] = 'reports/payments/export_payments';
-$route['reports/payments/(:any)/(:any)/(:num)'] = 'reports/payments/index/$1/$2/$3';
-$route['reports/payments/(:any)/(:any)'] = 'reports/payments/index/$1/$2';
-$route['reports/payments/bulk-actions'] = 'reports/payments/bulk_actions';
-$route['reports/payments/get-false-payments'] = 'reports/payments/update_payment_info';
-
-/*
- *    Users Routes
- */
-$route['administration/users'] = 'hr/personnel/index';
-$route['administration/users/(:any)/(:any)/(:num)'] = 'hr/personnel/index/$1/$2/$3';
-$route['administration/add-user'] = 'hr/personnel/add_personnel';
-$route['administration/edit-user/(:num)'] = 'hr/personnel/edit_personnel/$1';
-$route['administration/edit-user-about/(:num)'] = 'hr/personnel/update_personnel_about_details/$1';
-$route['administration/edit-user-account/(:num)'] = 'hr/personnel/update_personnel_account_details/$1';
-$route['administration/edit-user/(:num)/(:num)'] = 'hr/personnel/edit_personnel/$1/$2';
-$route['administration/delete-user/(:num)'] = 'hr/personnel/delete_personnel/$1';
-$route['administration/delete-user/(:num)/(:num)'] = 'hr/personnel/delete_personnel/$1/$2';
-$route['administration/activate-user/(:num)'] = 'hr/personnel/activate_personnel/$1';
-$route['administration/activate-user/(:num)/(:num)'] = 'hr/personnel/activate_personnel/$1/$2';
-$route['administration/deactivate-user/(:num)'] = 'hr/personnel/deactivate_personnel/$1';
-$route['administration/deactivate-user/(:num)/(:num)'] = 'hr/personnel/deactivate_personnel/$1/$2';
-$route['administration/reset-password/(:num)'] = 'hr/personnel/reset_password/$1';
-$route['administration/update-user-roles/(:num)'] = 'hr/personnel/update_personnel_roles/$1';
-
-/**
- * Update Payments
- */
-$route['administration/update-payments'] = 'admin/payments/index';
-$route['administration/update-payments/(:any)/(:any)/(:num)'] = 'admin/payments/index/$1/$2/$3';
-$route['administration/update-payments/(:any)/(:any)'] = 'admin/payments/index/$1/$2';
-$route['administration/search-update-payments'] = 'admin/payments/search_payments';
-$route['administration/update-payments-close-search'] = 'admin/payments/close_search';
-$route['administration/update-payments/bulk-actions'] = 'admin/payments/bulk_actions';
-
-/**
- * Reports - Merchants
- */
-$route['reports/search-merchants'] = 'reports/merchants/search_merchants';
-$route['reports/close-merchants-search'] = 'reports/merchants/close_search';
-$route['reports/export-merchants'] = 'reports/merchants/export_merchants';
-$route['reports/merchants'] = 'reports/merchants/index';
-$route['reports/merchants/(:any)/(:any)/(:num)'] = 'reports/merchants/index/$1/$2/$3';
-$route['reports/merchants/(:any)/(:any)'] = 'reports/merchants/index/$1/$2';
-$route['reports/merchants/bulk-actions'] = 'reports/merchants/bulk_actions';
-
-/**
- * Customers - All Customers
- */
-$route['customers/search-customers'] = 'customers/customers/search_customers';
-$route['customers/close-customers-search'] = 'customers/customers/close_search';
-$route['customers/export-customers'] = 'customers/customers/export_customers';
-$route['customers/all-customers'] = 'customers/customers/index';
-$route['customers/all-customers/(:any)/(:any)/(:num)'] = 'customers/customers/index/$1/$2/$3';
-$route['customers/all-customers/(:any)/(:any)'] = 'customers/customers/index/$1/$2';
-$route['customers/assign-customer'] = 'customers/customers/assign_customer';
-
-/**
- * Customers - Tasks
- */
-$route['customers/search-tasks'] = 'customers/tasks/search_tasks';
-$route['customers/close-tasks-search'] = 'customers/tasks/close_tasks_search';
-$route['customers/export-tasks'] = 'customers/tasks/export_tasks';
-$route['customers/task'] = 'customers/tasks/index';
-$route['customers/task/(:any)/(:any)/(:num)'] = 'customers/tasks/index/$1/$2/$3';
-$route['customers/task/(:any)/(:any)'] = 'customers/tasks/index/$1/$2';
-$route['customers/update-status'] = 'customers/tasks/update_status';
-$route['customers/update-customer-task'] = 'customers/tasks/update_customer_task';
-
-/**
- * rubicon - customers
- */
-$route['rubicon/customers'] = 'rubicon/customers/get_details';
 
 //Laikipia schools
 /**
@@ -230,3 +118,17 @@ $route['laikipiaschools/export-schools'] = 'laikipiaschools/schools/export_trans
 $route['laikipiaschools/schools/(:any)/(:any)/(:num)'] = 'laikipiaschools/schools/index/$1/$2/$3';
 $route['laikipiaschools/schools/(:any)/(:any)'] = 'laikipiaschools/schools/index/$1/$2';
 $route['laikipiaschools/schools/bulk-actions'] = 'laikipiaschools/schools/bulk_actions';
+
+
+/**
+ * Documents
+ */
+$route['laikipiaschools/update-school/(:num)'] = 'laikipiaschools/documents/edit_school/$1';
+$route['laikipiaschools/documents'] = 'laikipiadocuments/documents/index';
+$route['laikipiaschools/add-documents'] = 'laikipiadocuments/documents/add_school';
+$route['laikipiaschools/search-documents'] = 'laikipiadocuments/documents/search_transactions';
+$route['laikipiaschools/close-search'] = 'laikipiadocuments/documents/close_search';
+$route['laikipiaschools/export-documents'] = 'laikipiadocuments/documents/export_transactions';
+$route['laikipiaschools/documents/(:any)/(:any)/(:num)'] = 'laikipiadocuments/documents/index/$1/$2/$3';
+$route['laikipiaschools/documents/(:any)/(:any)'] = 'laikipiadocuments/documents/index/$1/$2';
+$route['laikipiaschools/documents/bulk-actions'] = 'laikipiadocuments/documents/bulk_actions';
