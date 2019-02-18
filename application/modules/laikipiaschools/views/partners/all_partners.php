@@ -52,9 +52,9 @@
 							<?php echo $row->partner_logo;?>
 						</td>
 						<td>
-						<!-- <?php echo anchor("laikipiaschools/addpartner","View","class='btn btn-info'");?> -->
-						<?php echo anchor("laikipiaschools/edit/". $row->partner_id,"Edit","class='btn btn-warning'");?>
-						<?php echo anchor("laikipiaschools/delete-partner/". $row->partner_id,"Delete","class='btn btn-danger'");?>
+						 <?php echo anchor("laikipiaschools/addpartner","View","class='btn btn-info btn-sm'");?> 
+						<?php echo anchor("laikipiaschools/edit/". $row->partner_id,"Edit","class='btn btn-warning btn-sm'");?>
+						<?php echo anchor("laikipiaschools/delete-partner/". $row->partner_id,"Delete","class='btn btn-danger btn-sm'");?>
 							
 						</td>
 					</tr>

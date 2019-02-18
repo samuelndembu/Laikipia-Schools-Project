@@ -1,6 +1,6 @@
 <div class="card shadow mb-4">
 	<div class="card-header py-3">
-		<button type="button" class="btn btn-success" data-toggle="modal" data-target="#createDonation">Add School</button>
+		<button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#createDonation">Add School</button>
 
 		<div class="modal fade" id="createDonation" tabindex="-1" role="dialog" aria-labelledby="createDonationLabel"
 		 aria-hidden="true">
@@ -131,9 +131,12 @@ if ($all_schools->num_rows() > 0) {
 						<td><?php echo $row->school_boys_number; ?></td>
 						<td><?php echo $row->school_girls_number; ?></td>
 						<td>
-						<!-- <td class="col-2"> <?php echo anchor("laikipiaschools/schools/singleschool/" . $id, "View", ['class' => 'btn btn-info']); ?></td> -->
-						<?php echo anchor("laikipiaschools/update-school/" . $id, "Edit", ['class' => 'btn btn-warning']); ?>
-						<?php echo anchor("laikipiaschools/delete-school/" . $id, "Delete", ['class' => 'btn btn-danger']); ?>
+						<td class="col-2"> <?php echo anchor("laikipiaschools/schools/singleschool/" . $id, "View", ['class' => 'btn btn-info btn-sm']); ?></td> 
+						<?php echo anchor("laikipiaschools/update-school/" . $id, "Edit", ['class' => 'btn btn-warning btn-sm']); ?>
+						<?php echo anchor("laikipiaschools/Activate-school/" . $id, "Activate", ['class' => 'btn btn-danger btn-sm']); ?>
+						<?php echo anchor("laikipiaschools/Deactivate-school/" . $id, "Deactivate", ['class' => 'btn btn-danger btn-sm']); ?>
+						<?php echo anchor("laikipiaschools/delete-school/" . $id, "Delete", ['class' => 'btn btn-danger btn-sm']); ?>
+					
 						</td>
 						</tr>
 						<?php
@@ -142,9 +145,7 @@ if ($all_schools->num_rows() > 0) {
 ?>
 				</tbody>
 			</table>
-		</div>
-
-		<p>
+		</div> 
 			<?php echo $links; ?>
 		</p>
 	</div>
