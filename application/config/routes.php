@@ -53,6 +53,13 @@ $route['default_controller'] = 'laikipia/login';
 // $route['404_override'] = 'auth/login_merchant';
 $route['translate_uri_dashes'] = false;
 
+/**
+ * Merchant Routes
+ */
+/**
+ * Auth
+ */
+
 $route['laikipia/login'] = 'auth/laikipiaauth/login_admin';
 $route['laikipia/logout'] = 'auth/laikipiaauth/logout';
 
