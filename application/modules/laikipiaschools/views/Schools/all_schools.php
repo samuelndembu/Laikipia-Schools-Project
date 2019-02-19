@@ -51,7 +51,7 @@
 						</div>
 						<div class="form-group">
 						<div class="col-sm-12 col-md-12">
-							<label for="school_name" class="col-sm-2 col-form-label">Profile Image</label>
+							<label for="school_image" class="col-sm-2 col-form-label">Profile Image</label>
 							<input type="file" id="school_image" name="school_image">
 						</div>
 						</div>
@@ -91,6 +91,17 @@
 		</div>
 
 	<div class="card-body">
+
+ <div class="container">
+        <?php $success = $this->session->flashdata("success");
+$error = $this->session->flashdata("error");
+if (!empty($success)) {
+    echo $success;
+} else {
+    echo $error;
+}
+
+?>
 		<div class="table-responsive">
 			<table class="table table-darkborderless" id="dataTable" width="100%" cellspacing="0">
 				<thead class="thead-dark">
@@ -131,12 +142,9 @@ if ($query->num_rows() > 0) {
 				<tr>
 						<td>
 							<?php echo $count ?>
-						</td>
 						<td>
-							<?php echo $row->school_image; ?>
+					 		 <img src="<?php echo base_url() . 'assets/uploads/' . $row->school_thumb_name; ?>">
 						</td>
-						<td>
-							<?php echo $row->school_name; ?>
 						</td>
 						<td><?php echo $row->school_write_up; ?></td>
 						<td><?php echo $row->school_boys_number; ?></td>

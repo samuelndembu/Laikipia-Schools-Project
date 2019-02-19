@@ -27,84 +27,6 @@ class Schools extends admin
     }
     public function index($order = 'school.school_name', $order_method = 'ASC')
     {
-//         // echo 1;die();
-        // $where = 'school_id > 0';
-        //         $table = 'school';
-        //         $school_search = $this->session->userdata('school_search');
-        //         $search_title = $this->session->userdata('school_search_title');
-
-//         if(!empty($school_search) && $school_search != NULL)
-        //         {
-        //             $where .= $school_search;
-        //         }
-
-//         //pagination
-        //         $segment = 5;
-        //         $this->load->library('pagination');
-        //         $config['base_url'] = site_url().'laikipiaschools/school/'.$order.'/'.$order_method;
-        //         $config['total_rows'] = $this->site_model->count_items($table, $where);
-        //         $config['uri_segment'] = $segment;
-        //         $config['per_page'] = 3;
-        //         $config['num_links'] = 5;
-
-//         $config['full_tag_open'] = '<ul class="pagination">';
-        //         $config['full_tag_close'] = '</ul>';
-
-//         $config['first_tag_open'] = '<li>';
-        //         $config['first_tag_close'] = '</li>';
-
-//         $config['last_tag_open'] = '<li>';
-        //         $config['last_tag_close'] = '</li>';
-
-//         $config['next_tag_open'] = '<li>';
-        //         $config['next_link'] = 'Next';
-        //         $config['next_tag_close'] = '</span>';
-
-//         $config['prev_tag_open'] = '<li page-item disabled>';
-        //         $config['prev_link'] = 'Prev';
-        //         $config['prev_tag_close'] = '</li>';
-
-//         $config['cur_tag_open'] = '<li class="page-link"><a href="#">';
-        //         $config['cur_tag_close'] = '</a></li>';
-
-//         $config['num_tag_open'] = '<li>';
-        //         $config['num_tag_close'] = '</li>';
-        //         $this->pagination->initialize($config);
-
-//         $page = ($this->uri->segment($segment)) ? $this->uri->segment($segment) : 0;
-        //         $v_data["links"] = $this->pagination->create_links();
-        //         $query = $this->schools_model->get_all_school($table, $where, $config["per_page"], $page, $order, $order_method);
-
-//         //change of order method
-        //         if($order_method == 'DESC')
-        //         {
-        //             $order_method = 'ASC';
-        //         }
-
-//         else
-        //         {
-        //             $order_method = 'DESC';
-        //         }
-
-//         $data['title'] = 'Lakipia Schools';
-
-//         if(!empty($search_title) && $search_title != NULL)
-        //         {
-        //             $data['title'] = 'school filtered by '.$search_title;
-        //         }
-        //         $v_data['title'] = $data['title'];
-
-//         $v_data['order'] = $order;
-        //         $v_data['order_method'] = $order_method;
-        //         $v_data['transacted_agents'] = $this->schools_model->get_transacted_agents();
-        //         $v_data['transacted_locations'] = $this->schools_model->get_transacted_locations();
-        //         $v_data['transacted_customers'] = $this->payments_model->get_transacted_customers();
-        //         $v_data['query'] = $query;
-        //         $v_data['page'] = $page;
-        //         $data['content'] = $this->load->view('laikipiaschools/all_school', $v_data, true);
-
-//         $this->load->view('laikipiaschools/layouts/layout', $data);
-        //     }
         $this->form_validation->set_rules("school_name", "School Name", "required");
         $this->form_validation->set_rules("school_write_up", "School Write Up", "required");
         $this->form_validation->set_rules("school_boys_number", "Number of Boys", "required");
@@ -116,39 +38,36 @@ class Schools extends admin
 
         //  validate
         $form_errors = "";
-
         if ($this->form_validation->run()) {
-            // echo 1;die();
-            $data["form_errors"] = validation_errors();
-
-            $school_id = $this->schools_model->add_school();
-            // echo $school_id;die();
-            if ($school_id > 0) {
-
-                redirect("laikipiaschools/schools");
-                $this->session->flashdata("success_message", "New school ID" . $school_id . "has been added");
-
+            $resize = array(
+                "width" => 600,
+                "height" => 600,
+            )
+            ;
+            $upload_response = $this->file_model->upload_image($this->upload_path, "school_image", $resize);
+            if ($upload_response['check'] == false) {
+                $this->session->set_flashdata('error', $upload_response['message']);
             } else {
-                $this->session->flashdata("error_message", "Unable to add  school");
-                redirect("laikipiaschools/schools");
+                if ($this->schools_model->add_school($upload_response['file_name'], $upload_response['thumb_name'])) {
+                    $this->session->set_flashdata('success', 'school Added successfully!!');
+                    redirect('laikipiaschools/schools');
 
+                } else {
+                    $this->session->flashdata("error_message", "Unable to add  school");
+                }
             }
         } else {
-//             echo validation_errors();
-            // ;die();
+            // $v_data["all_schools"] = $this->schools_model->get_all_schools();
+            // $data = array(
+            //     "title" => $this->site_model->display_page_title(),
+            //     "content" => $this->load->view("schools/all_schools", $v_data, true),
+            // );
+            // $this->load->view('site/layouts/layout', $data);
 
-            // $config["base_url"] = base_url() . "schools/schools/index";
-            // $config["total_rows"] = $this->schools_model->countAll();
-            // $config["per_page"] = 4;
+            // $this->load->view("all_schools", $data);
 
-            // $v_data["all_schools"] = $this->schools_model->get_all_schools($config["per_page"], $start);
+            // $this->load->view('site/layouts/layout', $data);
 
-            // $this->pagination->initialize($config);
-
-            // $v_data['links'] = $this->pagination->create_links();
-            // $v_data['counter'] = $start;
-
-            // echo 1;die();
             $where = 'school_id > 0';
             $table = 'school';
             $school_search = $this->session->userdata('school_search');
@@ -193,6 +112,7 @@ class Schools extends admin
 
             $page = ($this->uri->segment($segment)) ? $this->uri->segment($segment) : 0;
             $v_data["links"] = $this->pagination->create_links();
+
             $query = $this->schools_model->get_all_schools($table, $where, $config["per_page"], $page, $order, $order_method);
 
             //change of order method
@@ -213,14 +133,15 @@ class Schools extends admin
             $v_data['order_method'] = $order_method;
             $v_data['query'] = $query;
             $v_data['page'] = $page;
+            $v_data["all_schools"] = $this->schools_model->get_all_schools();
 
             $data = array(
                 "title" => $this->site_model->display_page_title(),
                 "content" => $this->load->view("schools/all_schools", $v_data, true),
             );
+            // $v_data["all_schools"] = $this->schools_model->get_all_schools();
 
             $this->load->view("laikipiaschools/layouts/layout", $data);
-
         }
 
     }
@@ -231,7 +152,7 @@ class Schools extends admin
         if ($school->num_rows() > 0) {
             //  $age, $gender, $hobby
             $row = $school->row();
-            $school_image = $row->school_image;
+            $school_image_name = $row->school_image_name;
             $school_name = $row->school_name;
             $School_write_up = $row->School_write_up;
             $school_boys_number = $row->school_boys_number;
@@ -241,7 +162,7 @@ class Schools extends admin
             $school_longitude = $row->school_longitude;
             $school_status = $row->school_status;
             $data = array(
-                'school_image' => $school_image,
+                'school_image_name' => $school_image_name,
                 'school_name' => $school_name,
                 'School_write_up' => $School_write_up,
                 'school_boys_number' => $school_boys_number,
@@ -255,7 +176,7 @@ class Schools extends admin
 
         } else {
             $this->session->set_flashdata("error_message, could not find your school");
-            redirect("schools");
+            redirect("laikipiaschools/schools");
         }
         //  pass the date
     }
@@ -279,7 +200,7 @@ class Schools extends admin
             } else {
                 if ($this->schools_model->add_school($upload_response['file_name'], $upload_response['thumb_name'])) {
                     $this->session->set_flashdata('success', 'School Added successfully!!');
-                    redirect('schools');
+                    redirect('laikipiaschools/schools');
                 } else {
                     $this->session->flashdata("error_message", "Unable to add  school");
                 }
@@ -289,14 +210,15 @@ class Schools extends admin
             if ($school_id > 0) {
                 $this->session->flashdata("success_message", "New school ID" . $school_id . "has been added");
 
-                redirect("schools");
+                redirect("laikipiaschools/schools");
             } else {
                 $this->session->flashdata("error_message", "Unable to add  school");
 
             }
         } else {
             $data["form_errors"] = validation_errors();
-            $this->load->view("schools/add_school", $data);
+            $this->load->view("laikipiaschools/schools", $data);
+
         }
     }
     public function edit_school($school_id)
@@ -389,7 +311,7 @@ class Schools extends admin
                     }
                 }
 
-                $schools = "schools";
+                $schools = "laikipiaschools/schools";
                 if ($total_schools == 1) {
                     $schools = "school";
                 }
