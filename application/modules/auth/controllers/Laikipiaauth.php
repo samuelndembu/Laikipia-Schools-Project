@@ -6,7 +6,7 @@ class Laikipiaauth extends MX_Controller
         parent::__construct();
         $this->load->model('auth/auth_model');
         $this->load->model('admin/site_model');
-        $this->load->model('merchants/merchants_model');
+     
     }
 
     public function index()

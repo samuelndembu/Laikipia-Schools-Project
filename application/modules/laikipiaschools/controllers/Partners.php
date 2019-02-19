@@ -22,6 +22,7 @@ class Partners extends admin
     {
 
         $v_data["query"] = $this->partners_model->get_partners();
+        $v_data["partner_types"] = $this->partners_model->get_partner_types();
 
         $data = array("title" => "Partner",
             "content" => $this->load->view("partners/all_partners", $v_data, true),
@@ -54,6 +55,7 @@ class Partners extends admin
 
         }
     }
+    
     public function create_partner()
     {
         $this->form_validation->set_rules("partner_type", "partner_type", "required");
@@ -72,14 +74,25 @@ class Partners extends admin
             redirect("laikipiaschools/partners");
         }
 
+        redirect("laikipiaschools/partners");
+
         $data["form_error"] = validation_errors();
-        $data["partner_types"] = $this->partners_model->get_partner_types();
-        $data = array("title" => "Add partner",
-            "content" => $this->load->view("partners/add_partner", $data, true));
-        // $this->load->view("welcome_here", $data);
-        $this->load->view("laikipiaschools/layouts/layout", $data);
+        // $data["partner_types"] = $this->partners_model->get_partner_types();
+        // $data = array("title" => "Add partner",
+        //     "content" => $this->load->view("partners/add_partner", $data, true));
+        // // $this->load->view("welcome_here", $data);
+        // $this->load->view("laikipiaschools/layouts/layout", $data);
 
         //  $this->load->view("partners/add_partner",$data);
+
+        $v_data["query"] = $this->partners_model->get_partners();
+        $v_data["partner_types"] = $this->partners_model->get_partner_types();
+
+        $data = array("title" => "Partner",
+            "content" => $this->load->view("partners/all_partners", $v_data, true),
+
+        );
+        $this->load->view("laikipiaschools/layouts/layout", $data);
     }
 
     //update
