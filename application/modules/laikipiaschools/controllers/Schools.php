@@ -154,7 +154,7 @@ class Schools extends admin
             $row = $school->row();
             $school_image_name = $row->school_image_name;
             $school_name = $row->school_name;
-            $School_write_up = $row->School_write_up;
+            $school_write_up = $row->school_write_up;
             $school_boys_number = $row->school_boys_number;
             $school_girls_number = $row->school_girls_number;
             $school_location_name = $row->school_location_name;
@@ -164,7 +164,7 @@ class Schools extends admin
             $data = array(
                 'school_image_name' => $school_image_name,
                 'school_name' => $school_name,
-                'School_write_up' => $School_write_up,
+                'school_write_up' => $school_write_up,
                 'school_boys_number' => $school_boys_number,
                 'school_girls_number' => $school_girls_number,
                 'school_location_name' => $school_location_name,
@@ -172,7 +172,7 @@ class Schools extends admin
                 'school_longitude' => $school_longitude,
                 'school_status' => $school_status,
             );
-            $this->load->view('welcome_here', $data);
+            $this->load->view('', $data);
 
         } else {
             $this->session->set_flashdata("error_message, could not find your school");
@@ -279,16 +279,19 @@ class Schools extends admin
 
         $data['content'] = $this->load->view('schools/single_school', $v_data, true);
 
-        $this->load->view("laikipiaschools/layouts/layout", $data);
+        $this->load->view("administration/layouts/layout", $data);
     }
     public function delete_school($school_id)
     {
-        if ($this->schools_model->delete_school($school_id)) {
+        if ($this->schools_model->delete_school($school_id))
+            {
             $this->session->set_flashdata('success', 'Deleted successfully');
-            redirect('laikipiaschools/schools');
-        } else {
+            redirect('administration/schools');
+        } 
+        else 
+        {
             $this->session->set_flashdata('error', 'Unable to delete, Try again!!');
-            redirect('laikipiaschools/schools');
+            redirect('administration/schools');
         }
     }
     public function bulk_actions()

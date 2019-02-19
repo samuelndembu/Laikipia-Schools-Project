@@ -47,7 +47,6 @@ class Schools_model extends CI_Model
             'deleted_by' => 1,
             'deleted_on' => date("Y-m-d H:i:s"),
         );
-
         $this->db->set($data);
         $this->db->where('school_id', $school_id);
         if ($this->db->update('school')) {

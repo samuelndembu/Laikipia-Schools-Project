@@ -86,8 +86,6 @@ $route['administration/activate-section/(:num)/(:num)'] = 'admin/sections/activa
 $route['administration/deactivate-section/(:num)'] = 'admin/sections/deactivate_section/$1';
 $route['administration/deactivate-section/(:num)/(:num)'] = 'admin/sections/deactivate_section/$1/$2';
 
-
-
 //Laikipia schools
 /**
  * Donations
@@ -100,7 +98,6 @@ $route['administration/export-donations'] = 'laikipiaschools/donations/export_tr
 $route['administration/donations/(:any)/(:any)/(:num)'] = 'laikipiaschools/donations/index/$1/$2/$3';
 $route['administration/donations/(:any)/(:any)'] = 'laikipiaschools/donations/index/$1/$2';
 $route['administration/donations/bulk-actions'] = 'laikipiaschools/donations/bulk_actions';
-
 
 //donation corrections
 
@@ -120,6 +117,7 @@ $route['administration/delete-partner/(:num)'] = 'laikipiaschools/partners/delet
  * Schools
  */
 $route['administration/update-school/(:num)'] = 'laikipiaschools/schools/edit_school/$1';
+$route['administration/delete-school/(:num)'] = 'laikipiaschools/schools/delete_school/$1';
 $route['administration/schools'] = 'laikipiaschools/schools/index';
 $route['administration/add-schools'] = 'laikipiaschools/schools/add_school';
 $route['administration/search-schools'] = 'laikipiaschools/schools/search_transactions';
@@ -128,7 +126,6 @@ $route['administration/export-schools'] = 'laikipiaschools/schools/export_transa
 $route['administration/schools/(:any)/(:any)/(:num)'] = 'laikipiaschools/schools/index/$1/$2/$3';
 $route['administration/schools/(:any)/(:any)'] = 'laikipiaschools/schools/index/$1/$2';
 $route['administration/schools/bulk-actions'] = 'laikipiaschools/schools/bulk_actions';
-
 
 /**
  * Documents
