@@ -29,7 +29,7 @@
         </button>
       </div>
       <div class="modal-body">
-	  <?php echo form_open(base_url() . 'administration/partners/add-partners')?>
+	  <?php echo form_open_multipart(base_url() . 'administration/partners/add-partners')?>
             <div class="form-group">
               <label for="partner_type">Partner Type</label>
               <!-- <input type="name" class="form-control" name="partner_type" id="partner_type" naria-describedby="emailHelp" placeholder="Select Partner Name"> -->
@@ -118,10 +118,51 @@
 							<?php echo $row->partner_email;?>
                         </td>
                         <td>
-							<?php echo $row->partner_logo;?>
+                        <img src="<?php echo base_url() . 'assets/uploads/' . $row->partner_thumb; ?>">
 						</td>
 						<td>
-						 <?php echo anchor("administration/addpartner","View","class='btn btn-dark btn-sm'");?> 
+             <!-- <?php echo anchor("administration/partners/read-partner/" . $row->partner_id,"View","class='btn btn-dark btn-sm'");?>  -->
+             
+    <!--Modal: Login with Avatar Form-->
+<div class="modal fade" id="modalLoginAvatar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog cascading-modal modal-avatar modal-sm" role="document">
+    <!--Content-->
+    <div class="modal-content">
+
+      <!--Header-->
+      <div class="modal-header">
+        <img src="<?php echo base_url() . 'assets/uploads/' . $partner_thumb; ?>" alt="avatar" class="rounded-circle img-responsive">
+      </div>
+      <!--Body-->
+      <div class="modal-body text-center mb-1">
+
+        <h5 class="mt-1 mb-2">Retrieved<?php echo $partner_name; ?></h5>
+
+        <div class="md-form ml-0 mr-0">
+        <li>Partner Type:<?php echo $partner_type_id; ?></li>
+        </div>
+        <div class="md-form ml-0 mr-0">
+        <li>Partner Name:<?php echo $partner_name; ?></li>
+        </div>
+        <div class="md-form ml-0 mr-0">
+        <li>Partner Email:<?php echo $partner_email; ?></li>
+        </div>
+        <div class="text-center mt-4">
+          <button class="btn btn-cyan mt-1">Back <i class="fas fa-sign-in ml-1"></i></button>
+        </div>
+      </div>
+
+    </div>
+    <!--/.Content-->
+  </div>
+</div>
+<!--Modal: Login with Avatar Form-->
+
+<div class="text-center">
+  <a href="" class="btn btn-dark btn-sm" data-toggle="modal" data-target="#modalLoginAvatar">View</a>
+</div>
+             
 						<?php echo anchor("administration/edit/". $row->partner_id,"Edit","class='btn btn-warning btn-sm'");?>
 						<?php echo anchor("administration/deactivate-partner/". $row->partner_id,"Deactivate","class='btn btn-primary btn-sm'");?>
             <?php echo anchor("administration/delete-partner/". $row->partner_id,"Delete","class='btn btn-danger btn-sm'");?>

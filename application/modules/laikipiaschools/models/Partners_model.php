@@ -1,13 +1,14 @@
 <?php
 class Partners_model extends CI_Model
 {
-    public function add_partners()
+    public function add_partners($file_name, $thumb_name)
     {
         $data = array(
             "partner_type_id" => $this->input->post("partner_type"),
             "partner_name" => $this->input->post("partner_name"),
             "partner_email" => $this->input->post("partner_email"),
-            "partner_logo" => $this->input->post("partner_logo"),
+            "partner_logo" => $file_name,
+            "partner_thumb" => $thumb_name,
 
         );
 

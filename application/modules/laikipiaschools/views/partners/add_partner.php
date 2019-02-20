@@ -40,7 +40,7 @@
           </button>
         </div>
         <div class="modal-body">
-        <?php echo form_open ($this->uri->uri_string());?>
+        <?php echo form_open_multipart($this->uri->uri_string());?>
             <div class="form-group">
               <label for="partner_type">Partner Type</label>
               <!-- <input type="name" class="form-control" name="partner_type" id="partner_type" naria-describedby="emailHelp" placeholder="Select Partner Name"> -->
@@ -69,15 +69,18 @@
             <div class="form-group">
               <label for="partner_logo">Upload Partner Logo</label>
               <input type="file" class="form-control-file" id="partner_logo" name="partner_logo">
+              <!-- <input type="file" name="userfile" size="20" /> -->
+
+<br /><br />
             </div>
             
           
         </div>
         <div class="modal-footer">
         <button type="submit" class="btn btn-primary">Submit</button>
-
-  <?php echo form_close() ?>
         </div>
+  <?php echo form_close() ?>
+        
       </div>
     </div>
   </div>
