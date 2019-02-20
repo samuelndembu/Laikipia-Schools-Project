@@ -27,9 +27,13 @@ class Schools_model extends CI_Model
     }
     public function get_all_schools()
     {
+        $where = "deleted=0";
+        $this->db->select("*");
+        $this->db->from("school");
         $this->db->order_by("created_on ", "DESC");
-        // var_dump($this->db->get("school")->result());die();
-        return $this->db->get("school");
+        $this->db->where($where);
+        return $this->db->get();
+
     }
     public function get_single_school($school_id)
     {
@@ -55,6 +59,7 @@ class Schools_model extends CI_Model
             return false;
         }
     }
+
     public function update_school($school_id)
     {
         $data = array(

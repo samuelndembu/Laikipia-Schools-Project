@@ -118,6 +118,8 @@ $route['administration/delete-partner/(:num)'] = 'laikipiaschools/partners/delet
  */
 $route['administration/update-school/(:num)'] = 'laikipiaschools/schools/edit_school/$1';
 $route['administration/delete-school/(:num)'] = 'laikipiaschools/schools/delete_school/$1';
+$route['administration/delete-school/(:num)'] = 'laikipiaschools/schools/delete_school/$1';
+
 $route['administration/schools'] = 'laikipiaschools/schools/index';
 $route['administration/add-schools'] = 'laikipiaschools/schools/add_school';
 $route['administration/search-schools'] = 'laikipiaschools/schools/search_transactions';

@@ -172,7 +172,15 @@ class Schools extends admin
                 'school_longitude' => $school_longitude,
                 'school_status' => $school_status,
             );
-            $this->load->view('', $data);
+            $v_data["all_schools"] = $this->schools_model->get_single_school();
+
+            $data = array(
+                "title" => $this->site_model->display_page_title(),
+                "content" => $this->load->view("schools/all_schools", $v_data, true),
+            );
+// $v_data["all_schools"] = $this->schools_model->get_all_schools();
+
+            $this->load->view("laikipiaschools/layouts/layout", $data);
 
         } else {
             $this->session->set_flashdata("error_message, could not find your school");
@@ -270,7 +278,6 @@ class Schools extends admin
         }
 
     }
-
     public function single_school($school_id)
     {
         $v_data['query'] = $this->schools_model->get_single_school($school_id);
@@ -283,17 +290,15 @@ class Schools extends admin
     }
     public function delete_school($school_id)
     {
-        if ($this->schools_model->delete_school($school_id))
-            {
+        if ($this->schools_model->delete_school($school_id)) {
             $this->session->set_flashdata('success', 'Deleted successfully');
             redirect('administration/schools');
-        } 
-        else 
-        {
+        } else {
             $this->session->set_flashdata('error', 'Unable to delete, Try again!!');
             redirect('administration/schools');
         }
     }
+
     public function bulk_actions()
     {
         $this->form_validation->set_rules('action_name', 'Action', 'required');
