@@ -53,11 +53,15 @@ class Migration_Add_school extends CI_Migration
                 'null' => true,
                 'default' => null,
             ),
-            'school_picture_id' => array(
-                'type' => 'INT',
+            'school_image_name' => array(
+                'type' => 'VARCHAR',
                 'constraint' => '100',
-                'null' => true,
-                'default' => null,
+                'null' => false,
+            ),
+            'school_thumb_name' => array(
+                'type' => 'VARCHAR',
+                'constraint' => '100',
+                'null' => false,
             ),
             'school_status' => array(
                 'type' => 'BOOLEAN',

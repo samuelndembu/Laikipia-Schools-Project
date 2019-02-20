@@ -51,7 +51,7 @@
 						</div>
 						<div class="form-group">
 						<div class="col-sm-12 col-md-12">
-							<label for="school_name" class="col-sm-2 col-form-label">Profile Image</label>
+							<label for="school_image" class="col-sm-2 col-form-label">Profile Image</label>
 							<input type="file" id="school_image" name="school_image">
 						</div>
 						</div>
@@ -91,6 +91,17 @@
 		</div>
 
 	<div class="card-body">
+
+ <div class="container">
+        <?php $success = $this->session->flashdata("success");
+$error = $this->session->flashdata("error");
+if (!empty($success)) {
+    echo $success;
+} else {
+    echo $error;
+}
+
+?>
 		<div class="table-responsive">
 			<table class="table table-darkborderless" id="dataTable" width="100%" cellspacing="0">
 				<thead class="thead-dark">
@@ -117,9 +128,7 @@
 					</tr>
 				</tfoot>
 				<tbody>
-
 				<?php
-
 if ($query->num_rows() > 0) {
     $count = 0;
 
@@ -128,35 +137,92 @@ if ($query->num_rows() > 0) {
 
         $count++;
         ?>
-				<tr>
-						<td>
-							<?php echo $count ?>
-						</td>
-						<td>
-							<?php echo $row->school_image; ?>
-						</td>
-						<td>
-							<?php echo $row->school_name; ?>
-						</td>
-						<td><?php echo $row->school_write_up; ?></td>
-						<td><?php echo $row->school_boys_number; ?></td>
-						<td><?php echo $row->school_girls_number; ?></td>
-						<td>
-						<td class="col-2"> <?php echo anchor("laikipiaschools/schools/singleschool/" . $id, "View", ['class' => 'btn btn-info btn-sm']); ?></td> 
-						<?php echo anchor("laikipiaschools/update-school/" . $id, "Edit", ['class' => 'btn btn-warning btn-sm']); ?>
-						<?php echo anchor("laikipiaschools/Activate-school/" . $id, "Activate", ['class' => 'btn btn-danger btn-sm']); ?>
-						<?php echo anchor("laikipiaschools/Deactivate-school/" . $id, "Deactivate", ['class' => 'btn btn-danger btn-sm']); ?>
-						<?php echo anchor("laikipiaschools/delete-school/" . $id, "Delete", ['class' => 'btn btn-danger btn-sm']); ?>
-					
-						</td>
-						</tr>
-						<?php
+									<tr>
+											<td>
+												<?php echo $count ?>
+											</td>
+											<td>
+												<img src="<?php echo base_url() . 'assets/uploads/' . $row->school_thumb_name; ?>">
+											</td>
+											<td>
+												<?php echo $row->school_name; ?>
+											</td>
+											<td><?php echo $row->school_write_up; ?></td>
+											<td><?php echo $row->school_boys_number; ?></td>
+											<td><?php echo $row->school_girls_number; ?></td>
+
+											<td class="col-2">
+											<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalQuickView">View</button>
+						<!-- Modal: modalQuickView -->
+												<div class="modal fade" id="modalQuickView" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+													aria-hidden="true">
+													<div class="modal-dialog modal-lg" role="document">
+														<div class="modal-content">
+															<div class="modal-body">
+																<div class="row">
+																			<div class="col-lg-7">
+																				<h2 class="h2-responsive product-name">
+																			<div class="modal-header">
+																						<img src="https://mdbootstrap.com/img/Photos/Avatars/img%20%281%29.jpg" alt="avatar" class="rounded-circle img-responsive">
+																			</div>
+																				<strong><p class="text-center"><?php echo $row->$school_name; ?></p></strong>
+																			</h2>
+																			<!--Accordion wrapper-->
+																			<div class="accordion md-accordion" id="accordionEx" 				role="tablist" aria-multiselectable="true">	</div>
+
+																			<div class="card">
+																					<p>Location:<?php echo $school_location; ?></p>
+																				</div>
+
+																				<div class="card">
+																					<p>Number Of Girls:<?php echo $school_girls_number; ?></p>
+																				</div>
+
+																				<div class="card">
+																						<p>Number Of Boys:<?php echo $school_boys_number; ?></p>
+																				</div>
+
+																				<div class="card">
+																						<p>School Write Up:<?php echo $school_write_up; ?></p>
+																				</div>
+
+																				</div>
+
+																				</div>
+
+																		</div>
+
+																		<div class="card-body">
+																			<div class="row">
+																				<div class="col-md-6">
+
+
+																				</div>
+																			<div class="text-center">
+																					<?php echo anchor('laikipiaschools/schools', 'back', ['class' => 'btn btn-primary']); ?>
+																			</div>
+																		</div>
+																		<!-- /.Add to Cart -->
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
+											</div>
+											<?php echo anchor("laikipiaschools/update-school/" . $id, "Edit", ['class' => 'btn btn-warning btn-sm']); ?>
+											<?php echo anchor("laikipiaschools/Activate-school/" . $id, "Activate", ['class' => 'btn btn-danger btn-sm']); ?>
+											<?php echo anchor("laikipiaschools/Deactivate-school/" . $id, "Deactivate", ['class' => 'btn btn-danger btn-sm']); ?>
+											<?php echo anchor("administration/delete-school/" . $id, "Delete", ['class' => 'btn btn-danger btn-sm']); ?>
+
+											</td>
+											</tr>
+											<?php
 }
 }
 ?>
 				</tbody>
 			</table>
-		</div> 
+		</div>
 			<?php echo $links; ?>
 		</p>
 	</div>

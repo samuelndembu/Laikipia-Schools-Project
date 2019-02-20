@@ -1,15 +1,16 @@
-<?php class File_model extends Ci_model
+<?php
+class File_model extends CI_Model
 {
     public function upload_image($upload_path, $field_name, $resize)
     {
         $config = array(
-            "allowed_types" => "JPG|JPEG|jpg|png|PNG",
+            "allowed_types" => "JPEG|JPG|jpeg|jpg|png|PNG",
             "upload_path" => $upload_path,
             "quality" => "100%",
             "max_size" => "0",
             "min_width" => "300",
             "min_height" => "300",
-            "file_name" => md5(date("Y-m-dH:i:s")),
+            "file_name" => md5(date("Y-m-d H:i:s")),
         );
 
         $response = [];
@@ -24,32 +25,49 @@
             $image_upload_data = $this->upload->data();
             $file_name = $image_upload_data["file_name"];
             $file_path = $image_upload_data["file_path"];
+<<<<<<< HEAD
 
+=======
+//Resize uploaded image
+>>>>>>> 96ffd3f9c5ae2f552089d490c9b22f620fe4a586
             $resize_upload = $this->resize_image($image_upload_data["full_path"], $resize);
             if ($resize_upload == true) {
-                //createc thnumbnail
+//create thumbnail
+                //Thumbnail size
                 $resize_thumb = array(
                     "width" => 100,
                     "height" => 100,
                 );
+<<<<<<< HEAD
                 //   Thumbnail properties
                 $thumb_name = "thumbnail_" . $file_name;
                 $thumb_array = array(
                     "thumb_path" => $file_path . "thumbnail_" . $file_name,
+=======
+//Thumbnail properties
+                $thumb_name = "thumbnail_" . $file_name;
+                $thumb_array = array(
+                    "thumb_path" => $file_path . $thumb_name,
+>>>>>>> 96ffd3f9c5ae2f552089d490c9b22f620fe4a586
                 );
                 $create_thumb = $this->resize_image($image_upload_data["full_path"], $resize_thumb, $thumb_array);
                 if ($create_thumb == true) {
                     $response["check"] = true;
                     $response["file_name"] = $file_name;
                     $response["thumb_name"] = $thumb_name;
+                } else {
+                    $response["check"] = false;
+                    $response["message"] = $create_thumb;
                 }
             } else {
                 $response["check"] = false;
-                $response["message"] = $this->upload->$create_thumb;
+                $response["message"] = $resize_upload;
             }
-
         }
+<<<<<<< HEAD
 
+=======
+>>>>>>> 96ffd3f9c5ae2f552089d490c9b22f620fe4a586
         return $response;
     }
     public function resize_image($source_image, $resize, $thumbnail = false)
@@ -64,8 +82,12 @@
         if ($thumbnail != false) {
             $resize_config["new_image"] = $thumbnail["thumb_path"];
             $resize_config["create_thumb"] = false;
+<<<<<<< HEAD
 
         } 
+=======
+        }
+>>>>>>> 96ffd3f9c5ae2f552089d490c9b22f620fe4a586
         $this->image_lib->initialize($resize_config);
 
         if (!$this->image_lib->resize()) {
@@ -74,4 +96,5 @@
             return true;
         }
     }
+
 }
