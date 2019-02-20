@@ -5,29 +5,48 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>New Partner</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script src="<?php echo base_url() ?>assets/jquery-3.3.1.min.js"></script>
+    <script src="<?php echo base_url() zz?>assets/jquery-3.3.1.min.js"></script>
     <link href="<?php echo base_url() ?>assets/themes/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
     <link href="<?php echo base_url() ?>assets/themes/bootstrap/js/bootstrap.min.js" rel="stylesheet" />
     <link href="<?php echo base_url() ?>assets/custom/partner.css" rel="stylesheet"/>
 </head>
 
 <body>
-    <div class = "container">
-                    <?php
+    <!--Modal: Login with Avatar Form-->
+<div class="modal fade" id="modalLoginAvatar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog cascading-modal modal-avatar modal-sm" role="document">
+    <!--Content-->
+    <div class="modal-content">
 
-            $validation_errors = validation_errors();
-            if (!empty($validation_errors)) {
-                echo $validation_errors;
-            }
-            ?>
-                <h1>Added <?php echo $partner_name; ?></h1>
-            <ol>
-                <li>Partner Type:<?php echo $partner_type; ?></li>
-                <li>Partner Name:<?php echo $partner_name; ?></li>
-                <li>Partner Email:<?php echo $partner_email; ?></li>
-                <li>Partner Logo:<?php echo $partner_logo; ?></li>
-            </ol>
+      <!--Header-->
+      <div class="modal-header">
+        <img src="https://mdbootstrap.com/img/Photos/Avatars/img%20%281%29.jpg" alt="avatar" class="rounded-circle img-responsive">
+      </div>
+      <!--Body-->
+      <div class="modal-body text-center mb-1">
+
+        <h5 class="mt-1 mb-2">Maria Doe</h5>
+
+        <div class="md-form ml-0 mr-0">
+          <input type="password" type="text" id="form29" class="form-control form-control-sm validate ml-0">
+          <label data-error="wrong" data-success="right" for="form29" class="ml-0">Enter password</label>
+        </div>
+
+        <div class="text-center mt-4">
+          <button class="btn btn-cyan mt-1">Login <i class="fas fa-sign-in ml-1"></i></button>
+        </div>
+      </div>
+
     </div>
+    <!--/.Content-->
+  </div>
+</div>
+<!--Modal: Login with Avatar Form-->
 
+<div class="text-center">
+  <a href="" class="btn btn-default btn-rounded" data-toggle="modal" data-target="#modalLoginAvatar">Launch
+    Modal Login with Avatar</a>
+</div>
 </body>
 </html>

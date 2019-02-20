@@ -11,8 +11,11 @@
             "min_height" => "300",
             "file_name" => md5(date("Y-m-dH:i:s")),
         );
+
         $response = [];
         $this->load->library("upload", $config);
+
+        // var_dump($this->input->post($field_name));die();
 
         if (!$this->upload->do_upload($field_name)) {
             $response["check"] = false;
@@ -22,7 +25,7 @@
             $file_name = $image_upload_data["file_name"];
             $file_path = $image_upload_data["file_path"];
 
-            $resize_upload = $this->resize_image($image_upload_data["full_path"]);
+            $resize_upload = $this->resize_image($image_upload_data["full_path"], $resize);
             if ($resize_upload == true) {
                 //createc thnumbnail
                 $resize_thumb = array(
@@ -30,11 +33,11 @@
                     "height" => 100,
                 );
                 //   Thumbnail properties
-                $thmb_name = "thumbnail_" . $file_name;
+                $thumb_name = "thumbnail_" . $file_name;
                 $thumb_array = array(
-                    "thumbnail" => $file_path . "thumbnail_" . $file_name,
+                    "thumb_path" => $file_path . "thumbnail_" . $file_name,
                 );
-                $create_thumb = $this->resize_image($image_upload_data["full_path"], $resize_thumb);
+                $create_thumb = $this->resize_image($image_upload_data["full_path"], $resize_thumb, $thumb_array);
                 if ($create_thumb == true) {
                     $response["check"] = true;
                     $response["file_name"] = $file_name;
@@ -46,11 +49,13 @@
             }
 
         }
+
+        return $response;
     }
     public function resize_image($source_image, $resize, $thumbnail = false)
     {
         $resize_config = array(
-            "source_image" => $image_upload_data["full_path"],
+            "source_image" => $source_image,
             "width" => $resize["width"],
             "height" => $resize["height"],
             "master_dim" => "width",
@@ -60,10 +65,7 @@
             $resize_config["new_image"] = $thumbnail["thumb_path"];
             $resize_config["create_thumb"] = false;
 
-        } else {
-            $response["check"] = false;
-            $response["message"] = $this->upload->$resize_upload;
-        }
+        } 
         $this->image_lib->initialize($resize_config);
 
         if (!$this->image_lib->resize()) {
