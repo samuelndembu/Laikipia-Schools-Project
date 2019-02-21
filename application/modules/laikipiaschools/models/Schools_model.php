@@ -25,11 +25,27 @@ class Schools_model extends CI_Model
             return false;
         }
     }
-    public function get_all_schools()
+    public function get_all_schools($table, $where, $start, $limit, $page, $order, $order_method)
     {
-        $this->db->order_by("created_on ", "DESC");
-        // var_dump($this->db->get("school")->result());die();
-        return $this->db->get("school");
+        $where = "school.deleted = 0";
+        $this->db->select("*");
+        $this->db->from("$table");
+        $this->db->where($where);
+        $this->db->limit($limit, $page);
+        $this->db->order_by($order, $order_method);
+        return $this->db->get();
+
+    }
+    public function change_school_status($school_id, $new_school_status)
+    {
+
+        $this->db->set('school_status', $new_school_status);
+        $this->db->where('school_id', $school_id);
+        if ($this->db->update('school')) {
+            return true;
+        } else {
+            return false;
+        }
     }
     public function get_single_school($school_id)
     {
@@ -55,6 +71,7 @@ class Schools_model extends CI_Model
             return false;
         }
     }
+
     public function update_school($school_id)
     {
         $data = array(

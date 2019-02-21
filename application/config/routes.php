@@ -120,6 +120,8 @@ $route['administration/delete-partner/(:num)'] = 'laikipiaschools/partners/delet
  */
 $route['administration/update-school/(:num)'] = 'laikipiaschools/schools/edit_school/$1';
 $route['administration/delete-school/(:num)'] = 'laikipiaschools/schools/delete_school/$1';
+$route['administration/delete-school/(:num)'] = 'laikipiaschools/schools/delete_school/$1';
+
 $route['administration/schools'] = 'laikipiaschools/schools/index';
 $route['administration/add-schools'] = 'laikipiaschools/schools/add_school';
 $route['administration/search-schools'] = 'laikipiaschools/schools/search_transactions';
@@ -128,6 +130,7 @@ $route['administration/export-schools'] = 'laikipiaschools/schools/export_transa
 $route['administration/schools/(:any)/(:any)/(:num)'] = 'laikipiaschools/schools/index/$1/$2/$3';
 $route['administration/schools/(:any)/(:any)'] = 'laikipiaschools/schools/index/$1/$2';
 $route['administration/schools/bulk-actions'] = 'laikipiaschools/schools/bulk_actions';
+$route['administration/deactivate-school/(:num)/(:num)'] = 'laikipiaschools/schools/deactivate_school/$1/$2';
 
 /**
  * Documents
