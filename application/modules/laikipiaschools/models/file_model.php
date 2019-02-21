@@ -38,13 +38,10 @@ class File_model extends CI_Model
                 //   Thumbnail properties
                 $thumb_name = "thumbnail_" . $file_name;
                 $thumb_array = array("thumb_path" => $file_path . "thumbnail_" . $file_name);
-<<<<<<< HEAD
 
 
              $create_thumb = $this->resize_image($image_upload_data["full_path"], $resize_thumb, $thumb_array);
-=======
                 $create_thumb = $this->resize_image($image_upload_data["full_path"], $resize_thumb, $thumb_array);
->>>>>>> deaf78e951d38d6fe9a66ac365eccfc9db7fc0b1
                 if ($create_thumb == true) {
                     $response["check"] = true;
                     $response["file_name"] = $file_name;
@@ -73,12 +70,7 @@ class File_model extends CI_Model
         if ($thumbnail != false) {
             $resize_config["new_image"] = $thumbnail["thumb_path"];
             $resize_config["create_thumb"] = false;
-
-<<<<<<< HEAD
-        } 
-=======
         }
->>>>>>> deaf78e951d38d6fe9a66ac365eccfc9db7fc0b1
         $this->image_lib->initialize($resize_config);
 
         if (!$this->image_lib->resize()) {
