@@ -5,10 +5,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>New Partner</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script src="<?php echo base_url() zz?>assets/jquery-3.3.1.min.js"></script>
+    <script src="<?php echo base_url() ?>assets/jquery-3.3.1.min.js"></script>
     <link href="<?php echo base_url() ?>assets/themes/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
     <link href="<?php echo base_url() ?>assets/themes/bootstrap/js/bootstrap.min.js" rel="stylesheet" />
     <link href="<?php echo base_url() ?>assets/custom/partner.css" rel="stylesheet"/>
+    <link href="<?php echo  base_url();?>assets/fontawesome/css/fontawesome.css" rel="stylesheet" type="text/css"/>
 </head>
 
 <body>

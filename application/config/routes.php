@@ -107,6 +107,7 @@ $route['administration/partners'] = 'laikipiaschools/partners/index';
 $route['administration/partners/add-partners'] = 'laikipiaschools/partners/create_partner';
 $route['administration/partners/read-partner/(:num)'] = 'laikipiaschools/partners/read_partner/$1';
 $route['administration/edit/(:num)'] = 'laikipiaschools/partners/edit/$1';
+$route['administration/deactivate-partner/(:num)/(:num)'] = 'laikipiaschools/partners/deactivate_partner/$1/$2';
 $route['administration/search-partners'] = 'laikipiaschools/partners/search_transactions';
 $route['administration/close-search'] = 'laikipiaschools/partners/close_search';
 $route['administration/export-partners'] = 'laikipiaschools/partners/export_transactions';

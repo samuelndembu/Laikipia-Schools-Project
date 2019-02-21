@@ -9,6 +9,7 @@
       <link href="<?php echo base_url() ?>assets/themes/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
       <link href="<?php echo base_url() ?>assets/themes/bootstrap/js/bootstrap.min.js" rel="stylesheet" />
       <link href="<?php echo base_url() ?>assets/themes/custom/partner.css" rel="stylesheet"/>
+      <link href="<?php echo  base_url();?>assets/fontawesome/css/fontawesome.css" rel="stylesheet" type="text/css"/>
   </head>
   <body>
       <!-- <div class="container"> -->

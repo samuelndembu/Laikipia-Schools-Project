@@ -25,11 +25,8 @@ class File_model extends CI_Model
             $image_upload_data = $this->upload->data();
             $file_name = $image_upload_data["file_name"];
             $file_path = $image_upload_data["file_path"];
-<<<<<<< HEAD
 
-=======
 //Resize uploaded image
->>>>>>> 96ffd3f9c5ae2f552089d490c9b22f620fe4a586
             $resize_upload = $this->resize_image($image_upload_data["full_path"], $resize);
             if ($resize_upload == true) {
 //create thumbnail
@@ -38,19 +35,12 @@ class File_model extends CI_Model
                     "width" => 100,
                     "height" => 100,
                 );
-<<<<<<< HEAD
                 //   Thumbnail properties
                 $thumb_name = "thumbnail_" . $file_name;
-                $thumb_array = array(
-                    "thumb_path" => $file_path . "thumbnail_" . $file_name,
-=======
-//Thumbnail properties
-                $thumb_name = "thumbnail_" . $file_name;
-                $thumb_array = array(
-                    "thumb_path" => $file_path . $thumb_name,
->>>>>>> 96ffd3f9c5ae2f552089d490c9b22f620fe4a586
-                );
-                $create_thumb = $this->resize_image($image_upload_data["full_path"], $resize_thumb, $thumb_array);
+                $thumb_array = array("thumb_path" => $file_path . "thumbnail_" . $file_name);
+
+
+             $create_thumb = $this->resize_image($image_upload_data["full_path"], $resize_thumb, $thumb_array);
                 if ($create_thumb == true) {
                     $response["check"] = true;
                     $response["file_name"] = $file_name;
@@ -64,10 +54,7 @@ class File_model extends CI_Model
                 $response["message"] = $resize_upload;
             }
         }
-<<<<<<< HEAD
 
-=======
->>>>>>> 96ffd3f9c5ae2f552089d490c9b22f620fe4a586
         return $response;
     }
     public function resize_image($source_image, $resize, $thumbnail = false)
@@ -82,12 +69,8 @@ class File_model extends CI_Model
         if ($thumbnail != false) {
             $resize_config["new_image"] = $thumbnail["thumb_path"];
             $resize_config["create_thumb"] = false;
-<<<<<<< HEAD
 
         } 
-=======
-        }
->>>>>>> 96ffd3f9c5ae2f552089d490c9b22f620fe4a586
         $this->image_lib->initialize($resize_config);
 
         if (!$this->image_lib->resize()) {
