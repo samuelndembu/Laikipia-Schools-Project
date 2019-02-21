@@ -295,7 +295,8 @@ if ($query->num_rows() > 0) {
                             </div>
 
                             <?php if ($row->school_status == 1) {
-            echo anchor("administration/edit/" . $id, '<i class="fas fa-edit"></i>', "class='btn btn-warning btn-sm'");
+            
+            echo anchor("administration/update-school/" . $id, '<i class="fas fa-edit"></i>', "class='btn btn-warning btn-sm'");
 
             echo anchor("administration/deactivate-school/" . $id . "/" . $row->school_status, "Deactivate", array("class" => "btn btn-info btn-sm", "onclick" => "return confirm('Are you sure you want to deactivate?')"));
         } else {

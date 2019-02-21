@@ -4,23 +4,24 @@
             <li class="nav-item">
                 <a class="nav-link" href="<?php echo base_url(); ?>laikipiaschools/schools">
                     <span data-feather="home"></span>
-                    Schools <span class="sr-only">
+                    <i class="fas fa-graduation-cap"></i> Schools <span class="sr-only">
                 </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="<?php echo base_url(); ?>laikipiaschools/partners">
                     <span data-feather="file"></span>
-                    Partners
+                    <i class="fas fa-handshake"></i> Partners
                 </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="<?php echo base_url(); ?>laikipiaschools/donations">
                     <span data-feather="shopping-cart"></span>
-                    Donations
+                    <i class="fas fa-hand-holding-usd"></i> Donations
                 </a>
 
 
             </li>
+
         </ul>
     </div>
 </nav>

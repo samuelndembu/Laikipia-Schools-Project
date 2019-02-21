@@ -254,39 +254,36 @@ class Schools extends admin
                 $this->session->set_flashdata('success', 'school ID: ' . $school_id . ' updated successfully');
 
                 redirect('laikipiaschools/schools');
-            } else {
-                $this->session->set_flashdata('error', 'Unable to update: ' . $school_id);
 
+            } else {
+                $school = $this->schools_model->get_single_school($school_id);
+
+                $row = $school->row();
+                $v_data['school_name'] = $row->school_name;
+                $v_data['school_write_up'] = $row->school_write_up;
+                $v_data['school_boys_number'] = $row->school_boys_number;
+                $v_data['school_girls_number'] = $row->school_girls_number;
+                $v_data['school_location_name'] = $row->school_location_name;
+                $v_data['school_latitude'] = $row->school_latitude;
+                $v_data['school_longitude'] = $row->school_longitude;
+                $v_data['school_status'] = $row->school_status;
+                $v_data['school_image_name'] = $row->school_image_name;
+                $v_data['school_image_name'] = $row->school_thumb_name;
+
+                // $v_data['query'] = $this->schools_model->get_single_school($school_id);
                 // $v_data['schools'] = $this->schools_model->all_schools();
 
-                $v_data['title'] = "Edit school";
-                $data['content'] = $this->load->view('schools/edit_school', $v_data, true);
-
-                $this->load->view("laikipiaschools/layouts/layout", $data);
-            }
-        } else {
-            $school = $this->schools_model->get_single_school($school_id);
-
-            $row = $school->row();
-            $v_data['school_name'] = $row->school_name;
-            $v_data['school_write_up'] = $row->school_write_up;
-            $v_data['school_boys_number'] = $row->school_boys_number;
-            $v_data['school_girls_number'] = $row->school_girls_number;
-            $v_data['school_location_name'] = $row->school_location_name;
-            $v_data['school_latitude'] = $row->school_latitude;
-            $v_data['school_longitude'] = $row->school_longitude;
-            $v_data['school_status'] = $row->school_status;
-
-            // $v_data['query'] = $this->schools_model->get_single_school($school_id);
-            // $v_data['schools'] = $this->schools_model->all_schools();
-
-            $v_data['title'] = "Edit school";
-            $data['content'] = $this->load->view('schools/edit_school', $v_data, true);
+                 $data = array(
+                "title" => $this->site_model->display_page_title(),
+                "content" => $this->load->view("schools/all_schools", $v_data, true),
+            );
+            
 
             $this->load->view("laikipiaschools/layouts/layout", $data);
         }
 
     }
+}
     public function search_schools()
     {
         $school_name = $this->input->post('school_name');
