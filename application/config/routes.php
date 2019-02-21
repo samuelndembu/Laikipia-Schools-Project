@@ -129,6 +129,7 @@ $route['administration/export-schools'] = 'laikipiaschools/schools/export_transa
 $route['administration/schools/(:any)/(:any)/(:num)'] = 'laikipiaschools/schools/index/$1/$2/$3';
 $route['administration/schools/(:any)/(:any)'] = 'laikipiaschools/schools/index/$1/$2';
 $route['administration/schools/bulk-actions'] = 'laikipiaschools/schools/bulk_actions';
+$route['administration/deactivate-school/(:num)/(:num)'] = 'laikipiaschools/schools/deactivate_school/$1/$2';
 
 /**
  * Documents

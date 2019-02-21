@@ -46,6 +46,8 @@
 	<script src="<?php echo base_url(); ?>assets/vendor/js/bootstrap.bundle.min.js"></script>
 	<script src="<?php echo base_url(); ?>assets/icons/feather.min.js"></script>
   <script src="<?php echo base_url(); ?>assets/vendor/dashboard.js"></script>
+  <link href="<?php echo base_url(); ?>assets/fontawesome/css/all.css" rel="stylesheet">
+<script defer src="<?php echo base_url(); ?>assets/fontawesome/js/all.js"></script>
   
 </body>
 

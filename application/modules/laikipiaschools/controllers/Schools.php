@@ -25,7 +25,7 @@ class Schools extends admin
 
         // $this->load->model("laikipiaschools/payments_model");
     }
-    public function index($order = 'school.school_name', $order_method = 'ASC')
+    public function index($order = 'school_name', $order_method = 'ASC', $start = null)
     {
         $this->form_validation->set_rules("school_name", "School Name", "required");
         $this->form_validation->set_rules("school_write_up", "School Write Up", "required");
@@ -42,8 +42,7 @@ class Schools extends admin
             $resize = array(
                 "width" => 600,
                 "height" => 600,
-            )
-            ;
+            );
             $upload_response = $this->file_model->upload_image($this->upload_path, "school_image", $resize);
             if ($upload_response['check'] == false) {
                 $this->session->set_flashdata('error', $upload_response['message']);
@@ -80,40 +79,33 @@ class Schools extends admin
             //pagination
             $segment = 5;
             $this->load->library('pagination');
-            $config['base_url'] = site_url() . 'laikipiaschools/school/' . $order . '/' . $order_method;
-            $config['total_rows'] = $this->site_model->count_items($table, $where);
+            $config['base_url'] = site_url() . 'administration/schools/' . $order . '/' . $order_method;
+            $config['total_rows'] = $this->site_model->count_items($table, $where . ' AND deleted != 1');
+            // $config["total_rows"] = $this->friends_model->countAll();
             $config['uri_segment'] = $segment;
             $config['per_page'] = 3;
             $config['num_links'] = 5;
 
-            $config['full_tag_open'] = '<ul class="pagination">';
-            $config['full_tag_close'] = '</ul>';
-
-            $config['first_tag_open'] = '<li>';
-            $config['first_tag_close'] = '</li>';
-
-            $config['last_tag_open'] = '<li>';
-            $config['last_tag_close'] = '</li>';
-
-            $config['next_tag_open'] = '<li>';
-            $config['next_link'] = 'Next';
-            $config['next_tag_close'] = '</span>';
-
-            $config['prev_tag_open'] = '<li page-item disabled>';
-            $config['prev_link'] = 'Prev';
-            $config['prev_tag_close'] = '</li>';
-
-            $config['cur_tag_open'] = '<li class="page-link"><a href="#">';
-            $config['cur_tag_close'] = '</a></li>';
-
-            $config['num_tag_open'] = '<li>';
-            $config['num_tag_close'] = '</li>';
+            $config['full_tag_open'] = '<div class="pagging text-center"><nav aria-label="Page navigation example"><ul class="pagination">';
+            $config['full_tag_close'] = '</ul></nav></div>';
+            $config['num_tag_open'] = '<li class="page-item"><span class="page-link">';
+            $config['num_tag_close'] = '</span></li>';
+            $config['cur_tag_open'] = '<li class="page-item active"><span class="page-link">';
+            $config['cur_tag_close'] = '<span class="sr-only">(current)</span></span></li>';
+            $config['next_tag_open'] = '<li class="page-item"><span class="page-link">';
+            $config['next_tagl_close'] = '<span aria-hidden="true">&raquo;</span></span></li>';
+            $config['prev_tag_open'] = '<li class="page-item"><span class="page-link">';
+            $config['prev_tagl_close'] = '</span></li>';
+            $config['first_tag_open'] = '<li class="page-item"><span class="page-link">';
+            $config['first_tagl_close'] = '</span></li>';
+            $config['last_tag_open'] = '<li class="page-item"><span class="page-link">';
+            $config['last_tagl_close'] = '</span></li>';
             $this->pagination->initialize($config);
 
             $page = ($this->uri->segment($segment)) ? $this->uri->segment($segment) : 0;
             $v_data["links"] = $this->pagination->create_links();
 
-            $query = $this->schools_model->get_all_schools($table, $where, $config["per_page"], $page, $order, $order_method);
+            $query = $this->schools_model->get_all_schools($table, $where, $start, $config["per_page"], $page, $order, $order_method);
 
             //change of order method
             if ($order_method == 'DESC') {
@@ -133,7 +125,6 @@ class Schools extends admin
             $v_data['order_method'] = $order_method;
             $v_data['query'] = $query;
             $v_data['page'] = $page;
-            $v_data["all_schools"] = $this->schools_model->get_all_schools();
 
             $data = array(
                 "title" => $this->site_model->display_page_title(),
@@ -145,7 +136,25 @@ class Schools extends admin
         }
 
     }
+    public function deactivate_school($school_id, $status_id)
+    {
+        if ($status_id == 1) {
+            $new_school_status = 0;
+            $message = 'Deactivated';
+        } else {
+            $new_school_status = 1;
+            $message = 'Activated';
+        }
 
+        $result = $this->schools_model->change_school_status($school_id, $new_school_status);
+        if ($result == true) {
+            $this->session->set_flashdata('success', "school ID: " . $school_id . " " . $message . " successfully!");
+        } else {
+            $this->session->set_flashdata('error', "school ID: " . $school_id . " failed to " . $message);
+        }
+
+        redirect('administration/schools');
+    }
     public function singleSchool($school_id)
     {
         $school = $this->schools_model->get_single_school($school_id);
@@ -268,7 +277,7 @@ class Schools extends admin
             $v_data['school_longitude'] = $row->school_longitude;
             $v_data['school_status'] = $row->school_status;
 
-            $v_data['query'] = $this->schools_model->get_single_school($school_id);
+            // $v_data['query'] = $this->schools_model->get_single_school($school_id);
             // $v_data['schools'] = $this->schools_model->all_schools();
 
             $v_data['title'] = "Edit school";
@@ -278,6 +287,66 @@ class Schools extends admin
         }
 
     }
+    public function search_schools()
+    {
+        $school_name = $this->input->post('school_name');
+        $school_girls_number = $this->input->post('school_girls_number');
+        $school_boys_number = $this->input->post('school_boys_number');
+        $school_location_name = $this->input->post('school_location_name');
+        $school_status = $this->input->post('school_status');
+        // $location_radius = $this->input->post('location_radius');
+
+        if (!empty($school_name)) {
+            $search_title .= ' School: <strong>' . $school_name . '</strong>';
+            $school_name = ' AND school.school_name = \'+' . $school_name . '\'';
+        }
+
+        if (!empty($school_girls_number)) {
+            $search_title .= ' Number of Girls <strong>' . $school_girls_number . '</strong>';
+            $school_girls_number = ' AND school.school_girls_number = \'' . $school_girls_number . '\'';
+        }
+        if (!empty($school_boys_number)) {
+            $search_title .= ' Number of boys <strong>' . $school_boys_number . '</strong>';
+            $school_boys_number = ' AND school.school_boys_number = \'' . $school_boys_number . '\'';
+        }
+        if (!empty($school_location_name)) {
+            $search_title .= ' Number of Girls <strong>' . $school_location_name . '</strong>';
+            $school_location_name = ' AND school.school_location_name = \'' . $school_location_name . '\'';
+        }
+        if (!empty($school_status)) {
+            $search_title .= ' Number of Girls <strong>' . $school_status . '</strong>';
+            $school_status = ' AND school.school_status = \'' . $school_status . '\'';
+        }
+
+        // if(!empty($daterange))
+        // {
+        //     $date_array = explode("-", $daterange);
+        //     if(count($date_array) == 2)
+        //     {
+        //         $start_date = date("Y-m-d", strtotime($date_array[0]));
+        //         $end_date = date("Y-m-d", strtotime($date_array[1]));
+
+        //         $search_title .= ' Date <strong>'.$daterange.'</strong>';
+        //         $daterange = ' AND (mpesa_customer_register.created_at >= \''.$start_date.'\' AND mpesa_customer_register.created_at <= \''.$end_date.'\')';
+        //     }
+        // }
+
+        $search = $school_name . $school_girls_number . $school_boys_number . $school_location_name . $school_status;
+
+        $this->session->set_userdata('schools_search', $search);
+        $this->session->set_userdata('schools_search_title', $search_title);
+
+        redirect("laikipiaschools/schools");
+    }
+
+    public function close_search()
+    {
+        $this->session->unset_userdata('schools_search');
+        $this->session->unset_userdata('schools_search_title');
+
+        redirect("laikipiaschools/schools");
+    }
+
     public function single_school($school_id)
     {
         $v_data['query'] = $this->schools_model->get_single_school($school_id);
