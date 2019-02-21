@@ -2,9 +2,8 @@
     exit('No direct script access allowed');
 }
 
-require_once "./application/modules/admin/controllers/Admin.php";
 
-class Schools extends admin
+class Schools extends MX_Controller
 {
     public $upload_path;
     public $upload_location;
