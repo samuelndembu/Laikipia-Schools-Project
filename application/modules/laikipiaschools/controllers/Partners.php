@@ -4,7 +4,7 @@
 
 require_once "./application/modules/admin/controllers/Admin.php";
 
-class Partners extends admin
+class Partners extends MX_Controller
 {
     public $upload_path;
     public $upload_location;
