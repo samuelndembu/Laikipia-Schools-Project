@@ -33,12 +33,12 @@ class Partners extends MX_Controller
     {
         $where = 'partner_id > 0';
         $table = 'partner';
-        $partners_search = $this->session->userdata('partners_search');
-        $search_title = $this->session->userdata('partners_search_title');
+        // $partners_search = $this->session->userdata('partners_search');
+        // $search_title = $this->session->userdata('partners_search_title');
 
-        if (!empty($partners_search) && $partners_search != null) {
-            $where .= $partners_search;
-        }
+        // if (!empty($partners_search) && $partners_search != null) {
+        //     $where .= $partners_search;
+        // }
 
         //pagination
         $segment = 5;
