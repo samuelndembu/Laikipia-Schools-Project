@@ -132,6 +132,10 @@ $route['administration/schools/(:any)/(:any)'] = 'laikipiaschools/schools/index/
 $route['administration/schools/bulk-actions'] = 'laikipiaschools/schools/bulk_actions';
 $route['administration/deactivate-school/(:num)/(:num)'] = 'laikipiaschools/schools/deactivate_school/$1/$2';
 
+$route['administration/schools/get-schools-details'] = 'laikipiaschools/webservice/get_school_details';
+
+
+
 /**
  * Documents
  */
