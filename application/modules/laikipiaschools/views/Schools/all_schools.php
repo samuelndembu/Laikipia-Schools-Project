@@ -72,7 +72,8 @@
 <div class=" card-body">
         <div class="card shadow mb-4">
             <div class="card-header py-3">
-                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#createDonation">Add
+                <button type="button" class="btn btn-success btn-sm" data-toggle="modal"
+                    data-target="#createDonation">Add
                     School</button>
                 <div class="modal fade" id="createDonation" tabindex="-1" role="dialog"
                     aria-labelledby="createDonationLabel" aria-hidden="true">
@@ -94,12 +95,6 @@
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-12 col-md-12">
-                                        <input type="text" class="form-control" id="school_write_up"
-                                            name="school_write_up" placeholder="School Write up" required>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <div class="col-sm-12 col-md-12">
                                         <input type="number" class="form-control" id="school_boys_number"
                                             name="school_boys_number" placeholder="Number of Boys" required>
                                     </div>
@@ -110,69 +105,82 @@
                                             name="school_girls_number" placeholder="Number Of Girls" required>
                                     </div>
                                 </div>
+
                                 <div class="form-group row">
                                     <div class="col-sm-12 col-md-12">
                                         <input type="text" class="form-control" id="school_location_name"
                                             name="school_location_name" placeholder="Location Description" required>
                                     </div>
-                                </div>
-                                <div class="form-group row">
-                                    <div class="col-sm-12 col-md-12">
-                                        <input type="text" class="form-control" id="school_latitude"
-                                            name="school_latitude" placeholder="Latitude" required>
+                                    <div class="form-group row">
+                                        <div class="panel-body">
+                                            <label class="title">Zone: </label>
+                                            <?php echo form_dropdown('school_location_name', $zones, '', 'class="form-control"'); ?>
+                                        </div>
+
                                     </div>
-                                </div>
-                                <div class="form-group row">
-                                    <div class="col-sm-12 col-md-12">
-                                        <input type="text" class="form-control" id="school_longitude"
-                                            name="school_longitude" placeholder="Longitude" required>
+                                    <div class="form-group row">
+                                        <div class="col-sm-12 col-md-12">
+                                            <input type="text" class="form-control" id="school_latitude"
+                                                name="school_latitude" placeholder="Latitude" required>
+                                        </div>
                                     </div>
+                                    <div class="form-group row">
+                                        <div class="col-sm-12 col-md-12">
+                                            <input type="text" class="form-control" id="school_longitude"
+                                                name="school_longitude" placeholder="Longitude" required>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-12 col-md-12">
+                                            <label for="school_image">Profile
+                                                Image</label>
+                                            <input type="file" id="school_image" name="school_image">
+                                        </div>
+                                    </div>
+                                    <fieldset class="form-group">
+                                        <div class="row">
+                                            <legend class="col-form-label col-sm-2 pt-0">Status</legend>
+                                            <br>
+                                            <div class="col-sm-10">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" name="school_status"
+                                                        id="school_status" value="1" checked>
+                                                    <label class="form-check-label" for="gridRadios1">
+                                                        Active
+                                                    </label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" name="school_status"
+                                                        id="school_status" value="0">
+                                                    <label class="form-check-label" for="gridRadios2">
+                                                        Inactive
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                    <input class="form-check-input" type="hidden" name="school_status"
+                                        id="school_status" value="0">
                                 </div>
                                 <div class="form-group">
                                     <div class="col-sm-12 col-md-12">
-                                        <label for="school_image" class="col-sm-2 col-form-label">Profile
-                                            Image</label>
-                                        <input type="file" id="school_image" name="school_image">
+                                        <label for="school_write_up" class="col-form-label"></label>
+                                        <textarea class="form-control" id="message-text"
+                                            placeholder="School Write up"></textarea>
                                     </div>
                                 </div>
-                                <fieldset class="form-group">
-                                    <div class="row">
-                                        <legend class="col-form-label col-sm-2 pt-0">Status</legend>
-                                        <br>
-                                        <div class="col-sm-10">
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="school_status"
-                                                    id="school_status" value="1" checked>
-                                                <label class="form-check-label" for="gridRadios1">
-                                                    Active
-                                                </label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="school_status"
-                                                    id="school_status" value="0">
-                                                <label class="form-check-label" for="gridRadios2">
-                                                    Inactive
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </fieldset>
-                                <input class="form-check-input" type="hidden" name="school_status" id="school_status"
-                                    value="0">
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn btn-primary">Save</button>
+                                </div>
+                                <?php form_close();?>
                             </div>
-
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                <button type="submit" class="btn btn-primary">Save</button>
-                            </div>
-                            <?php form_close();?>
                         </div>
                     </div>
                 </div>
+
             </div>
-
         </div>
-
 
 
 
@@ -238,72 +246,62 @@ if ($query->num_rows() > 0) {
                                             <div class="row">
                                                 <div class="col-lg-12">
                                                     <h2 class="h2-responsive product-name">
-                                                        <div class="modal-header">
-                                                            <div class="img-responsive center-block">
+                                                        <div class="modal-header row">
+                                                            <div class="img-responsive center-block row">
                                                                 <img src="<?php echo base_url() . 'assets/uploads/' . $row->school_thumb_name; ?>"
                                                                     alt="avatar" class="img-responsive center-block">
                                                             </div>
                                                         </div>
                                                         <strong>
                                                             <h1 class="text-center"><?php echo $row->school_name; ?>
-                                                                </p>
+                                                            </h1>
                                                         </strong>
-                                                    </h2>
-                                                    <!--Accordion wrapper-->
-                                                    <div class="accordion md-accordion" id="accordionEx" role="tablist"
-                                                        aria-multiselectable="true">
-                                                    </div>
 
-                                                    <div class="card">
-                                                        <p>Location:<?php echo $row->school_location_name; ?></p>
-                                                    </div>
+                                                        <!--Accordion wrapper-->
+                                                        <div class="accordion md-accordion" id="accordionEx"
+                                                            role="tablist" aria-multiselectable="true">
+                                                        </div>
 
-                                                    <div class="card">
-                                                        <p>Number Of Girls:<?php echo $row->school_girls_number; ?>
-                                                        </p>
-                                                    </div>
+                                                        <div class="card">
+                                                            <p>Location:<?php echo $row->school_location_name; ?></p>
+                                                        </div>
 
-                                                    <div class="card">
-                                                        <p>Number Of Boys:<?php echo $row->school_boys_number; ?>
-                                                        </p>
-                                                    </div>
+                                                        <div class="card">
+                                                            <p>Number Of Girls:<?php echo $row->school_girls_number; ?>
+                                                            </p>
+                                                        </div>
 
-                                                    <div class="card">
-                                                        <p>School Write Up:<?php echo $row->school_write_up; ?></p>
-                                                    </div>
+                                                        <div class="card">
+                                                            <p>Number Of Boys:<?php echo $row->school_boys_number; ?>
+                                                            </p>
+                                                        </div>
+
+                                                        <div class="card">
+                                                            <p>School Write Up:<?php echo $row->school_write_up; ?></p>
+                                                        </div>
                                                 </div>
-
                                             </div>
-
                                         </div>
-
-
                                         <div class="card-body">
                                             <div class="row">
-                                                <div class="col-md-6">
-
-
-                                                </div>
                                                 <div class="text-center">
                                                     <?php echo anchor('laikipiaschools/schools', 'back', ['class' => 'btn btn-primary']); ?>
                                                 </div>
                                             </div>
-                                            <!-- /.Add to Cart -->
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
+                            <?php echo anchor("administration/edit/" . $row->school_id, "<i class='fas fa-edit'></i>", "class='btn btn-warning btn-sm'"); ?>
                             <?php if ($row->school_status == 1) {
-            
-            echo anchor("administration/update-school/" . $id, '<i class="fas fa-edit"></i>', "class='btn btn-warning btn-sm'");
-
-            echo anchor("administration/deactivate-school/" . $id . "/" . $row->school_status, "Deactivate", array("class" => "btn btn-info btn-sm", "onclick" => "return confirm('Are you sure you want to deactivate?')"));
+            echo anchor("administration/deactivate-school/" . $row->school_id . "/" . $row->school_status, "<i class='far fa-thumbs-down'></i>", array("class" => "btn btn-default btn-sm", "onclick" => "return confirm('Are you sure you want to deactivate?')"));
         } else {
-            echo anchor("administration/deactivate-school/" . $id . "/" . $row->school_status, "Activate", array("class" => "btn btn-info btn-sm", "onclick" => "return confirm('Are you sure you want to activate?')"));
-        }
-        echo anchor("administration/delete-school/" . $id, '<i class="fas fa-trash-alt"></i>', array("class" => "btn btn-danger btn-sm", "onclick" => "return confirm('Are you sure you want to Delete?')"));
-        ?>
+            echo anchor("administration/deactivate-school/" . $row->school_id . "/" . $row->school_status, "<i class='far fa-thumbs-up'></i>", array("class" => "btn btn-info btn-sm", "onclick" => "return confirm('Are you sure you want to activate?')"));
+        }?>
+
+                            <?php echo anchor("administration/delete-school/" . $row->school_id, '<i class="fas fa-trash-alt"></i>', array("class" => "btn btn-danger btn-sm", "onclick" => "return confirm('Are you sure you want to Delete?')")); ?>
+
 
                         </td>
                     </tr>

@@ -72,6 +72,27 @@ class Schools_model extends CI_Model
         }
     }
 
+    public function get_zones()
+    {
+        $result = $this->db->select('school_id, school_location_name')->get('zones')->result_array();
+
+        $zone = array();
+        foreach ($result as $r) {
+            $zone[$r['school_id']] = $r['school_location_name'];
+        }
+        $zone[''] = 'Select School Zone...';
+        return $zone;
+    }
+
+    public function get_location_dropdownlist()
+    {
+        $results = $this->db->select('school_id, school_location_name');
+        $this->db->get('school');
+        $this->db->result_array();
+
+        return array_column($results, 'school_location_name', 'school_id');
+    }
+
     public function update_school($school_id, $file_name, $thumb_name)
     {
         $data = array(

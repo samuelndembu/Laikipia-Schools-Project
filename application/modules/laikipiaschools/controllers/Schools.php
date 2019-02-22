@@ -2,7 +2,6 @@
     exit('No direct script access allowed');
 }
 
-
 class Schools extends MX_Controller
 {
     public $upload_path;
@@ -154,6 +153,52 @@ class Schools extends MX_Controller
 
         redirect('administration/schools');
     }
+    public function export_school()
+    {
+        $this->load->model("excel_export_model");
+        $data["school_data"] = $this->excel_export_model->fetch_data();
+        $this->load->view("Administration/schools", $data
+        );
+    }
+
+    public function get_zones()
+    {
+        $data['zone'] = $this->schools_model->get_zones();
+        $this->load->view('administration/all_schools', $data);
+    }
+
+    public function get_country_dropdownlist()
+    {
+        $data['school'] = $this->schools_model->get_location_dropdownlist();
+
+        $this->load->view('Administration/all_schools', $data);
+    }
+
+    public function export_transactions()
+    {
+        $order = 'school.school_id';
+        $order_method = 'DESC';
+        $where = 'school_id > 0';
+        $table = 'school';
+        $schools_search = $this->session->userdata('school_search');
+        $search_title = $this->session->userdata('school_search_title');
+
+        if (!empty($schools_search) && $schools_search != null) {
+            $where .= $schools_search;
+        }
+        $title = 'Schools';
+
+        if (!empty($search_title) && $search_title != null) {
+            $title = 'schools filtered by ' . $search_title;
+        }
+
+        if ($this->site_model->export_results($table, $where, $order, $order_method, $title)) {
+        } else {
+            $this->session->set_userdata('error_message', "Unable to export results");
+        }
+
+    }
+
     public function singleSchool($school_id)
     {
         $school = $this->schools_model->get_single_school($school_id);
@@ -272,17 +317,16 @@ class Schools extends MX_Controller
                 // $v_data['query'] = $this->schools_model->get_single_school($school_id);
                 // $v_data['schools'] = $this->schools_model->all_schools();
 
-                 $data = array(
-                "title" => $this->site_model->display_page_title(),
-                "content" => $this->load->view("schools/all_schools", $v_data, true),
-            );
-            
+                $data = array(
+                    "title" => $this->site_model->display_page_title(),
+                    "content" => $this->load->view("schools/all_schools", $v_data, true),
+                );
 
-            $this->load->view("laikipiaschools/layouts/layout", $data);
+                $this->load->view("laikipiaschools/layouts/layout", $data);
+            }
+
         }
-
     }
-}
     public function search_schools()
     {
         $school_name = $this->input->post('school_name');
