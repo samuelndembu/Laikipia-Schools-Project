@@ -159,11 +159,11 @@ aria-hidden="true" >
 
         
         <?php if($row->partner_status == 1){
-        echo anchor("administration/edit/". $row->partner_id,"Edit","class='btn btn-warning btn-sm'");
+        echo anchor("administration/edit/". $row->partner_id,"Edit","class='btn btn-warning btn-sm p-left-10'","style='padding-left:10px;'");
         
          
           // echo anchor("administration/deactivate-partner/". $row->partner_id . "/" .$row->partner_status ,"Deactivate","class='btn btn-primary btn-sm'");
-          echo anchor("administration/deactivate-partner/". $row->partner_id . "/" .$row->partner_status ,"DeActivate", array("class" => "btn btn-info btn-sm", "onclick" => "return confirm('Are you sure you want to deactivate?')"));
+          echo anchor("administration/deactivate-partner/". $row->partner_id . "/" .$row->partner_status ,"DeActivate", array("class" => "btn btn-info btn-sm p-left-10", "onclick" => "return confirm('Are you sure you want to deactivate?')"));
         }
         else{
           echo anchor("administration/deactivate-partner/". $row->partner_id . "/" .$row->partner_status ,"Activate", array("class" => "btn btn-info btn-sm", "onclick" => "return confirm('Are you sure you want to activate?')"));
