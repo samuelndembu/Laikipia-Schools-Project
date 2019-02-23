@@ -7,6 +7,8 @@ if (!empty($validation_errors)) {
 ?>
 
 
+
+
 <div class="card shadow mb-4">
     <div class="card-header py-3">
 
@@ -76,23 +78,11 @@ if (!empty($validation_errors)) {
                 </div>
             </div>
         </div>
-<<<<<<< HEAD
-        <div class="form-group">
-          <label for="partner_logo">Upload Partner Logo</label>
-          <input type="file" class="form-control-file" id="partner_logo" name="partner_logo">
-        </div>
-        
-      
-    </div>
-    <div class="modal-footer">
-    <button type="submit" class="btn btn-primary">Submit</button>
-    
 <?php echo form_close() ?>
   </div>
-  
 </div>
-</div>
-</div>
+
+
 
 <div class="card-body">
 <div class="table-responsive">
@@ -178,19 +168,18 @@ aria-hidden="true" >
 </div>
 <!--Modal: Login with Avatar Form-->
 
-
         
         <?php if($row->partner_status == 1){
         echo anchor("administration/edit/". $row->partner_id,"Edit","class='btn btn-warning btn-sm p-left-10'","style='padding-left:10px;'");
         
          
-          // echo anchor("administration/deactivate-partner/". $row->partner_id . "/" .$row->partner_status ,"Deactivate","class='btn btn-primary btn-sm'");
+          echo anchor("administration/deactivate-partner/". $row->partner_id . "/" .$row->partner_status ,"Deactivate","class='btn btn-primary btn-sm'");
           echo anchor("administration/deactivate-partner/". $row->partner_id . "/" .$row->partner_status ,"DeActivate", array("class" => "btn btn-info btn-sm p-left-10", "onclick" => "return confirm('Are you sure you want to deactivate?')"));
         }
         else{
           echo anchor("administration/deactivate-partner/". $row->partner_id . "/" .$row->partner_status ,"Activate", array("class" => "btn btn-info btn-sm", "onclick" => "return confirm('Are you sure you want to activate?')"));
         }
-         //echo anchor("administration/delete-partner/". $row->partner_id,"Delete","class='btn btn-danger btn-sm'");
+         echo anchor("administration/delete-partner/". $row->partner_id,"Delete","class='btn btn-danger btn-sm'");
               echo anchor("administration/delete-partner/". $row->partner_id ,"Delete", array("class" => "btn btn-danger btn-sm", "onclick" => "return confirm('Are you sure you want to Delete?')"));?>
           
         </td>
@@ -207,10 +196,8 @@ aria-hidden="true" >
       <?php echo $links;?>
 </p>
 </div>
-</div>
 
-=======
->>>>>>> 4e0391c11632838440a3266d67f8ee5594a4f035
+
 
         <div class="card-body">
             <div class="table-responsive">
@@ -235,7 +222,6 @@ if ($query->num_rows() > 0) {
     foreach ($query->result() as $row) {
         $count++;
         ?>
-
                         <tr>
                             <td>
                                 <?php echo $count ?>
@@ -328,4 +314,4 @@ if ($query->num_rows() > 0) {
                 <?php echo $links; ?>
             </p>
         </div>
-    </div>
+    

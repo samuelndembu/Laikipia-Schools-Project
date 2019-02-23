@@ -6,6 +6,13 @@
 				</button>
 
 				<!-- Modal -->
+
+
+<div class="container">
+    <div class="shadow-lg p-3 mb-5 bg-white rounded">
+
+
+
 <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
     aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -62,10 +69,6 @@
 
 
 
-
-
-<div class="container">
-    <div class="shadow-lg p-3 mb-5 bg-white rounded"">
 
 
 
@@ -305,7 +308,7 @@ if ($query->num_rows() > 0) {
                                 </div>
                             </div>
 
-                            <?php echo anchor("administration/edit/" . $row->school_id, "<i class='fas fa-edit'></i>", "class='btn btn-warning btn-sm'"); ?>
+                            <?php echo anchor("administration/edit-school/" . $row->school_id, "<i class='fas fa-edit'></i>", "class='btn btn-warning btn-sm'"); ?>
                             <?php if ($row->school_status == 1) {
             echo anchor("administration/deactivate-school/" . $row->school_id . "/" . $row->school_status, "<i class='far fa-thumbs-down'></i>", array("class" => "btn btn-default btn-sm", "onclick" => "return confirm('Are you sure you want to deactivate?')"));
         } else {

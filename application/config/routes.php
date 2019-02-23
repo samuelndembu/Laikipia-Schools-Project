@@ -123,7 +123,8 @@ $route['administration/delete-school/(:num)'] = 'laikipiaschools/schools/delete_
 $route['administration/delete-school/(:num)'] = 'laikipiaschools/schools/delete_school/$1';
 
 $route['administration/schools'] = 'laikipiaschools/schools/index';
-$route['administration/add-schools'] = 'laikipiaschools/schools/add_school';
+// $route['administration/schools/add-schools'] = 'laikipiaschools/schools/add_school';
+// $route['administration/add-schools'] = 'laikipiaschools/schools/add_school';
 $route['administration/search-schools'] = 'laikipiaschools/schools/search_transactions';
 $route['administration/close-search'] = 'laikipiaschools/schools/close_search';
 $route['administration/export-schools'] = 'laikipiaschools/schools/export_transactions';
@@ -131,6 +132,7 @@ $route['administration/schools/(:any)/(:any)/(:num)'] = 'laikipiaschools/schools
 $route['administration/schools/(:any)/(:any)'] = 'laikipiaschools/schools/index/$1/$2';
 $route['administration/schools/bulk-actions'] = 'laikipiaschools/schools/bulk_actions';
 $route['administration/deactivate-school/(:num)/(:num)'] = 'laikipiaschools/schools/deactivate_school/$1/$2';
+$route['administration/edit-school/(:num)'] = 'laikipiaschools/schools/edit_school/$1';
 
 $route['administration/schools/get-schools-details'] = 'laikipiaschools/webservice/get_school_details';
 
@@ -148,3 +150,24 @@ $route['administration/export-documents'] = 'laikipiadocuments/documents/export_
 $route['administration/documents/(:any)/(:any)/(:num)'] = 'laikipiadocuments/documents/index/$1/$2/$3';
 $route['administration/documents/(:any)/(:any)'] = 'laikipiadocuments/documents/index/$1/$2';
 $route['administration/documents/bulk-actions'] = 'laikipiadocuments/documents/bulk_actions';
+
+
+
+/**
+ * Posts
+ */
+$route['administration/update-post/(:num)'] = 'laikipiaschools/posts/edit_post/$1';
+$route['administration/delete-post/(:num)'] = 'laikipiaschools/posts/delete_post/$1';
+$route['administration/delete-post/(:num)'] = 'laikipiaschools/posts/delete_post/$1';
+
+$route['administration/posts'] = 'laikipiaschools/posts/index';
+$route['administration/add-posts'] = 'laikipiaschools/posts/add_post';
+$route['administration/search-posts'] = 'laikipiaschools/posts/search_posts';
+$route['administration/close-search'] = 'laikipiaschools/posts/close_search';
+$route['administration/export-posts'] = 'laikipiaschools/posts/export_posts';
+$route['administration/posts/(:any)/(:any)/(:num)'] = 'laikipiaschools/posts/index/$1/$2/$3';
+$route['administration/posts/(:any)/(:any)'] = 'laikipiaschools/posts/index/$1/$2';
+$route['administration/post/bulk-actions'] = 'laikipiaschools/posts/bulk_actions';
+$route['administration/deactivate-post/(:num)/(:num)'] = 'laikipiaschools/posts/deactivate_posts/$1/$2';
+
+$route['administration/schools/get-posts-details'] = 'laikipiaschools/webservice/get_post_details';

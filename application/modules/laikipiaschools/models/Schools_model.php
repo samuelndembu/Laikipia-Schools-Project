@@ -10,9 +10,9 @@ class Schools_model extends CI_Model
             "school_boys_number" => $this->input->post("school_boys_number"),
             "school_girls_number" => $this->input->post("school_girls_number"),
             "school_location_name" => $this->input->post("school_location_name"),
+             "school_zone" => $this->input->post("school_zone"),
             "school_image_name" => $file_name,
             "school_thumb_name" => $thumb_name,
-
             "school_latitude" => $this->input->post("school_latitude"),
             "school_longitude" => $this->input->post("school_longitude"),
             "school_status" => $this->input->post("school_status"),
