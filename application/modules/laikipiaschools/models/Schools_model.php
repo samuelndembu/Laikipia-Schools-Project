@@ -25,6 +25,29 @@ class Schools_model extends CI_Model
             return false;
         }
     }
+
+public function get_all_zones()
+    {
+        $this->db->distinct('school_zone');
+        $this->db->select("school_zone");
+        $this->db->from("school");
+        $query = $this->db->get();
+
+        // $sql = '';
+
+        // foreach ($query->result() as $key => $value) 
+        // {
+        //     $sql .= 'UPDATE school SET school_zone ="' . $value->school_location_name . '" WHERE school_id = ' . $value->school_id . ';';
+        // }
+
+        // echo $sql;die();
+
+        // echo json_encode($query->result());die();
+        return $query;
+
+    }
+
+
     public function get_all_schools($table, $where, $start, $limit, $page, $order, $order_method)
     {
         $where = "school.deleted = 0";
@@ -71,28 +94,7 @@ class Schools_model extends CI_Model
             return false;
         }
     }
-
-    public function get_zones()
-    {
-        $result = $this->db->select('school_id, school_location_name')->get('zones')->result_array();
-
-        $zone = array();
-        foreach ($result as $r) {
-            $zone[$r['school_id']] = $r['school_location_name'];
-        }
-        $zone[''] = 'Select School Zone...';
-        return $zone;
-    }
-
-    public function get_location_dropdownlist()
-    {
-        $results = $this->db->select('school_id, school_location_name');
-        $this->db->get('school');
-        $this->db->result_array();
-
-        return array_column($results, 'school_location_name', 'school_id');
-    }
-
+    
     public function update_school($school_id, $file_name, $thumb_name)
     {
         $data = array(

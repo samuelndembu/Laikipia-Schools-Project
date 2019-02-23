@@ -106,31 +106,47 @@
                                     </div>
                                 </div>
 
+
+
                                 <div class="form-group row">
                                     <div class="col-sm-12 col-md-12">
                                         <input type="text" class="form-control" id="school_location_name"
                                             name="school_location_name" placeholder="Location Description" required>
                                     </div>
-                                    <div class="form-group row">
-                                        <div class="panel-body">
-                                            <label class="title">Zone: </label>
-                                            <?php echo form_dropdown('school_location_name', $zones, '', 'class="form-control"'); ?>
+                                    <div class="modal-body">
+                                        <?php echo form_open_multipart(base_url() . 'administration/schools/add-schools') ?>
+                                        <div class="form-group row">
+                                            <label for="school_zone">Zones</label>
+                                            <select id="inputState" class="form-control" name="school_zone">
+                                                <option selected>Choose your zone...</option>
+
+                                                <?php if ($zones->num_rows() > 0) {
+    foreach ($zones->result() as $row) {?>
+                                                <option value="<?php echo $row->school_zone ?>">
+                                                    <?php echo $row->school_zone ?></option>
+                                                <?php
+}
+}?>
+                                            </select>
                                         </div>
 
                                     </div>
-                                    <div class="form-group row">
+
+
+
+                                    <div class="form-group">
                                         <div class="col-sm-12 col-md-12">
                                             <input type="text" class="form-control" id="school_latitude"
                                                 name="school_latitude" placeholder="Latitude" required>
                                         </div>
                                     </div>
-                                    <div class="form-group row">
+                                    <div class="form-group">
                                         <div class="col-sm-12 col-md-12">
                                             <input type="text" class="form-control" id="school_longitude"
                                                 name="school_longitude" placeholder="Longitude" required>
                                         </div>
                                     </div>
-                                    <div class="form-group">
+                                    <div class="form-group row">
                                         <div class="col-sm-12 col-md-12">
                                             <label for="school_image">Profile
                                                 Image</label>
@@ -138,7 +154,7 @@
                                         </div>
                                     </div>
                                     <fieldset class="form-group">
-                                        <div class="row">
+                                        <div class="col-sm-12 col-md-12">
                                             <legend class="col-form-label col-sm-2 pt-0">Status</legend>
                                             <br>
                                             <div class="col-sm-10">
@@ -191,7 +207,6 @@
                         <th>#</th>
                         <th> School Picture</th>
                         <th>School Name</th>
-
                         <th>Number of Boys</th>
                         <th>Number of Girls</th>
                         <th>Actions</th>
@@ -200,9 +215,8 @@
                 <tfoot>
                     <tr>
                         <th>#</th>
-                        <th> School Picture</th>
+                        <th>School Picture</th>
                         <th>School Name</th>
-
                         <th>Number of Boys</th>
                         <th>Number of Girls</th>
                         <th>Actions</th>

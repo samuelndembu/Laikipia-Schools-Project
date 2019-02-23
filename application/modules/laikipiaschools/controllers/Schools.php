@@ -123,6 +123,7 @@ class Schools extends MX_Controller
             $v_data['order_method'] = $order_method;
             $v_data['query'] = $query;
             $v_data['page'] = $page;
+            $v_data["zones"] = $this->schools_model->get_all_zones();
 
             $data = array(
                 "title" => $this->site_model->display_page_title(),
@@ -162,8 +163,8 @@ class Schools extends MX_Controller
     }
 
     public function get_zones()
-    {
-        $data['zone'] = $this->schools_model->get_zones();
+    {$this->load->model("schools_model");
+        $data['zones'] = $this->schools_model->get_zones();
         $this->load->view('administration/all_schools', $data);
     }
 
