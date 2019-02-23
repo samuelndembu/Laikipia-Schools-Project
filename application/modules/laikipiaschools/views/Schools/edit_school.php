@@ -1,4 +1,4 @@
-<div class="card">
+<div class="container">
   <div class="card-header">
    <h1>  Update School Details</h1>
   </div>
