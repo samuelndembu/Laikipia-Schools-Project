@@ -41,7 +41,6 @@ class File_model extends CI_Model
 
 
              $create_thumb = $this->resize_image($image_upload_data["full_path"], $resize_thumb, $thumb_array);
-                $create_thumb = $this->resize_image($image_upload_data["full_path"], $resize_thumb, $thumb_array);
                 if ($create_thumb == true) {
                     $response["check"] = true;
                     $response["file_name"] = $file_name;
@@ -58,6 +57,39 @@ class File_model extends CI_Model
 
         return $response;
     }
+    // public function multiple_upload($field_name, $cof = array()){
+    // $files = $_FILES[$file_name];
+    // $file_upload = sizeOf($_FILES[$file_name]['tmp_name];
+    // $image = array();
+    // $multiple = array();
+
+    // for($i = 0; $i < $file_upload; $i++){
+    //     $_FILES[$field_name]['name'] = $files['name'][$i],
+    //     $_FILES[$field_name]['type'] = $files['types'][$i];
+    //     $_FILES[$field_name]['error'] = $files['error'][$i];
+    //     $_FILES[field_name]['size'] = $files['size'][$i];
+
+    //     $upload_path =FCPATH.$conf['upload_path'];
+    //     if(!is_dir($upload_path))
+    //     mkdir($upload_path, 0777, true);
+
+    //     $config = array(
+    //         'upload_path'=> $upload_path'
+    //         'allowed_types' => $config['allowed_types'],
+    //         'max_size' => 0,
+    //         'encrypt' => true
+    //     );
+    //     $this->Ci->uplod->initialize($config);
+    //     if($this->CI->upload->do_upload($field_name)){
+    //         $data = $this->CI->upload->data();
+    //         chmod(data['fulll_path', 0777]);
+
+    //         $multiple[i] = $data['file_name'];
+    //     }
+    // // }
+    // // return $multiple
+    // // }
+
     public function resize_image($source_image, $resize, $thumbnail = false)
     {
         $resize_config = array(
@@ -70,7 +102,8 @@ class File_model extends CI_Model
         if ($thumbnail != false) {
             $resize_config["new_image"] = $thumbnail["thumb_path"];
             $resize_config["create_thumb"] = false;
-        }
+
+        } 
         $this->image_lib->initialize($resize_config);
 
         if (!$this->image_lib->resize()) {
@@ -79,5 +112,5 @@ class File_model extends CI_Model
             return true;
         }
     }
-
+    
 }

@@ -28,9 +28,9 @@ class Partners_model extends CI_Model
         $this->db->where($where);
         $this->db->limit($limit, $start);
         $this->db->join("partner_type", "partner.partner_type_id=partner_type.partner_type_id");
-     
+
         $this->db->order_by($order, $order_method);
-        
+
         return $this->db->get();
     }
 
@@ -39,7 +39,8 @@ class Partners_model extends CI_Model
         $this->db->where("partner_id", $partner_id);
         return $this->db->get("partner");
     }
-    public function all_partner_types(){
+    public function all_partner_types()
+    {
         $this->db->select("*");
         $this->db->from("partner_type");
         return $this->db->get();
@@ -51,13 +52,10 @@ class Partners_model extends CI_Model
 
         $this->db->set('partner_status', $new_partner_status);
         $this->db->where('partner_id', $partner_id);
-        if($this->db->update('partner'))
-        {
-            return TRUE;
-        }
-        else
-        {
-            return FALSE;
+        if ($this->db->update('partner')) {
+            return true;
+        } else {
+            return false;
         }
     }
 
@@ -73,26 +71,23 @@ class Partners_model extends CI_Model
         $this->db->from("partner_type");
         return $this->db->get();
     }
-    
-    public function update_partner($partner_id){
+
+    public function update_partner($partner_id)
+    {
         $data = array(
             "partner_type_id" => $this->input->post("partner_type"),
             "partner_name" => $this->input->post("partner_name"),
             "partner_email" => $this->input->post("partner_email"),
-            
-           
+
         );
         $this->db->set($data);
-        $this->db->where('partner_id',$partner_id);
+        $this->db->where('partner_id', $partner_id);
 
-        if($this->db->update('partner'))
-        {
-            return TRUE;
-        }else
-        {
-            return FALSE;
+        if ($this->db->update('partner')) {
+            return true;
+        } else {
+            return false;
         }
-
 
     }
     public function delete_partners($partner_id)
@@ -111,7 +106,5 @@ class Partners_model extends CI_Model
             return false;
         }
     }
-
- 
 
 }

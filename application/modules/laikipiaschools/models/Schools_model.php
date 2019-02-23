@@ -72,6 +72,27 @@ class Schools_model extends CI_Model
         }
     }
 
+    public function get_zones()
+    {
+        $result = $this->db->select('school_id, school_location_name')->get('zones')->result_array();
+
+        $zone = array();
+        foreach ($result as $r) {
+            $zone[$r['school_id']] = $r['school_location_name'];
+        }
+        $zone[''] = 'Select School Zone...';
+        return $zone;
+    }
+
+    public function get_location_dropdownlist()
+    {
+        $results = $this->db->select('school_id, school_location_name');
+        $this->db->get('school');
+        $this->db->result_array();
+
+        return array_column($results, 'school_location_name', 'school_id');
+    }
+
     public function update_school($school_id, $file_name, $thumb_name)
     {
         $data = array(
@@ -94,6 +115,24 @@ class Schools_model extends CI_Model
         } else {
             return false;
         }
+    }
+
+    public function save_school_flow($table, $data)
+    {
+        if ($this->db->insert($table, $data)) {
+            return $this->db->insert_id();
+        } else {
+            return false;
+        }
+    }
+
+    public function save_image($image_url, $path)
+    {
+        $image_name = md5(date("Y-m-d H:i:s"));
+        $content = file_get_contents($image_url);
+        file_put_contents($path . '/' . $image_name . '.jpg', $content);
+
+        return $image_name . '.jpg';
     }
 
 }
