@@ -115,6 +115,23 @@ $route['administration/partners/(:any)/(:any)/(:num)'] = 'laikipiaschools/partne
 $route['administration/partners/(:any)/(:any)'] = 'laikipiaschools/partners/index/$1/$2';
 $route['administration/partners/bulk-actions'] = 'laikipiaschools/partners/bulk_actions';
 $route['administration/delete-partner/(:num)'] = 'laikipiaschools/partners/delete_partner/$1';
+
+
+
+//categories
+
+$route['administration/categories'] = 'laikipiaschools/categories/index';
+$route['administration/categories/add-categories'] = 'laikipiaschools/categories/create_category';
+$route['administration/categories/read-category/(:num)'] = 'laikipiaschools/categories/read_category/$1';
+$route['administration/edit/(:num)'] = 'laikipiaschools/categories/edit/$1';
+$route['administration/deactivate-category/(:num)/(:num)'] = 'laikipiaschools/categories/deactivate_category/$1/$2';
+$route['administration/search-categories'] = 'laikipiaschools/categories/search_transactions';
+$route['administration/close-search'] = 'laikipiaschools/categories/close_search';
+$route['administration/export-categories'] = 'laikipiaschools/categories/export_transactions';
+$route['administration/categories/(:any)/(:any)/(:num)'] = 'laikipiaschools/categories/index/$1/$2/$3';
+$route['administration/categories/(:any)/(:any)'] = 'laikipiaschools/categories/index/$1/$2';
+$route['administration/categories/bulk-actions'] = 'laikipiaschools/categories/bulk_actions';
+$route['administration/delete-category/(:num)'] = 'laikipiaschools/categories/delete_category/$1';
 /**
  * Schools
  */

@@ -86,6 +86,7 @@ class Partners extends MX_Controller
         $v_data['order_method'] = $order_method;
         $v_data['query'] = $query;
         $v_data['page'] = $page;
+        $v_data['categories'] = $this->site_model->get_all_categories();
         $v_data["partner_types"] = $this->partners_model->get_partner_types();
 
         $data['content'] = $this->load->view('partners/all_partners', $v_data, true);

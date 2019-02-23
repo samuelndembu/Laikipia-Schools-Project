@@ -122,6 +122,7 @@ class Schools extends MX_Controller
             $v_data['order'] = $order;
             $v_data['order_method'] = $order_method;
             $v_data['query'] = $query;
+            $v_data['categories'] = $this->site_model->get_all_categories();
             $v_data['page'] = $page;
 
             $data = array(

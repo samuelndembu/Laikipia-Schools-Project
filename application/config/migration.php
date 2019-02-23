@@ -69,17 +69,14 @@ $config['migration_auto_latest'] = true;
 | be upgraded / downgraded to.
 |
  */
-<<<<<<< HEAD
 //$config['migration_version'] = 20190218125630;
 //$config['migration_version'] = 20190218111230;
 
-$config['migration_version'] = 20190222164833;
+//$config['migration_version'] = 20190222164833;
 
-=======
-$config['migration_version'] = 20190221130610;
+$config['migration_version'] = 20190223102133;
 //$config['migration_version'] = 20190218111230;
 
->>>>>>> 4e0391c11632838440a3266d67f8ee5594a4f035
 /*
 |--------------------------------------------------------------------------
 | Migrations Path

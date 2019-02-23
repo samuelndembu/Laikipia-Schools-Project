@@ -1,8 +1,7 @@
 
 <?php
 $validation_errors = validation_errors();
-if (!empty($validation_errors))
-{
+if (!empty($validation_errors)) {
     echo $validation_errors;
 }
 ?>
@@ -27,19 +26,18 @@ Add Category
   </button>
 </div>
 <div class="modal-body">
-<?php echo form_open_multipart(base_url() . 'administration/categories/add-categories') ?>
+<?php echo form_open_multipart(base_url() . 'laikipiaschools/categories/create_category') ?>
       <div class="form-group">
         <label for="Parent">Parent</label>
         <!-- <input type="name" class="form-control" name="partner_type" id="partner_type" naria-describedby="emailHelp" placeholder="Select Partner Name"> -->
         <select id="inputState" class="form-control" name="parent">
-          <option selected>Choose...</option>
-
-          <?php if ($parent->num_rows() > 0) {
-    foreach ($parent->result() as $row) {?>
-              <option value="<?php echo $row->content_id ?>"><?php echo $row->parent ?></option>
-              <?php
-}
-}?>
+          <option value="">Choose a parent...</option>
+          <?php if(is_array($categories->result())){
+            foreach($categories->result() as $cat)
+            {?>
+              <option value="<?php echo $cat->name;?>"><?php echo $cat->name;?></option>
+            <?php }
+          }?>
       </select>
       </div>
       <div class="form-group">
@@ -89,7 +87,7 @@ if ($query->num_rows() > 0) {
         <?php echo $row->name; ?>
         </td>
       <td>
-      <?php if ($row->content_status == 1) {?>
+      <?php if ($row->category_status == 1) {?>
         <a href="" class="btn btn-dark btn-sm" data-toggle="modal" data-target="#modalLoginAvatar">View</a>
       <?php }?>
 
@@ -113,7 +111,7 @@ aria-hidden="true" >
   <div class="md-form ml-0 mr-0" style="padding:30px;font-size:20px;list-style-type:none;margin-left:10px;font-weight:bold;">
   <li>Name:<?php echo $row->name; ?></li>
   </div>
-  
+
 </div>
 
 </div>
@@ -122,16 +120,13 @@ aria-hidden="true" >
 </div>
 <!--Modal: Login with Avatar Form-->
 
-      <?php if ($row->partner_status == 1) {
-            echo anchor("administration/edit/" . $row->content_id, "Edit", "class='btn btn-warning btn-sm p-left-10'", "style='padding-left:10px;'");
-
-            // echo anchor("administration/deactivate-partner/". $row->partner_id . "/" .$row->partner_status ,"Deactivate","class='btn btn-primary btn-sm'");
-            echo anchor("administration/deactivate-category/" . $row->content_id . "/" . $row->content_status, "DeActivate", array("class" => "btn btn-info btn-sm p-left-10", "onclick" => "return confirm('Are you sure you want to deactivate?')"));
+      <?php if ($row->category_status == 1) {
+            echo anchor("administration/edit/" . $row->category_id, "Edit", "class='btn btn-warning btn-sm p-left-10'", "style='padding-left:10px;'");
+            echo anchor("administration/deactivate-category/" . $row->category_id . "/" . $row->category_status, "DeActivate", array("class" => "btn btn-info btn-sm p-left-10", "onclick" => "return confirm('Are you sure you want to deactivate?')"));
         } else {
-            echo anchor("administration/deactivate-category/" . $row->content_id . "/" . $row->content_status, "Activate", array("class" => "btn btn-info btn-sm", "onclick" => "return confirm('Are you sure you want to activate?')"));
+            echo anchor("administration/deactivate-category/" . $row->category_id . "/" . $row->category_status, "Activate", array("class" => "btn btn-info btn-sm", "onclick" => "return confirm('Are you sure you want to activate?')"));
         }
-        //echo anchor("administration/delete-partner/". $row->partner_id,"Delete","class='btn btn-danger btn-sm'");
-        echo anchor("administration/delete-content/" . $row->content_id, "Delete", array("class" => "btn btn-danger btn-sm", "onclick" => "return confirm('Are you sure you want to Delete?')"));?>
+        echo anchor("administration/delete-category/" . $row->category_id, "Delete", array("class" => "btn btn-danger btn-sm", "onclick" => "return confirm('Are you sure you want to Delete?')"));?>
 
       </td>
     </tr>

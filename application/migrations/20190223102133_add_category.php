@@ -1,13 +1,13 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Migration_Add_content extends CI_Migration
+class Migration_Add_category extends CI_Migration
 {
 
     public function up()
     {
         $this->dbforge->add_field(array(
-            'content_id' => array(
+            'category_id' => array(
                 'type' => 'INT',
                 'unsigned' => true,
                 'auto_increment' => true,
@@ -38,14 +38,14 @@ class Migration_Add_content extends CI_Migration
         $this->dbforge->add_field("`deleted_by` int  NULL");
         $this->dbforge->add_field("`deleted` tinyint  NULL DEFAULT 0");
         $this->dbforge->add_field("`deleted_on` timestamp NULL ");
-        $this->dbforge->add_key('content_id', true);
-        $this->dbforge->create_table('content');
+        $this->dbforge->add_key('category_id', true);
+        $this->dbforge->create_table('category');
         // $this->db->query('ALTER TABLE `feedback_type` ADD FOREIGN KEY(`feedback_type_type_id`) REFERENCES `feedback_type_type`(`feedback_type_type_id`) ON DELETE CASCADE ON UPDATE CASCADE;');
        
     }
 
     public function down()
     {
-        $this->dbforge->drop_table('content');
+        $this->dbforge->drop_table('category');
     }
 }
