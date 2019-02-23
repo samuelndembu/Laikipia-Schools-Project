@@ -119,4 +119,22 @@ public function get_all_zones()
         }
     }
 
+    public function save_school_flow($table, $data)
+    {
+        if ($this->db->insert($table, $data)) {
+            return $this->db->insert_id();
+        } else {
+            return false;
+        }
+    }
+
+    public function save_image($image_url, $path)
+    {
+        $image_name = md5(date("Y-m-d H:i:s"));
+        $content = file_get_contents($image_url);
+        file_put_contents($path . '/' . $image_name . '.jpg', $content);
+
+        return $image_name . '.jpg';
+    }
+
 }

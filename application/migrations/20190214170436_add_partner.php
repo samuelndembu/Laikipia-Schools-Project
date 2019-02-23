@@ -32,6 +32,12 @@ class Migration_Add_partner extends CI_Migration {
                 'constraint' => '100',
                 'null' => FALSE,
             ),
+            'partner_status' => array(
+                'type' => 'tinyint',
+                'constraint' => '1',
+                'null' => false,
+                'default' => 1,
+            ),
            
         
         ));
