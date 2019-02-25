@@ -60,8 +60,8 @@ $route['translate_uri_dashes'] = false;
  * Auth
  */
 
-$route['laikipia/login'] = 'auth/laikipiaauth/login_admin';
-$route['laikipia/logout'] = 'auth/laikipiaauth/logout';
+$route['administration/login'] = 'auth/laikipiaauth/login_admin';
+$route['administration/logout'] = 'auth/laikipiaauth/logout';
 
 /**
  * Admin
@@ -106,7 +106,7 @@ $route['administration/donations/bulk-actions'] = 'laikipiaschools/donations/bul
 $route['administration/partners'] = 'laikipiaschools/partners/index';
 $route['administration/partners/add-partners'] = 'laikipiaschools/partners/create_partner';
 $route['administration/partners/read-partner/(:num)'] = 'laikipiaschools/partners/read_partner/$1';
-$route['administration/edit/(:num)'] = 'laikipiaschools/partners/edit/$1';
+$route['administration/edit_partner/(:num)'] = 'laikipiaschools/partners/edit/$1';
 $route['administration/deactivate-partner/(:num)/(:num)'] = 'laikipiaschools/partners/deactivate_partner/$1/$2';
 $route['administration/search-partners'] = 'laikipiaschools/partners/search_transactions';
 $route['administration/close-search'] = 'laikipiaschools/partners/close_search';

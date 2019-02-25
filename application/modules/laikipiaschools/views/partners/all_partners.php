@@ -134,8 +134,7 @@ if (!empty($validation_errors)) {
         <td>
  
         <?php if($row->partner_status == 1){ ?>
-          <a href="" class="btn btn-dark btn-sm" data-toggle="modal" data-target="#modalLoginAvatar" ><i
-                                            class="fas fa-eye"></i></a>
+          <a href="" class="btn btn-dark btn-sm" data-toggle="modal" data-target="#modalLoginAvatar" ><i class="fas fa-eye"></i></a>
         <?php }?>
   
 <!--Modal: Login with Avatar Form-->
@@ -174,7 +173,7 @@ aria-hidden="true" >
 </div>
 <!--Modal: Login with Avatar Form-->
 
-        
+<?php echo anchor("administration/edit_partner/". $row->partner_id,"<i class='fas fa-edit'></i>","class='btn btn-warning btn-sm p-left-10'","style='padding-left:10px;'");?>
         <?php if($row->partner_status == 1){
           echo anchor("administration/deactivate-partner/". $row->partner_id . "/" .$row->partner_status ,"<i class='far fa-thumbs-down'></i>",array("class" => "btn btn-info btn-sm p-left-10", "onclick" => "return confirm('Are you sure you want to deactivate?')"));
         }
@@ -183,8 +182,7 @@ aria-hidden="true" >
         }?>
         <?php
          echo anchor("administration/delete-partner/". $row->partner_id,"<i class='fas fa-trash-alt'></i>",array("class" => "btn btn-danger btn-sm", "onclick" => "return confirm('Are you sure you want to Delete?')"));?>
-        <?php echo anchor("administration/edit/". $row->partner_id,"<i class='fas fa-edit'></i>","class='btn btn-warning btn-sm p-left-10'","style='padding-left:10px;'");?>
-      
+        
           
         </td>
       </tr>

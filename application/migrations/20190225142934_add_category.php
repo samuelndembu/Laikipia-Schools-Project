@@ -13,17 +13,17 @@ class Migration_Add_category extends CI_Migration
                 'auto_increment' => true,
             ),
 
-            'parent' => array(
+            'category_parent' => array(
+                'type' => 'INT',
+                'constraint' => '11',
+                'null' => false,
+            ),
+            'category_name' => array(
                 'type' => 'VARCHAR',
                 'constraint' => '100',
                 'null' => false,
             ),
-            'name' => array(
-                'type' => 'VARCHAR',
-                'constraint' => '100',
-                'null' => false,
-            ),
-            'content_status' => array(
+            'category_status' => array(
                 'type' => 'TINYINT',
                 'constraint' => '1',
                 'null' => false,
@@ -40,9 +40,8 @@ class Migration_Add_category extends CI_Migration
         $this->dbforge->add_field("`deleted_on` timestamp NULL ");
         $this->dbforge->add_key('category_id', true);
         $this->dbforge->create_table('category');
-        // $this->db->query('ALTER TABLE `feedback_type` ADD FOREIGN KEY(`feedback_type_type_id`) REFERENCES `feedback_type_type`(`feedback_type_type_id`) ON DELETE CASCADE ON UPDATE CASCADE;');
-       
-    }
+        
+      }
 
     public function down()
     {

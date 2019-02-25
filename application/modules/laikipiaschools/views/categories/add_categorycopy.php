@@ -1,4 +1,17 @@
-
+<!DOCTYPE html>
+  <html>
+  <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <title>Page Title</title>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <!-- <script src="<?php echo base_url() ?>assets/vendor/jquery/jquery-3.3.1.slim.min.js"></script> -->
+      <link href="<?php echo base_url() ?>assets/themes/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+      <link href="<?php echo base_url() ?>assets/themes/bootstrap/js/bootstrap.min.js" rel="stylesheet" />
+      <link href="<?php echo base_url() ?>assets/themes/custom/partner.css" rel="stylesheet"/>
+      <link href="<?php echo  base_url();?>assets/fontawesome/css/fontawesome.css" rel="stylesheet" type="text/css"/>
+  </head>
+  <body>
       <!-- <div class="container"> -->
       <div class = "container">
           <?php
@@ -107,7 +120,8 @@
 
     <?php echo form_close() ?>
       </div>
- 
+  </body>
+  </html>
 
 
 

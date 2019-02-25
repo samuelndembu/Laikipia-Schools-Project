@@ -281,6 +281,7 @@ class Partners extends MX_Controller
                 $v_data["partner_email"] = $partner_email;
                 $v_data["partner_logo"] = $partner_logo;
                 // $v_data["partners"] = $my_partner;
+                $v_data['categories'] = $this->site_model->get_all_categories();
                 $v_data["partner_types"] = $this->partners_model->all_partner_types();
 
                 $data = array("title" => "Update partner",

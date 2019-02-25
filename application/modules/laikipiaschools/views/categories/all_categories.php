@@ -28,21 +28,21 @@ Add Category
 <div class="modal-body">
 <?php echo form_open_multipart(base_url() . 'laikipiaschools/categories/create_category') ?>
       <div class="form-group">
-        <label for="Parent">Parent</label>
+        <label for="category_Parent">Parent</label>
         <!-- <input type="name" class="form-control" name="partner_type" id="partner_type" naria-describedby="emailHelp" placeholder="Select Partner Name"> -->
-        <select id="inputState" class="form-control" name="parent">
+        <select id="inputState" class="form-control" name="category_parent">
           <option value="">Choose a parent...</option>
           <?php if(is_array($categories->result())){
             foreach($categories->result() as $cat)
             {?>
-              <option value="<?php echo $cat->name;?>"><?php echo $cat->name;?></option>
+              <option value="<?php echo $cat->category_id;?>"><?php echo $cat->category_name;?></option>
             <?php }
           }?>
       </select>
       </div>
       <div class="form-group">
-        <label for="name"> Name</label>
-        <input type="name" class="form-control" name="name" id="name" naria-describedby="emailHelp" placeholder="Enter category Name">
+        <label for="category_name"> Name</label>
+        <input type="name" class="form-control" name="category_name" id="category_name" naria-describedby="emailHelp" placeholder="Enter category Name">
       </div>
   </div>
   <div class="modal-footer">
@@ -66,7 +66,11 @@ Add Category
     </tr>
   </thead>
   <tfoot>
-    <!-- <tr><?php echo $links; ?></tr> -->
+  <tr>
+      <th>#</th>
+      <th>Parent</th>
+      <th>Name</th>
+    </tr>
   </tfoot>
   <tbody>
     <?php
@@ -81,14 +85,27 @@ if ($query->num_rows() > 0) {
         <?php echo $count ?>
       </td>
       <td>
-        <?php echo $row->parent; ?>
+        <?php if($row->category_parent == 0){
+          echo "";
+        }
+        else{
+          foreach($categories->result() as $category)
+            {
+              if($category->category_id == $row->category_parent){
+              echo $category->category_name;
+              }
+            
+              }
+        }
+        
+         ?>
       </td>
       <td>
-        <?php echo $row->name; ?>
+        <?php echo $row->category_name; ?>
         </td>
       <td>
       <?php if ($row->category_status == 1) {?>
-        <a href="" class="btn btn-dark btn-sm" data-toggle="modal" data-target="#modalLoginAvatar">View</a>
+        <a href="" class="btn btn-dark btn-sm" data-toggle="modal" data-target="#modalLoginAvatar"><i class="fas fa-eye"></i></a>
       <?php }?>
 
 <!--Modal: Login with Avatar Form-->
@@ -103,13 +120,13 @@ aria-hidden="true" >
 <!--Body-->
 <div class="modal-body text-center mb-1">
 
-  <h5 class="mt-1 mb-2">Retrieved:  <?php echo $row->name; ?></h5>
+  <h5 class="mt-1 mb-2">Retrieved:  <?php echo $row->category_name; ?></h5>
 
   <div class="md-form ml-0 mr-0" style="padding:30px;font-size:20px;list-style-type:none;margin-left:10px;">
-  <li >Parent:   <?php echo $row->parent; ?></li>
+  <li >Parent:   <?php echo $row->category_parent; ?></li>
   </div>
   <div class="md-form ml-0 mr-0" style="padding:30px;font-size:20px;list-style-type:none;margin-left:10px;font-weight:bold;">
-  <li>Name:<?php echo $row->name; ?></li>
+  <li>Name:<?php echo $row->category_name; ?></li>
   </div>
 
 </div>
@@ -119,15 +136,15 @@ aria-hidden="true" >
 </div>
 </div>
 <!--Modal: Login with Avatar Form-->
+      <?php echo anchor("administration/edit/". $row->category_id,"<i class='fas fa-edit'></i>","class='btn btn-warning btn-sm p-left-10'","style='padding-left:10px;'");?>
 
       <?php if ($row->category_status == 1) {
-            echo anchor("administration/edit/" . $row->category_id, "Edit", "class='btn btn-warning btn-sm p-left-10'", "style='padding-left:10px;'");
-            echo anchor("administration/deactivate-category/" . $row->category_id . "/" . $row->category_status, "DeActivate", array("class" => "btn btn-info btn-sm p-left-10", "onclick" => "return confirm('Are you sure you want to deactivate?')"));
+            echo anchor("administration/deactivate-category/" . $row->category_id . "/" . $row->category_status, "<i class='far fa-thumbs-down'></i>", array("class" => "btn btn-info btn-sm p-left-10", "onclick" => "return confirm('Are you sure you want to deactivate?')"));
         } else {
-            echo anchor("administration/deactivate-category/" . $row->category_id . "/" . $row->category_status, "Activate", array("class" => "btn btn-info btn-sm", "onclick" => "return confirm('Are you sure you want to activate?')"));
-        }
-        echo anchor("administration/delete-category/" . $row->category_id, "Delete", array("class" => "btn btn-danger btn-sm", "onclick" => "return confirm('Are you sure you want to Delete?')"));?>
-
+            echo anchor("administration/deactivate-category/" . $row->category_id . "/" . $row->category_status, "<i class='far fa-thumbs-up'></i>", array("class" => "btn btn-info btn-sm", "onclick" => "return confirm('Are you sure you want to activate?')"));
+        }?>
+        <?php echo anchor("administration/delete-category/" . $row->category_id, "<i class='fas fa-trash-alt'></i>", array("class" => "btn btn-danger btn-sm", "onclick" => "return confirm('Are you sure you want to Delete?')"));?>
+        
       </td>
     </tr>
     <?php

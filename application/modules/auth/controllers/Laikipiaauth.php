@@ -9,15 +9,7 @@ class Laikipiaauth extends MX_Controller
      
     }
 
-    public function index()
-    {
-
-        if (!$this->auth_model->check_login()) {
-            redirect('login');
-        } else {
-            redirect('reports/transactions');
-        }
-    }
+  
 
     /*
      *
@@ -56,31 +48,25 @@ class Laikipiaauth extends MX_Controller
                     'personnel_id' => 0,
                 );
 
-                $this->session->set_userdata($newdata);
+                $this->session->set_userdata("laikipia_admin",$newdata);
 
                 $personnel_type_id = $this->session->userdata('personnel_type_id');
 
                 if (!empty($personnel_type_id) && ($personnel_type_id != 1)) 
                 {
-                    redirect('laikipiaschools/schools');
-                    // $l_data['title'] = "Welcome";
-                    // $l_data["content"] = "";
-                    // $this->load->view("laikipiaschools/layouts/layout", $l_data);
+                    redirect('administration/schools');
+                   
                 } 
                 else 
                 {
-                    redirect('laikipiaschools/schools');
-                    // $l_data['title'] = "Welcome";
-                    // $l_data["content"] = "";
-                    // $this->load->view("laikipiaschools/layouts/layout", $l_data);
+                    redirect('administration/schools');
+                   
                 }
             } 
             else if ($this->auth_model->validate_personnel()) 
             {
-                redirect('laikipiaschools/schools');
-                // $l_data['title'] = "Welcome";
-                // $l_data["content"] = "";
-                // $this->load->view("laikipiaschools/layouts/layout", $l_data);
+                redirect('administration/schools');
+                
             }
 
             else
@@ -105,38 +91,14 @@ class Laikipiaauth extends MX_Controller
 
             $this->load->view("auth/layouts/login", $data);
         }
-        //4. load login view
-        // $V_data['title'] = 'Admin Login';
-        // $data = array(
-        //     "title" => "Admin Login",
-        //     "content" => $this->load->view("auth/templates/laikipialogin", $V_data, true),
-        //     "login" => true,
-        // );
-
-        // $this->load->view("auth/layouts/login", $data);
+        
     }
 
     public function logout()
     {
-        $personnel_id = $this->session->userdata('personnel_id');
-
-        // if($personnel_id > 0)
-        // {
-        //     $session_log_insert = array(
-        //         "personnel_id" => $personnel_id,
-        //         "session_name_id" => 2
-        //     );
-        //     $table = "session";
-        //     if($this->db->insert($table, $session_log_insert))
-        //     {
-        //     }
-
-        //     else
-        //     {
-        //     }
-        // }
+        $personnel_id = $this->session->userdata('laikipia_admin');
         $this->session->sess_destroy();
-        redirect('login');
+        redirect('administration/login');
     }
 
     /*

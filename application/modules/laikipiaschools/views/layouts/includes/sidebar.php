@@ -9,50 +9,60 @@
                     <div class="sidebar-menu">
                         <ul id="accordion-menu">
 
-                            <li class="dropdown">
-                                <a href="<?php echo base_url(); ?>administration/schools" class="dropdown-toggle">
+                            <hr>
+                            <li class="dropdown pt-3">
+                                <a href="<?php echo base_url(); ?>administration/schools" class="">
                                     <span class="fas fa-graduation-cap"></span><span class="mtext">School</span>
                                 </a>
 
                             </li>
+                            <hr>
                             <li class="dropdown">
-                                <a href="javascript:;" class="dropdown-toggle">
-                                    <span class="fa fa-home"></span>Content
+                                <a href="javascript:;" class="">
+                                    <span class="fa fa-table"></span>Content
                                 </a>
                                 <ul class="submenu">
-                                    <li><a href="<?php echo base_url(); ?>laikipiaschools/categories">Category</a></li>
+                                    <li><a href="<?php echo base_url(); ?>administration/categories">Category</a></li>
 
-                                    <li><a href="<?php echo base_url(); ?>laikipiaschools/posts">Post</a></li>
+                                    <li><a href="<?php echo base_url(); ?>administration/posts">Post</a></li>
                                 </ul>
                             </li>
+                            <hr>
                             <?php if (is_array($categories->result())) {
     $cats = array();
     foreach ($categories->result() as $cat) {
-        if (!in_array($cat->parent, $cats) && ($cat->parent != "" || $cat->parent != null)) {
-            array_push($cats, $cat->parent);
+        if (!in_array($cat->category_parent, $cats) && ($cat->category_parent != "0" || $cat->category_parent != 0)) {
+            
+            array_push($cats, $cat->category_parent);
         }
 
     }
-
+    // var_dump($cats);
     foreach ($cats as $cat) {
         ?>
                             <li class="dropdown">
-                                <a href="javascript:;" class="dropdown-toggle">
-                                    <span class="fa fa-home"></span><?php echo $cat; ?>
+                                <a href="javascript:;" class="">
+                                    <?php foreach ($categories->result() as $value) {
+                                        if($value->category_id == $cat){ ?>
+                                            <?php echo $value->category_name; 
+                                         }
+                                        }
+                                        ?>
                                 </a>
                                 <ul class="submenu">
                                     <?php
 foreach ($categories->result() as $value) {
-            if ($value->parent == $cat) {?>
+            if ($value->category_parent == $cat) {?>
 
                                     <li><a
-                                            href="<?php echo base_url(); ?>administration/<?php echo strtolower($value->name); ?>"><?php echo $value->name; ?></a>
+                                            href="<?php echo base_url(); ?>administration/<?php echo strtolower($value->category_name); ?>"><?php echo $value->category_name; ?></a>
                                     </li>
 
                                     <?php }
         }?>
                                 </ul>
                             </li>
+                            <hr>
                             <?php }
 }?>
                         </ul>

@@ -158,76 +158,16 @@ class Categories extends MX_Controller
 
     }
 
-    // public function bulk_actions()
-    // {
-    //     $this->form_validation->set_rules('action_name', 'Action', 'required');
-
-    //     //if form conatins invalid data
-    //     if ($this->form_validation->run())
-    //     {
-    //         $partner_id_array = $_POST['partner_id'];
-    //         $action_name = $this->input->post('action_name');
-
-    //         $total_partners = count($partner_id_array);
-
-    //         if($total_partners > 0)
-    //         {
-    //             foreach($partner_id_array as $key => $value)
-    //             {
-    //                 if($action_name == "reset")
-    //                 {
-    //                     $this->partners_model->reset_merchant_password($value);
-    //                 }
-    //             }
-
-    //             $merchants = "merchants";
-    //             if($total_merchants == 1)
-    //             {
-    //                 $merchants = "merchant";
-    //             }
-    //             $this->session->set_userdata('success_message', $action_name." of ".$total_merchants." ".$merchants."  successfull");
-    //         }
-
-    //         else
-    //         {
-    //             $this->session->set_userdata('error_message', "No merchants have been selected");
-    //         }
-    //     }
-
-    //     else
-    //     {
-    //         $validation_errors = validation_errors();
-    //         if(!empty($validation_errors))
-    //         {
-    //             $this->session->set_userdata("error_message", $validation_errors);
-    //         }
-    //     }
-
-    //     redirect("reports/merchants");
-    // }
-
-    // public function firstview()
-    // {
-
-    //     $v_data["query"] = $this->partners_model->get_partners();
-    //     $v_data["partner_types"] = $this->partners_model->get_partner_types();
-
-    //     $data = array("title" => "Partner",
-    //         "content" => $this->load->view("partners/all_partners", $v_data, true),
-
-    //     );
-    //     $this->load->view("laikipiaschools/layouts/layout", $data);
-    // }
     public function read_category($category_id)
     {
         $my_category = $this->categories_model->get_single_category($category_id);
         if ($my_category->num_rows() > 0) {
             $row = $my_category->row();
-            $parent = $row->parent;
-            $name = $row->name;
+            $category_parent = $row->category_parent;
+            $category_name = $row->category_name;
 
-            $v_data["parent"] = $parent;
-            $v_data["name"] = $name;
+            $v_data["category_parent"] = $category_parent;
+            $v_data["Category_name"] = $category_name;
 
             $data = array("title" => "category",
                 "content" => $this->load->view("categories/new_category", $v_data, true));
@@ -263,7 +203,7 @@ class Categories extends MX_Controller
     public function create_category()
     {
         // $this->form_validation->set_rules("parent", "parent", "required");
-        $this->form_validation->set_rules("name", "name", "required|is_unique[category.name]");
+        $this->form_validation->set_rules("category_name", "category_name", "required|is_unique[category.category_name]");
 
         if ($this->form_validation->run()) {
             $category_id = $this->categories_model->add_category();
@@ -282,28 +222,7 @@ class Categories extends MX_Controller
             );
         $this->load->view("laikipiaschools/layouts/layout", $data);
     }
-    // $partner_id = $this->partners_model->add_partners();
-    // if ($partner_id > 0) {
-    //     $this->session->set_flashdata("success_message", "New partner ID" . $partner_name . " has been added");
-    // } else {
-    //     $this->session->set_flashdata
-    //         ("error_message", "unable to add partner");
-    // }
-    // redirect("laikipiaschools/partners");
-    // }
-
-    // redirect("laikipiaschools/partners");
-
-    // $data["form_error"] = validation_errors();
-    // // $data["partner_types"] = $this->partners_model->get_partner_types();
-    // // $data = array("title" => "Add partner",
-    // //     "content" => $this->load->view("partners/add_partner", $data, true));
-    // // // $this->load->view("welcome_here", $data);
-    // // $this->load->view("laikipiaschools/layouts/layout", $data);
-
-    // //  $this->load->view("partners/add_partner",$data);
-
-    // //update
+    
     public function edit($category_id)
     {
         $this->form_validation->set_rules("parent", "Parent", "required");
@@ -337,26 +256,21 @@ class Categories extends MX_Controller
 
         }
     }
-    public function delete_category($category_id)
-    {
-        $this->db->where("category_id", $category_id);
-        $this->db->delete("category");
-        redirect("categories/all_categories");
-    }
 
     //uploading image
     //delete image
-    // public function delete_partner($partner_id)
-    // {
-    // if($this->partners_model->delete_partners($partner_id)
-    // {
-    // $this->session->set_flashdata('success', 'Partner Deleted successfully');
-    // redirect('administration/partners');
-    // }
-    // else
-    // {
-    // $this->session->set_flashdata('error', 'Unable to delete partner, Try again!!');
-    // redirect('administration/partners');
-    // }
-    // }
+   
+    public function delete_category($category_id)
+    {
+        if ($this->categories_model->delete_categories($category_id)) {
+            $this->session->set_flashdata('success', 'Deleted successfully');
+            redirect('administration/categories');
+        } else {
+            $this->session->set_flashdata('error', 'Unable to delete, Try again!!');
+            redirect('administration/categories');
+        }
+    }   
+
+    
+    
 }

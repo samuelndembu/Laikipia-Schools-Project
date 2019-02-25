@@ -18,8 +18,8 @@ class Categories_model extends CI_Model
     public function add_category()
     {
         $data = array(
-        "parent" => $this->input->post("parent"),
-        "name" => $this->input->post("name"),
+        "category_parent" => $this->input->post("category_parent"),
+        "category_name" => $this->input->post("category_name"),
         "category_status" => 1
         );
          
@@ -65,6 +65,23 @@ class Categories_model extends CI_Model
             return false;
         }
 
+    }
+
+    public function delete_categories($category_id)
+    {
+        $data = array(
+            'deleted' => 1,
+            'deleted_by' => 1,
+            'deleted_on' => date("Y-m-d H:i:s"),
+        );
+
+        $this->db->set($data);
+        $this->db->where('category_id', $category_id);
+        if ($this->db->update('category')) {
+            return true;
+        } else {
+            return false;
+        }
     }
     
     
