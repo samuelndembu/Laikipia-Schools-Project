@@ -11,6 +11,7 @@ class File_model extends CI_Model
             "min_width" => "300",
             "min_height" => "300",
             "file_name" => md5(date("Y-m-d H:i:s")),
+            "overwrite" => true,
         );
 
         $response = [];
@@ -33,14 +34,13 @@ class File_model extends CI_Model
                 //Thumbnail size
                 $resize_thumb = array(
                     "width" => 100,
-                    "height" => 100
+                    "height" => 100,
                 );
                 //   Thumbnail properties
                 $thumb_name = "thumbnail_" . $file_name;
                 $thumb_array = array("thumb_path" => $file_path . "thumbnail_" . $file_name);
 
-
-             $create_thumb = $this->resize_image($image_upload_data["full_path"], $resize_thumb, $thumb_array);
+                $create_thumb = $this->resize_image($image_upload_data["full_path"], $resize_thumb, $thumb_array);
                 if ($create_thumb == true) {
                     $response["check"] = true;
                     $response["file_name"] = $file_name;
@@ -103,7 +103,7 @@ class File_model extends CI_Model
             $resize_config["new_image"] = $thumbnail["thumb_path"];
             $resize_config["create_thumb"] = false;
 
-        } 
+        }
         $this->image_lib->initialize($resize_config);
 
         if (!$this->image_lib->resize()) {
@@ -112,5 +112,5 @@ class File_model extends CI_Model
             return true;
         }
     }
-    
+
 }

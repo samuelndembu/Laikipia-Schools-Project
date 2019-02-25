@@ -9,12 +9,13 @@ class Schools_model extends CI_Model
             "school_write_up" => $this->input->post("school_write_up"),
             "school_boys_number" => $this->input->post("school_boys_number"),
             "school_girls_number" => $this->input->post("school_girls_number"),
-            "school_location_name" => $this->input->post("school_location_name"),
-             "school_zone" => $this->input->post("school_zone"),
-            "school_image_name" => $file_name,
-            "school_thumb_name" => $thumb_name,
             "school_latitude" => $this->input->post("school_latitude"),
             "school_longitude" => $this->input->post("school_longitude"),
+            "school_location_name" => $this->input->post("school_location_name"),
+            "school_zone" => $this->input->post("school_zone"),
+            "school_image_name" => $file_name,
+            "school_thumb_name" => $thumb_name,
+
             "school_status" => $this->input->post("school_status"),
 
         );
@@ -26,7 +27,7 @@ class Schools_model extends CI_Model
         }
     }
 
-public function get_all_zones()
+    public function get_all_zones()
     {
         $this->db->distinct('school_zone');
         $this->db->select("school_zone");
@@ -35,7 +36,7 @@ public function get_all_zones()
 
         // $sql = '';
 
-        // foreach ($query->result() as $key => $value) 
+        // foreach ($query->result() as $key => $value)
         // {
         //     $sql .= 'UPDATE school SET school_zone ="' . $value->school_location_name . '" WHERE school_id = ' . $value->school_id . ';';
         // }
@@ -46,7 +47,6 @@ public function get_all_zones()
         return $query;
 
     }
-
 
     public function get_all_schools($table, $where, $start, $limit, $page, $order, $order_method)
     {
@@ -94,7 +94,7 @@ public function get_all_zones()
             return false;
         }
     }
-    
+
     public function update_school($school_id, $file_name, $thumb_name)
     {
         $data = array(
