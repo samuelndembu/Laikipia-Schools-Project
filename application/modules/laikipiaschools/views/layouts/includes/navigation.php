@@ -6,7 +6,7 @@
       <a class="nav-link" href="#">Sign out</a>
     </li>
   </ul> -->
-    <div class="user-info-dropdown">
+    <!-- <div class="user-info-dropdown">
         <div class="dropdown">
             <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown">
                 <span class="user-icon"><i class="fas fa-user-graduate"></i></span>
@@ -19,5 +19,5 @@
                 <a class="dropdown-item" href="login.php"><i class="fa fa-sign-out" aria-hidden="true"></i> Log Out</a>
             </div>
         </div>
-    </div>
+    </div> -->
 </nav>
