@@ -43,10 +43,11 @@ class Webservice extends MX_Controller
         $json_obj = json_decode($json_string);
         // var_dump(count($json_obj));
 
-        if (is_array($json_obj)) {
+        if (is_array($json_obj)) 
+        {
             $row = $json_obj[0];
             // echo json_encode($row);die();
-            $school_name = $row->school_name;
+            $school_name = json_decode($row->school_name)[0];
             $school_boys_number = $row->school_boys_number;
             $school_girls_number = $row->school_girls_number;
             $school_zone = json_decode($row->school_zone)[0];
@@ -70,18 +71,22 @@ class Webservice extends MX_Controller
                 'school_write_up' => $school_write_up,
                 'school_location_name' => $school_location_name,
                 'school_image_name' => $school_image_name,
+                'school_thumb_name' => $school_image_name,
                 'school_longitude' => $school_longitude,
                 'school_latitude' => $school_latitude,
             );
 
             $result = $this->schools_model->save_school_flow('school', $data);
 
-            if ($result != false) {
-                if (is_array($school_other_images_arr) || $school_other_images_arr != null) {
+            if ($result != false) 
+            {
+                if (is_array($school_other_images_arr) || $school_other_images_arr != null) 
+                {
 
                     $school_id = $result;
 
-                    foreach ($school_other_images_arr as $image) {
+                    foreach ($school_other_images_arr as $image) 
+                    {
                         //download image and save to uploads folder
                         //return the image name
                         $school_other_image_name = $this->schools_model->save_image($image->mediaUrl, $this->upload_path);
@@ -99,7 +104,9 @@ class Webservice extends MX_Controller
 
                 $message = 'School submitted successfully! Thank you';
 
-            } else {
+            } 
+            else 
+            {
 
                 $message = 'Failed to submit school. Please resubmit!!';
                 
