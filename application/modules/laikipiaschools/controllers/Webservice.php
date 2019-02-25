@@ -30,8 +30,8 @@ class Webservice extends MX_Controller
             exit(0);
         }
 
-        $this->upload_path = realpath(APPPATH . '../assets/uploads/schools');
-        $this->upload_location = base_url() . 'assets/uploads/schools/';
+        $this->upload_path = realpath(APPPATH . '../assets/uploads');
+        $this->upload_location = base_url() . 'assets/uploads/';
         $this->load->model('schools_model');
         $this->load->model('kaizala_model');
     }
