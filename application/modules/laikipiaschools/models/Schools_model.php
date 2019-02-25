@@ -50,11 +50,7 @@ class Schools_model extends CI_Model
 
     public function get_all_schools($table, $where, $start, $limit, $page, $order, $order_method)
     {
-<<<<<<< HEAD
         $where = "school_old.deleted = 0";
-=======
-        $where = "deleted = 0";
->>>>>>> a34498090df9ae51964fa3404879c335439fcbb9
         $this->db->select("*");
         $this->db->from("$table");
         $this->db->where($where);
