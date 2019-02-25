@@ -221,7 +221,8 @@ if ($query->num_rows() > 0) {
                         <?php echo $count ?>
                     </td>
                     <td>
-                        <img  width="70px" height="70px" src="<?php echo base_url() . 'assets/uploads/' . $row->school_thumb_name; ?>">
+                        <img src="<?php echo base_url() . 'assets/uploads/' . $row->school_thumb_name; ?>" width="100px"
+                            height="70px">
                     </td>
                     <td>
                         <?php echo $row->school_name; ?>
