@@ -1,8 +1,13 @@
-<div class="container">
-    <div class="shadow-lg p-3 mb-5 bg-white rounded"">
+<?php
+
+$validation_errors = validation_errors();
+if (!empty($validation_errors)) {
+    echo $validation_errors;
+}
+?>
 
 
-
+<div class="shadow-lg p-3 mb-5 bg-white rounded">
     <div class=" card-body">
         <div class="card shadow mb-4">
             <div class="card-header py-3">
@@ -28,18 +33,23 @@
                                     </div>
                                 </div>
 
-
                                 <div class="form-group row">
                                     <div class="col-sm-12 col-md-12">
-                                        <label for="post_image_name">Category</label>
-                                        <input type="text" class="form-control" id="post_category" name="post_category"
-                                            placeholder="Category" required>
+                                        <label for="name">Categories</label>
+                                        <select id="inputState" class="form-control" name="name">
+                                            <option selected>Choose Category</option>
+
+                                            <?php if ($categories->num_rows() > 0) {
+    foreach ($categories->result() as $row) {?>
+                                            <option value="<?php echo $row->name ?>">
+                                                <?php echo $row->name ?></option>
+                                            <?php
+}
+}?>
+                                            '
+                                        </select>
                                     </div>
                                 </div>
-
-
-
-
 
 
 
@@ -54,14 +64,14 @@
 
                                 <div class="form-group row">
                                     <div class="col-sm-12 col-md-12">
-                                        <label for="post_image_name">Post Image</label>
+                                        <label for="post_views">Post Views</label>
                                         <input type="Numeric" class="form-control" id="post_views" name="post_views"
                                             placeholder="Views" required>
                                     </div>
                                 </div>
 
-
-                                <fieldset class="form-group row">
+                                <div class="form-group row">
+                                    <!-- <fieldset class="form-group"> -->
                                     <div class="col-sm-12 col-md-12">
                                         <label for="post_image_name">Status</label>
                                         <br>
@@ -82,33 +92,31 @@
                                             </div>
                                         </div>
                                     </div>
-                                </fieldset>
-                                <!-- <input class="form-check-input" type="hidden" name="post_status" id="post_status"
-                                    value="0"> -->
-                            </div>
-
-                            <div class="form-group">
-                                <div class="col-sm-12 col-md-12">
-                                    <label for="post_image_name">Post Description</label>
-                                    <textarea class="form-control" id="message-text" placeholder="Post Description"
-                                        name="post_descriptioon"></textarea>
                                 </div>
-                            </div>
+
+                                <div class="form-group row">
+                                    <div class="col-sm-12 col-md-12">
+                                        <label for="post_description" name="post_description">Post
+                                            Description</label>
+                                        <textarea class="form-control" id="message-text" placeholder="Post Description"
+                                            name="post_description"></textarea>
+                                    </div>
+                                </div>
 
 
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                <button type="submit" class="btn btn-primary">Save</button>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn btn-primary">Save</button>
+                                </div>
+                                <?php echo form_close(); ?>
                             </div>
-                            <?php form_close();?>
                         </div>
                     </div>
                 </div>
-            </div>
 
+            </div>
         </div>
     </div>
-
 
 
     <div class=" table-responsive">
@@ -116,11 +124,11 @@
             <thead>
                 <tr>
                     <th>#</th>
-                    <th> Post Image</th>
+                    <th>Post Image</th>
                     <th>Post Title</th>
                     <th>Post Description</th>
                     <th>Post Views</th>
-                    <th>Post Status</th>
+                    <!-- <th>Post Status</th> -->
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -131,7 +139,7 @@
                     <th>Post Title</th>
                     <th>Description</th>
                     <th>Views</th>
-                    <th>Post Status</th>
+                    <!-- <th>Post Status</th> -->
                     <th>Actions</th>
                 </tr>
             </tfoot>
@@ -158,7 +166,7 @@ if ($query->num_rows() > 0) {
 
                     <td><?php echo $row->post_description; ?></td>
                     <td><?php echo $row->post_views; ?></td>
-                    <td><?php echo $row->post_status; ?></td>
+                    <!-- <td><?php echo $row->post_status; ?></td> -->
 
                     <td>
                         <button type="button" class="btn btn-primary btn-sm" data-toggle="modal"
@@ -195,7 +203,8 @@ if ($query->num_rows() > 0) {
                                                     </div>
 
                                                     <div class="card">
-                                                        <p>Post Description:<?php echo $row->post_description; ?>
+                                                        <p>Post
+                                                            Description:<?php echo $row->post_description; ?>
                                                         </p>
                                                     </div>
 
@@ -203,33 +212,118 @@ if ($query->num_rows() > 0) {
                                                         <p>Views:<?php echo $row->post_views; ?>
                                                         </p>
                                                     </div>
-
-                                                    <div class="card">
-                                                        <p>Post Status:<?php echo $row->post_status; ?>
-                                                        </p>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="row">
+                                                    <div class="text-center">
+                                                        <?php echo anchor('administration/posts', 'back', ['class' => 'btn btn-primary']); ?>
                                                     </div>
+                                                </div>
                                             </div>
                                         </div>
+
                                     </div>
-                                    <div class="card-body">
-                                        <div class="row">
-                                            <div class="text-center">
-                                                <?php echo anchor('administration/posts', 'back', ['class' => 'btn btn-primary']); ?>
-                                            </div>
-                                        </div>
-                                    </div>
+
                                 </div>
                             </div>
                         </div>
 
-                        <?php echo anchor("administration/edit/" . $row->post_id, "<i class='fas fa-edit'></i>", "class='btn btn-warning btn-sm'"); ?>
-                        <?php if ($row->post_status == 1) {
+
+                        <!-- <?php echo anchor("administration/edit-school/" . $row->post_id, "<i class='fas fa-edit'></i>", "class='btn btn-warning btn-sm'"); ?> -->
+
+
+                        <!-- Button trigger modal -->
+                        <button type="button" class="class='btn btn-warning btn-sm" data-toggle="modal"
+                            data-target="#exampleModal<?php echo $row->post_id; ?>">
+                            <i class='fas fa-edit'></i>
+                        </button>
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="exampleModal<?php echo $row->post_id; ?>" tabindex="-1"
+                            role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Update School Details</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="card-body">
+                                        <h5 class="card-title">Enter school Details to update</h5>
+
+                                        <?php echo
+        form_open($this->uri->uri_string()); ?>
+                                        <div class="form-group row">
+                                            <label for="school_name" class="col-sm-2 col-form-label">Post
+                                                Title</label>
+
+                                            <div class="col-md-10">
+                                                <?php echo form_input(['name' => 'post_title', 'class' => 'form-control', 'value' => set_value('post_title', $row->post_title)]) ?>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="post_description" class="col-sm-2 col-form-label">Post
+                                                Description</label>
+                                            <div class="col-md-10">
+                                                <?php echo form_textarea(['name' => 'post_description', 'class' => 'form-control', 'value' => set_value('post_description', $row->post_description)]) ?>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="post_image_name" class="col-sm-2 col-form-label">Post
+                                                Image</label>
+                                            <div class="col-md-10">
+                                                <?php echo form_input(['name' => 'post_image_name', 'class' => 'form-control', 'type' => 'file', 'value' => set_value('post_image_name', $row->post_image_name)]) ?>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <label for="post_views" class="col-sm-2 col-form-label">Post
+                                                Views</label>
+                                            <div class="col-md-10">
+                                                <?php echo form_input(['name' => 'post_views', 'class' => 'form-control', 'value' => set_value('post_views', $row->post_views)]) ?>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <label class="col-form-label col-sm-2 pt-0">Post Status</label>
+                                            <div class="form-group">
+                                                <input type="radio" name="status" value="1"
+                                                    <?php echo ($row->post_status == 'Active') ? 'checked' : '' ?>>Active
+                                                <input type="radio" name="status" value="0"
+                                                    <?php echo ($row->post_status == 'Inactive') ? 'checked' : '' ?> ">Inactive
+                            </div>
+                        </div>
+
+
+                        <div class="
+                                                    form-group row">
+                                                <div class="col-sm-10">
+                                                    <button type="submit" class="btn btn-primary">Save
+                                                        Changes</button>
+                                                    <div class="modal-footer">
+                                                        <?php echo anchor('laikipiaschools/schools', 'Cancel', ['class' => 'btn btn-primary']); ?>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <?php echo form_close(); ?>
+                                    </div>
+
+                                </div>
+                            </div>
+
+
+
+
+                            <?php if ($row->post_status == 1) {
             echo anchor("administration/deactivate-post/" . $row->post_id . "/" . $row->post_status, "<i class='far fa-thumbs-down'></i>", array("class" => "btn btn-default btn-sm", "onclick" => "return confirm('Are you sure you want to deactivate?')"));
         } else {
             echo anchor("administration/deactivate-post/" . $row->post_id . "/" . $row->post_status, "<i class='far fa-thumbs-up'></i>", array("class" => "btn btn-info btn-sm", "onclick" => "return confirm('Are you sure you want to activate?')"));
         }?>
 
-                        <?php echo anchor("administration/delete-post/" . $row->post_id, '<i class="fas fa-trash-alt"></i>', array("class" => "btn btn-danger btn-sm", "onclick" => "return confirm('Are you sure you want to Delete?')")); ?>
+                            <?php echo anchor("administration/delete-post/" . $row->post_id, '<i class="fas fa-trash-alt"></i>', array("class" => "btn btn-danger btn-sm", "onclick" => "return confirm('Are you sure you want to Delete?')")); ?>
 
 
                     </td>
@@ -241,7 +335,7 @@ if ($query->num_rows() > 0) {
             </tbody>
         </table>
     </div>
-
-    <?php echo $links; ?>
-    </p>
 </div>
+
+<?php echo $links; ?>
+</p>

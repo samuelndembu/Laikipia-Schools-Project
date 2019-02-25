@@ -1,23 +1,23 @@
 <div class="container">
     <div class="card-header">
-        <h1> Update School Details</h1>
+        <h1> Update post Details</h1>
     </div>
     <div class="card-body">
-        <h5 class="card-title">Enter school Details to update</h5>
+        <h5 class="card-title">Enter post Details to update</h5>
 
         <?php echo
 form_open($this->uri->uri_string()); ?>
         <div class="form-group row">
-            <label for="school_name" class="col-sm-2 col-form-label">School Name</label>
+            <label for="post_title" class="col-sm-2 col-form-label">post Title</label>
 
             <div class="col-md-10">
-                <?php echo form_input(['name' => 'school_name', 'placeholder' => 'School Name', 'class' => 'form-control', 'value' => set_value('school_name', $school_name)]) ?>
+                <?php echo form_input(['name' => 'post_title', 'placeholder' => 'Post Title', 'class' => 'form-control', 'value' => set_value('post_title', $post_title)]) ?>
             </div>
         </div>
         <div class="form-group row">
-            <label for="school_write_up" class="col-sm-2 col-form-label">School Write up</label>
+            <label for="post_description" class="col-sm-2 col-form-label">Post Description</label>
             <div class="col-md-10">
-                <?php echo form_textarea(['name' => 'school_write_up', 'placeholder' => 'Describe your school briefly', 'class' => 'form-control', 'value' => set_value('firstname', $school_write_up)]) ?>
+                <?php echo form_textarea(['name' => 'post_description', 'placeholder' => 'Describe post', 'class' => 'form-control', 'value' => set_value('post_description', $post_description)]) ?>
             </div>
         </div>
         <div class="form-group row">

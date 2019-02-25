@@ -24,25 +24,27 @@ class Schools extends MX_Controller
     }
     public function index($start = null)
     {
-        $order = 'school.school_name';
-		$order_method = 'ASC';
+        $order = 'school.created_on';
+        $order_method = 'ASC';
         $this->form_validation->set_rules("school_name", "School Name", "required");
-        $this->form_validation->set_rules("school_write_up", "School Write Up", "required");
+        $this->form_validation->set_rules("school_write_up", "school Write Up", "required");
         $this->form_validation->set_rules("school_boys_number", "Number of Boys", "required");
         $this->form_validation->set_rules("school_girls_number", "Number of Girls", "required");
         $this->form_validation->set_rules("school_location_name", "Location", "required");
-         $this->form_validation->set_rules("school_zone", "School Zone", "school_zone");
+        $this->form_validation->set_rules("school_zone", "School Zone", "required");
         $this->form_validation->set_rules("school_latitude", "Latitude", "required");
         $this->form_validation->set_rules("school_longitude", "Longitude", "required");
-        
+
         $form_errors = "";
-        if($this->form_validation->run()) {
+        if ($this->form_validation->run()) {
+
             $resize = array(
                 "width" => 600,
-                "height" => 600
+                "height" => 600,
             );
             $upload_response = $this->file_model->upload_image($this->upload_path, "school_image", $resize);
-       
+            // var_dump($upload_response);die();
+
             if ($upload_response['check'] == false) {
                 $this->session->set_flashdata('error', $upload_response['message']);
             } else {
@@ -54,7 +56,6 @@ class Schools extends MX_Controller
                 }
             }
         } else {
-           
 
             $where = 'school_id > 0';
             $table = 'school';
@@ -147,13 +148,13 @@ class Schools extends MX_Controller
 
         redirect('administration/schools');
     }
-    public function export_school()
-    {
-        $this->load->model("excel_export_model");
-        $data["school_data"] = $this->excel_export_model->fetch_data();
-        $this->load->view("Administration/schools", $data
-        );
-    }
+    // public function export_school()
+    // {
+    //     $this->load->model("excel_export_model");
+    //     $data["school_data"] = $this->excel_export_model->fetch_data();
+    //     $this->load->view("Administration/schools", $data
+    //     );
+    // }
 
     public function get_zones()
     {$this->load->model("schools_model");
@@ -168,7 +169,7 @@ class Schools extends MX_Controller
         $this->load->view('Administration/all_schools', $data);
     }
 
-    public function export_transactions()
+    public function export_schools()
     {
         $order = 'school.school_id';
         $order_method = 'DESC';
@@ -239,11 +240,11 @@ class Schools extends MX_Controller
     public function add_school()
     {
         $this->form_validation->set_rules("school_name", "School Name", "required");
-        $this->form_validation->set_rules("School_write_up", "School Write Up", "required");
+        $this->form_validation->set_rules("school_write_up", "school Write Up", "required");
         $this->form_validation->set_rules("school_boys_number", "Number of Boys", "required");
         $this->form_validation->set_rules("school_girls_number", "Number of Girls", "required");
         $this->form_validation->set_rules("school_location_name", "Location", "required");
-          $this->form_validation->set_rules("school_zone", "School Zone", "school_zone");
+        $this->form_validation->set_rules("school_zone", "School Zone", "school_zone");
         $this->form_validation->set_rules("school_latitude", "Latitude", "required");
         $this->form_validation->set_rules("school_longitude", "Longitude", "required");
         $this->form_validation->set_rules("school_status", "Status", "required");
@@ -279,13 +280,13 @@ class Schools extends MX_Controller
         }
     }
 
-
-  public function edit_school($school_id){
-    $this->form_validation->set_rules("school_name", "School Name", "required");
+    public function edit_school($school_id)
+    {
+        $this->form_validation->set_rules("school_name", "School Name", "required");
         $this->form_validation->set_rules("school_write_up", "school Write Up", "required");
         $this->form_validation->set_rules("school_boys_number", "Number of Boys", "required");
         $this->form_validation->set_rules("school_girls_number", "Number of Girls", "required");
-          $this->form_validation->set_rules("school_zone", "School Zone", "school_zone");
+        $this->form_validation->set_rules("school_zone", "School Zone", "school_zone");
         $this->form_validation->set_rules("school_location_name", "Location", "required");
         $this->form_validation->set_rules("school_latitude", "Latitude", "required");
         $this->form_validation->set_rules("school_longitude", "Longitude", "required");
@@ -304,7 +305,7 @@ class Schools extends MX_Controller
                 $v_data['school_write_up'] = $row->school_write_up;
                 $v_data['school_boys_number'] = $row->school_boys_number;
                 $v_data['school_girls_number'] = $row->school_girls_number;
-                $v_data['school_zone'] = $row->school_zone;
+                $v_data['school_zone'] = $row->$school_zone;
                 $v_data['school_location_name'] = $row->school_location_name;
                 $v_data['school_latitude'] = $row->school_latitude;
                 $v_data['school_longitude'] = $row->school_longitude;
@@ -326,7 +327,7 @@ class Schools extends MX_Controller
         }
 
     }
-    
+
     public function search_schools()
     {
         $school_name = $this->input->post('school_name');

@@ -3,20 +3,19 @@ class Posts_model extends CI_Model
 {
     public function add_post($file_name, $thumb_name)
     {
-          
+
         // create an array of The data to save
         $data = array(
             "post_title" => $this->input->post("post_title"),
             "post_description" => $this->input->post("post_description"),
             "post_image_name" => $this->input->post("post_image_name"),
-            "post_views" => $this->input->post("views"),
+            "post_views" => $this->input->post("post_views"),
             "post_image_name" => $file_name,
             "post_thumb_name" => $thumb_name,
             "post_status" => $this->input->post("post_status"),
 
         );
 
-      
         if ($this->db->insert("post", $data)) {
             return $this->db->insert_id();
         } else {
@@ -35,6 +34,17 @@ class Posts_model extends CI_Model
         return $this->db->get();
 
     }
+
+    public function get_all_categories()
+    {
+        $this->db->distinct('name');
+        $this->db->select('name');
+        $this->db->from("category");
+        $query = $this->db->get();
+        return $query;
+
+    }
+
     public function change_post_status($post_id, $new_post_status)
     {
         $this->db->set('post_status', $new_post_status);
@@ -45,7 +55,7 @@ class Posts_model extends CI_Model
             return false;
         }
     }
-    public function get_single_post($school_id)
+    public function get_single_post($post_id)
     {
         $this->db->where("post_id", $post_id);
         return $this->db->get("post");
@@ -69,17 +79,17 @@ class Posts_model extends CI_Model
             return false;
         }
     }
-    
+
     public function update_post($post_id, $file_name, $thumb_name)
     {
         $data = array(
             "post_title" => $this->input->post("post_title"),
             "post_description" => $this->input->post("post_description"),
             "post_image_name" => $this->input->post("post_image_name"),
-            "views" => $this->input->post("views"),
+            "post_views" => $this->input->post("views"),
             "post_image_name" => $file_name,
             "post_thumb_name" => $thumb_name,
-            "school_status" => $this->input->post("school_status"),
+            "post_status" => $this->input->post("post_status"),
         );
 
         $this->db->set($data);

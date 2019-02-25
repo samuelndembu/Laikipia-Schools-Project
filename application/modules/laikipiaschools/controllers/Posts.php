@@ -26,10 +26,10 @@ class posts extends MX_Controller
     public function index($order = 'post_id', $order_method = 'ASC', $start = null)
     {
         $this->form_validation->set_rules("post_title", "Post Title", "required");
-$this->form_validation->set_rules("post_description", "Post Description", "required");
-$this->form_validation->set_rules("post_image_name", "Post Image", "required");
-$this->form_validation->set_rules("post_views", "Views", "required");
-$this->form_validation->set_rules("post_status", "Status", "required");
+        $this->form_validation->set_rules("post_description", "Post Description", "required");
+        // $this->form_validation->set_rules("post_image_name", "Post Image", "required");
+        $this->form_validation->set_rules("post_views", "Views", "required");
+        // $this->form_validation->set_rules("post_status", "Status", "required");
 
         //  validate
         $form_errors = "";
@@ -38,7 +38,9 @@ $this->form_validation->set_rules("post_status", "Status", "required");
                 "width" => 600,
                 "height" => 600,
             );
+
             $upload_response = $this->file_model->upload_image($this->upload_path, "post_image_name", $resize);
+
             if ($upload_response['check'] == false) {
                 $this->session->set_flashdata('error', $upload_response['message']);
             } else {
@@ -89,11 +91,10 @@ $this->form_validation->set_rules("post_status", "Status", "required");
 
             $page = ($this->uri->segment($segment)) ? $this->uri->segment($segment) : 0;
             $v_data["links"] = $this->pagination->create_links();
-
+            $v_data["categories"] = $this->posts_model->get_all_categories();
             $query = $this->posts_model->get_all_posts($table, $where, $start, $config["per_page"],
-            
-         
-            $page, $order, $order_method);
+
+                $page, $order, $order_method);
             //change of order method
             if ($order_method == 'DESC') {
                 $order_method = 'ASC';
@@ -112,13 +113,14 @@ $this->form_validation->set_rules("post_status", "Status", "required");
             $v_data['order_method'] = $order_method;
             $v_data['query'] = $query;
             $v_data['page'] = $page;
-            // $v_data["zones"] = $this->posts_model->get_all_posts();
+            $v_data["posts"] = $this->posts_model->get_all_posts($table, $where, $start, $config["per_page"], $page, $order, $order_method);
+            $v_data["all_posts"] = $this->posts_model->get_all_posts($table, $where, $start, $config["per_page"], $page, $order, $order_method);
 
             $data = array(
                 "title" => $this->site_model->display_page_title(),
                 "content" => $this->load->view("posts/all_posts", $v_data, true),
             );
-            // $v_data["all_posts"] = $this->posts_model->get_all_posts();
+            //
 
             $this->load->view("laikipiaschools/layouts/layout", $data);
         }
@@ -184,13 +186,13 @@ $this->form_validation->set_rules("post_status", "Status", "required");
             $post_title = $row->post_title;
             $post_description = $row->post_description;
             $post_image_name = $row->post_image_name;
-            $views = $row->views;
+            $post_views = $row->post_views;
             $post_status = $row->post_status;
             $data = array(
                 'post_image_name' => $post_title,
-                'post_name' => $post_description,
+                'post_description' => $post_description,
                 'post_image_name' => $post_image_name,
-                'views' => $views,
+                'post_views' => $post_views,
                 'post_status' => $post_status,
             );
             $v_data["all_posts"] = $this->posts_model->get_single_post();
@@ -209,7 +211,7 @@ $this->form_validation->set_rules("post_status", "Status", "required");
     }
     public function edit_post($post_id)
     {
-         $this->form_validation->set_rules("post_title", "Post Title", "required");
+        $this->form_validation->set_rules("post_title", "Post Title", "required");
         $this->form_validation->set_rules("post_description", "Post Description", "required");
         $this->form_validation->set_rules("post_image_name", "Post Image", "required");
         $this->form_validation->set_rules("post_views", "Views", "required");
@@ -225,10 +227,10 @@ $this->form_validation->set_rules("post_status", "Status", "required");
                 $post = $this->posts_model->get_single_post($post_id);
 
                 $row = $post->row();
-                $v_data['post_title'] = $row->post_name;
-                $v_data['post_description'] = $row->post_write_up;
-                $v_data['post_image_name'] = $row->post_boys_number;
-                $v_data['post_views'] = $row->post_girls_number;
+                $v_data['post_title'] = $row->post_title;
+                $v_data['post_description'] = $row->post_description;
+                $v_data['post_image_name'] = $row->post_image_name;
+                $v_data['post_views'] = $row->post_views;
                 $v_data['post_status'] = $row->post_status;
                 $v_data['post_image_name'] = $row->post_image_name;
                 $v_data['post_image_name'] = $row->post_thumb_name;
@@ -277,7 +279,6 @@ $this->form_validation->set_rules("post_status", "Status", "required");
     //         $post_status = ' AND post.post_status = \'' . $post_status . '\'';
     //     }
 
-        
     //     $search = $post_name . $post_girls_number . $post_boys_number . $post_location_name . $post_status;
 
     //     $this->session->set_userdata('posts_search', $search);
