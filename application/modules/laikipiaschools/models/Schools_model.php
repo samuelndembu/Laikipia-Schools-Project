@@ -20,7 +20,7 @@ class Schools_model extends CI_Model
 
         );
 
-        if ($this->db->insert("school", $data)) {
+        if ($this->db->insert("school_old", $data)) {
             return $this->db->insert_id();
         } else {
             return false;
@@ -31,7 +31,7 @@ class Schools_model extends CI_Model
     {
         $this->db->distinct('school_zone');
         $this->db->select("school_zone");
-        $this->db->from("school");
+        $this->db->from("school_old");
         $query = $this->db->get();
 
         // $sql = '';
@@ -50,7 +50,7 @@ class Schools_model extends CI_Model
 
     public function get_all_schools($table, $where, $start, $limit, $page, $order, $order_method)
     {
-        $where = "school.deleted = 0";
+        $where = "deleted = 0";
         $this->db->select("*");
         $this->db->from("$table");
         $this->db->where($where);
@@ -64,7 +64,7 @@ class Schools_model extends CI_Model
 
         $this->db->set('school_status', $new_school_status);
         $this->db->where('school_id', $school_id);
-        if ($this->db->update('school')) {
+        if ($this->db->update('school_old')) {
             return true;
         } else {
             return false;
@@ -77,7 +77,7 @@ class Schools_model extends CI_Model
     }
     public function countAll()
     {
-        return $this->db->get("school")->num_rows();
+        return $this->db->get("school_old")->num_rows();
     }
     public function delete_school($school_id)
     {
@@ -88,7 +88,7 @@ class Schools_model extends CI_Model
         );
         $this->db->set($data);
         $this->db->where('school_id', $school_id);
-        if ($this->db->update('school')) {
+        if ($this->db->update('school_old')) {
             return true;
         } else {
             return false;
@@ -112,7 +112,7 @@ class Schools_model extends CI_Model
 
         $this->db->set($data);
         $this->db->where('school_id', $school_id);
-        if ($this->db->update('school')) {
+        if ($this->db->update('school_old')) {
             return true;
         } else {
             return false;
