@@ -5,6 +5,7 @@ if (!empty($validation_errors)) {
     echo $validation_errors;
 }
 ?>
+<div class="shadow-lg p-3 mb-5 bg-white rounded">
 <div class="card shadow mb-4">
     <div class="card-header py-3">
 
@@ -86,15 +87,23 @@ if (!empty($validation_errors)) {
     <thead>
       <tr>
         <th>#</th>
-        <th>PartnerType</th>
-        <th>PartnerName</th> 
-        <th>PartnerEmail</th>
-        <th>PartnerLogo</th>
+        <th>Partner Type</th>
+        <th>Partner Name</th> 
+        <th>Partner Email</th>
+        <th>Partner Logo</th>
         <th>Actions</th>
       </tr>
     </thead>
     <tfoot>
-      <!-- <tr><?php echo $links;?></tr> -->
+    <tr>
+        <th>#</th>
+        <th>Partner Type</th>
+        <th>Partner Name</th> 
+        <th>Partner Email</th>
+        <th>Partner Logo</th>
+        <th>Actions</th>
+      </tr>
+    
     </tfoot>
     <tbody>
       <?php 
@@ -123,9 +132,10 @@ if (!empty($validation_errors)) {
           <img src="<?php echo base_url() . 'assets/uploads/' . $row->partner_thumb; ?>">
         </td>
         <td>
-        
+ 
         <?php if($row->partner_status == 1){ ?>
-          <a href="" class="btn btn-dark btn-sm" data-toggle="modal" data-target="#modalLoginAvatar">View</a>
+          <a href="" class="btn btn-dark btn-sm" data-toggle="modal" data-target="#modalLoginAvatar" ><i
+                                            class="fas fa-eye"></i></a>
         <?php }?>
   
 <!--Modal: Login with Avatar Form-->
@@ -166,17 +176,15 @@ aria-hidden="true" >
 
         
         <?php if($row->partner_status == 1){
-          
-          //echo anchor("administration/deactivate-partner/". $row->partner_id . "/" .$row->partner_status ,"Deactivate","class='btn btn-primary btn-sm'");
-          echo anchor("administration/deactivate-partner/". $row->partner_id . "/" .$row->partner_status ,"DeActivate", array("class" => "btn btn-info btn-sm p-left-10", "onclick" => "return confirm('Are you sure you want to deactivate?')"));
+          echo anchor("administration/deactivate-partner/". $row->partner_id . "/" .$row->partner_status ,"<i class='far fa-thumbs-down'></i>",array("class" => "btn btn-info btn-sm p-left-10", "onclick" => "return confirm('Are you sure you want to deactivate?')"));
         }
         else{
-          echo anchor("administration/deactivate-partner/". $row->partner_id . "/" .$row->partner_status ,"Activate", array("class" => "btn btn-info btn-sm", "onclick" => "return confirm('Are you sure you want to activate?')"));
-        }
-         //echo anchor("administration/delete-partner/". $row->partner_id,"Delete","class='btn btn-danger btn-sm'");
-         echo anchor("administration/delete-partner/". $row->partner_id ,"Delete", array("class" => "btn btn-danger btn-sm", "onclick" => "return confirm('Are you sure you want to Delete?')"));
-         echo anchor("administration/edit/". $row->partner_id,"Edit","class='btn btn-warning btn-sm p-left-10'","style='padding-left:10px;'");
-         ?>
+         echo anchor("administration/deactivate-partner/". $row->partner_id . "/" .$row->partner_status ,"<i class='far fa-thumbs-up'></i>", array("class" => "btn btn-info btn-sm", "onclick" => "return confirm('Are you sure you want to activate?')"));
+        }?>
+        <?php
+         echo anchor("administration/delete-partner/". $row->partner_id,"<i class='fas fa-trash-alt'></i>",array("class" => "btn btn-danger btn-sm", "onclick" => "return confirm('Are you sure you want to Delete?')"));?>
+        <?php echo anchor("administration/edit/". $row->partner_id,"<i class='fas fa-edit'></i>","class='btn btn-warning btn-sm p-left-10'","style='padding-left:10px;'");?>
+      
           
         </td>
       </tr>
@@ -187,7 +195,7 @@ aria-hidden="true" >
     </tbody>
   </table>
 </div>
-
+</div>
 <p>
       <?php echo $links;?>
 </p>

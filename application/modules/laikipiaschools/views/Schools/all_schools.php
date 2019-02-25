@@ -315,15 +315,6 @@ if ($query->num_rows() > 0) {
 
                                                     </div>
 
-
-
-
-
-
-
-
-
-
                                                     <a href="<?php echo site_url() . "administration/export-schools" ?>"
                                                         target="_blank" class="btn btn-default pull-right"><i
                                                             class="fas fa-file-import"></i> Import</a>
@@ -331,16 +322,6 @@ if ($query->num_rows() > 0) {
                                                     <a href="<?php echo site_url() . "administration/export-schools" ?>"
                                                         target="_blank" class="btn btn-default pull-right"><i
                                                             class="fas fa-file-export"></i> Export</a>
-
-
-
-
-
-
-
-
-
-
 
                                                     <div class="form-group row">
                                                         <label for="school_latitude"
