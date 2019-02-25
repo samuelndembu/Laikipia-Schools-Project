@@ -80,7 +80,7 @@ if (!empty($validation_errors)) {
                                 </div>
                                 <div class="form-group">
                                     <label for="school_name">School Name</label>
-                                    <input type="email" class="form-control" id="school_name"
+                                    <input type="text" class="form-control" id="school_name"
                                         aria-describedby="emailHelp" name="school_boys_number"
                                         placeholder="School Name">
                                     <small id="emailHelp" class="form-text text-muted"></small>
@@ -94,7 +94,7 @@ if (!empty($validation_errors)) {
                                 </div>
                                 <div class="form-group">
                                     <label for="school_girls_number">Number of Girls</label>
-                                    <input type="text" class="form-control" id="school_girls_number"
+                                    <input type="number" class="form-control" id="school_girls_number"
                                         aria-describedby="emailHelp" name="school_girls_number"
                                         placeholder="Number of Girls">
                                     <small id="emailHelp" class="form-text text-muted"></small>
@@ -123,7 +123,7 @@ if (!empty($validation_errors)) {
 
                                 <div class="form-group">
                                     <label for="school_location_name">Location Description</label>
-                                    <input type="email" class="form-control" id="school_location_name"
+                                    <input type="text" class="form-control" id="school_location_name"
                                         aria-describedby="emailHelp" name="school_location_name"
                                         placeholder="Location Description">
                                     <small id="emailHelp" class="form-text text-muted"></small>
@@ -131,13 +131,13 @@ if (!empty($validation_errors)) {
 
                                 <div class="form-group">
                                     <label for="school_latitude">Latitude</label>
-                                    <input type="email" class="form-control" id="school_latitude"
+                                    <input type="number" class="form-control" id="school_latitude"
                                         aria-describedby="emailHelp" name="school_latitude" placeholder="Latitude">
                                     <small id="emailHelp" class="form-text text-muted"></small>
                                 </div>
                                 <div class="form-group">
                                     <label for="school_longitude">Longitude</label>
-                                    <input type="email" class="form-control" id="school_longitude"
+                                    <input type="number" class="form-control" id="school_longitude"
                                         aria-describedby="emailHelp" name="school_longitude" placeholder="Longitude">
                                     <small id="emailHelp" class="form-text text-muted"></small>
                                 </div>
