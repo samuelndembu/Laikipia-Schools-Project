@@ -26,7 +26,7 @@ class Partners_model extends CI_Model
         $this->db->select("*");
         $this->db->from($table);
         $this->db->where($where);
-        $this->db->limit($limit, $start);
+      //  $this->db->limit($limit, $start);
         $this->db->join("partner_type", "partner.partner_type_id=partner_type.partner_type_id");
 
         $this->db->order_by($order, $order_method);
