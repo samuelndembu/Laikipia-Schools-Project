@@ -246,7 +246,8 @@ if ($query->num_rows() > 0) {
                                                     <div class="modal-header row">
                                                         <div class="img-responsive center-block row">
                                                             <img src="<?php echo base_url() . 'assets/uploads/' . $row->school_thumb_name; ?>"
-                                                                alt="avatar" class="img-responsive center-block">
+                                                                alt="avatar" class="img-responsive center-block"
+                                                                width="70px" height="70px">
                                                         </div>
                                                     </div>
                                                     <strong>
