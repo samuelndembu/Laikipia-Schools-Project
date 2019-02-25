@@ -27,9 +27,9 @@ if (!empty($validation_errors)) {
                                 <?php echo form_open_multipart($this->uri->uri_string()); ?>
                                 <div class="form-group row">
                                     <div class="col-sm-12 col-md-12">
-                                        <label for="post_image_name">Post Title</label>
+                                        <label for="post_title">Post Title</label>
                                         <input type="text" class="form-control" id="post_title" name="post_title"
-                                            placeholder="Post Name" required>
+                                            placeholder="Post Title" required>
                                     </div>
                                 </div>
 
@@ -178,161 +178,157 @@ if ($query->num_rows() > 0) {
                             <div class="modal-dialog modal-lg" role="document">
                                 <div class="modal-content">
                                     <div class="modal-body">
-                                        <div class="row">
-                                            <div class="col-lg-12">
-                                                <h2 class="h2-responsive product-name">
-                                                    <div class="modal-header row">
-                                                        <div class="img-responsive center-block row">
-                                                            <img src="<?php echo base_url() . 'assets/uploads/' . $row->post_thumb_name; ?>"
-                                                                alt="avatar" class="img-responsive center-block">
-                                                        </div>
-                                                    </div>
-                                                    <strong>
-                                                        <h1 class="text-center"><?php echo $row->post_title; ?>
-                                                        </h1>
-                                                    </strong>
+                                        <strong>
+                                            <h1 class="card text-center"><?php echo $row->post_title; ?>
+                                            </h1>
+                                        </strong>
 
-                                                    <!--Accordion wrapper-->
-                                                    <div class="accordion md-accordion" id="accordionEx" role="tablist"
-                                                        aria-multiselectable="true">
-                                                    </div>
-
-                                                    <div class="card">
-                                                        <p>Category:<?php echo $row->category; ?>
-                                                        </p>
-                                                    </div>
-
-                                                    <div class="card">
-                                                        <p>Post
-                                                            Description:<?php echo $row->post_description; ?>
-                                                        </p>
-                                                    </div>
-
-                                                    <div class="card">
-                                                        <p>Views:<?php echo $row->post_views; ?>
-                                                        </p>
-                                                    </div>
+                                        <div class="card-body row">
+                                            <div class="img-responsive left-block row">
+                                                <img src="<?php echo base_url() . 'assets/uploads/' . $row->post_image_name; ?>"
+                                                    alt="avatar" class="img-responsive center-block">
                                             </div>
-                                            <div class="card-body">
-                                                <div class="row">
-                                                    <div class="text-center">
-                                                        <?php echo anchor('administration/posts', 'back', ['class' => 'btn btn-primary']); ?>
-                                                    </div>
+                                            <!--Accordion wrapper-->
+                                            <div class="float-right">
+                                                <div class="accordion md-accordion" id="accordionEx" role="tablist"
+                                                    aria-multiselectable="true">
+                                                </div>
+
+                                                <div>
+                                                    <p>Category:<?php echo $row->category; ?>
+                                                    </p>
+                                                </div>
+
+                                                <div>
+                                                    <p>Post
+                                                        Description:<?php echo $row->post_description; ?>
+                                                    </p>
+                                                </div>
+                                                <div>
+                                                    <p>Views:<?php echo $row->post_views; ?>
+                                                    </p>
                                                 </div>
                                             </div>
                                         </div>
-
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="text-center">
+                                                    <?php echo anchor('administration/posts', 'back', ['class' => 'btn btn-primary']); ?>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
 
                                 </div>
+
                             </div>
                         </div>
+    </div>
 
 
-                        <!-- <?php echo anchor("administration/edit-school/" . $row->post_id, "<i class='fas fa-edit'></i>", "class='btn btn-warning btn-sm'"); ?> -->
+    <!-- <?php echo anchor("administration/edit-school/" . $row->post_id, "<i class='fas fa-edit'></i>", "class='btn btn-warning btn-sm'"); ?> -->
 
 
-                        <!-- Button trigger modal -->
-                        <button type="button" class="class='btn btn-warning btn-sm" data-toggle="modal"
-                            data-target="#exampleModal<?php echo $row->post_id; ?>">
-                            <i class='fas fa-edit'></i>
-                        </button>
+    <!-- Button trigger modal -->
+    <button type="button" class="class='btn btn-warning btn-sm" data-toggle="modal"
+        data-target="#exampleModal<?php echo $row->post_id; ?>">
+        <i class='fas fa-edit'></i>
+    </button>
 
-                        <!-- Modal -->
-                        <div class="modal fade" id="exampleModal<?php echo $row->post_id; ?>" tabindex="-1"
-                            role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Update School Details</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <div class="card-body">
-                                        <h5 class="card-title">Enter school Details to update</h5>
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal<?php echo $row->post_id; ?>" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalLabel" aria-hidden="true">
 
-                                        <?php echo
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Update School Details</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">Enter school Details to update</h5>
+
+                <?php echo
         form_open($this->uri->uri_string()); ?>
-                                        <div class="form-group row">
-                                            <label for="school_name" class="col-sm-2 col-form-label">Post
-                                                Title</label>
+                <div class="form-group row">
+                    <label for="post_title" class="col-sm-2 col-form-label">Post
+                        Title</label>
+                    <div class="col-md-10">
+                        <?php echo form_input(['name' => 'post_title', 'class' => 'form-control', 'value' => set_value('post_title', $row->post_title)]) ?>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="post_description" class="col-sm-2 col-form-label">Post
+                        Description</label>
+                    <div class="col-md-10">
+                        <?php echo form_textarea(['name' => 'post_description', 'class' => 'form-control', 'value' => set_value('post_description', $row->post_description)]) ?>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="post_image_name" class="col-sm-2 col-form-label">Post
+                        Image</label>
+                    <div class="col-md-10">
+                        <?php echo form_input(['name' => 'post_image_name', 'class' => 'form-control', 'type' => 'file', 'value' => set_value('post_image_name', $row->post_image_name)]) ?>
+                    </div>
+                </div>
 
-                                            <div class="col-md-10">
-                                                <?php echo form_input(['name' => 'post_title', 'class' => 'form-control', 'value' => set_value('post_title', $row->post_title)]) ?>
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label for="post_description" class="col-sm-2 col-form-label">Post
-                                                Description</label>
-                                            <div class="col-md-10">
-                                                <?php echo form_textarea(['name' => 'post_description', 'class' => 'form-control', 'value' => set_value('post_description', $row->post_description)]) ?>
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label for="post_image_name" class="col-sm-2 col-form-label">Post
-                                                Image</label>
-                                            <div class="col-md-10">
-                                                <?php echo form_input(['name' => 'post_image_name', 'class' => 'form-control', 'type' => 'file', 'value' => set_value('post_image_name', $row->post_image_name)]) ?>
-                                            </div>
-                                        </div>
+                <div class="form-group row">
+                    <label for="post_views" class="col-sm-2 col-form-label">Post
+                        Views</label>
+                    <div class="col-md-10">
+                        <?php echo form_input(['name' => 'post_views', 'class' => 'form-control', 'value' => set_value('post_views', $row->post_views)]) ?>
+                    </div>
+                </div>
 
-                                        <div class="form-group row">
-                                            <label for="post_views" class="col-sm-2 col-form-label">Post
-                                                Views</label>
-                                            <div class="col-md-10">
-                                                <?php echo form_input(['name' => 'post_views', 'class' => 'form-control', 'value' => set_value('post_views', $row->post_views)]) ?>
-                                            </div>
-                                        </div>
-
-                                        <div class="row">
-                                            <label class="col-form-label col-sm-2 pt-0">Post Status</label>
-                                            <div class="form-group">
-                                                <input type="radio" name="status" value="1"
-                                                    <?php echo ($row->post_status == 'Active') ? 'checked' : '' ?>>Active
-                                                <input type="radio" name="status" value="0"
-                                                    <?php echo ($row->post_status == 'Inactive') ? 'checked' : '' ?> ">Inactive
+                <div class="row">
+                    <label class="col-form-label col-sm-2 pt-0">Post Status</label>
+                    <div class="form-group">
+                        <input type="radio" name="status" value="1"
+                            <?php echo ($row->post_status == 'Active') ? 'checked' : '' ?>>Active
+                        <input type="radio" name="status" value="0"
+                            <?php echo ($row->post_status == 'Inactive') ? 'checked' : '' ?> ">Inactive
                             </div>
                         </div>
 
 
                         <div class="
-                                                    form-group row">
-                                                <div class="col-sm-10">
-                                                    <button type="submit" class="btn btn-primary">Save
-                                                        Changes</button>
-                                                    <div class="modal-footer">
-                                                        <?php echo anchor('laikipiaschools/schools', 'Cancel', ['class' => 'btn btn-primary']); ?>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                        <?php echo form_close(); ?>
-                                    </div>
-
-                                </div>
+                            form-group row">
+                        <div class="col-sm-10">
+                            <button type="submit" class="btn btn-primary">Save
+                                Changes</button>
+                            <div class="modal-footer">
+                                <?php echo anchor('laikipiaschools/schools', 'Cancel', ['class' => 'btn btn-primary']); ?>
                             </div>
+                        </div>
+                    </div>
+
+                </div>
+                <?php echo form_close(); ?>
+            </div>
+
+
+        </div>
 
 
 
 
-                            <?php if ($row->post_status == 1) {
+        <?php if ($row->post_status == 1) {
             echo anchor("administration/deactivate-post/" . $row->post_id . "/" . $row->post_status, "<i class='far fa-thumbs-down'></i>", array("class" => "btn btn-default btn-sm", "onclick" => "return confirm('Are you sure you want to deactivate?')"));
         } else {
             echo anchor("administration/deactivate-post/" . $row->post_id . "/" . $row->post_status, "<i class='far fa-thumbs-up'></i>", array("class" => "btn btn-info btn-sm", "onclick" => "return confirm('Are you sure you want to activate?')"));
         }?>
 
-                            <?php echo anchor("administration/delete-post/" . $row->post_id, '<i class="fas fa-trash-alt"></i>', array("class" => "btn btn-danger btn-sm", "onclick" => "return confirm('Are you sure you want to Delete?')")); ?>
+        <?php echo anchor("administration/delete-post/" . $row->post_id, '<i class="fas fa-trash-alt"></i>', array("class" => "btn btn-danger btn-sm", "onclick" => "return confirm('Are you sure you want to Delete?')")); ?>
 
 
-                    </td>
-                </tr>
-                <?php
+        </td>
+        </tr>
+        <?php
 }
 }
 ?>
-            </tbody>
+        </tbody>
         </table>
     </div>
 </div>

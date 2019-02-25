@@ -11,18 +11,19 @@
 
                             <li class="dropdown">
                                 <a href="<?php echo base_url(); ?>administration/schools" class="dropdown-toggle">
-                                    <span class="fas fa-graduation-cap"></span><span class="mtext">School</span>
+                                    <span class="fas fa-graduation-cap"></span>-School
                                 </a>
 
                             </li>
                             <li class="dropdown">
                                 <a href="javascript:;" class="dropdown-toggle">
-                                    <span class="fa fa-home"></span>Content
+                                    <i class="fas fa-book"></i></span>-Content
                                 </a>
                                 <ul class="submenu">
                                     <li><a href="<?php echo base_url(); ?>laikipiaschools/categories">Category</a></li>
 
-                                    <li><a href="<?php echo base_url(); ?>laikipiaschools/posts">Post</a></li>
+                                    <li><a href="<?php echo base_url(); ?>laikipiaschools/posts"><i
+                                                class="fas fa-blog"></i>Post</a></li>
                                 </ul>
                             </li>
                             <?php if (is_array($categories->result())) {

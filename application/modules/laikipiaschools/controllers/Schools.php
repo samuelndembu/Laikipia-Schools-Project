@@ -24,7 +24,7 @@ class Schools extends MX_Controller
     }
     public function index($start = null)
     {
-        $order = 'school_old.created_on';
+        $order = 'school_old.school_name';
         $order_method = 'ASC';
         $this->form_validation->set_rules("school_name", "School Name", "required");
         $this->form_validation->set_rules("school_write_up", "school Write Up", "required");
