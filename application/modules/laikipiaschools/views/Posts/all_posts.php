@@ -61,14 +61,14 @@ if (!empty($validation_errors)) {
                                     </div>
                                 </div>
 
-
+<!-- 
                                 <div class="form-group row">
                                     <div class="col-sm-12 col-md-12">
                                         <label for="post_views">Post Views</label>
                                         <input type="Numeric" class="form-control" id="post_views" name="post_views"
                                             placeholder="Views" required>
                                     </div>
-                                </div>
+                                </div> -->
 
                                 <div class="form-group row">
                                     <!-- <fieldset class="form-group"> -->
@@ -127,7 +127,7 @@ if (!empty($validation_errors)) {
                     <th>Post Image</th>
                     <th>Post Title</th>
                     <th>Post Description</th>
-                    <th>Post Views</th>
+                    <!-- <th>Post Views</th> -->
                     <!-- <th>Post Status</th> -->
                     <th>Actions</th>
                 </tr>
@@ -138,7 +138,7 @@ if (!empty($validation_errors)) {
                     <th>Post Image</th>
                     <th>Post Title</th>
                     <th>Description</th>
-                    <th>Views</th>
+                    <!-- <th>Views</th> -->
                     <!-- <th>Post Status</th> -->
                     <th>Actions</th>
                 </tr>
@@ -204,10 +204,7 @@ if ($query->num_rows() > 0) {
                                                         Description:<?php echo $row->post_description; ?>
                                                     </p>
                                                 </div>
-                                                <div>
-                                                    <p>Views:<?php echo $row->post_views; ?>
-                                                    </p>
-                                                </div>
+                                               
                                             </div>
                                         </div>
                                         <div class="card-body">
@@ -272,14 +269,14 @@ if ($query->num_rows() > 0) {
                         <?php echo form_input(['name' => 'post_image_name', 'class' => 'form-control', 'type' => 'file', 'value' => set_value('post_image_name', $row->post_image_name)]) ?>
                     </div>
                 </div>
-
-                <div class="form-group row">
+<!--  -->
+                <!-- <div class="form-group row">
                     <label for="post_views" class="col-sm-2 col-form-label">Post
                         Views</label>
                     <div class="col-md-10">
                         <?php echo form_input(['name' => 'post_views', 'class' => 'form-control', 'value' => set_value('post_views', $row->post_views)]) ?>
                     </div>
-                </div>
+                </div> -->
 
                 <div class="row">
                     <label class="col-form-label col-sm-2 pt-0">Post Status</label>
@@ -287,7 +284,7 @@ if ($query->num_rows() > 0) {
                         <input type="radio" name="status" value="1"
                             <?php echo ($row->post_status == 'Active') ? 'checked' : '' ?>>Active
                         <input type="radio" name="status" value="0"
-                            <?php echo ($row->post_status == 'Inactive') ? 'checked' : '' ?> ">Inactive
+                            <?php echo ($row->post_status == 'Inactive') ? 'checked' : '' ?>>Inactive
                             </div>
                         </div>
 
