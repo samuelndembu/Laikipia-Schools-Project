@@ -237,11 +237,11 @@ class Categories extends MX_Controller
             $my_category = $this->categories_model->get_single_category($category_id);
             if ($my_category->num_rows() > 0) {
                 $row = $my_category->row();
-                $parent = $row->parent;
-                $name = $row->name;
+                $parent = $row->category_parent;
+                $name = $row->category_name;
 
-                $v_data["parent"] = $parent;
-                $v_data["name"] = $name;
+                $v_data["category_parent"] = $category_parent;
+                $v_data["category_name"] = $name;
 
                 $data = array("title" => "Update category",
                     "content" => $this->load->view("categories/edit_category", $v_data, true),
