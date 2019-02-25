@@ -24,7 +24,7 @@ class Schools extends MX_Controller
     }
     public function index($start = null)
     {
-        $order = 'school_old.created_on';
+        $order = 'school.created_on';
         $order_method = 'ASC';
         $this->form_validation->set_rules("school_name", "School Name", "required");
         $this->form_validation->set_rules("school_write_up", "school Write Up", "required");
@@ -58,7 +58,7 @@ class Schools extends MX_Controller
         } else {
 
             $where = 'school_id > 0';
-            $table = 'school_old';
+            $table = 'school';
             $school_search = $this->session->userdata('school_search');
             $search_title = $this->session->userdata('school_search_title');
 
@@ -90,6 +90,7 @@ class Schools extends MX_Controller
             $config['first_tagl_close'] = '</span></li>';
             $config['last_tag_open'] = '<li class="page-item"><span class="page-link">';
             $config['last_tagl_close'] = '</span></li>';
+            
             $this->pagination->initialize($config);
 
             $page = ($this->uri->segment($segment)) ? $this->uri->segment($segment) : 0;
@@ -171,10 +172,10 @@ class Schools extends MX_Controller
 
     public function export_schools()
     {
-        $order = 'school_old.school_id';
+        $order = 'school.school_id';
         $order_method = 'DESC';
         $where = 'school_id > 0';
-        $table = 'school_old';
+        $table = 'school';
         $schools_search = $this->session->userdata('school_search');
         $search_title = $this->session->userdata('school_search_title');
 
@@ -339,24 +340,24 @@ class Schools extends MX_Controller
 
         if (!empty($school_name)) {
             $search_title .= ' School: <strong>' . $school_name . '</strong>';
-            $school_name = ' AND school_old.school_name = \'+' . $school_name . '\'';
+            $school_name = ' AND school.school_name = \'+' . $school_name . '\'';
         }
 
         if (!empty($school_girls_number)) {
             $search_title .= ' Number of Girls <strong>' . $school_girls_number . '</strong>';
-            $school_girls_number = ' AND school_old.school_girls_number = \'' . $school_girls_number . '\'';
+            $school_girls_number = ' AND school.school_girls_number = \'' . $school_girls_number . '\'';
         }
         if (!empty($school_boys_number)) {
             $search_title .= ' Number of boys <strong>' . $school_boys_number . '</strong>';
-            $school_boys_number = ' AND school_old.school_boys_number = \'' . $school_boys_number . '\'';
+            $school_boys_number = ' AND school.school_boys_number = \'' . $school_boys_number . '\'';
         }
         if (!empty($school_location_name)) {
             $search_title .= ' Number of Girls <strong>' . $school_location_name . '</strong>';
-            $school_location_name = ' AND school_old.school_location_name = \'' . $school_location_name . '\'';
+            $school_location_name = ' AND school.school_location_name = \'' . $school_location_name . '\'';
         }
         if (!empty($school_status)) {
             $search_title .= ' Number of Girls <strong>' . $school_status . '</strong>';
-            $school_status = ' AND school_old.school_status = \'' . $school_status . '\'';
+            $school_status = ' AND school.school_status = \'' . $school_status . '\'';
         }
 
         // if(!empty($daterange))

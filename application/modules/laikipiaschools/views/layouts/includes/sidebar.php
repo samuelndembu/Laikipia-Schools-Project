@@ -9,22 +9,38 @@
                     <div class="sidebar-menu">
                         <ul id="accordion-menu">
 
+<<<<<<< HEAD
                             <hr>
                             <li class="dropdown pt-3">
                                 <a href="<?php echo base_url(); ?>administration/schools" class="">
                                     <span class="fas fa-graduation-cap"></span><span class="mtext">School</span>
+=======
+                            <li class="dropdown">
+                                <a href="<?php echo base_url(); ?>administration/schools" class="dropdown-toggle">
+                                    <span class="fas fa-graduation-cap"></span>-School
+>>>>>>> d14311ebf6830f5a49bc33b5ce8a36e55116f894
                                 </a>
 
                             </li>
                             <hr>
                             <li class="dropdown">
+<<<<<<< HEAD
                                 <a href="javascript:;" class="">
                                     <span class="fa fa-table"></span>Content
+=======
+                                <a href="javascript:;" class="dropdown-toggle">
+                                    <i class="fas fa-book"></i></span>-Content
+>>>>>>> d14311ebf6830f5a49bc33b5ce8a36e55116f894
                                 </a>
                                 <ul class="submenu">
                                     <li><a href="<?php echo base_url(); ?>administration/categories">Category</a></li>
 
+<<<<<<< HEAD
                                     <li><a href="<?php echo base_url(); ?>administration/posts">Post</a></li>
+=======
+                                    <li><a href="<?php echo base_url(); ?>laikipiaschools/posts"><i
+                                                class="fas fa-blog"></i>Post</a></li>
+>>>>>>> d14311ebf6830f5a49bc33b5ce8a36e55116f894
                                 </ul>
                             </li>
                             <hr>
