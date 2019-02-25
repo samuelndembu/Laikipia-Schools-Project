@@ -1,4 +1,4 @@
-    <?php if (!defined('BASEPATH')) {
+<?php if (!defined('BASEPATH')) {
     exit('No direct script access allowed');
 }
 
@@ -13,11 +13,8 @@ class Partners extends MX_Controller
         $this->load->model("laikipiaschools/partners_model");
         $this->load->model("laikipiaschools/file_model");
         $this->load->model("laikipiaschools/site_model");
-        // $this->load->model("reports/payments_model");
-
         $this->upload_path = realpath(APPPATH . "../assets/uploads");
         $this->upload_location = base_url() . "assets/uploads";
-
         $this->load->library("image_lib");
     }
 
@@ -86,6 +83,7 @@ class Partners extends MX_Controller
         $v_data['order_method'] = $order_method;
         $v_data['query'] = $query;
         $v_data['page'] = $page;
+        $v_data['categories'] = $this->site_model->get_all_categories();
         $v_data["partner_types"] = $this->partners_model->get_partner_types();
 
         $data['content'] = $this->load->view('partners/all_partners', $v_data, true);
@@ -97,13 +95,6 @@ class Partners extends MX_Controller
     {
         $this->partners_model->update_partner_info($per_page, $page);
     }
-
-    // public function test_page()
-    // {
-    //     $v_data['x_partners'] = $this->merchants_m->get_transacted_merchants();
-    //     $this->load->view("merchants/test.php", $v_data);
-    // }
-
     public function search_partners()
     {
         $partner_id = $this->input->post('partner_id');
@@ -115,10 +106,8 @@ class Partners extends MX_Controller
         }
 
         $search = $partner_id;
-        // var_dump($search_title); die();
         $this->session->set_userdata('partners_search', $search);
         $this->session->set_userdata('partners_search_title', $search_title);
-
         redirect("administration/partners");
     }
 
@@ -181,55 +170,6 @@ class Partners extends MX_Controller
         }
 
     }
-
-    // public function bulk_actions()
-    // {
-    //     $this->form_validation->set_rules('action_name', 'Action', 'required');
-
-    //     //if form conatins invalid data
-    //     if ($this->form_validation->run())
-    //     {
-    //         $partner_id_array = $_POST['partner_id'];
-    //         $action_name = $this->input->post('action_name');
-
-    //         $total_partners = count($partner_id_array);
-
-    //         if($total_partners > 0)
-    //         {
-    //             foreach($partner_id_array as $key => $value)
-    //             {
-    //                 if($action_name == "reset")
-    //                 {
-    //                     $this->partners_model->reset_merchant_password($value);
-    //                 }
-    //             }
-
-    //             $merchants = "merchants";
-    //             if($total_merchants == 1)
-    //             {
-    //                 $merchants = "merchant";
-    //             }
-    //             $this->session->set_userdata('success_message', $action_name." of ".$total_merchants." ".$merchants."  successfull");
-    //         }
-
-    //         else
-    //         {
-    //             $this->session->set_userdata('error_message', "No merchants have been selected");
-    //         }
-    //     }
-
-    //     else
-    //     {
-    //         $validation_errors = validation_errors();
-    //         if(!empty($validation_errors))
-    //         {
-    //             $this->session->set_userdata("error_message", $validation_errors);
-    //         }
-    //     }
-
-    //     redirect("reports/merchants");
-    // }
-
     public function firstview()
     {
 
@@ -276,8 +216,7 @@ class Partners extends MX_Controller
         $this->form_validation->set_rules("partner_type", "partner_type", "required");
         $this->form_validation->set_rules("partner_name", "partner_name", "required");
         $this->form_validation->set_rules("partner_email", "partner_email", "required");
-        //$this->form_validation->set_rules("partner_logo", "partner_logo", "required");
-
+ 
         if ($this->form_validation->run()) {
             $resize = array(
                 "width" => 600,
@@ -315,28 +254,7 @@ class Partners extends MX_Controller
             $this->load->view("laikipiaschools/layouts/layout", $data);
         }
     }
-    // $partner_id = $this->partners_model->add_partners();
-    // if ($partner_id > 0) {
-    //     $this->session->set_flashdata("success_message", "New partner ID" . $partner_name . " has been added");
-    // } else {
-    //     $this->session->set_flashdata
-    //         ("error_message", "unable to add partner");
-    // }
-    // redirect("laikipiaschools/partners");
-    // }
-
-    // redirect("laikipiaschools/partners");
-
-    // $data["form_error"] = validation_errors();
-    // // $data["partner_types"] = $this->partners_model->get_partner_types();
-    // // $data = array("title" => "Add partner",
-    // //     "content" => $this->load->view("partners/add_partner", $data, true));
-    // // // $this->load->view("welcome_here", $data);
-    // // $this->load->view("laikipiaschools/layouts/layout", $data);
-
-    // //  $this->load->view("partners/add_partner",$data);
-
-    // //update
+   
     public function edit($partner_id)
     {
         $this->form_validation->set_rules("partner_type", "Partner Type", "required");
@@ -381,17 +299,15 @@ class Partners extends MX_Controller
     }
     //uploading image
     //delete image
-    // public function delete_partner($partner_id)
-    // {
-    // if($this->partners_model->delete_partners($partner_id)
-    // {
-    // $this->session->set_flashdata('success', 'Partner Deleted successfully');
-    // redirect('administration/partners');
-    // }
-    // else
-    // {
-    // $this->session->set_flashdata('error', 'Unable to delete partner, Try again!!');
-    // redirect('administration/partners');
-    // }
-    // }
+    public function delete_partner($partner_id)
+    {
+        if ($this->partners_model->delete_partners($partner_id)) {
+            $this->session->set_flashdata('success', 'Deleted successfully');
+            redirect('administration/partners');
+        } else {
+            $this->session->set_flashdata('error', 'Unable to delete, Try again!!');
+            redirect('administration/partners');
+        }
+    }   
+    
 }

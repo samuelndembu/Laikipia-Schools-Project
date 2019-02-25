@@ -114,6 +114,7 @@ class Schools extends MX_Controller
             $v_data['order'] = $order;
             $v_data['order_method'] = $order_method;
             $v_data['query'] = $query;
+            $v_data['categories'] = $this->site_model->get_all_categories();
             $v_data['page'] = $page;
             $v_data["zones"] = $this->schools_model->get_all_zones();
             $v_data["schools"] = $this->schools_model->get_all_schools($table, $where, $start, $config["per_page"], $page, $order, $order_method);

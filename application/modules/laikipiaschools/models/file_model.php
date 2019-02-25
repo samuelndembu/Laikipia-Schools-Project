@@ -8,8 +8,8 @@ class File_model extends CI_Model
             "upload_path" => $upload_path,
             "quality" => "100%",
             "max_size" => "0",
-            "min_width" => "300",
-            "min_height" => "300",
+            "min_width" => "100",
+            "min_height" => "100",
             "file_name" => md5(date("Y-m-d H:i:s")),
             "overwrite" => true,
         );

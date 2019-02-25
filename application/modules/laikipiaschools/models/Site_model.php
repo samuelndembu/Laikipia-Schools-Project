@@ -23,6 +23,14 @@ class Site_model extends CI_Model
         $field_name = str_replace("-", " ", $web_name);
 
         return $field_name;
+	}
+	
+	public function get_all_categories()
+    {
+		$this->db->select('*');
+		$this->db->from('category');
+
+		return $this->db->get();
     }
 
     public function count_items($table, $where, $limit = NULL)
