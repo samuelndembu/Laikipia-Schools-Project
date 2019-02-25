@@ -90,6 +90,7 @@ class Schools extends MX_Controller
             $config['first_tagl_close'] = '</span></li>';
             $config['last_tag_open'] = '<li class="page-item"><span class="page-link">';
             $config['last_tagl_close'] = '</span></li>';
+            
             $this->pagination->initialize($config);
 
             $page = ($this->uri->segment($segment)) ? $this->uri->segment($segment) : 0;
