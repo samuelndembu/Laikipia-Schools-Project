@@ -8,13 +8,12 @@ if (!empty($validation_errors)) {
 <div class="shadow-lg p-3 mb-5 bg-white rounded">
 <div class="card shadow mb-4">
     <div class="card-header py-3">
-
         <!-- <button type="button" class="btn btn-success">Add Partner</button> -->
-
         <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal">
             Add Partner
         </button>
-
+</div>
+</div>
         <!-- Modal -->
         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
             aria-hidden="true">
@@ -74,13 +73,9 @@ if (!empty($validation_errors)) {
 
                 </div>
             </div>
-        </div>
+            </div> 
 <?php echo form_close() ?>
-  </div>
-</div>
-
-
-
+ 
 <div class="card-body">
 <div class="table-responsive">
   <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -134,37 +129,38 @@ if (!empty($validation_errors)) {
         <td>
  
         <?php if($row->partner_status == 1){ ?>
-          <a href="" class="btn btn-dark btn-sm" data-toggle="modal" data-target="#modalLoginAvatar" ><i class="fas fa-eye"></i></a>
+          <a href="" class="btn btn-dark btn-sm" data-toggle="modal" data-target="#modalLoginAvatar<?php echo $row->partner_id; ?>" ><i class="fas fa-eye"></i></a>
         <?php }?>
   
 <!--Modal: Login with Avatar Form-->
-<div class="modal fade" id="modalLoginAvatar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+<div class="modal fade" id="modalLoginAvatar<?php echo $row->partner_id; ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
 aria-hidden="true" >
-<div class="modal-dialog cascading-modal modal-avatar modal-sm" role="document" >
+<div class="modal-dialog cascading-modal modal-avatar modal-md" role="document" >
 <!--Content-->
 <div class="modal-content" style="margin-left:0px;">
 
   <!--Header-->
   <div class="modal-header">
-    <img src="<?php echo base_url() . 'assets/uploads/' . $row->partner_thumb; ?>" alt="avatar" class="rounded-circle img-responsive" style="margin-left:60px;">
+    <img src="<?php echo base_url() . 'assets/uploads/' . $row->partner_thumb; ?>" alt="avatar" class="rounded-circle img-responsive" style="margin-left:40%;margin-right:50%">
   </div>
   <!--Body-->
-  <div class="modal-body text-center mb-1">
+  <div class="modal-body">
 
-    <h5 class="mt-1 mb-2">Retrieved  <?php echo $row->partner_name; ?></h5>
+    <h5 class=" pb-3"><b>Retrieved:</b> <br /> <?php echo $row->partner_name; ?></h5>
 
-    <div class="md-form ml-0 mr-0" style="padding:30px;font-size:20px;list-style-type:none;margin-left:10px;">
-    <li >Partner Type:   <?php echo $row->partner_type_id; ?></li>
+    <div class=" ml-1 pb-3" style="font-size:20px;list-style-type:none;">
+    <li ><b>Partner Type:</b>  <br /> <?php echo $row->partner_type_name; ?></li>
     </div>
-    <div class="md-form ml-0 mr-0" style="padding:30px;font-size:20px;list-style-type:none;margin-left:10px;font-weight:bold;">
-    <li>Partner Name:<?php echo $row->partner_name; ?></li>
+    <div class=" ml-1 pb-3" style="font-size:20px;list-style-type:none;">
+    <li><b>Partner Name: </b> <br /><?php echo $row->partner_name; ?></li>
     </div>
-    <div class="md-form ml-0 mr-0" style="padding:30px;font-size:20px;list-style-type:none;margin-left:10px;">
-    <li>Partner Email:<?php echo $row->partner_email; ?></li>
+    <div class="ml-1 pb-3" style="font-size:20px;list-style-type:none;">
+    <li><b>Partner Email: </b> <br /><?php echo $row->partner_email; ?></li>
     </div>
-    <div class="text-center mt-4">
-      <button class="btn btn-cyan mt-1">Back <i class="fas fa-sign-in ml-1"></i></button>
-    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+
+      </div>
   </div>
 
 </div>
@@ -197,6 +193,7 @@ aria-hidden="true" >
 <p>
       <?php echo $links;?>
 </p>
+</div>
 </div>
 
 

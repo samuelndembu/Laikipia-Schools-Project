@@ -15,9 +15,9 @@ class Categories extends MX_Controller
     }
 
     //public function index
-    public function index($order = 'category.created_on', $order_method = 'DESC')
+    public function index($order = 'category.category_name', $order_method = 'ASC')
     {
-        $where = 'category_id > 0';
+        $where = 'category_id > 0 AND deleted=0';
         $table = 'category';
         $category_search = $this->session->userdata('category_search');
         $search_title = $this->session->userdata('category_search_title');
@@ -73,10 +73,25 @@ class Categories extends MX_Controller
         $v_data['order_method'] = $order_method;
         $v_data['query'] = $query;
         $v_data['page'] = $page;
-        $v_data['categories'] = $this->site_model->get_all_categories();
+        $all_categories = $this->site_model->get_all_categories();
+        $v_data['categories'] = $all_categories;
+
+        $cat_parent = array();
+
+        $categories_result = $all_categories->result();
+
+        foreach ($categories_result as $value) 
+        {
+            if($value->category_parent == 0)
+            {
+                array_push($cat_parent, $value->category_name);
+            }
+        }
+      
         // $v_data["parent"] = $this->categories_model->get_parents();
 
         $data['content'] = $this->load->view('categories/all_categories', $v_data, true);
+        $data['search_options'] = $cat_parent;
         //$this->load->view('admin/layout/home', $data);
         $this->load->view("laikipiaschools/layouts/layout", $data);
     }
@@ -211,22 +226,25 @@ class Categories extends MX_Controller
                 $this->session->set_flashdata("success_message", "New category ID" . $category_id . " has been added");
             } else {
                 $this->session->set_flashdata
-                    ("error_message", "unable to add category");
+                    ("error", "unable to add category");
             }
             redirect("administration/categories");
         }
+        else{
+             $this->session->set_flashdata
+                    ("error", validation_errors());
+        
+             redirect("administration/categories");
+        }
 
-        $v_data["form_error"] = validation_errors();
-         $data = array("title" => "Add Category",
-                "content" => $this->load->view("categories/all_categories", $v_data, true)
-            );
-        $this->load->view("laikipiaschools/layouts/layout", $data);
+        redirect("administration/categories");
+
+       
     }
     
     public function edit($category_id)
-    {
-        $this->form_validation->set_rules("parent", "Parent", "required");
-        $this->form_validation->set_rules("name", "Name", "required");
+     {
+    $this->form_validation->set_rules("category_name", "Name", "required|is_unique[category.category_name]");
 
         if ($this->form_validation->run()) {
             $update_status = $this->categories_model->update_category($category_id);
@@ -237,12 +255,14 @@ class Categories extends MX_Controller
             $my_category = $this->categories_model->get_single_category($category_id);
             if ($my_category->num_rows() > 0) {
                 $row = $my_category->row();
-                $parent = $row->category_parent;
-                $name = $row->category_name;
-
+                $category_parent = $row->category_parent;
+                $category_name = $row->category_name;
+                $v_data["category_id"] = $category_id;
+                $v_data["category_name"] = $category_name;
+                $v_data['categories'] = $this->site_model->get_all_categories();
                 $v_data["category_parent"] = $category_parent;
-                $v_data["category_name"] = $name;
-
+                //var_dump("category_parent");die();
+               
                 $data = array("title" => "Update category",
                     "content" => $this->load->view("categories/edit_category", $v_data, true),
                 );

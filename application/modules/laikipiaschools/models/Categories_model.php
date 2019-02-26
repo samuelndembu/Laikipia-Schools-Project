@@ -7,7 +7,7 @@ class Categories_model extends CI_Model
         $this->db->select("*");
         $this->db->from($table);
         $this->db->where($where);
-       // $this->db->limit($limit, $start);
+        $this->db->limit($limit, $start);
         //$this->db->join("partner_type", "partner.partner_type_id=partner_type.partner_type_id");
         $this->db->order_by($order, $order_method);
 
@@ -37,6 +37,16 @@ class Categories_model extends CI_Model
          $this->db->where("category_id", $category_id);
          return $this->db->get("category");
      }
+     public function fetch_all_categories()
+     {
+         $this->db->select("category_parent");
+         $this->db->from("category");
+         return $this->db->get();
+
+ 
+     }
+
+
      public function change_category_status($category_id, $new_category_status)
     {
 
@@ -52,8 +62,8 @@ class Categories_model extends CI_Model
     public function update_category($category_id)
     {
         $data = array(
-            "parent" => $this->input->post("parent"),
-            "name" => $this->input->post("name"),
+            "category_parent" => $this->input->post("category_parent"),
+            "category_name" => $this->input->post("category_name"),
 
         );
         $this->db->set($data);

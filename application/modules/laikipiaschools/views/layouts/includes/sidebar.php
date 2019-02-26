@@ -2,17 +2,14 @@
     <div class="list-group-flush">
         <ul class="nav flex-column">
 
-            <li class="nav-item ">
-
+            <li class="nav-item pl-4 ">
 
                 <div class="menu-block customscroll">
                     <div class="sidebar-menu">
                         <ul id="accordion-menu">
-
-                            <hr>
-                            <li class="dropdown pt-3">
+                            <li class="dropdown">
                                 <a href="<?php echo base_url(); ?>administration/schools" class="">
-                                    <span class="fas fa-graduation-cap"></span><span class="mtext">School</span>
+                                    <span class="fas fa-graduation-cap"></span><span class="mtext"><b>School</b></span>
                                 </a>
                             </li>
                             <hr>
