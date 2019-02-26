@@ -13,7 +13,7 @@ class Posts_model extends CI_Model
             "post_image_name" => $file_name,
             "post_thumb_name" => $thumb_name,
             "post_status" => $this->input->post("post_status"),
-
+            "category_id" => $this->input->post("category_id"),
         );
 
         if ($this->db->insert("post", $data)) {
@@ -37,8 +37,8 @@ class Posts_model extends CI_Model
 
     public function get_all_categories()
     {
-        $this->db->distinct('name');
-        $this->db->select('name');
+        $this->db->distinct('category_name');
+        $this->db->select('category_name');
         $this->db->from("category");
         $query = $this->db->get();
         return $query;
@@ -55,6 +55,7 @@ class Posts_model extends CI_Model
             return false;
         }
     }
+
     public function get_single_post($post_id)
     {
         $this->db->where("post_id", $post_id);

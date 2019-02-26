@@ -14,7 +14,7 @@ if (!empty($validation_errors)) {
                 <button type="button" class="btn btn-success btn-sm" data-toggle="modal"
                     data-target="#createDonation">Add
                     School</button>
-                <input type="file" class="btn btn-default pull-right" placeholder="Import"/>
+                <input type="file" class="btn btn-default pull-right" placeholder="Import" />
 
                 <a href="<?php echo site_url() . "administration/export-schools" ?>" target="_blank"
                     class="btn btn-default pull-right"><i class="fas fa-file-export"></i> Export</a>
@@ -141,8 +141,10 @@ if (!empty($validation_errors)) {
                                     <small id="emailHelp" class="form-text text-muted"></small>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    <button type="submit" class="btn btn-primary">Save</button>
+                                    < <button type="button" class="btn btn-secondary" data-dismiss="modal"><i
+                                            class="fas fa-times"></i>Close</button>
+                                        <button type="submit" class="btn btn-primary"><i
+                                                class="fas fa-check"></i>Save</button>
                                 </div>
                                 <?php echo form_close(); ?>
                             </div>
@@ -312,7 +314,7 @@ if ($query->num_rows() > 0) {
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal"><i
-                                                class="far fa-window-close"></i>Close</button>
+                                                class="fas fa-times"></i>Close</button>
                                     </div>
                                 </div>
                             </div>
@@ -414,7 +416,7 @@ if ($query->num_rows() > 0) {
                         <div class="
                                 form-group row">
                             <div class="col-sm-10">
-                                <button type="submit" class="btn btn-primary">Save
+                                <button type="submit" class="btn btn-primary"><i class="fas fa-check"></i>Save
                                     School</button>
                                 <div class="modal-footer">
                                     <?php echo anchor('laikipiaschools/schools', 'Cancel', ['class' => 'btn btn-primary']); ?>

@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css?family=ZCOOL+QingKe+HuangYou');
+
+
 body,
 html {
 	font-family: 'Oxygen', sans-serif;
@@ -15,7 +18,8 @@ html {
 
 h1.title {
 	font-size: 50px;
-	font-family: 'Passion One', cursive;
+	font-family: 'ZCOOL',
+		cursive;
 	font-weight: 400;
 }
 
