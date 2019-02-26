@@ -28,7 +28,7 @@ class posts extends MX_Controller
         $this->form_validation->set_rules("post_title", "Post Title", "required");
         $this->form_validation->set_rules("post_description", "Post Description", "required");
         // $this->form_validation->set_rules("post_image_name", "Post Image", "required");
-        $this->form_validation->set_rules("post_views", "Views", "required");
+        // $this->form_validation->set_rules("post_views", "Views", "required");
         // $this->form_validation->set_rules("post_status", "Status", "required");
 
         //  validate
@@ -215,7 +215,7 @@ class posts extends MX_Controller
         $this->form_validation->set_rules("post_title", "Post Title", "required");
         $this->form_validation->set_rules("post_description", "Post Description", "required");
         $this->form_validation->set_rules("post_image_name", "Post Image", "required");
-        $this->form_validation->set_rules("post_views", "Views", "required");
+        // $this->form_validation->set_rules("post_views", "Views", "required");
         $this->form_validation->set_rules("post_status", "Status", "required");
 
         if ($this->form_validation->run()) {

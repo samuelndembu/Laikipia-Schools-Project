@@ -50,17 +50,16 @@ label {
 
 }
 
-input[type=text],
+/* input[type=text],
 input[type=number] {
 	/* width:150px; */
-	height: 30px;
+/* height: 30px;
 	border: 1px solid grey;
 	border-radius: 5px;
-	padding: 0 20px;
-	;
+	padding: 0 20px; */
+/* ;
 
-}
-
+} */
 .submit_button {
 	margin-top: 20px;
 	width: 100%;

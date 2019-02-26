@@ -26,7 +26,7 @@ class Partners extends MX_Controller
     //public function index
     public function index($order = 'partner.created_on', $order_method = 'DESC')
     {
-        $where = 'partner_id > 0';
+        $where = 'partner_id > 0 AND deleted=0';
         $table = 'partner';
         $partners_search = $this->session->userdata('partners_search');
         $search_title = $this->session->userdata('partners_search_title');
@@ -86,6 +86,14 @@ class Partners extends MX_Controller
         $v_data['categories'] = $this->site_model->get_all_categories();
         $v_data["partner_types"] = $this->partners_model->get_partner_types();
 
+        $partner_type_search = array();
+
+        foreach($v_data["partner_types"]->result() as $partner_type)
+        {
+            array_push($partner_type_search, $partner_type->partner_type_name);
+        }
+
+        $data['search_options'] = $partner_type_search;
         $data['content'] = $this->load->view('partners/all_partners', $v_data, true);
         //$this->load->view('admin/layout/home', $data);
         $this->load->view("laikipiaschools/layouts/layout", $data);

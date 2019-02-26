@@ -62,8 +62,8 @@ Add Category
   <thead>
     <tr>
       <th>#</th>
-      <th>Parent</th>
-      <th>Name</th>
+      <th><?php echo anchor("administration/categories/category.category_parent/".$order_method, "Parent"); ?> </th>
+      <th><?php  echo anchor("administration/categories/".$order . "/" . $order_method , "Name"); ?></th>
       <th>Actions</th>
       
     </tr>
@@ -107,11 +107,12 @@ if ($query->num_rows() > 0) {
         </td>
       <td>
       <?php if ($row->category_status == 1) {?>
-        <a href="" class="btn btn-dark btn-sm" data-toggle="modal" data-target="#modalLoginAvatar"><i class="fas fa-eye"></i></a>
+        <a href="" class="btn btn-dark btn-sm" data-toggle="modal" data-target="#modalLoginAvatar<?php echo $row->category_id; ?>"><i class="fas fa-eye"></i></a>
       <?php }?>
+      
 
 <!--Modal: Login with Avatar Form-->
-<div class="modal fade" id="modalLoginAvatar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+<div class="modal fade" id="modalLoginAvatar<?php echo $row->category_id; ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
 aria-hidden="true" >
 <div class="modal-dialog cascading-modal modal-avatar modal-sm" role="document" >
 <!--Content-->
@@ -125,7 +126,18 @@ aria-hidden="true" >
   <h5 class="pl-3 pb-3" style="font-size:20px;list-style-type:none;margin-left:10px;"><b>Retrieved:</b>  <?php echo $row->category_name; ?></h5>
 
   <div class=" pl-3 pb-3" style="font-size:20px;list-style-type:none;margin-left:10px;">
-  <li ><b>Parent:</b>   <?php echo $row->category_parent; ?></li>
+  <li ><b>Parent:</b>   <?php if ($row->category_parent == 0) {
+            echo "";
+        } else {
+            foreach ($categories->result() as $category) {
+                if ($category->category_id == $row->category_parent) {
+                    echo $category->category_name;
+                }
+
+            }
+        }
+
+        ?></li>
   </div>
   <div class="pl-3" style="font-size:20px;list-style-type:none;margin-left:10px;">
   <li><b>Name:</b> <?php echo $row->category_name; ?></li>

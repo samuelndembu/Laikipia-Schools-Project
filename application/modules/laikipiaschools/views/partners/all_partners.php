@@ -129,19 +129,19 @@ if (!empty($validation_errors)) {
         <td>
  
         <?php if($row->partner_status == 1){ ?>
-          <a href="" class="btn btn-dark btn-sm" data-toggle="modal" data-target="#modalLoginAvatar" ><i class="fas fa-eye"></i></a>
+          <a href="" class="btn btn-dark btn-sm" data-toggle="modal" data-target="#modalLoginAvatar<?php echo $row->partner_id; ?>" ><i class="fas fa-eye"></i></a>
         <?php }?>
   
 <!--Modal: Login with Avatar Form-->
-<div class="modal fade" id="modalLoginAvatar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+<div class="modal fade" id="modalLoginAvatar<?php echo $row->partner_id; ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
 aria-hidden="true" >
-<div class="modal-dialog cascading-modal modal-avatar modal-sm" role="document" >
+<div class="modal-dialog cascading-modal modal-avatar modal-md" role="document" >
 <!--Content-->
 <div class="modal-content" style="margin-left:0px;">
 
   <!--Header-->
   <div class="modal-header">
-    <img src="<?php echo base_url() . 'assets/uploads/' . $row->partner_thumb; ?>" alt="avatar" class="rounded-circle img-responsive" style="margin-left:60px;">
+    <img src="<?php echo base_url() . 'assets/uploads/' . $row->partner_thumb; ?>" alt="avatar" class="rounded-circle img-responsive" style="margin-left:40%;margin-right:50%">
   </div>
   <!--Body-->
   <div class="modal-body">

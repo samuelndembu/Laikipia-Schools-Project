@@ -37,11 +37,12 @@ class Categories_model extends CI_Model
          $this->db->where("category_id", $category_id);
          return $this->db->get("category");
      }
-     public function all_categories()
+     public function fetch_all_categories()
      {
-         $this->db->select("*");
-         $this->db->from("partner_type");
+         $this->db->select("category_parent");
+         $this->db->from("category");
          return $this->db->get();
+
  
      }
 
@@ -62,7 +63,7 @@ class Categories_model extends CI_Model
     {
         $data = array(
             "category_parent" => $this->input->post("category_parent"),
-            "categoy_name" => $this->input->post("category_name"),
+            "category_name" => $this->input->post("category_name"),
 
         );
         $this->db->set($data);
