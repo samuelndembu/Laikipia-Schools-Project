@@ -4,7 +4,7 @@ class Laikipiaauth extends MX_Controller
     public function __construct()
     {
         parent::__construct();
-        //$this->load->model('auth/auth_model');
+        $this->load->model('auth/auth_model');
         $this->load->model('admin/site_model');
      
     }
