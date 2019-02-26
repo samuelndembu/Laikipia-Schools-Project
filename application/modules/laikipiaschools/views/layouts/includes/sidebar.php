@@ -4,7 +4,6 @@
 
             <li class="nav-item ">
 
-
                 <div class="menu-block customscroll">
                     <div class="sidebar-menu">
                         <ul id="accordion-menu">

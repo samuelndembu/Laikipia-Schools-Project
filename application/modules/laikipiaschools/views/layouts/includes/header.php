@@ -11,7 +11,7 @@
     <link href="<?php echo base_url(); ?>assets/themes/custom/styles.css" rel="stylesheet">
     <link href="<?php echo base_url(); ?>assets/themes/custom/css/sidenav.css" rel="stylesheet">
     <!-- <link href="<?php echo base_url(); ?>assets/themes/custom/dashboard.css" rel="stylesheet"> -->
-    <link href="<?php echo base_url(); ?>assets/custom/css/partner.css" rel="stylesheet">
+    <!-- //<link href="<?php echo base_url(); ?>assets/custom/css/partner.css" rel="stylesheet"> -->
     <link href="<?php echo base_url(); ?>assets/fontawesome/css/all.css" rel="stylesheet">
     <script defer src="<?php echo base_url(); ?>assets/fontawesome/js/all.js"></script>
     <script defer src="<?php echo base_url(); ?>assets/fontawesome/js/fontawesome.js"></script>

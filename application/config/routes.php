@@ -103,7 +103,7 @@ $route['administration/donations/bulk-actions'] = 'laikipiaschools/donations/bul
 
 //partners
 
-$route['administration/partners'] = 'laikipiaschools/partners/index';
+$route['administration/partner'] = 'laikipiaschools/partners/index';
 $route['administration/partners/add-partners'] = 'laikipiaschools/partners/create_partner';
 $route['administration/partners/read-partner/(:num)'] = 'laikipiaschools/partners/read_partner/$1';
 $route['administration/edit_partner/(:num)'] = 'laikipiaschools/partners/edit/$1';

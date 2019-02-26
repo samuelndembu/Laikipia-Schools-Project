@@ -32,9 +32,6 @@ class Laikipiaauth extends MX_Controller
             $this->form_validation->set_rules('user_password', 'Password', 'required');
         }
 
-        $this->form_validation->set_rules('user_email', 'Email address', 'required|valid_email');
-        $this->form_validation->set_rules('user_password', 'Password', 'required');
-
         //2. Check if validaion rules pass
         if ($this->form_validation->run()) {
             //     //login hack
@@ -42,7 +39,7 @@ class Laikipiaauth extends MX_Controller
                 $newdata = array(
                     'login_status' => true,
                     'first_name' => 'Admin',
-                    'other_names' => 'Admin',
+                    'other_name' => 'Patricia',
                     'username' => 'laikipia-schools',
                     'personnel_type_id' => '1',
                     'personnel_id' => 0,

@@ -15,7 +15,7 @@ class Categories extends MX_Controller
     }
 
     //public function index
-    public function index($order = 'category.created_on', $order_method = 'DESC')
+    public function index($order = 'category.category_name', $order_method = 'ASC')
     {
         $where = 'category_id > 0';
         $table = 'category';
@@ -74,6 +74,7 @@ class Categories extends MX_Controller
         $v_data['query'] = $query;
         $v_data['page'] = $page;
         $v_data['categories'] = $this->site_model->get_all_categories();
+      
         // $v_data["parent"] = $this->categories_model->get_parents();
 
         $data['content'] = $this->load->view('categories/all_categories', $v_data, true);
@@ -217,6 +218,7 @@ class Categories extends MX_Controller
         }
 
         $v_data["form_error"] = validation_errors();
+        
          $data = array("title" => "Add Category",
                 "content" => $this->load->view("categories/all_categories", $v_data, true)
             );
@@ -224,9 +226,10 @@ class Categories extends MX_Controller
     }
     
     public function edit($category_id)
-    {
-        $this->form_validation->set_rules("parent", "Parent", "required");
-        $this->form_validation->set_rules("name", "Name", "required");
+     {
+    //     $this->form_validation->set_rules("category_parent", "category_Parent", "required");
+    //     $this->form_validation->set_rules("category_name", "Name", "required");
+    $this->form_validation->set_rules("category_name", "category_name", "required|is_unique[category.category_name]");
 
         if ($this->form_validation->run()) {
             $update_status = $this->categories_model->update_category($category_id);
@@ -237,11 +240,13 @@ class Categories extends MX_Controller
             $my_category = $this->categories_model->get_single_category($category_id);
             if ($my_category->num_rows() > 0) {
                 $row = $my_category->row();
-                $parent = $row->category_parent;
-                $name = $row->category_name;
-
+                $category_parent = $row->category_parent;
+                $category_name = $row->category_name;
                 $v_data["category_parent"] = $category_parent;
-                $v_data["category_name"] = $name;
+                $v_data["category_name"] = $category_name;
+                $v_data['categories'] = $this->site_model->get_all_categories();
+                $v_data["cat"] = $this->categories_model->all_category_types();
+
 
                 $data = array("title" => "Update category",
                     "content" => $this->load->view("categories/edit_category", $v_data, true),

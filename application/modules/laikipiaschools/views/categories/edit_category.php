@@ -12,14 +12,14 @@ if (!empty($validation_errors)) {
     <div class="container">
     <?php echo form_open($this->uri->uri_string()); ?>
     <div class="form-group">
-    <label for="parent">Parent</label>
-    <select id="inputState" class="form-control" name="parent">
+    <label for="category_parent">Parent</label>
+    <select id="inputState" class="form-control" name="category_parent">
     
     </select>
     </div>
     <div class="form-group">
-    <label for="name">Name</label>
-    <input type="name" class="form-control" name="name" id="name" naria-describedby="emailHelp" placeholder="Enter Name" value=" <?php echo $name; ?>">
+    <label for="category_name">Name</label>
+    <input type="category_name" class="form-control" name="name" id="name" naria-describedby="emailHelp" placeholder="Enter Name" value=" <?php echo $category_name; ?>">
     </div>
     
     <button type="submit" class="btn btn-primary">Update</button>
