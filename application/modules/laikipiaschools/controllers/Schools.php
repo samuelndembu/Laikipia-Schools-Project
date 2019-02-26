@@ -127,8 +127,19 @@ class Schools extends MX_Controller
             $v_data['categories'] = $this->site_model->get_all_categories();
             $v_data['page'] = $page;
             $v_data["zones"] = $this->schools_model->get_all_zones();
-            $v_data["schools"] = $this->schools_model->get_all_schools($table, $where, $start, $config["per_page"], $page, $order, $order_method);
+            $v_data['schools']= $this->schools_model->get_all_schools($table, $where, $start, $config["per_page"], $page, $order, $order_method);
             $v_data['map'] = $this->googlemaps->create_map();
+// var_dump($v_data['schools']->result());die();
+            
+            $school_array = array();
+
+            foreach($v_data["schools"]->result() as $school)
+        {
+            array_push($school_array, $school->school_name);
+        }
+        // var_dump($school_array);die();
+
+        $v_data['search_options'] = $school_array;
 
             $data = array(
                 "title" => $this->site_model->display_page_title(),

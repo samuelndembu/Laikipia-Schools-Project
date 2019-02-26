@@ -223,7 +223,7 @@ class Partners extends MX_Controller
     {
         $this->form_validation->set_rules("partner_type", "partner_type", "required");
         $this->form_validation->set_rules("partner_name", "partner_name", "required");
-        $this->form_validation->set_rules("partner_email", "partner_email", "required");
+        $this->form_validation->set_rules("partner_email", "partner_email");
  
         if ($this->form_validation->run()) {
             $resize = array(
@@ -267,7 +267,7 @@ class Partners extends MX_Controller
     {
         $this->form_validation->set_rules("partner_type", "Partner Type", "required");
         $this->form_validation->set_rules("partner_name", "Partner Name", "required");
-        $this->form_validation->set_rules("partner_email", "Partner Email", "required");
+        $this->form_validation->set_rules("partner_email", "Partner Email");
 
         if ($this->form_validation->run()) {
             $update_status = $this->partners_model->update_partner($partner_id);
