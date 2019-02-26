@@ -35,14 +35,14 @@ if (!empty($validation_errors)) {
 
                                 <div class="form-group row">
                                     <div class="col-sm-12 col-md-12">
-                                        <label for="name">Categories</label>
-                                        <select id="inputState" class="form-control" name="name">
+                                        <label for="category_name">Categories</label>
+                                        <select id="inputState" class="form-control" name="category_name">
                                             <option selected>Choose Category</option>
 
                                             <?php if ($categories->num_rows() > 0) {
     foreach ($categories->result() as $row) {?>
-                                            <option value="<?php echo $row->name ?>">
-                                                <?php echo $row->name ?></option>
+                                            <option value="<?php echo $row->category_name ?>">
+                                                <?php echo $row->category_name ?></option>
                                             <?php
 }
 }?>
@@ -61,7 +61,7 @@ if (!empty($validation_errors)) {
                                     </div>
                                 </div>
 
-<!-- 
+                                <!--
                                 <div class="form-group row">
                                     <div class="col-sm-12 col-md-12">
                                         <label for="post_views">Post Views</label>
@@ -94,13 +94,10 @@ if (!empty($validation_errors)) {
                                     </div>
                                 </div>
 
-                                <div class="form-group row">
-                                    <div class="col-sm-12 col-md-12">
-                                        <label for="post_description" name="post_description">Post
-                                            Description</label>
-                                        <textarea class="form-control" id="message-text" placeholder="Post Description"
-                                            name="post_description"></textarea>
-                                    </div>
+                                <div class="form-group">
+                                    <label for="post_description">Post Description</label>
+                                    <?php echo form_textarea(array('name' => 'post_description', 'placeholder' => 'Write s description of the post', 'id' => 'ckeditor', 'class' => "ckeditor")); ?>
+                                    <small id="emailHelp" class="form-text text-muted"></small>
                                 </div>
 
 
@@ -127,7 +124,7 @@ if (!empty($validation_errors)) {
                     <th>Post Image</th>
                     <th>Post Title</th>
                     <th>Post Description</th>
-                    <!-- <th>Post Views</th> -->
+                    <th>Post Category</th>
                     <!-- <th>Post Status</th> -->
                     <th>Actions</th>
                 </tr>
@@ -138,7 +135,7 @@ if (!empty($validation_errors)) {
                     <th>Post Image</th>
                     <th>Post Title</th>
                     <th>Description</th>
-                    <!-- <th>Views</th> -->
+                    <th>Post Category</th>
                     <!-- <th>Post Status</th> -->
                     <th>Actions</th>
                 </tr>
@@ -165,7 +162,12 @@ if ($query->num_rows() > 0) {
                     </td>
 
                     <td><?php echo $row->post_description; ?></td>
-                    <td><?php echo $row->post_views; ?></td>
+
+            
+                    <td>
+                        
+                    
+                    <?php echo $row->category_name; ?></td>
                     <!-- <td><?php echo $row->post_status; ?></td> -->
 
                     <td>
@@ -195,7 +197,7 @@ if ($query->num_rows() > 0) {
                                                 </div>
 
                                                 <div>
-                                                    <p>Category:<?php echo $row->category; ?>
+                                                    <p>Category:<?php echo $row->category_id; ?>
                                                     </p>
                                                 </div>
 
@@ -204,7 +206,7 @@ if ($query->num_rows() > 0) {
                                                         Description:<?php echo $row->post_description; ?>
                                                     </p>
                                                 </div>
-                                               
+
                                             </div>
                                         </div>
                                         <div class="card-body">
@@ -238,13 +240,13 @@ if ($query->num_rows() > 0) {
 
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Update School Details</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Update Post</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="card-body">
-                <h5 class="card-title">Enter school Details to update</h5>
+                <h5 class="card-title">Enter Post Details to update</h5>
 
                 <?php echo
         form_open($this->uri->uri_string()); ?>
@@ -269,14 +271,15 @@ if ($query->num_rows() > 0) {
                         <?php echo form_input(['name' => 'post_image_name', 'class' => 'form-control', 'type' => 'file', 'value' => set_value('post_image_name', $row->post_image_name)]) ?>
                     </div>
                 </div>
-<!--  -->
+                <!--  -->
                 <!-- <div class="form-group row">
                     <label for="post_views" class="col-sm-2 col-form-label">Post
                         Views</label>
                     <div class="col-md-10">
-                        <?php echo form_input(['name' => 'post_views', 'class' => 'form-control', 'value' => set_value('post_views', $row->post_views)]) ?>
+                        <!-- <?php echo form_input(['name' => 'post_views', 'class' => 'form-control', 'value' => set_value('post_views', $row->post_views)]) ?>
                     </div>
                 </div> -->
+                -->
 
                 <div class="row">
                     <label class="col-form-label col-sm-2 pt-0">Post Status</label>
@@ -285,49 +288,41 @@ if ($query->num_rows() > 0) {
                             <?php echo ($row->post_status == 'Active') ? 'checked' : '' ?>>Active
                         <input type="radio" name="status" value="0"
                             <?php echo ($row->post_status == 'Inactive') ? 'checked' : '' ?>>Inactive
-                            </div>
-                        </div>
-
-
-                        <div class="
+                    </div>
+                </div>
+                <div class="
                             form-group row">
-                        <div class="col-sm-10">
-                            <button type="submit" class="btn btn-primary">Save
-                                Changes</button>
-                            <div class="modal-footer">
-                                <?php echo anchor('laikipiaschools/schools', 'Cancel', ['class' => 'btn btn-primary']); ?>
-                            </div>
+                    <div class="col-sm-10">
+                        <button type="submit" class="btn btn-primary">Save
+                            Changes</button>
+                        <div class="modal-footer">
+                            <?php echo anchor('laikipiaschools/schools', 'Cancel', ['class' => 'btn btn-primary']); ?>
                         </div>
                     </div>
-
                 </div>
-                <?php echo form_close(); ?>
+
             </div>
-
-
+            <?php echo form_close(); ?>
         </div>
-
-
-
-
-        <?php if ($row->post_status == 1) {
+    </div>
+    <?php if ($row->post_status == 1) {
             echo anchor("administration/deactivate-post/" . $row->post_id . "/" . $row->post_status, "<i class='far fa-thumbs-down'></i>", array("class" => "btn btn-default btn-sm", "onclick" => "return confirm('Are you sure you want to deactivate?')"));
         } else {
             echo anchor("administration/deactivate-post/" . $row->post_id . "/" . $row->post_status, "<i class='far fa-thumbs-up'></i>", array("class" => "btn btn-info btn-sm", "onclick" => "return confirm('Are you sure you want to activate?')"));
         }?>
 
-        <?php echo anchor("administration/delete-post/" . $row->post_id, '<i class="fas fa-trash-alt"></i>', array("class" => "btn btn-danger btn-sm", "onclick" => "return confirm('Are you sure you want to Delete?')")); ?>
+    <?php echo anchor("administration/delete-post/" . $row->post_id, '<i class="fas fa-trash-alt"></i>', array("class" => "btn btn-danger btn-sm", "onclick" => "return confirm('Are you sure you want to Delete?')")); ?>
 
 
-        </td>
-        </tr>
-        <?php
+    </td>
+    </tr>
+    <?php
 }
 }
 ?>
-        </tbody>
-        </table>
-    </div>
+    </tbody>
+    </table>
+</div>
 </div>
 
 <?php echo $links; ?>

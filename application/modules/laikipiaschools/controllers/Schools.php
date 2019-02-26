@@ -16,6 +16,7 @@ class Schools extends MX_Controller
 
         $this->load->model("laikipiaschools/schools_model");
         $this->load->library("image_lib");
+        $this->load->library('googlemaps');
 
         $this->load->model("laikipiaschools/schools_model");
         $this->load->model("laikipiaschools/site_model");
@@ -24,6 +25,14 @@ class Schools extends MX_Controller
     }
     public function index($start = null)
     {
+
+        // This is our Google API key. You will need to change this for your own website
+        $map_config['apikey'] = 'AIzaSyAMfrWKiELcjgQDzNq1n3LTVMSQAXGSs6E';
+        $map_config['center'] = '37.4419, -122.1419';
+        $map_config['zoom'] = 'auto';
+        // Initialize our map, passing in any map_config
+        $this->googlemaps->initialize($map_config);
+
         $order = 'school.created_on';
         $order_method = 'ASC';
         $this->form_validation->set_rules("school_name", "School Name", "required");
@@ -90,7 +99,7 @@ class Schools extends MX_Controller
             $config['first_tagl_close'] = '</span></li>';
             $config['last_tag_open'] = '<li class="page-item"><span class="page-link">';
             $config['last_tagl_close'] = '</span></li>';
-            
+
             $this->pagination->initialize($config);
 
             $page = ($this->uri->segment($segment)) ? $this->uri->segment($segment) : 0;
@@ -119,9 +128,11 @@ class Schools extends MX_Controller
             $v_data['page'] = $page;
             $v_data["zones"] = $this->schools_model->get_all_zones();
             $v_data["schools"] = $this->schools_model->get_all_schools($table, $where, $start, $config["per_page"], $page, $order, $order_method);
+            $v_data['map'] = $this->googlemaps->create_map();
 
             $data = array(
                 "title" => $this->site_model->display_page_title(),
+                'map' => $this->googlemaps->create_map(),
                 "content" => $this->load->view("schools/all_schools", $v_data, true),
             );
             // $v_data["all_schools"] = $this->schools_model->get_all_schools();
@@ -396,7 +407,7 @@ class Schools extends MX_Controller
         $query = $this->schools_model->get_single_school($school_id);
 
         $data['content'] = $this->load->view('schools/single_school', $v_data, true);
-
+        $data["fetch_data"] = $this->main_model->fetch_data();
         $this->load->view("administration/layouts/layout", $data);
     }
     public function delete_school($school_id)

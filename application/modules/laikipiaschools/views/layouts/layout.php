@@ -35,6 +35,7 @@ echo $content;?>
             </main>
         </div>
     </div>
+
     <script src="<?php echo base_url(); ?>assets/vendor/jquery/jquery-3.3.1.slim.min.js"></script>
     <script>
     window.jQuery || document.write(
@@ -46,6 +47,9 @@ echo $content;?>
     <script src="<?php echo base_url(); ?>assets/vendor/script.js"></script>
     <link href="<?php echo base_url(); ?>assets/fontawesome/css/all.css" rel="stylesheet">
     <script defer src="<?php echo base_url(); ?>assets/fontawesome/js/all.js"></script>
+
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAMfrWKiELcjgQDzNq1n3LTVMSQAXGSs6E">
+    </script>
 
 </body>
 
