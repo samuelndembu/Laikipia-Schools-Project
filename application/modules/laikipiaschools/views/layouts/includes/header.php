@@ -15,7 +15,8 @@
 <link href="<?php echo base_url(); ?>assets/fontawesome/css/all.css" rel="stylesheet">
 <script defer src="<?php echo base_url(); ?>assets/fontawesome/js/all.js"></script>
 <script defer src="<?php echo base_url(); ?>assets/fontawesome/js/fontawesome.js"></script>
-
+<script defer src="<?php echo base_url(); ?>assets/ckeditor/ckeditor.js"></script>
+<script type="text/javascript" src="<?php echo base_url(); ?>/asset/ckfinder/ckfinder.js"></script>
 
 <!-- <script src="<?php echo base_url(); ?>assets/themes/custom/js/script1.js"></script> -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-119386393-1"></script>

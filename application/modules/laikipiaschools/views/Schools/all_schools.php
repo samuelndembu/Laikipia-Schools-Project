@@ -8,7 +8,6 @@ if (!empty($validation_errors)) {
 <!--
 <div class="container"> -->
 <div class="shadow-lg p-3 mb-5 bg-white rounded">
-
     <div class="card-body">
         <div class="card shadow mb-4">
             <div class="card-header py-3">
@@ -29,18 +28,11 @@ if (!empty($validation_errors)) {
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
-
-
-
-
                             </div>
                             <div class="modal-body">
                                 <?php echo form_open_multipart($this->uri->uri_string()); ?>
-                                <div class="row">
-                                </div>
-
                                 <div class="form-group">
-                                    <label for="school_name">Zones</label>
+                                    <label for="school_name">Zone</label>
                                     <select id="inputState" class="form-control" name="school_zone">
                                         <option selected>Choose your zone...</option>
                                         <option value="Daiga">Daiga </option>
@@ -62,28 +54,24 @@ if (!empty($validation_errors)) {
                                         <option value="Sirima"> Sirima </option>
                                         <option value="Tigithi"> Tigithi </option>
                                     </select>
-
-
-
-
-                                    <!--
-                                        <?php if ($zones->num_rows() > 0) {
-    foreach ($zones->result() as $row) {?>
-                                        <option value="<?php echo $row->school_zone ?>">
-                                            <?php echo $row->school_zone ?></option>
-                                        <?php
-}
-}?>
-                                        '
-                                    </select> -->
                                     <small id="emailHelp" class="form-text text-muted"></small>
                                 </div>
                                 <div class="form-group">
                                     <label for="school_name">School Name</label>
-                                    <input type="text" class="form-control" id="school_name"
+                                    <!-- <input type="text" class="form-control" id="school_name"
                                         aria-describedby="emailHelp" name="school_boys_number"
-                                        placeholder="School Name">
-                                    <small id="emailHelp" class="form-text text-muted"></small>
+                                        placeholder="School Name"> -->
+                                    <select id="inputState" class="form-control" name="school_name">
+                                        <option selected>Choose your School.</option>
+                                        <option value="Draja Academy">Draja Academy</option>
+                                        <option value="G.G Kinamba Day sec school"> G.G Kinamba Day sec school </option>
+                                        <option value="G.G Kinamba Pry school"> G.G Kinamba Pry school </option>
+                                        <option value="Kiwanja day sec school">Kiwanja day sec school </option>
+                                        <option value="Kunderila Day Sec School"> Kunderila Day Sec School </option>
+                                        <option value="Shamanei day sec school">Shamanei day sec school </option>
+                                        <option value="Shamanei pry school">Shamanei pry school</option>
+                                        <option value="Tandare Day sec school">Tandare Day sec school</option>
+                                    </select>
                                 </div>
                                 <div class="form-group">
                                     <label for="school_boys_number">Number of boys</label>
@@ -150,25 +138,16 @@ if (!empty($validation_errors)) {
                                 </div>
                                 <div class="form-group">
                                     <label for="school_write_up">School Write Up</label>
-                                    <script>
+                                    echo"<script>
                                     $(function() {
-                                        $('textarea').froalaEditor()
+                                        $('textarea').ckeditor()
                                     });
-                                    </script>
+                                    </script>"
 
-                                    <textarea id="froala-editor" name="school_write_up" class="form-control"
+                                    <textarea id="ckeditor" name="school_write_up" class="form-control"
                                         placeholder="School Write up"></textarea>
                                     <small id="emailHelp" class="form-text text-muted"></small>
                                 </div>
-                                <!-- <div class="form-group">
-                                    <div class="col-sm-12 col-md-12">
-                                        <label for="school_write_up" name="school_write_up"
-                                            class="col-form-label"></label>
-                                        <textarea name="school_write_up" class="form-control" id="school_write_up"
-                                            placeholder="School Write up"></textarea>
-                                    </div>
-                                </div> -->
-
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                     <button type="submit" class="btn btn-primary">Save</button>
@@ -203,17 +182,14 @@ if (!empty($validation_errors)) {
                     <th>Number of Boys</th>
                     <th>Number of Girls</th>
                     <th>Actions</th>
-
                 </tr>
             </tfoot>
             <tbody>
                 <?php
 if ($query->num_rows() > 0) {
     $count = 0;
-
     foreach ($query->result() as $row) {
         $id = $row->school_id;
-
         $count++;
         ?>
                 <tr>
@@ -242,228 +218,212 @@ if ($query->num_rows() > 0) {
                                 <div class="modal-content">
                                     <div class="modal-body">
                                         <div class="row">
-                                            <div class="col-lg-12">
-                                                <h2 class="h2-responsive product-name">
-                                                    <div class="modal-header row">
+                                            <div class="col-md-12">
+
+                                                <div class="container">
+                                                    <div class="row justify-content-center">
+                                                        <h3> <?php echo $row->school_name; ?></h3>
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="row">
+                                                    <div class="col-md-4 col-sm-2">
                                                         <div class="img-responsive center-block row">
-                                                            <img src="<?php echo base_url() . 'assets/uploads/' . $row->school_thumb_name; ?>"
-                                                                alt="avatar" class="img-responsive center-block"
-                                                                width="70px" height="70px">
+                                                            <img src="<?php echo base_url() . 'assets/uploads/' . $row->school_image_name; ?>"
+                                                                alt="avatar" class="img-responsive center-block">
                                                         </div>
                                                     </div>
-                                                    <strong>
-                                                        <h1 class="text-center">
-                                                            <?php echo $row->school_name; ?>
-                                                        </h1>
-                                                    </strong>
+                                                    <div class="col-md-8 col-sm-4">
 
-                                                    <!--Accordion wrapper-->
-                                                    <div class="accordion md-accordion" id="accordionEx" role="tablist"
-                                                        aria-multiselectable="true">
-                                                    </div>
-
-                                                    <div class="card">
-                                                        <p>Location:<?php echo $row->school_location_name; ?>
-                                                        </p>
-                                                    </div>
-
-                                                    <div class="card">
-                                                        <p>Number Of
-                                                            Girls:<?php echo $row->school_girls_number; ?>
-                                                        </p>
-                                                    </div>
-
-                                                    <div class="card">
-                                                        <p>Number Of
-                                                            Boys:<?php echo $row->school_boys_number; ?>
-                                                        </p>
-                                                    </div>
-
-                                                    <div class="card">
-                                                        <p>School Write
-                                                            Up:<?php echo $row->school_write_up; ?></p>
-                                                    </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="card-body">
-                                        <div class="row">
-                                            <div class="text-center">
-                                                <?php echo anchor('laikipiaschools/schools', 'back', ['class' => 'btn btn-primary']); ?>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-
-                        <!-- <?php echo anchor("administration/edit-school/" . $row->school_id, "<i class='fas fa-edit'></i>", "class='btn btn-warning btn-sm'"); ?> -->
-
-
-                        <!-- Button trigger modal -->
-                        <!-- <button type="button" class="class='btn btn-warning btn-sm" data-toggle="modal" data-target="#exampleModal<?php echo $row->post_id; ?>">
-            <i class='fas fa-edit'></i>
-        </button> -->
-                        <button type="button" class="btn btn-warning btn-sm" data-toggle="modal"
-                            data-target="#exampleModal<?php echo $row->school_id; ?>"><i
-                                class="fas fa-edit"></i></button>
-                        <!-- Modal -->
-                        <div class="modal fade" id="exampleModal<?php echo $row->school_id; ?>" tabindex="-1"
-                            role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Update School
-                                            Details</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <div class="card-body">
-                                        <h5 class="card-title">Enter school Details to update</h5>
-
-                                        <?php echo
-        form_open($this->uri->uri_string()); ?>
-                                        <div class="form-group row">
-                                            <label for="school_name" class="col-sm-2 col-form-label">School
-                                                Name</label>
-
-                                            <div class="col-md-10">
-                                                <?php echo form_input(['name' => 'school_name', 'placeholder' => 'School Name', 'class' => 'form-control', 'value' => set_value('school_name', $row->school_name)]) ?>
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label for="school_write_up" class="col-sm-2 col-form-label">School
-                                                Write up</label>
-                                            <div class="col-md-10">
-                                                <?php echo form_textarea(['name' => 'school_write_up', 'placeholder' => 'Describe your school briefly', 'class' => 'form-control', 'value' => set_value('firstname', $row->school_write_up)]) ?>
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label for="school_boys_number" class="col-sm-2 col-form-label">Number
-                                                of
-                                                Boys</label>
-                                            <div class="col-md-10">
-                                                <?php echo form_input(['name' => 'school_boys_number', 'placeholder' => 'Number of boys, eg. 10', 'class' => 'form-control', 'value' => set_value('school_boys_number', $row->school_boys_number)]) ?>
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label for="school_girls_number" class="col-sm-2 col-form-label">Number
-                                                of
-                                                Girls</label>
-                                            <div class="col-md-10">
-                                                <?php echo form_input(['name' => 'school_girls_number', 'placeholder' => 'Enter First Name', 'class' => 'form-control', 'value' => set_value('firstname', $row->school_girls_number)]) ?>
-                                            </div>
-
-                                        </div>
-
-
-
-
-
-
-
-
-
-
-                                        <a href="<?php echo site_url() . "administration/export-schools" ?>"
-                                            target="_blank" class="btn btn-default pull-right"><i
-                                                class="fas fa-file-import"></i> Import</a>
-
-                                        <a href="<?php echo site_url() . "administration/export-schools" ?>"
-                                            target="_blank" class="btn btn-default pull-right"><i
-                                                class="fas fa-file-export"></i> Export</a>
-
-
-
-
-                                        <div class="form-group row">
-                                            <label for="school_latitude"
-                                                class="col-sm-2 col-form-label">Latitude</label>
-                                            <div class="col-md-10">
-                                                <?php echo form_input(['name' => 'school_latitude', 'placeholder' => 'Enter Latitude', 'class' => 'form-control', 'value' => set_value('school_latitude', $row->school_latitude)]) ?>
-                                            </div>
-                                        </div>
-
-
-                                        <div class="form-group row">
-                                            <label for="school_longitude"
-                                                class="col-sm-2 col-form-label">Longitude</label>
-                                            <div class="col-md-10">
-                                                <?php echo form_input(['name' => 'school_longitude', 'placeholder' => 'Longitude', 'class' => 'form-control', 'value' => set_value('school_longitude', $row->school_longitude)]) ?>
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label for="school_location_name" class="col-sm-2 col-form-label">Location
-                                                Name</label>
-                                            <div class="col-md-10">
-                                                <?php echo form_input(['name' => 'school_location_name', 'placeholder' => 'Location Name', 'class' => 'form-control', 'value' => set_value('school_location_name', $row->school_location_name)]) ?>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <legend class="col-form-label col-sm-2 pt-0">School Status
-                                            </legend>
-                                            <div class="form-group">
-                                                <input type="radio" name="status" value="1"
-                                                    <?php echo ($row->school_status == 'Active') ? 'checked' : '' ?>>Active
-                                                <input type="radio" name="status" value="0"
-                                                    <?php echo ($row->school_status == 'Inactive') ? 'checked' : '' ?> ">Inactive
-                            </div>
-                        </div>
-
-
-                        <div class="
-                                                    form-group row">
-                                                <div class="col-sm-10">
-                                                    <button type="submit" class="btn btn-primary">Save
-                                                        School</button>
-                                                    <div class="modal-footer">
-                                                        <?php echo anchor('laikipiaschools/schools', 'Cancel', ['class' => 'btn btn-primary']); ?>
+                                                        <div class="card-body">
+                                                            <h5 class="card-title">Details</h5>
+                                                            <!-- <div
+                                                                    <?php echo $row->school_name; ?>
+                                                                    </h3>
+                                                                    </strong>
+                                                                    </div> -->
+                                                            <break>
+                                                                <div>
+                                                                    <p>Number Of
+                                                                        Girls:<?php echo $row->school_girls_number; ?>
+                                                                    </p>
+                                                                </div>
+                                                                <break>
+                                                                    <div>
+                                                                        <p>Number Of
+                                                                            Boys:<?php echo $row->school_boys_number; ?>
+                                                                        </p>
+                                                                    </div>
+                                                                    <break>
+                                                                        <div>
+                                                                            <p>School Write
+                                                                                Up:<?php echo $row->school_write_up; ?>
+                                                                            </p>
+                                                                        </div>
+                                                                        <div>
+                                                                            <p>Zone:<?php echo $row->school_zone; ?>
+                                                                            </p>
+                                                                        </div>
+                                                                        <div>
+                                                                            <p>Status:<?php echo $row->school_status; ?>
+                                                                            </p>
+                                                                        </div>
+                                                                        <div>
+                                                                            <p>Latitude:<?php echo $row->school_latitude; ?>
+                                                                            </p>
+                                                                        </div>
+                                                                        <div>
+                                                                            <p>Longitude:<?php echo $row->school_longitude; ?>
+                                                                            </p>
+                                                                        </div>
+                                                                        <p class="card-text"><small
+                                                                                class="text-muted">Date
+                                                                                Created:<?php echo $row->created_on; ?></small>
+                                                                        </p>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-
+                                            <div class="col-md-12">
+                                                <div class="card-body">
+                                                    <div>
+                                                        <p>Location
+                                                            Description:<?php echo $row->school_location_name; ?>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <?php echo form_close(); ?>
                                     </div>
-
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal"><i
+                                                class="far fa-window-close"></i>Close</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
+    </div>
+    <button type="button" class="btn btn-warning btn-sm" data-toggle="modal"
+        data-target="#exampleModal<?php echo $row->school_id; ?>"><i class="fas fa-edit"></i></button>
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal<?php echo $row->school_id; ?>" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Update School
+                        Details</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Enter school Details to update</h5>
 
+                    <?php echo
+        form_open($this->uri->uri_string()); ?>
+                    <div class="form-group row">
+                        <label for="school_name" class="col-sm-2 col-form-label">School
+                            Name</label>
 
-
-
-                        <?php if ($row->school_status == 1) {
+                        <div class="col-md-10">
+                            <?php echo form_input(['name' => 'school_name', 'placeholder' => 'School Name', 'class' => 'form-control', 'value' => set_value('school_name', $row->school_name)]) ?>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="school_write_up" class="col-sm-2 col-form-label">School
+                            Write up</label>
+                        <div class="col-md-10">
+                            <?php echo form_textarea(['name' => 'school_write_up', 'placeholder' => 'Describe your school briefly', 'class' => 'form-control', 'value' => set_value('firstname', $row->school_write_up)]) ?>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="school_boys_number" class="col-sm-2 col-form-label">Number
+                            of
+                            Boys</label>
+                        <div class="col-md-10">
+                            <?php echo form_input(['name' => 'school_boys_number', 'placeholder' => 'Number of boys, eg. 10', 'class' => 'form-control', 'value' => set_value('school_boys_number', $row->school_boys_number)]) ?>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="school_girls_number" class="col-sm-2 col-form-label">Number
+                            of
+                            Girls</label>
+                        <div class="col-md-10">
+                            <?php echo form_input(['name' => 'school_girls_number', 'placeholder' => 'Enter First Name', 'class' => 'form-control', 'value' => set_value('firstname', $row->school_girls_number)]) ?>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="school_latitude" class="col-sm-2 col-form-label">Latitude</label>
+                        <div class="col-md-10">
+                            <?php echo form_input(['name' => 'school_latitude', 'placeholder' => 'Enter Latitude', 'class' => 'form-control', 'value' => set_value('school_latitude', $row->school_latitude)]) ?>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="school_longitude" class="col-sm-2 col-form-label">Longitude</label>
+                        <div class="col-md-10">
+                            <?php echo form_input(['name' => 'school_longitude', 'placeholder' => 'Longitude', 'class' => 'form-control', 'value' => set_value('school_longitude', $row->school_longitude)]) ?>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="school_location_name" class="col-sm-2 col-form-label">Location
+                            Name</label>
+                        <div class="col-md-10">
+                            <?php echo form_input(['name' => 'school_location_name', 'placeholder' => 'Location Name', 'class' => 'form-control', 'value' => set_value('school_location_name', $row->school_location_name)]) ?>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <legend class="col-form-label col-sm-2 pt-0">School Status
+                        </legend>
+                        <div class="form-group">
+                            <input type="radio" name="status" value="1"
+                                <?php echo ($row->school_status == 'Active') ? 'checked' : '' ?>>Active
+                            <input type="radio" name="status" value="0"
+                                <?php echo ($row->school_status == 'Inactive') ? 'checked' : '' ?> ">Inactive
+                                                </div>
+                                        </div>
+                                        <div class="
+                                form-group row">
+                            <div class="col-sm-10">
+                                <button type="submit" class="btn btn-primary">Save
+                                    School</button>
+                                <div class="modal-footer">
+                                    <?php echo anchor('laikipiaschools/schools', 'Cancel', ['class' => 'btn btn-primary']); ?>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <?php echo form_close(); ?>
+                </div>
+            </div>
+        </div>
+    </div>
+    <?php if ($row->school_status == 1) {
             echo anchor("administration/deactivate-school/" . $row->school_id . "/" . $row->school_status, "<i class='far fa-thumbs-down'></i>", array("class" => "btn btn-default btn-sm", "onclick" => "return confirm('Are you sure you want to deactivate?')"));
         } else {
             echo anchor("administration/deactivate-school/" . $row->school_id . "/" . $row->school_status, "<i class='far fa-thumbs-up'></i>", array("class" => "btn btn-info btn-sm", "onclick" => "return confirm('Are you sure you want to activate?')"));
         }?>
 
-                        <?php echo anchor("administration/delete-school/" . $row->school_id, '<i class="fas fa-trash-alt"></i>', array("class" => "btn btn-danger btn-sm", "onclick" => "return confirm('Are you sure you want to Delete?')")); ?>
+    <?php echo anchor("administration/delete-school/" . $row->school_id, '<i class="fas fa-trash-alt"></i>', array("class" => "btn btn-danger btn-sm", "onclick" => "return confirm('Are you sure you want to Delete?')")); ?>
 
 
-                    </td>
-                </tr>
-                <?php
+    </td>
+    </tr>
+    <?php
 }
 }
 ?>
-            </tbody>
-        </table>
-    </div>
+    </tbody>
+    </table>
+</div>
 
-    <?php echo $links; ?>
-    </p>
-    <script>
-    $(function() {
-        $('textarea').froalaEditor()
-    });
-    </script>
-    <script>
-    $(function() {
-        $('textarea#froala-editor').froalaEditor()
-    });
-    </script>
+<?php echo $links; ?>
+</p>
+<script>
+$(function() {
+    $('textarea').froalaEditor()
+});
+</script>
+
 </div>

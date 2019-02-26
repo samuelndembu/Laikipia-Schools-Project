@@ -23,7 +23,6 @@ if (!empty($error)) {
                 </div>
                 <?php
 }
-
 if (!empty($success)) {
     ?>
                 <div class="alert alert-success">
