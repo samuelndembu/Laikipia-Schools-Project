@@ -169,22 +169,22 @@ class Categories extends MX_Controller
 
     }
 
-    public function export_partners()
+    public function export_categories()
     {
-        $order = 'partner.created_on';
+        $order = 'category.created_on';
         $order_method = 'DESC';
-        $where = 'parner_id > 0';
-        $table = 'partner';
-        $partnerss_search = $this->session->userdata('partners_search');
-        $search_title = $this->session->userdata('partners_search_title');
+        $where = 'category_id > 0';
+        $table = 'category';
+        $categories_search = $this->session->userdata('categories_search');
+        $search_title = $this->session->userdata('categories_search_title');
 
-        if (!empty($partners_search) && $partners_search != null) {
-            $where .= $partners_search;
+        if (!empty($categories_search) && $categories_search != null) {
+            $where .= $categories_search;
         }
-        $title = 'Partners';
+        $title = 'categories';
 
         if (!empty($search_title) && $search_title != null) {
-            $title = 'Partners filtered by ' . $search_title;
+            $title = 'Categories filtered by ' . $search_title;
         }
 
         if ($this->site_model->export_results($table, $where, $order, $order_method, $title)) {
