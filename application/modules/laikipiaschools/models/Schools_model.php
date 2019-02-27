@@ -15,7 +15,6 @@ class Schools_model extends CI_Model
             "school_zone" => $this->input->post("school_zone"),
             "school_image_name" => $file_name,
             "school_thumb_name" => $thumb_name,
-
             "school_status" => $this->input->post("school_status"),
 
         );
@@ -74,7 +73,7 @@ class Schools_model extends CI_Model
 
     public function get_all_schools($table, $where, $start, $limit, $page, $order, $order_method)
     {
-        $where = "school.deleted = 0";
+        // $where = "school.deleted = 0";
         $this->db->select("*");
         $this->db->from("$table");
         $this->db->where($where);
