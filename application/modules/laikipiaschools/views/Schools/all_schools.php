@@ -235,6 +235,7 @@ if ($query->num_rows() > 0) {
                                                             </p>
                                                         </div>
 
+
                                                         <div>
                                                             <h6>Number Of Boys:</h6>
                                                             <p><?php echo $row->school_boys_number; ?>
