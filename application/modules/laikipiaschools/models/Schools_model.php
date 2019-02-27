@@ -73,6 +73,7 @@ class Schools_model extends CI_Model
 
     public function get_all_schools($table, $where, $start, $limit, $page, $order, $order_method)
     {
+        // var_dump($where);die();
         // $where = "school.deleted = 0";
         $this->db->select("*");
         $this->db->from("$table");

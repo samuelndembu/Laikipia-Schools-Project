@@ -19,9 +19,9 @@ class Categories extends MX_Controller
     {
         $where = 'category_id > 0 AND deleted=0';
         $table = 'category';
-        $category_search = $this->session->userdata('category_search');
+        $category_search = $this->session->userdata('categories_search');
         
-        $search_title = $this->session->userdata('category_search_title');
+        $search_title = $this->session->userdata('categories_search_title');
 
         if (!empty($category_search) && $category_search != null) {
             $where .= $category_search;
@@ -132,8 +132,8 @@ class Categories extends MX_Controller
 
         $search = $category_parent;
         // var_dump($search_title); die();
-        $this->session->set_userdata('category_search', $search);
-        $this->session->set_userdata('category_search_title', $search_title);
+        $this->session->set_userdata('categories_search', $search);
+        $this->session->set_userdata('categories_search_title', $search_title);
 
         // var_dump($search);die();
 

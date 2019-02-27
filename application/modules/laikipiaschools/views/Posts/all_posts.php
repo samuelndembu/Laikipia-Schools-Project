@@ -213,7 +213,7 @@ if ($query->num_rows() > 0) {
                                                     </div>
 
                                                     <div>
-                                                        <h5>Category: </h5>
+                                                        <h5><b>Category:</b> </h5>
                                                         <p> <?php foreach ($categories->result() as $category) {
             if ($category->category_id == $row->category_id) {
                 echo $category->category_name;
@@ -223,8 +223,7 @@ if ($query->num_rows() > 0) {
                                                         </p>
                                                     </div>
                                                     <div>
-                                                        <h5> Post
-                                                            Description:</h5>
+                                                        <h5><b> Post Description:</h5>
                                                         <p><?php echo $row->post_description; ?>
                                                         </p>
                                                     </div>
