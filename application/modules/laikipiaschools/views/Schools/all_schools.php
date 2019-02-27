@@ -11,7 +11,7 @@ if (!empty($validation_errors)) {
     <div class="card-body">
         <div class="card shadow mb-4">
             <div class="card-header py-3">
-                <button type="button" class="btn btn-success btn-sm" data-toggle="modal"
+                <button type="button" class="btn btn-primary btn-sm" data-toggle="modal"
                     data-target="#createDonation">Add
                     School</button>
                 <input type="file" class="btn btn-default pull-right" placeholder="Import" />
@@ -63,13 +63,13 @@ if (!empty($validation_errors)) {
                                     <select id="inputState" class="form-control" name="school_name">
                                         <option selected>Choose your School.</option>
                                         <option value="Draja Academy">Draja Academy</option>
-                                        <option value="G.G Kinamba Day sec school"> G.G Kinamba Day sec school </option>
-                                        <option value="G.G Kinamba Pry school"> G.G Kinamba Pry school </option>
-                                        <option value="Kiwanja day sec school">Kiwanja day sec school </option>
-                                        <option value="Kunderila Day Sec School"> Kunderila Day Sec School </option>
-                                        <option value="Shamanei day sec school">Shamanei day sec school </option>
-                                        <option value="Shamanei pry school">Shamanei pry school</option>
-                                        <option value="Tandare Day sec school">Tandare Day sec school</option>
+                                        <option value="G.G Kinamba Day sec school"> G.G Kinamba Day Secondary School </option>
+                                        <option value="G.G Kinamba Pry school"> G.G Kinamba Primary School</option>
+                                        <option value="Kiwanja day sec school">Kiwanja Day Secondary School</option>
+                                        <option value="Kunderila Day Sec School"> Kunderila Day Secondary School</option>
+                                        <option value="Shamanei day sec school">Shamanei Day Secondary School</option>
+                                        <option value="Shamanei pry school">Shamanei Primary School</option>
+                                        <option value="Tandare Day sec school">Tandare Day Secondary School</option>
                                     </select>
                                 </div>
                                 <div class="form-group">

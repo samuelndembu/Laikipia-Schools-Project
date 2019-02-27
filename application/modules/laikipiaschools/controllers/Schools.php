@@ -17,7 +17,9 @@ class Schools extends MX_Controller
         $this->load->model("laikipiaschools/schools_model");
         $this->load->library("image_lib");
         $this->load->library('googlemaps');
-        $this->load->view('csv_import');
+        // $this->load->library('form_validation');
+        // $this->load->library('session');
+        // $this->load->view('csv_import');
 
         $this->load->model("laikipiaschools/schools_model");
         $this->load->model("laikipiaschools/site_model");
@@ -62,7 +64,8 @@ class Schools extends MX_Controller
                     $this->session->set_flashdata('success', 'school Added successfully!!');
                     redirect('laikipiaschools/schools');
                 } else {
-                    $this->session->flashdata("error_message", "Unable to add  school");
+                    $this->session->set_flashdata("error_message", "Unable to add  school");
+                    redirect('laikipiaschools/schools');
                 }
             }
         } else {
@@ -128,28 +131,19 @@ class Schools extends MX_Controller
             $v_data['categories'] = $this->site_model->get_all_categories();
             $v_data['page'] = $page;
             $v_data["zones"] = $this->schools_model->get_all_zones();
-            $v_data['schools']= $this->schools_model->get_all_schools($table, $where, $start, $config["per_page"], $page, $order, $order_method);
+            $v_data['schools'] = $this->schools_model->get_all_schools($table, $where, $start, $config["per_page"], $page, $order, $order_method);
             $v_data['map'] = $this->googlemaps->create_map();
-// var_dump($v_data['schools']->result());die();
-            
             $school_array = array();
 
-            foreach($v_data["schools"]->result() as $school)
-        {
-            array_push($school_array, $school->school_name);
-        }
-        // var_dump($school_array);die();
-
-        $v_data['search_options'] = $school_array;
-
-            $school_search = array();
-
             foreach ($v_data["schools"]->result() as $school) {
-                array_push($school_search, $school->school_name);
+                // array_push($school_array, $school->school_name);
+                array_push($school_array, array(
+                    'id' => $school->school_id,
+                    'name' => $school->school_name,
+                ));
             }
-
-            $v_data['search_options'] = $school_search;
-
+            $v_data['search_options'] = $school_array;
+            $v_data['route'] = 'schools';
             $data = array(
                 "title" => $this->site_model->display_page_title(),
                 'map' => $this->googlemaps->create_map(),
@@ -359,57 +353,20 @@ class Schools extends MX_Controller
         }
 
     }
-
     public function search_schools()
     {
-        $school_name = $this->input->post('school_name');
-        $school_girls_number = $this->input->post('school_girls_number');
-        $school_boys_number = $this->input->post('school_boys_number');
-        $school_location_name = $this->input->post('school_location_name');
-        $school_status = $this->input->post('school_status');
-        // $location_radius = $this->input->post('location_radius');
+        $school_id = $this->input->post('search_param');
+        $search_title = '';
 
-        if (!empty($school_name)) {
-            $search_title .= ' School: <strong>' . $school_name . '</strong>';
-            $school_name = ' AND school.school_name = \'+' . $school_name . '\'';
+        if (!empty($school_id)) {
+            $search_title .= ' school ID <strong>' . $school_id . '</strong>';
+            $school_id = ' AND school.school_id = ' . $school_id;
         }
 
-        if (!empty($school_girls_number)) {
-            $search_title .= ' Number of Girls <strong>' . $school_girls_number . '</strong>';
-            $school_girls_number = ' AND school.school_girls_number = \'' . $school_girls_number . '\'';
-        }
-        if (!empty($school_boys_number)) {
-            $search_title .= ' Number of boys <strong>' . $school_boys_number . '</strong>';
-            $school_boys_number = ' AND school.school_boys_number = \'' . $school_boys_number . '\'';
-        }
-        if (!empty($school_location_name)) {
-            $search_title .= ' Number of Girls <strong>' . $school_location_name . '</strong>';
-            $school_location_name = ' AND school.school_location_name = \'' . $school_location_name . '\'';
-        }
-        if (!empty($school_status)) {
-            $search_title .= ' Number of Girls <strong>' . $school_status . '</strong>';
-            $school_status = ' AND school.school_status = \'' . $school_status . '\'';
-        }
-
-        // if(!empty($daterange))
-        // {
-        //     $date_array = explode("-", $daterange);
-        //     if(count($date_array) == 2)
-        //     {
-        //         $start_date = date("Y-m-d", strtotime($date_array[0]));
-        //         $end_date = date("Y-m-d", strtotime($date_array[1]));
-
-        //         $search_title .= ' Date <strong>'.$daterange.'</strong>';
-        //         $daterange = ' AND (mpesa_customer_register.created_at >= \''.$start_date.'\' AND mpesa_customer_register.created_at <= \''.$end_date.'\')';
-        //     }
-        // }
-
-        $search = $school_name . $school_girls_number . $school_boys_number . $school_location_name . $school_status;
-
+        $search = $school_id;
         $this->session->set_userdata('schools_search', $search);
         $this->session->set_userdata('schools_search_title', $search_title);
-
-        redirect("laikipiaschools/schools");
+        redirect("administration/schools");
     }
 
     public function close_search()

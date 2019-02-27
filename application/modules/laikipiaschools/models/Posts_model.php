@@ -25,7 +25,7 @@ class Posts_model extends CI_Model
     }
     public function get_all_posts($table, $where, $start, $limit, $page, $order, $order_method)
     {
-        $where = "post.deleted = 0";
+        // $where = "post.deleted = 0";
         $this->db->select("*");
         $this->db->from("$table");
         $this->db->where($where);

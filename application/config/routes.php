@@ -50,7 +50,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 |        my-controller/my-method    -> my_controller/my_method
  */
 $route['default_controller'] = 'auth/laikipiaauth/login_admin';
-// $route['404_override'] = 'auth/login_merchant';
+$route['404_override'] = 'auth/laikipiaauth/login_admin';
 $route['translate_uri_dashes'] = false;
 
 /**
@@ -142,7 +142,7 @@ $route['administration/delete-school/(:num)'] = 'laikipiaschools/schools/delete_
 $route['administration/schools'] = 'laikipiaschools/schools/index';
 // $route['administration/schools/add-schools'] = 'laikipiaschools/schools/add_school';
 // $route['administration/add-schools'] = 'laikipiaschools/schools/add_school';
-$route['administration/search-schools'] = 'laikipiaschools/schools/search_school';
+$route['administration/search-schools'] = 'laikipiaschools/schools/search_schools';
 $route['administration/close-search'] = 'laikipiaschools/schools/close_search';
 $route['administration/export-schools'] = 'laikipiaschools/schools/export_schools';
 $route['administration/schools/(:any)/(:any)/(:num)'] = 'laikipiaschools/schools/index/$1/$2/$3';
