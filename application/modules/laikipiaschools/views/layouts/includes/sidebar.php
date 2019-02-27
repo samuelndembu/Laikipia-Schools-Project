@@ -9,18 +9,19 @@
                         <ul id="accordion-menu">
                             <li class="dropdown">
                                 <a href="<?php echo base_url(); ?>administration/schools" class="">
-                                    <span class="fas fa-graduation-cap"></span><span class="mtext"><b>School</b></span>
+                                    <span class="fas fa-graduation-cap"></span><span
+                                        class="mtext"><b>&nbsp;School</b></span>
                                 </a>
                             </li>
                             <hr>
                             <li class="dropdown">
                                 <a href="javascript:;" class="">
-                                    <span class="fa fa-table"></span>Content
+                                    <span class="fa fa-table"></span><b>&nbsp;Content</b>
                                 </a>
                                 <ul class="submenu">
                                     <li><a href="<?php echo base_url(); ?>administration/categories">Category</a></li>
 
-                                    <li><a href="<?php echo base_url(); ?>administration/posts">Post</a></li>
+                                    <li><a href="<?php echo base_url(); ?>administration/posts">Posts</a></li>
                                 </ul>
                             </li>
                             <hr>
