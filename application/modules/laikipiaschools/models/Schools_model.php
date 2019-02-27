@@ -126,7 +126,7 @@ class Schools_model extends CI_Model
         }
     }
 
-    public function update_school($school_id, $file_name, $thumb_name)
+    public function update_school($school_id)
     {
         $data = array(
             "school_name" => $this->input->post("school_name"),
@@ -136,8 +136,6 @@ class Schools_model extends CI_Model
             "school_location_name" => $this->input->post("school_location_name"),
             "school_latitude" => $this->input->post("school_latitude"),
             "school_longitude" => $this->input->post("school_longitude"),
-            "school_image_name" => $file_name,
-            "school_thumb_name" => $thumb_name,
             "school_status" => $this->input->post("school_status"),
         );
 

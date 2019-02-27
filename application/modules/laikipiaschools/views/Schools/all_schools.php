@@ -222,7 +222,7 @@ if ($query->num_rows() > 0) {
 												<div class="col-md-5 col-sm-12">
                                                 <div id="carouselExampleFade" class="carousel slide carousel-fade" data-ride="carousel">
                                                     <div class="carousel-inner">
-                                                    <div class="carousel-item active">
+                                                    <div class="carousel-item">
                                                         <img style="max-width:100%;" src="<?php echo base_url() . 'assets/uploads/' . $image;?>" class="d-block w-100" alt="No Image"/>
                                                     </div>
                                                     <?php foreach($other_images as $other_image){
@@ -286,10 +286,10 @@ if ($query->num_rows() > 0) {
 						</div>
 
 	</div>
-	<button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#exampleModal<?php echo $row->school_id; ?>"><i
+	<button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#editModal<?php echo $row->school_id; ?>"><i
 		 class="fas fa-edit"></i></button>
 	<!-- Modal -->
-	<div class="modal fade" id="exampleModal<?php echo $row->school_id; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+	<div class="modal fade" id="editModal<?php echo $row->school_id; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
 	 aria-hidden="true">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
@@ -305,8 +305,7 @@ if ($query->num_rows() > 0) {
 					<h5 class="card-title">Enter school Details to
 						update</h5>
 
-					<?php echo
-        form_open($this->uri->uri_string()); ?>
+					<?php echo form_open(base_url() . 'administration/edit-school/' . $row->school_id); ?>
 					<div class="form-group row">
 						<label for="school_name" class="col-sm-2 col-form-label">School
 							Name</label>
@@ -340,19 +339,7 @@ if ($query->num_rows() > 0) {
 							<?php echo form_input(['name' => 'school_girls_number', 'placeholder' => 'Enter First Name', 'class' => 'form-control', 'value' => set_value('firstname', $row->school_girls_number)]) ?>
 						</div>
 					</div>
-					<div class="row">
-						<legend class="col-form-label col-sm-2 pt-0">
-							School Status
-						</legend>
-						<div class="form-group">
-							<input type="radio" name="status" value="1" <?php echo ($row->school_status == 'Active') ? 'checked' : ''
-							?>>Active
-							<input type="radio" name="status" value="0" <?php echo ($row->school_status == 'Inactive') ? 'checked' : '' ?>
-							">Inactive
-						</div>
-					</div>
-					<div class="
-                                form-group row">
+					<div class="form-group row">
 						<label for="school_latitude" class="col-sm-2 col-form-label">Latitude</label>
 						<div class="col-md-10">
 							<?php echo form_input(['name' => 'school_latitude', 'placeholder' => 'Enter Latitude', 'class' => 'form-control', 'value' => set_value('school_latitude', $row->school_latitude)]) ?>
@@ -370,22 +357,31 @@ if ($query->num_rows() > 0) {
 						<div class="col-md-10">
 							<?php echo form_input(['name' => 'school_location_name', 'placeholder' => 'Location Name', 'class' => 'form-control', 'value' => set_value('school_location_name', $row->school_location_name)]) ?>
 						</div>
-					</div>
-
-					<div class="form-group row">
-						<label for="school_write_up" class="ckeditor">School
-							Write up</label>
-						<div class="col-md-10">
-							<?php echo form_textarea(['name' => 'school_write_up', 'placeholder' => 'Describe your school briefly', 'class' => 'ckeditor', 'id' => 'ckeditor', 'value' => set_value('school_write_up', $row->school_write_up)]) ?>
+                    </div>
+                    
+					<div class="row">
+						<legend class="col-form-label col-sm-2 pt-0">
+							School Status
+						</legend>
+						<div class="form-group">
+							<input type="radio" name="status" value="1" <?php echo ($row->school_status == 'Active') ? 'checked' : ''
+							?>>Active
+							<input type="radio" name="status" value="0" <?php echo ($row->school_status == 'Inactive') ? 'checked' : '' ?>
+							">Inactive
 						</div>
-					</div>
-					<div class="
-                                form-group row">
+                    </div>
+                    
+                    <div class="form-group">
+									<label for="school_write_up">School Write Up</label>
+									<?php echo form_textarea(array('name' => 'school_write_up', 'id' => 'ckeditor', 'class' => "ckeditor", 'value' => set_value('school_write_up', $row->school_write_up))); ?>
+									<small id="emailHelp" class="form-text text-muted"></small>
+								</div>
+					<div class="form-group row">
 						<div class="col-sm-10">
-							<button type="submit" class="btn btn-primary"><i class="fas fa-check"></i>Save
-								School</button>
 							<div class="modal-footer">
-								<button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fas fa-times"></i>Close</button>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fas fa-times"></i>Close</button>
+                                <button type="submit" class="btn btn-primary"><i class="fas fa-check"></i>Save
+								School</button>
 							</div>
 						</div>
 					</div>

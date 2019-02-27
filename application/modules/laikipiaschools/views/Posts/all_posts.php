@@ -248,12 +248,6 @@ if ($query->num_rows() > 0) {
 							</div>
 	</div>
 
-
-
-
-	<!-- <?php echo anchor("administration/edit-school/" . $row->post_id, "<i class='fas fa-edit'></i>", "class='btn btn-warning btn-sm'"); ?> -->
-
-
 	<!-- Button trigger modal -->
 	<button type="button" class="class='btn btn-warning btn-sm" data-toggle="modal" data-target="#exampleModal<?php echo $row->post_id; ?>">
 		<i class='fas fa-edit'></i>
@@ -273,8 +267,7 @@ if ($query->num_rows() > 0) {
 				<div class="card-body">
 					<h5 class="card-title">Enter Post Details to update</h5>
 
-					<?php echo
-        form_open($this->uri->uri_string()); ?>
+					<?php echo form_open(base_url() . 'administration/edit-post/' . $row->post_id); ?>
 					<div class="form-group row">
 						<label for="post_title" class="col-sm-2 col-form-label">Post
 							Title</label>
@@ -287,22 +280,6 @@ if ($query->num_rows() > 0) {
 							Description</label>
 						<div class="col-md-10">
 							<?php echo form_textarea(['name' => 'post_description', 'id' => 'ckeditor', 'class' => 'ckeditor', 'value' => set_value('post_description', $row->post_description)]) ?>
-						</div>
-					</div>
-					<div class="form-group row">
-						<label for="post_image_name" class="col-sm-2 col-form-label">Post
-							Image</label>
-						<div class="col-md-10">
-							<?php echo form_input(['name' => 'post_image_name', 'class' => 'form-control', 'value' => set_value('post_image_name', $row->post_image_name)]) ?>
-						</div>
-					</div>
-					<div class="row">
-						<label class="col-form-label col-sm-2 pt-0">Post Status</label>
-						<div class="form-group">
-							<input type="radio" name="status" value="1" <?php echo ($row->post_status == 'Active') ? 'checked' : ''
-							?>>Active
-							<input type="radio" name="status" value="0" <?php echo ($row->post_status == 'Inactive') ? 'checked' : ''
-							?>>Inactive
 						</div>
 					</div>
 					<div class="form-group">
