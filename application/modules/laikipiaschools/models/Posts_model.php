@@ -28,12 +28,22 @@ class Posts_model extends CI_Model
     {
         // $where = "post.deleted = 0";
         $this->db->select("*");
-        $this->db->from("$table");
+        $this->db->from($table);
         $this->db->where($where);
         $this->db->limit($limit, $page);
+
         $this->db->order_by($order, $order_method);
         return $this->db->get();
 
+    }
+
+    public function get_posts_titles($table, $order, $order_method)
+    {
+        $this->db->select("*");
+        $this->db->from($table);
+
+        $this->db->order_by($order, $order_method);
+        return $this->db->get();
     }
 
     public function get_all_categories()

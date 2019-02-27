@@ -145,7 +145,8 @@ if (!empty($validation_errors)) {
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal"><i
                                             class="fas fa-times"></i>Close</button>
-                                        <button type="submit" class="btn btn-primary"><i class="fas fa-check"></i>Save</button>
+                                    <button type="submit" class="btn btn-primary"><i
+                                            class="fas fa-check"></i>Save</button>
                                 </div>
                                 <?php echo form_close(); ?>
                             </div>
@@ -420,7 +421,8 @@ if ($query->num_rows() > 0) {
                                 <button type="submit" class="btn btn-primary"><i class="fas fa-check"></i>Save
                                     School</button>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fas fa-times"></i>Close</button>
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal"><i
+                                            class="fas fa-times"></i>Close</button>
                                 </div>
                             </div>
                         </div>
