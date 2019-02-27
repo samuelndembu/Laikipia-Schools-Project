@@ -91,7 +91,6 @@ class posts extends MX_Controller
 
             $page = ($this->uri->segment($segment)) ? $this->uri->segment($segment) : 0;
             $v_data["links"] = $this->pagination->create_links();
-            //$v_data["categories"] = $this->posts_model->get_all_categories();
             $v_data['categories'] = $this->site_model->get_all_categories();
             $query = $this->posts_model->get_all_posts($table, $where, $start, $config["per_page"],
 
@@ -117,14 +116,14 @@ class posts extends MX_Controller
             $v_data["posts"] = $this->posts_model->get_all_posts($table, $where, $start, $config["per_page"], $page, $order, $order_method);
             $v_data["all_posts"] = $this->posts_model->get_all_posts($table, $where, $start, $config["per_page"], $page, $order, $order_method);
 
-            $post_search = array();
+            $posts_search = array();
             foreach ($v_data["posts"]->result() as $post) {
-                array_push($post_search, array(
+                array_push($posts_search, array(
                     'id' => $post->post_id,
                     'name' => $post->post_title,
                 ));
             }
-            $v_data['search_options'] = $post_search;
+            $v_data['search_options'] = $posts_search;
             $v_data['route'] = 'posts';
 
             $data = array(
@@ -321,7 +320,7 @@ class posts extends MX_Controller
         $post_id = $this->input->post('search_param');
         $search_title = '';
 
-        if (!empty($partner_type_id)) {
+        if (!empty($post_id)) {
             $search_title .= ' post ID <strong>' . $post_id . '</strong>';
             $post_id = ' AND post.post_id = ' . $post_id;
         }

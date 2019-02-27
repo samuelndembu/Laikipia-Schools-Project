@@ -64,7 +64,8 @@ class Schools extends MX_Controller
                     $this->session->set_flashdata('success', 'school Added successfully!!');
                     redirect('laikipiaschools/schools');
                 } else {
-                    $this->session->flashdata("error_message", "Unable to add  school");
+                    $this->session->set_flashdata("error_message", "Unable to add  school");
+                    redirect('laikipiaschools/schools');
                 }
             }
         } else {
@@ -134,16 +135,15 @@ class Schools extends MX_Controller
             $v_data['map'] = $this->googlemaps->create_map();
             $school_array = array();
 
-            foreach($v_data["schools"]->result() as $school)
-        {
-           // array_push($school_array, $school->school_name);
-           array_push($school_array, array(
-            'id' => $school->school_id, 
-            'name' => $school->school_name
-            ) ); 
-        }
-        $v_data['search_options'] = $school_array;
-        $v_data['route'] = 'schools';
+            foreach ($v_data["schools"]->result() as $school) {
+                // array_push($school_array, $school->school_name);
+                array_push($school_array, array(
+                    'id' => $school->school_id,
+                    'name' => $school->school_name,
+                ));
+            }
+            $v_data['search_options'] = $school_array;
+            $v_data['route'] = 'schools';
             $data = array(
                 "title" => $this->site_model->display_page_title(),
                 'map' => $this->googlemaps->create_map(),
@@ -368,9 +368,6 @@ class Schools extends MX_Controller
         $this->session->set_userdata('schools_search_title', $search_title);
         redirect("administration/schools");
     }
-
-
- 
 
     public function close_search()
     {
