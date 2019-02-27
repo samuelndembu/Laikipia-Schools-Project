@@ -220,7 +220,7 @@ if ($query->num_rows() > 0) {
 										<div class="container">
 											<div class="row">
 												<div class="col-md-5 col-sm-12">
-                                                        <img style="max-width:100%;" src="<?php echo base_url() . 'assets/uploads/' . $image;?>" class="d-block w-100" alt="No Image"/>
+                                                    <img style="max-width:100%;" src="<?php echo base_url() . 'assets/uploads/' . $image;?>" class="d-block w-100" alt="No Image"/>
 												</div>
 												<div class="col-md-7 col-sm-12 " style="border:0px solid gray">
 													<div class="form-group">
