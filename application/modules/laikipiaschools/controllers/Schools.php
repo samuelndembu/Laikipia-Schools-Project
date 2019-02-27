@@ -17,6 +17,8 @@ class Schools extends MX_Controller
         $this->load->model("laikipiaschools/schools_model");
         $this->load->library("image_lib");
         $this->load->library('googlemaps');
+        // $this->load->library('form_validation');
+        // $this->load->library('session');
         // $this->load->view('csv_import');
 
         $this->load->model("laikipiaschools/schools_model");
