@@ -9,8 +9,12 @@
     <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
         <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
         </ul>
-
         <?php if (isset($route)) {
+             if ($this->session->userdata($route . '_search_title')){?>
+             <div class="text-center p-3">
+                 <label class="text-dark"><?php echo $this->session->userdata($route . '_search_title'); ?> </label>
+               </div>
+               <?php }
     echo form_open(base_url() . 'administration/search-' . $route, array("class" => "form-inline my-2 my-lg-0"))?>
                 <select class="custom-select2 form-control mr-sm-2" name="search_param" required>
                     <option value="">Choose..</option>

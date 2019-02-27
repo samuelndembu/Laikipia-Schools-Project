@@ -361,7 +361,7 @@ class Schools extends MX_Controller
         $search_title = '';
 
         if (!empty($school_name)) {
-            $search_title .= ' school ID <strong>' . $school_name . '</strong>';
+            $search_title .= ' Searched: <strong>' . $school_name . '</strong>';
             $school_name = ' AND school.school_name = "' . $school_name . '"';
             $search = $school_name;
             $this->session->set_userdata('schools_search', $search);

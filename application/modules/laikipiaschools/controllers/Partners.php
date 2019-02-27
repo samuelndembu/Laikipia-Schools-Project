@@ -112,7 +112,7 @@ class Partners extends MX_Controller
         $search_title = '';
 
         if (!empty($partner_type_id)) {
-            $search_title .= ' Partner ID <strong>' . $partner_type_id . '</strong>';
+            $search_title .= ' Searched: <strong>' . $partner_type_id . '</strong>';
             $partner_type_id = ' AND partner.partner_type_id = ' . $partner_type_id;
         }
 
