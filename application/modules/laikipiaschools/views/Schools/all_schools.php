@@ -220,21 +220,7 @@ if ($query->num_rows() > 0) {
 										<div class="container">
 											<div class="row">
 												<div class="col-md-5 col-sm-12">
-                                                <div id="carouselExampleFade" class="carousel slide carousel-fade" data-ride="carousel">
-                                                    <div class="carousel-inner">
-                                                    <div class="carousel-item">
                                                         <img style="max-width:100%;" src="<?php echo base_url() . 'assets/uploads/' . $image;?>" class="d-block w-100" alt="No Image"/>
-                                                    </div>
-                                                    </div>
-                                                    <a class="carousel-control-prev" href="#carouselExampleFade" role="button" data-slide="prev">
-                                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                                        <span class="sr-only">Previous</span>
-                                                    </a>
-                                                    <a class="carousel-control-next" href="#carouselExampleFade" role="button" data-slide="next">
-                                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                                        <span class="sr-only">Next</span>
-                                                    </a>
-                                                    </div>
 												</div>
 												<div class="col-md-7 col-sm-12 " style="border:0px solid gray">
 													<div class="form-group">
