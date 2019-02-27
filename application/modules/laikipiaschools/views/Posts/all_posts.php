@@ -155,7 +155,7 @@ if ($query->num_rows() > 0) {
 
     foreach ($query->result() as $row) {
         $id = $row->post_id;
-
+        $image = $row->post_thumb_name;
         $count++;
         ?>
                 <tr>
@@ -163,7 +163,7 @@ if ($query->num_rows() > 0) {
                         <?php echo $count ?>
                     </td>
                     <td>
-                        <img src="<?php echo base_url() . 'assets/uploads/' . $row->post_thumb_name; ?>">
+                        <img src="<?php echo base_url() . 'assets/uploads/' . $image; ?>">
                     </td>
                     <td>
                         <?php echo $row->post_title; ?>
@@ -192,60 +192,62 @@ if ($query->num_rows() > 0) {
                             <div class="modal fade" id="modalQuickView<?php echo $row->post_id; ?>" tabindex="-1"
                                 role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div class="modal-dialog modal-lg" role="document">
-                                    <div class="modal-content primary">
-                                        <div class="modal-body primary">
-                                            <strong>
-                                                <h1 class="card text-center"><?php echo $row->post_title; ?>
-                                                </h1>
-                                            </strong>
-                                            <div class="row">
+                                <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title"><?php echo $row->post_title; ?></h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                <div class="container">
+        	<div class="row">
+               <div class="col-md-4 col-sm-12">
+                    <img style="max-width:100%;" src="<?php 
+                        echo base_url() . 'assets/uploads/' . $image;?>" />
+                </div>
+                <div class="col-md-8 col-sm-12" style="border:0px solid gray">
+                    <div class="form-group">
+                    <h6 class="title-price"><small>Post Title</small></h6>
+						<label><b><?php echo $row->post_title; ?></b></label>
+                        <h6 class="title-price"><small>Category</small></h6>
+                        <label><b><?php foreach ($categories->result() as $category) {
+                            if ($category->category_id == $row->category_id) {
+                                echo $category->category_name;
+                            }}?></b></label>
+                    </div>
 
-                                                <div class="card-body col-md-6 col-sm-2">
-                                                    <div class="img-responsive left-block row">
-                                                        <img src="<?php echo base_url() . 'assets/uploads/' . $row->post_image_name; ?>"
-                                                            alt="avatar" class="mx-auto d-block">
-                                                    </div>
-                                                </div>
+                </div>
+                </div>
 
-                                                <div class="card-body col-md-6 col-sm-4">
-                                                    <div class="accordion md-accordion" id="accordionEx" role="tablist"
-                                                        aria-multiselectable="true">
-                                                    </div>
+                <div class="col-md-12 col-sm-12">
+                    <h6 class="title-price mt-4"><small>Post Description</small></h6>
+                    <div style="width:100%;border-top:1px solid silver">
+                        <p class="mt-3">
+                            <small>
+                                <?php echo $row->post_description; ?>
+                            </small>
+                        </p>
+                    </div>
+                </div>
+                <hr>
+                <div class="col-md-12 col-sm-12">
+                    <h6 class="title-price mt-4"><small>Post Data</small></h6>
+                    <div style="width:100%;border-top:1px solid silver">
+                        <p class="mt-3">
+                            <small>
+                                <?php echo $row->post_data; ?>
+                            </small>
+                        </p>
+                    </div>
+                </div>
 
-                                                    <div>
-                                                        <h5><b>Category:</b> </h5>
-                                                        <p> <?php foreach ($categories->result() as $category) {
-            if ($category->category_id == $row->category_id) {
-                echo $category->category_name;
-            }
-        }
-        ?>
-                                                        </p>
-                                                    </div>
-                                                    <div>
-                                                        <h5><b> Post Description:</h5>
-                                                        <p><?php echo $row->post_description; ?>
-                                                        </p>
-                                                    </div>
-                                                    <div>
-                                                        <h5> Post
-                                                            Data:</h5>
-                                                        <p><?php echo $row->post_data; ?>
-                                                        </p>
-                                                    </div>
-                                                    <div>
-                                                        <p class="card-text"><small class="text-muted">Date
-                                                                Created:<?php echo $row->created_on; ?></small>
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal"><i
-                                                    class="fas fa-times"></i>Close</button>
-                                        </div>
-                                    </div>
+        </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                </div>
+                                </div>
 
                                 </div>
 
