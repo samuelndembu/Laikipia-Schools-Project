@@ -139,7 +139,7 @@ class posts extends MX_Controller
         $search_title = '';
 
         if (!empty($post_title)) {
-            $search_title .= ' post ID <strong>' . $post_title . '</strong>';
+            $search_title .= ' Searched: <strong>' . $post_title . '</strong>';
             $post_title = ' AND post.post_title = "' . $post_title . '"';
             $search = $post_title;
             $this->session->set_userdata('posts_search', $search);
