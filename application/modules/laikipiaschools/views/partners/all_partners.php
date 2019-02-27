@@ -83,7 +83,9 @@ if (!empty($validation_errors)) {
                     <tr>
                         <th>#</th>
                         <th>Partner Type</th>
-                        <th>Partner Name</th>
+                        <!-- <th>Partner Name</th> -->
+                        <!-- <th><?php echo anchor("administration/partners/partner.partner_name/" . $order_method, "Partner Name"); ?></th> -->
+                        <th><?php echo anchor("administration/partners/" . $order . "/" . $order_method, "Partner Name"); ?></th>
                         <th>Partner Email</th>
                         <th>Partner Logo</th>
                         <th>Actions</th>
