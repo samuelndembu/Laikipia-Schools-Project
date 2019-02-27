@@ -17,14 +17,8 @@ class Partners extends MX_Controller
         $this->upload_location = base_url() . "assets/uploads";
         $this->load->library("image_lib");
     }
-
-    /*
-     *
-     *    Default action is to show all the transactions
-     *
-     */
     //public function index
-    public function index($order = 'partner.created_on', $order_method = 'DESC')
+    public function index($order = 'partner.partner_name', $order_method = 'ASC')
     {
         $where = 'partner_id > 0 AND partner.deleted=0';
         $table = 'partner';
@@ -153,7 +147,7 @@ class Partners extends MX_Controller
 
     public function export_partners()
     {
-        $order = 'partner.created_on';
+        $order = 'partner.partner_name';
         $order_method = 'DESC';
         $where = 'parner_id > 0';
         $table = 'partner';

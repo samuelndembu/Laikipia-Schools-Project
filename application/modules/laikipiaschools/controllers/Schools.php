@@ -17,9 +17,6 @@ class Schools extends MX_Controller
         $this->load->model("laikipiaschools/schools_model");
         $this->load->library("image_lib");
         $this->load->library('googlemaps');
-        // $this->load->library('form_validation');
-        // $this->load->library('session');
-        // $this->load->view('csv_import');
 
         $this->load->model("laikipiaschools/schools_model");
         $this->load->model("laikipiaschools/site_model");
@@ -74,8 +71,7 @@ class Schools extends MX_Controller
                     $this->session->set_flashdata('success', 'school Added successfully!!');
                     redirect('laikipiaschools/schools');
                 } else {
-                    $this->session->set_flashdata("error_message", "Unable to add  school");
-                    redirect('laikipiaschools/schools');
+                    $this->session->flashdata("error_message", "Unable to add  school");
                 }
             }
         } else {
@@ -132,19 +128,20 @@ class Schools extends MX_Controller
             $v_data['categories'] = $this->site_model->get_all_categories();
             $v_data['page'] = $page;
             $v_data["zones"] = $this->schools_model->get_all_zones();
-            $v_data['schools'] = $this->schools_model->get_all_schools($table, $where, $start, $config["per_page"], $page, $order, $order_method);
+            $v_data['schools']= $this->schools_model->get_all_schools($table, $where, $start, $config["per_page"], $page, $order, $order_method);
             $v_data['map'] = $this->googlemaps->create_map();
             $school_array = array();
 
-            foreach ($v_data["schools"]->result() as $school) {
-                // array_push($school_array, $school->school_name);
-                array_push($school_array, array(
-                    'id' => $school->school_id,
-                    'name' => $school->school_name,
-                ));
-            }
-            $v_data['search_options'] = $school_array;
-            $v_data['route'] = 'schools';
+            foreach($v_data["schools"]->result() as $school)
+        {
+           // array_push($school_array, $school->school_name);
+           array_push($school_array, array(
+            'id' => $school->school_id, 
+            'name' => $school->school_name
+            ) ); 
+        }
+        $v_data['search_options'] = $school_array;
+        $v_data['route'] = 'schools';
             $data = array(
                 "title" => $this->site_model->display_page_title(),
                 'map' => $this->googlemaps->create_map(),
@@ -363,6 +360,9 @@ class Schools extends MX_Controller
         }
 
     }
+
+
+ 
 
     public function close_search()
     {
