@@ -125,7 +125,7 @@ class posts extends MX_Controller
                 ));
             }
             $v_data['search_options'] = $post_search;
-            $data['route'] = 'posts';
+            $v_data['route'] = 'posts';
 
             $data = array(
                 "title" => $this->site_model->display_page_title(),
