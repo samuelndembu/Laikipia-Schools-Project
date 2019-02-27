@@ -99,6 +99,11 @@ if (!empty($validation_errors)) {
                                     <?php echo form_textarea(array('name' => 'post_description', 'placeholder' => 'Write s description of the post', 'id' => 'ckeditor', 'class' => "ckeditor")); ?>
                                     <small id="emailHelp" class="form-text text-muted"></small>
                                 </div>
+                                <div class="form-group">
+                                    <label for="post_data">Post data</label>
+                                    <?php echo form_textarea(array('name' => 'post_data', 'placeholder' => 'Write posts data here', 'id' => 'ckeditor', 'class' => "ckeditor")); ?>
+                                    <small id="emailHelp" class="form-text text-muted"></small>
+                                </div>
 
 
                                 <div class="modal-footer">
@@ -223,6 +228,12 @@ if ($query->num_rows() > 0) {
                                                         </p>
                                                     </div>
                                                     <div>
+                                                        <h5> Post
+                                                            Data:</h5>
+                                                        <p><?php echo $row->post_data; ?>
+                                                        </p>
+                                                    </div>
+                                                    <div>
                                                         <p class="card-text"><small class="text-muted">Date
                                                                 Created:<?php echo $row->created_on; ?></small>
                                                         </p>
@@ -297,6 +308,13 @@ if ($query->num_rows() > 0) {
                                 <?php echo ($row->post_status == 'Active') ? 'checked' : '' ?>>Active
                             <input type="radio" name="status" value="0"
                                 <?php echo ($row->post_status == 'Inactive') ? 'checked' : '' ?>>Inactive
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="post_data" class="col-sm-2 col-form-label">Post
+                            Data</label>
+                        <div class="col-md-10">
+                            <?php echo form_textarea(['name' => 'post_data', 'id' => 'ckeditor', 'class' => 'ckeditor', 'value' => set_value('post_data', $row->post_data)]) ?>
                         </div>
                     </div>
                     <div class="modal-footer row">

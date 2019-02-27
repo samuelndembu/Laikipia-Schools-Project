@@ -28,7 +28,7 @@ class Schools extends MX_Controller
     }
     public function index($start = null)
     {
-        
+
         $where = 'school_id > 0 AND deleted = 0 ';
         $table = 'school';
         $school_search = $this->session->userdata('schools_search');
@@ -38,7 +38,6 @@ class Schools extends MX_Controller
             $where .= $school_search;
             // var_dump($where);die();
         }
-
 
         // This is our Google API key. You will need to change this for your own website
         $map_config['apikey'] = 'AIzaSyAMfrWKiELcjgQDzNq1n3LTVMSQAXGSs6E';
@@ -80,7 +79,7 @@ class Schools extends MX_Controller
                 }
             }
         } else {
-            
+
             //pagination
             $segment = 5;
             $this->load->library('pagination');
@@ -157,6 +156,22 @@ class Schools extends MX_Controller
         }
 
     }
+    public function search_schools()
+    {
+        $school_name = $this->input->post('search_param');
+        $search_title = '';
+
+        if (!empty($school_name)) {
+            $search_title .= ' school ID <strong>' . $school_name . '</strong>';
+            $school_name = ' AND school.school_name = "' . $school_name . '"';
+            $search = $school_name;
+            $this->session->set_userdata('schools_search', $search);
+            $this->session->set_userdata('schools_search_title', $search_title);
+        }
+
+        redirect("administration/schools");
+    }
+
     public function deactivate_school($school_id, $status_id)
     {
         if ($status_id == 1) {
@@ -176,13 +191,6 @@ class Schools extends MX_Controller
 
         redirect('administration/schools');
     }
-    // public function export_school()
-    // {
-    //     $this->load->model("excel_export_model");
-    //     $data["school_data"] = $this->excel_export_model->fetch_data();
-    //     $this->load->view("Administration/schools", $data
-    //     );
-    // }
 
     public function get_zones()
     {$this->load->model("schools_model");
@@ -354,21 +362,6 @@ class Schools extends MX_Controller
 
         }
 
-    }
-    public function search_schools()
-    {
-        $school_name = $this->input->post('search_param');
-        $search_title = '';
-
-        if (!empty($school_name)) {
-            $search_title .= ' Searched: <strong>' . $school_name . '</strong>';
-            $school_name = ' AND school.school_name = "' . $school_name . '"';
-            $search = $school_name;
-            $this->session->set_userdata('schools_search', $search);
-            $this->session->set_userdata('schools_search_title', $search_title);
-        }
-        
-        redirect("administration/schools");
     }
 
     public function close_search()
