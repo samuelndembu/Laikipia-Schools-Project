@@ -12,7 +12,10 @@ if (!empty($validation_errors)) {
             <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal">
                 Add Partner
             </button>
+            <a href="<?php echo site_url() . "administration/export-partners" ?>" target="_blank"
+            class="btn btn-default pull-right"><i class="fas fa-file-export"></i> Export</a>
         </div>
+        
     </div>
     <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
