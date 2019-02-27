@@ -11,7 +11,7 @@ if (!empty($validation_errors)) {
     <div class="card-body">
         <div class="card shadow mb-4">
             <div class="card-header py-3">
-                <button type="button" class="btn btn-success btn-sm" data-toggle="modal"
+                <button type="button" class="btn btn-primary btn-sm" data-toggle="modal"
                     data-target="#createDonation">Add
                     School</button>
                 <input type="file" class="btn btn-default pull-right" placeholder="Import" />
