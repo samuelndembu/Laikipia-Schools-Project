@@ -56,8 +56,8 @@ class posts extends MX_Controller
 
             $where = 'post_id > 0 AND post.deleted = 0';
             $table = 'post';
-            $post_search = $this->session->userdata('post_search');
-            $search_title = $this->session->userdata('post_search_title');
+            $posts_search = $this->session->userdata('posts_search');
+            $search_title = $this->session->userdata('posts_search_title');
 
             if (!empty($post_search) && $post_search != null) {
                 $where .= $post_search;
@@ -169,8 +169,8 @@ class posts extends MX_Controller
         $order_method = 'DESC';
         $where = 'post_id > 0';
         $table = 'post';
-        $posts_search = $this->session->userdata('post_search');
-        $search_title = $this->session->userdata('post_search_title');
+        $posts_search = $this->session->userdata('posts_search');
+        $search_title = $this->session->userdata('posts_search_title');
 
         if (!empty($posts_search) && $posts_search != null) {
             $where .= $posts_search;

@@ -13,6 +13,7 @@ class Posts_model extends CI_Model
             "post_image_name" => $file_name,
             "post_thumb_name" => $thumb_name,
             "post_status" => $this->input->post("post_status"),
+            "post_data" => $this->input->post("post_data"),
             "category_id" => $this->input->post("category_id"),
         );
 
