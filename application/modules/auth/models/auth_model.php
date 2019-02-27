@@ -1,37 +1,61 @@
 <?php
-if (!defined('BASEPATH')) {
-    exit('No direct script access allowed');
-}
 
-class Auth_model extends CI_Model
+class Auth_model extends CI_Model 
 {
-    public function validate_user()
-    {
-        $where = array(
-            "user_email" => $this->input->post("user_email"),
-            "user_password" => md5($this->input->post("user_password")),
-        );
-        $this->db->where($where);
-        $query = $this->db->get("user_table");
+	/*
+	*	Validate a personnel's login request
+	*
+	*/
+	public function validate_personnel()
+	{
+		//select the personnel by username from the database
+		$this->db->select('personnel.*');
+		$this->db->where(
+			array(
+				'personnel_phone' => $this->input->post('phone'), 
+				'personnel_status' => 1, 
+				'personnel_password' => md5($this->input->post('password'))
+			)
+		);
+		$query = $this->db->get('personnel');
+		
+		//if personnel exists
+		if ($query->num_rows() > 0)
+		{
+			$result = $query->result();
 
-        if ($query->num_rows() == 1) {
-            $row = $query->row();
-            $user = array(
-                "first_name" => $row->user_first_name,
-                "last_name" => $row->user_last_name,
-                "phone_number" => $row->user_phone_number,
-                "user_email" => $row->user_email,
-                "id" => $row->user_id,
-                "login_status" => true,
-            );
-            $this->session->set_userdata($user);
-            return true;
-        } else {
-            $this->session->set_flashdata("error", "Email or password is incorrect");
-            return false;
-        }
-    }
-    public function get_active_branch()
+			// get an active branch
+
+			//$branch_details = $this->get_active_branch();
+
+			//create personnel's login session
+			$newdata = array(
+                   'login_status'     			=> TRUE,
+                   'first_name'     			=> $result[0]->personnel_fname,
+                   'other_names'     			=> $result[0]->personnel_onames,
+                   'username'     				=> $result[0]->personnel_username,
+                   'personnel_id'  				=> $result[0]->personnel_id,
+                   'personnel_type_id'     		=> $result[0]->personnel_type_id
+				   
+               );
+
+			$this->session->set_userdata($newdata);
+			
+			//update personnel's last login date time
+			//var_dump($newdata); die();
+			$personnel_id = $this->session->userdata('personnel_id');
+			// $this->update_personnel_login($personnel_id);
+			return TRUE;
+		}
+		
+		//if personnel doesn't exist
+		else
+		{
+			return FALSE;
+		}
+	}
+
+	public function get_active_branch()
 	{
 		$this->db->where('branch_status = 1');
 		$this->db->from('branch');
@@ -124,3 +148,4 @@ class Auth_model extends CI_Model
 		}
 	}
 }
+?>
