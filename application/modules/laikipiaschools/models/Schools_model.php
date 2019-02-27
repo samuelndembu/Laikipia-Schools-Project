@@ -76,7 +76,7 @@ class Schools_model extends CI_Model
         // var_dump($where);die();
         // $where = "school.deleted = 0";
         $this->db->select("*");
-        $this->db->from("$table");
+        $this->db->from($table);
         $this->db->where($where);
         $this->db->limit($limit, $page);
         $this->db->order_by($order, $order_method);
@@ -93,6 +93,13 @@ class Schools_model extends CI_Model
         } else {
             return false;
         }
+    }
+
+    public function get_other_images()
+    {
+        $this->db->select("*");
+        $this->db->from("school_images");
+        return $this->db->get();
     }
     public function get_single_school($school_id)
     {

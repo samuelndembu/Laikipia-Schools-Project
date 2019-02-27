@@ -219,11 +219,31 @@ if ($query->num_rows() > 0) {
 									<div class="modal-body">
 										<div class="container">
 											<div class="row">
-												<div class="col-md-4 col-sm-12">
-													<img style="max-width:100%;" src="<?php 
-                        echo base_url() . 'assets/uploads/' . $image;?>" />
+												<div class="col-md-5 col-sm-12">
+                                                <div id="carouselExampleFade" class="carousel slide carousel-fade" data-ride="carousel">
+                                                    <div class="carousel-inner">
+                                                    <div class="carousel-item active">
+                                                        <img style="max-width:100%;" src="<?php echo base_url() . 'assets/uploads/' . $image;?>" class="d-block w-100" alt="No Image"/>
+                                                    </div>
+                                                    <?php foreach($other_images as $other_image){
+                                                        if($other_image->school_id == $row->school_id){?>
+                                                        <div class="carousel-item">
+                                                            <img src="<?php echo base_url() . 'assets/uploads/' . $other_image->school_image_name;?>" class="d-block w-100" alt="No Image"/>
+                                                        </div>
+                                                    <?php }} ?>
+                                                   
+                                                    </div>
+                                                    <a class="carousel-control-prev" href="#carouselExampleFade" role="button" data-slide="prev">
+                                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                                        <span class="sr-only">Previous</span>
+                                                    </a>
+                                                    <a class="carousel-control-next" href="#carouselExampleFade" role="button" data-slide="next">
+                                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                                        <span class="sr-only">Next</span>
+                                                    </a>
+                                                    </div>
 												</div>
-												<div class="col-md-8 col-sm-12" style="border:0px solid gray">
+												<div class="col-md-7 col-sm-12 " style="border:0px solid gray">
 													<div class="form-group">
 														<h6 class="title-price"><small>School</small></h6>
 														<label><b>
