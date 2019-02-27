@@ -187,6 +187,8 @@ if ($query->num_rows() > 0) {
     foreach ($query->result() as $row) {
         $id = $row->school_id;
         $count++;
+        $image = $row->school_image_name;
+        // $image = 'school_default.jpeg';
         ?>
                 <tr>
                     <td>
@@ -208,120 +210,60 @@ if ($query->num_rows() > 0) {
                             data-target="#modalQuickView<?php echo $row->school_id; ?>"><i
                                 class="fas fa-eye"></i></button>
                         <!-- Modal: modalQuickView -->
-                        <div class="modal fade" id="modalQuickView<?php echo $row->school_id; ?>" tabindex="-1"
-                            role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog modal-lg" role="document">
+                        <div class="modal fade" id="modalQuickView<?php echo $row->school_id; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
                                 <div class="modal-content">
-                                    <div class="modal-body">
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <div class="container">
-                                                    <div class="row justify-content-center">
-                                                        <h3> <?php echo $row->school_name; ?></h3>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-md-5 col-sm-2">
-                                                        <div class="img-responsive center-block row">
-                                                            <img src="<?php echo base_url() . 'assets/uploads/' . $row->school_image_name; ?>"
-                                                                alt="avatar" class="rounded float-left">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-7 col-sm-4">
-                                                        <h5 class="card-title">Details</h5>
-                                                        <div>
-                                                            <h6>Zone:</h6>
-                                                            <p><?php echo $row->school_zone; ?>
-                                                            </p>
-                                                        </div>
-                                                        
-                                                        <div>
-                                                            <h6>Number Of Boys:</h6>
-                                                            <p><?php echo $row->school_boys_number; ?>
-                                                            </p>
-                                                        </div>
-                                                        <div>
-                                                            <h6>Number Of
-                                                                Girls:</h6>
-                                                            <p><?php echo $row->school_girls_number; ?>
-                                                            </p>
-                                                        </div>
-                                                        <div>
-                                                            <h6>Status:</h6>
-                                                            <p><?php echo $row->school_status; ?>
-                                                            </p>
-                                                        </div>
-                                                        <div>
-                                                            <h6>School Write
-                                                                Up: </h6>
-                                                            <p><?php echo $row->school_write_up; ?>
-                                                            </p>
-                                                        </div>
-                                                        <p class="card-text"><small class="text-muted">Date
-                                                                Created:<?php echo $row->created_on; ?></small>
-                                                        </p>
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Modal title</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                <div class="container">
+        	<div class="row">
+               <div class="col-md-4 col-sm-12">
+                    <img style="max-width:100%;" src="<?php 
+                        echo base_url() . 'assets/uploads/' . $image;?>" />
+                </div>
+                <div class="col-md-8 col-sm-12" style="border:0px solid gray">
+                    <div class="form-group">
+                        <h6 class="title-price"><small>School</small></h6>
+                        <label><b><?php echo $row->school_name; ?></b></label>
 
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-12">
-                                                <div class="row">
-                                                    <div>
-                                                        <p>Location
-                                                            Description:&nbsp; <?php echo $row->school_location_name; ?>
-                                                        </p>
-                                                    </div>
-                                                    <div>
-                                                        <p>&nbsp;Latitude:&nbsp;
-                                                            <?php echo $row->school_latitude; ?>
-                                                        </p>
-                                                    </div>
-                                                    <div>
-                                                        <p> &nbsp;Longitude:&nbsp;
-                                                            <?php echo $row->school_longitude; ?>
-                                                        </p>
-                                                    </div>
-                                                    <div id="map">34</div>
-                                                    <div>
-                                                        <button class="btn btn-warning btn-sm"
-                                                            onclick="loadLocation()">View on Map</button>
+                        <h6 class="title-price"><small>Zone</small></h6>
+                        <label><b><?php echo $row->school_zone; ?></b></label>
 
-                                                        <?php echo "<script type='text/javascript'>
+                        <h6 class="title-price"><small>Number Of Boys</small></h6>
+                        <label><b><?php echo $row->school_boys_number; ?></b></label>
 
-                                                        function loadLocation()
-                                                        {
-                                                            var myLatLng = {lat: -5.363, lng: 131.044};
-                                                            var mapDiv = document.createElement('DIV');
-                                                            var  map = new google.maps.Map(mapDiv, {
-                                                                zoom: 16,
-                                                                center: new google.maps.LatLng(-33.91722, 151.23064),
-                                                                mapTypeId: 'roadmap'
-                                                            });
+                        <h6 class="title-price"><small>Number Of Girls</small></h6>
+                        <label><b><?php echo $row->school_girls_number; ?></b></label>
+                    </div>
 
-                                                            var marker = new google.maps.Marker({
-                                                                position: myLatLng,
-                                                                map: map,
-                                                                title: 'Hello World!'
-                                                            });
-                                                            console.log(mapDiv);
-                                                             document.getElementById('ads').appendChild(mapDiv);
-                                                        }
-                                                        </script>"; ?>
-                                                    </div>
+                </div>
+                </div>
 
+                <div class="col-md-12 col-sm-12">
+                    <h6 class="title-price mt-4"><small>Write Up</small></h6>
+                    <div style="width:100%;border-top:1px solid silver">
+                        <p class="mt-3">
+                            <small>
+                            <?php echo $row->school_write_up; ?>
+                            </small>
+                        </p>
+                    </div>
+                </div>
 
-
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal"><i
-                                                class="fas fa-times"></i>Close</button>
-                                    </div>
+        </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                </div>
                                 </div>
                             </div>
                         </div>
+
     </div>
     <button type="button" class="btn btn-warning btn-sm" data-toggle="modal"
         data-target="#exampleModal<?php echo $row->school_id; ?>"><i class="fas fa-edit"></i></button>
