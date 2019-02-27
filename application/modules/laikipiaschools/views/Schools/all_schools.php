@@ -63,10 +63,12 @@ if (!empty($validation_errors)) {
                                     <select id="inputState" class="form-control" name="school_name">
                                         <option selected>Choose your School.</option>
                                         <option value="Draja Academy">Draja Academy</option>
-                                        <option value="G.G Kinamba Day sec school"> G.G Kinamba Day Secondary School </option>
+                                        <option value="G.G Kinamba Day sec school"> G.G Kinamba Day Secondary School
+                                        </option>
                                         <option value="G.G Kinamba Pry school"> G.G Kinamba Primary School</option>
                                         <option value="Kiwanja day sec school">Kiwanja Day Secondary School</option>
-                                        <option value="Kunderila Day Sec School"> Kunderila Day Secondary School</option>
+                                        <option value="Kunderila Day Sec School"> Kunderila Day Secondary School
+                                        </option>
                                         <option value="Shamanei day sec school">Shamanei Day Secondary School</option>
                                         <option value="Shamanei pry school">Shamanei Primary School</option>
                                         <option value="Tandare Day sec school">Tandare Day Secondary School</option>
@@ -118,13 +120,13 @@ if (!empty($validation_errors)) {
 
                                 <div class="form-group">
                                     <label for="school_latitude">Latitude</label>
-                                    <input type="number" class="form-control" id="school_latitude"
+                                    <input type="numeric" class="form-control" id="school_latitude"
                                         aria-describedby="emailHelp" name="school_latitude" placeholder="Latitude">
                                     <small id="emailHelp" class="form-text text-muted"></small>
                                 </div>
                                 <div class="form-group">
                                     <label for="school_longitude">Longitude</label>
-                                    <input type="number" class="form-control" id="school_longitude"
+                                    <input type="numeric" class="form-control" id="school_longitude"
                                         aria-describedby="emailHelp" name="school_longitude" placeholder="Longitude">
                                     <small id="emailHelp" class="form-text text-muted"></small>
                                 </div>
@@ -141,10 +143,10 @@ if (!empty($validation_errors)) {
                                     <small id="emailHelp" class="form-text text-muted"></small>
                                 </div>
                                 <div class="modal-footer">
-                                    < <button type="button" class="btn btn-secondary" data-dismiss="modal"><i
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal"><i
                                             class="fas fa-times"></i>Close</button>
-                                        <button type="submit" class="btn btn-primary"><i
-                                                class="fas fa-check"></i>Save</button>
+                                    <button type="submit" class="btn btn-primary"><i
+                                            class="fas fa-check"></i>Save</button>
                                 </div>
                                 <?php echo form_close(); ?>
                             </div>

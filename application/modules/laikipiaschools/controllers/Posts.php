@@ -23,8 +23,18 @@ class posts extends MX_Controller
 
         // $this->load->model("administration/payments_model");
     }
-    public function index($order = 'post_id', $order_method = 'ASC', $start = null)
+    public function index($order = 'post_title', $order_method = 'ASC', $start = null)
     {
+         $where = 'post_id > 0 AND deleted = 0';
+        $table = 'post';
+        $post_search = $this->session->userdata('posts_search');
+        $search_title = $this->session->userdata('posts_search_title');
+
+        if (!empty($post_search) && $post_search != null) {
+            $where .= $post_search;
+            // var_dump($where);die();
+        }
+
         $this->form_validation->set_rules("post_title", "Post Title", "required");
         $this->form_validation->set_rules("post_description", "Post Description", "required");
         // $this->form_validation->set_rules("post_image_name", "Post Image", "required");
@@ -53,16 +63,6 @@ class posts extends MX_Controller
                 }
             }
         } else {
-
-            $where = 'post_id > 0 AND post.deleted = 0';
-            $table = 'post';
-            $post_search = $this->session->userdata('post_search');
-            $search_title = $this->session->userdata('post_search_title');
-
-            if (!empty($post_search) && $post_search != null) {
-                $where .= $post_search;
-            }
-
             //pagination
             $segment = 5;
             $this->load->library('pagination');
@@ -93,8 +93,8 @@ class posts extends MX_Controller
             $v_data["links"] = $this->pagination->create_links();
             $v_data['categories'] = $this->site_model->get_all_categories();
             $query = $this->posts_model->get_all_posts($table, $where, $start, $config["per_page"],
-
                 $page, $order, $order_method);
+                // var_dump($query->result());die();
             //change of order method
             if ($order_method == 'DESC') {
                 $order_method = 'ASC';
@@ -113,28 +113,41 @@ class posts extends MX_Controller
             $v_data['order_method'] = $order_method;
             $v_data['query'] = $query;
             $v_data['page'] = $page;
-            $v_data["posts"] = $this->posts_model->get_all_posts($table, $where, $start, $config["per_page"], $page, $order, $order_method);
-            $v_data["all_posts"] = $this->posts_model->get_all_posts($table, $where, $start, $config["per_page"], $page, $order, $order_method);
+            $all_posts = $this->posts_model->get_posts_titles($table, 'post_title', 'ASC');
 
-            $posts_search = array();
-            foreach ($v_data["posts"]->result() as $post) {
-                array_push($posts_search, array(
+            $post_array = array();
+            foreach ($all_posts->result() as $post) {
+                array_push($post_array, array(
                     'id' => $post->post_id,
                     'name' => $post->post_title,
                 ));
             }
-            $v_data['search_options'] = $posts_search;
+            $v_data['search_options'] = $post_array;
             $v_data['route'] = 'posts';
 
             $data = array(
                 "title" => $this->site_model->display_page_title(),
                 "content" => $this->load->view("posts/all_posts", $v_data, true),
             );
-            //
-
             $this->load->view("laikipiaschools/layouts/layout", $data);
         }
 
+    }
+    public function search_posts()
+    {
+        $post_title = $this->input->post('search_param');
+        $search_title = '';
+
+        if (!empty($post_title)) {
+            $search_title .= ' Searched: <strong>' . $post_title . '</strong>';
+            $post_title = ' AND post.post_title = "' . $post_title . '"';
+            $search = $post_title;
+            $this->session->set_userdata('posts_search', $search);
+            $this->session->set_userdata('posts_search_title', $search_title);
+        }
+        // var_dump($search);die();
+
+        redirect("administration/posts");
     }
     public function deactivate_post($post_id, $status_id)
     {
@@ -169,8 +182,8 @@ class posts extends MX_Controller
         $order_method = 'DESC';
         $where = 'post_id > 0';
         $table = 'post';
-        $posts_search = $this->session->userdata('post_search');
-        $search_title = $this->session->userdata('post_search_title');
+        $posts_search = $this->session->userdata('posts_search');
+        $search_title = $this->session->userdata('posts_search_title');
 
         if (!empty($posts_search) && $posts_search != null) {
             $where .= $posts_search;
@@ -297,13 +310,13 @@ class posts extends MX_Controller
     //     redirect("administration/posts");
     // }
 
-    // public function close_search()
-    // {
-    //     $this->session->unset_userdata('posts_search');
-    //     $this->session->unset_userdata('posts_search_title');
+    public function close_search()
+    {
+        $this->session->unset_userdata('posts_search');
+        $this->session->unset_userdata('posts_search_title');
 
-    //     redirect("administration/posts");
-    // }
+        redirect("administration/posts");
+    }
 
     public function single_post($post_id)
     {
@@ -315,21 +328,7 @@ class posts extends MX_Controller
 
         $this->load->view("administration/layouts/layout", $data);
     }
-    public function search_posts()
-    {
-        $post_id = $this->input->post('search_param');
-        $search_title = '';
 
-        if (!empty($post_id)) {
-            $search_title .= ' post ID <strong>' . $post_id . '</strong>';
-            $post_id = ' AND post.post_id = ' . $post_id;
-        }
-
-        $search = $post_id;
-        $this->session->set_userdata('posts_search', $search);
-        $this->session->set_userdata('posts_search_title', $search_title);
-        redirect("administration/posts");
-    }
     public function delete_post($post_id)
     {
         if ($this->posts_model->delete_post($post_id)) {

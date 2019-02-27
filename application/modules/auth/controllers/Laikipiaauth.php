@@ -9,8 +9,6 @@ class Laikipiaauth extends MX_Controller
      
     }
 
-  
-
     /*
      *
      *    Login a user
@@ -21,7 +19,6 @@ class Laikipiaauth extends MX_Controller
         // //form validation rules
         if($this->session->userdata("laikipia_admin")){
             redirect("administration/schools");
-
 
         }else{
 
