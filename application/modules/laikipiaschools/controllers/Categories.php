@@ -126,8 +126,8 @@ class Categories extends MX_Controller
         $search_title = '';
 
         if (!empty($category_parent)) {
-            $search_title .= ' Category ID <strong>' . $category_parent . '</strong>';
-            $category_parent = ' AND category.category_parent = ' . $category_parent;
+            $search_title .= ' Searched: <strong>' . $category_parent . '</strong>';
+            $category_parent = ' AND category.category_parent = "' . $category_parent . '"';
         }
 
         $search = $category_parent;
