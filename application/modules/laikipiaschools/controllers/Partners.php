@@ -26,7 +26,7 @@ class Partners extends MX_Controller
     //public function index
     public function index($order = 'partner.created_on', $order_method = 'DESC')
     {
-        $where = 'partner_id > 0 AND deleted=0';
+        $where = 'partner_id > 0 AND partner.deleted=0';
         $table = 'partner';
         $partners_search = $this->session->userdata('partners_search');
         $search_title = $this->session->userdata('partners_search_title');
@@ -90,10 +90,14 @@ class Partners extends MX_Controller
 
         foreach($v_data["partner_types"]->result() as $partner_type)
         {
-            array_push($partner_type_search, $partner_type->partner_type_name);
+            array_push($partner_type_search, array(
+                'id' => $partner_type->partner_type_id, 
+                'name' => $partner_type->partner_type_name
+                ) );
         }
 
         $data['search_options'] = $partner_type_search;
+        $data['route'] = 'partners';
         $data['content'] = $this->load->view('partners/all_partners', $v_data, true);
         //$this->load->view('admin/layout/home', $data);
         $this->load->view("laikipiaschools/layouts/layout", $data);
@@ -105,15 +109,15 @@ class Partners extends MX_Controller
     }
     public function search_partners()
     {
-        $partner_id = $this->input->post('partner_id');
+        $partner_type_id = $this->input->post('search_param');
         $search_title = '';
 
-        if (!empty($partner_id)) {
-            $search_title .= ' Partner ID <strong>' . $partner_id . '</strong>';
-            $partner_id = ' AND partner.partner_id = ' . $partner_id;
+        if (!empty($partner_type_id)) {
+            $search_title .= ' Partner ID <strong>' . $partner_type_id . '</strong>';
+            $partner_type_id = ' AND partner.partner_type_id = ' . $partner_type_id;
         }
 
-        $search = $partner_id;
+        $search = $partner_type_id;
         $this->session->set_userdata('partners_search', $search);
         $this->session->set_userdata('partners_search_title', $search_title);
         redirect("administration/partners");

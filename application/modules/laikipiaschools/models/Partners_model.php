@@ -22,7 +22,7 @@ class Partners_model extends CI_Model
 
     public function get_partners($table, $where, $limit, $start, $order, $order_method)
     {
-        $where = "partner.deleted=0";
+        // $where = "partner.deleted=0";
         $this->db->select("*");
         $this->db->from($table);
         $this->db->where($where);

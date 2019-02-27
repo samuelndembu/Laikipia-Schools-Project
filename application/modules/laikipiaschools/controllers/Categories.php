@@ -20,11 +20,14 @@ class Categories extends MX_Controller
         $where = 'category_id > 0 AND deleted=0';
         $table = 'category';
         $category_search = $this->session->userdata('category_search');
+        
         $search_title = $this->session->userdata('category_search_title');
 
         if (!empty($category_search) && $category_search != null) {
             $where .= $category_search;
         }
+
+        // var_dump($where);die();
 
         //pagination
         $segment = 5;
@@ -84,7 +87,10 @@ class Categories extends MX_Controller
         {
             if($value->category_parent == 0)
             {
-                array_push($cat_parent, $value->category_name);
+                array_push($cat_parent, array(
+                    'id' => $value->category_id, 
+                    'name' => $value->category_name
+                    ) );
             }
         }
       
@@ -92,6 +98,7 @@ class Categories extends MX_Controller
 
         $data['content'] = $this->load->view('categories/all_categories', $v_data, true);
         $data['search_options'] = $cat_parent;
+        $data['route'] = 'categories';
         //$this->load->view('admin/layout/home', $data);
         $this->load->view("laikipiaschools/layouts/layout", $data);
     }
@@ -103,18 +110,32 @@ class Categories extends MX_Controller
 
     public function search_categories()
     {
-        $category_id = $this->input->post('category_id');
+        $category_parent = $this->input->post('search_param');
+        
+        // $all_categories = ($this->site_model->get_all_categories())->result();
+
+        // foreach ($all_categories as $key => $category) 
+        // {
+        //     if($category_parent_name == $category->category_name)
+        //     {
+        //         $category_parent = $category->category_id;
+        //         break;
+        //     }
+        // }
+
         $search_title = '';
 
-        if (!empty($category_id)) {
-            $search_title .= ' Category ID <strong>' . $category_id . '</strong>';
-            $category_id = ' AND category.category_id = ' . $category_id;
+        if (!empty($category_parent)) {
+            $search_title .= ' Category ID <strong>' . $category_parent . '</strong>';
+            $category_parent = ' AND category.category_parent = ' . $category_parent;
         }
 
-        $search = $category_id;
+        $search = $category_parent;
         // var_dump($search_title); die();
         $this->session->set_userdata('category_search', $search);
         $this->session->set_userdata('category_search_title', $search_title);
+
+        // var_dump($search);die();
 
         redirect("administration/categories");
     }
