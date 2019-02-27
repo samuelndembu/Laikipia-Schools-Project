@@ -63,13 +63,13 @@ if (!empty($validation_errors)) {
                                     <select id="inputState" class="form-control" name="school_name">
                                         <option selected>Choose your School.</option>
                                         <option value="Draja Academy">Draja Academy</option>
-                                        <option value="G.G Kinamba Day sec school"> G.G Kinamba Day sec school </option>
-                                        <option value="G.G Kinamba Pry school"> G.G Kinamba Pry school </option>
-                                        <option value="Kiwanja day sec school">Kiwanja day sec school </option>
-                                        <option value="Kunderila Day Sec School"> Kunderila Day Sec School </option>
-                                        <option value="Shamanei day sec school">Shamanei day sec school </option>
-                                        <option value="Shamanei pry school">Shamanei pry school</option>
-                                        <option value="Tandare Day sec school">Tandare Day sec school</option>
+                                        <option value="G.G Kinamba Day sec school"> G.G Kinamba Day Secondary School </option>
+                                        <option value="G.G Kinamba Pry school"> G.G Kinamba Primary School</option>
+                                        <option value="Kiwanja day sec school">Kiwanja Day Secondary School</option>
+                                        <option value="Kunderila Day Sec School"> Kunderila Day Secondary School</option>
+                                        <option value="Shamanei day sec school">Shamanei Day Secondary School</option>
+                                        <option value="Shamanei pry school">Shamanei Primary School</option>
+                                        <option value="Tandare Day sec school">Tandare Day Secondary School</option>
                                     </select>
                                 </div>
                                 <div class="form-group">
@@ -407,10 +407,10 @@ if ($query->num_rows() > 0) {
                         </div>
 
                         <div class="form-group row">
-                            <label for="school_write_up" class="col-sm-2 col-form-label">School
+                            <label for="school_write_up" class="ckeditor">School
                                 Write up</label>
                             <div class="col-md-10">
-                                <?php echo form_textarea(['name' => 'school_write_up', 'placeholder' => 'Describe your school briefly', 'class' => 'form-control', 'value' => set_value('firstname', $row->school_write_up)]) ?>
+                                <?php echo form_textarea(['name' => 'school_write_up', 'placeholder' => 'Describe your school briefly', 'class' => 'ckeditor', 'id' => 'ckeditor', 'value' => set_value('school_write_up', $row->school_write_up)]) ?>
                             </div>
                         </div>
                         <div class="
@@ -419,7 +419,8 @@ if ($query->num_rows() > 0) {
                                 <button type="submit" class="btn btn-primary"><i class="fas fa-check"></i>Save
                                     School</button>
                                 <div class="modal-footer">
-                                    <?php echo anchor('laikipiaschools/schools', 'Cancel', ['class' => 'btn btn-primary']); ?>
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal"><i
+                                            class="fas fa-times"></i>Close</button>
                                 </div>
                             </div>
                         </div>

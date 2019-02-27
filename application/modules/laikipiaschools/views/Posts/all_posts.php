@@ -229,9 +229,7 @@ if ($query->num_rows() > 0) {
                                                         </p>
                                                     </div>
                                                 </div>
-
                                             </div>
-
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-dismiss="modal"><i
@@ -242,90 +240,80 @@ if ($query->num_rows() > 0) {
                                 </div>
 
                             </div>
-
     </div>
-</div>
-</div>
 
 
-<!-- <?php echo anchor("administration/edit-school/" . $row->post_id, "<i class='fas fa-edit'></i>", "class='btn btn-warning btn-sm'"); ?> -->
 
 
-<!-- Button trigger modal -->
-<button type="button" class="class='btn btn-warning btn-sm" data-toggle="modal"
-    data-target="#exampleModal<?php echo $row->post_id; ?>">
-    <i class='fas fa-edit'></i>
-</button>
+    <!-- <?php echo anchor("administration/edit-school/" . $row->post_id, "<i class='fas fa-edit'></i>", "class='btn btn-warning btn-sm'"); ?> -->
 
-<!-- Modal -->
-<div class="modal fade" id="exampleModal<?php echo $row->post_id; ?>" tabindex="-1" role="dialog"
-    aria-labelledby="exampleModalLabel" aria-hidden="true">
 
-    <div class="modal-content">
-        <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Update Post</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-        <div class="card-body">
-            <h5 class="card-title">Enter Post Details to update</h5>
+    <!-- Button trigger modal -->
+    <button type="button" class="class='btn btn-warning btn-sm" data-toggle="modal"
+        data-target="#exampleModal<?php echo $row->post_id; ?>">
+        <i class='fas fa-edit'></i>
+    </button>
 
-            <?php echo
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal<?php echo $row->post_id; ?>" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel<?php echo $row->post_id; ?>">Update Post</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Enter Post Details to update</h5>
+
+                    <?php echo
         form_open($this->uri->uri_string()); ?>
-            <div class="form-group row">
-                <label for="post_title" class="col-sm-2 col-form-label">Post
-                    Title</label>
-                <div class="col-md-10">
-                    <?php echo form_input(['name' => 'post_title', 'class' => 'form-control', 'value' => set_value('post_title', $row->post_title)]) ?>
-                </div>
-            </div>
-            <div class="form-group row">
-                <label for="post_description" class="col-sm-2 col-form-label">Post
-                    Description</label>
-                <div class="col-md-10">
-                    <?php echo form_textarea(['name' => 'post_description', 'class' => 'form-control', 'value' => set_value('post_description', $row->post_description)]) ?>
-                </div>
-            </div>
-            <div class="form-group row">
-                <label for="post_image_name" class="col-sm-2 col-form-label">Post
-                    Image</label>
-                <div class="col-md-10">
-                    <?php echo form_input(['name' => 'post_image_name', 'class' => 'form-control', 'type' => 'file', 'value' => set_value('post_image_name', $row->post_image_name)]) ?>
-                </div>
-            </div>
-            <!--  -->
-            <!-- <div class="form-group row">
-                    <label for="post_views" class="col-sm-2 col-form-label">Post
-                        Views</label>
-                    <div class="col-md-10">
-                        <!-- <?php echo form_input(['name' => 'post_views', 'class' => 'form-control', 'value' => set_value('post_views', $row->post_views)]) ?>
+                    <div class="form-group row">
+                        <label for="post_title" class="col-sm-2 col-form-label">Post
+                            Title</label>
+                        <div class="col-md-10">
+                            <?php echo form_input(['name' => 'post_title', 'class' => 'form-control', 'value' => set_value('post_title', $row->post_title)]) ?>
+                        </div>
                     </div>
-                </div> -->
-            -->
-
-            <div class="row">
-                <label class="col-form-label col-sm-2 pt-0">Post Status</label>
-                <div class="form-group">
-                    <input type="radio" name="status" value="1"
-                        <?php echo ($row->post_status == 'Active') ? 'checked' : '' ?>>Active
-                    <input type="radio" name="status" value="0"
-                        <?php echo ($row->post_status == 'Inactive') ? 'checked' : '' ?>>Inactive
-                </div>
-            </div>
-            <div class="
-                            form-group row">
-                <div class="col-sm-10">
-                    <button type="submit" class="btn btn-primary"><i class="fas fa-check"></i>Save
-                        Changes</button>
-                    <div class="modal-footer">
-                        <?php echo anchor('laikipiaschools/schools', 'Cancel', ['class' => 'btn btn-primary']); ?>
+                    <div class="form-group row">
+                        <label for="post_description" class="col-sm-2 col-form-label">Post
+                            Description</label>
+                        <div class="col-md-10">
+                            <?php echo form_textarea(['name' => 'post_description', 'id' => 'ckeditor', 'class' => 'ckeditor', 'value' => set_value('post_description', $row->post_description)]) ?>
+                        </div>
                     </div>
-                </div>
-            </div>
+                    <div class="form-group row">
+                        <label for="post_image_name" class="col-sm-2 col-form-label">Post
+                            Image</label>
+                        <div class="col-md-10">
+                            <?php echo form_input(['name' => 'post_image_name', 'class' => 'form-control', 'value' => set_value('post_image_name', $row->post_image_name)]) ?>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <label class="col-form-label col-sm-2 pt-0">Post Status</label>
+                        <div class="form-group">
+                            <input type="radio" name="status" value="1"
+                                <?php echo ($row->post_status == 'Active') ? 'checked' : '' ?>>Active
+                            <input type="radio" name="status" value="0"
+                                <?php echo ($row->post_status == 'Inactive') ? 'checked' : '' ?>>Inactive
+                        </div>
+                    </div>
+                    <div class="modal-footer row">
 
+                        <button type="submit" class="btn btn-primary"><i class="fas fa-check"></i>Save
+                            Changes</button>
+
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal"><i
+                                class="fas fa-times"></i>Close</button>
+                    </div>
+
+                </div>
+
+            </div>
+            <?php echo form_close(); ?>
         </div>
-        <?php echo form_close(); ?>
     </div>
 </div>
 <?php if ($row->post_status == 1) {
@@ -345,8 +333,8 @@ if ($query->num_rows() > 0) {
 ?>
 </tbody>
 </table>
-</div>
-</div>
 
-<?php echo $links; ?>
+<p>
+    <?php echo $links; ?>
 </p>
+</div>

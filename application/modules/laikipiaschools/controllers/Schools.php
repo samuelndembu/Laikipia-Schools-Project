@@ -17,6 +17,7 @@ class Schools extends MX_Controller
         $this->load->model("laikipiaschools/schools_model");
         $this->load->library("image_lib");
         $this->load->library('googlemaps');
+        // $this->load->view('csv_import');
 
         $this->load->model("laikipiaschools/schools_model");
         $this->load->model("laikipiaschools/site_model");
@@ -127,7 +128,7 @@ class Schools extends MX_Controller
             $v_data['categories'] = $this->site_model->get_all_categories();
             $v_data['page'] = $page;
             $v_data["zones"] = $this->schools_model->get_all_zones();
-            $v_data['schools']= $this->schools_model->get_all_schools($table, $where, $start, $config["per_page"], $page, $order, $order_method);
+            $v_data['schools'] = $this->schools_model->get_all_schools($table, $where, $start, $config["per_page"], $page, $order, $order_method);
             $v_data['map'] = $this->googlemaps->create_map();
             $school_array = array();
 
