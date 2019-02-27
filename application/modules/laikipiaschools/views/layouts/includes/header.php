@@ -21,3 +21,4 @@
 
 <!-- <script src="<?php echo base_url(); ?>assets/themes/custom/js/script1.js"></script> -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-119386393-1"></script>
+<script src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>

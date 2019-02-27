@@ -17,6 +17,14 @@ class Schools extends MX_Controller
         $this->load->model("laikipiaschools/schools_model");
         $this->load->library("image_lib");
         $this->load->library('googlemaps');
+        $this->load->library('ckeditor');
+        $this->load->library('ckfinder');
+        $this->ckeditor->basePath = base_url().'asset/ckeditor/';
+        $this->ckeditor->config['language'] = 'en';
+        $this->ckeditor->config['width'] = '730px';
+        $this->ckeditor->config['height'] = '300px'; 
+        //Add Ckfinder to Ckeditor
+        $this->ckfinder->SetupCKEditor($this->ckeditor,'../asset/ckfinder/');
 
         $this->load->model("laikipiaschools/schools_model");
         $this->load->model("laikipiaschools/site_model");

@@ -20,12 +20,11 @@ class posts extends MX_Controller
         $this->load->model("laikipiaschools/posts_model");
         $this->load->model("laikipiaschools/site_model");
         $this->load->model("laikipiaschools/file_model");
-
         // $this->load->model("administration/payments_model");
     }
     public function index($order = 'post_title', $order_method = 'ASC', $start = null)
     {
-         $where = 'post_id > 0 AND deleted = 0';
+        $where = 'post_id > 0 AND deleted = 0';
         $table = 'post';
         $post_search = $this->session->userdata('posts_search');
         $search_title = $this->session->userdata('posts_search_title');
@@ -37,9 +36,6 @@ class posts extends MX_Controller
 
         $this->form_validation->set_rules("post_title", "Post Title", "required");
         $this->form_validation->set_rules("post_description", "Post Description", "required");
-        // $this->form_validation->set_rules("post_image_name", "Post Image", "required");
-        // $this->form_validation->set_rules("post_views", "Views", "required");
-        // $this->form_validation->set_rules("post_status", "Status", "required");
 
         //  validate
         $form_errors = "";
@@ -48,11 +44,10 @@ class posts extends MX_Controller
                 "width" => 600,
                 "height" => 600,
             );
-
             $upload_response = $this->file_model->upload_image($this->upload_path, "post_image_name", $resize);
-
             if ($upload_response['check'] == false) {
                 $this->session->set_flashdata('error', $upload_response['message']);
+                redirect('administration/posts');
             } else {
                 if ($this->posts_model->add_post($upload_response['file_name'], $upload_response['thumb_name'])) {
                     $this->session->set_flashdata('success', 'Post Added successfully');
@@ -72,7 +67,6 @@ class posts extends MX_Controller
             $config['uri_segment'] = $segment;
             $config['per_page'] = 3;
             $config['num_links'] = 5;
-
             $config['full_tag_open'] = '<div class="pagging text-center"><nav aria-label="Page navigation example"><ul class="pagination">';
             $config['full_tag_close'] = '</ul></nav></div>';
             $config['num_tag_open'] = '<li class="page-item"><span class="page-link">';
@@ -94,14 +88,11 @@ class posts extends MX_Controller
             $v_data['categories'] = $this->site_model->get_all_categories();
             $query = $this->posts_model->get_all_posts($table, $where, $start, $config["per_page"],
                 $page, $order, $order_method);
-                // var_dump($query->result());die();
-            //change of order method
             if ($order_method == 'DESC') {
                 $order_method = 'ASC';
             } else {
                 $order_method = 'DESC';
             }
-
             $data['title'] = 'Lakipia posts';
 
             if (!empty($search_title) && $search_title != null) {
@@ -131,13 +122,11 @@ class posts extends MX_Controller
             );
             $this->load->view("laikipiaschools/layouts/layout", $data);
         }
-
     }
     public function search_posts()
     {
         $post_title = $this->input->post('search_param');
         $search_title = '';
-
         if (!empty($post_title)) {
             $search_title .= ' Searched: <strong>' . $post_title . '</strong>';
             $post_title = ' AND post.post_title = "' . $post_title . '"';
@@ -146,7 +135,6 @@ class posts extends MX_Controller
             $this->session->set_userdata('posts_search_title', $search_title);
         }
         // var_dump($search);die();
-
         redirect("administration/posts");
     }
     public function deactivate_post($post_id, $status_id)

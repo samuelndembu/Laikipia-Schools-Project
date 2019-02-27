@@ -97,10 +97,10 @@ class Posts_model extends CI_Model
         $data = array(
             "post_title" => $this->input->post("post_title"),
             "post_description" => $this->input->post("post_description"),
-            "post_image_name" => $this->input->post("post_image_name"),
-            // "post_views" => $this->input->post("views"),
-            "post_image_name" => $file_name,
-            "post_thumb_name" => $thumb_name,
+            // "post_image_name" => $this->input->post("post_image_name"),
+            // // "post_views" => $this->input->post("views"),
+            // "post_image_name" => $file_name,
+            // "post_thumb_name" => $thumb_name,
             "post_status" => $this->input->post("post_status"),
         );
 

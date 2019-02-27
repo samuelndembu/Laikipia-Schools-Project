@@ -283,35 +283,106 @@ if ($query->num_rows() > 0) {
                                                             <?php echo $row->school_longitude; ?>
                                                         </p>
                                                     </div>
-                                                    <div id="map">34</div>
+                                                    <!-- <div id="map" style="width:500px; height: 500px;"> -->
+                                                    <!-- </div> -->
                                                     <div>
-                                                        <button class="btn btn-warning btn-sm"
-                                                            onclick="loadLocation()">View on Map</button>
+                                                        <script
+                                                            src="https://maps.googleapis.com/maps/api/js?v=3.exp&amp;libraries=places">
+                                                        </script>
+                                                        <h1 class="">Lazy Load Google Map</h1>
+                                                        <a href="#myMapModal" class="btn" data-toggle="modal">Launch Map
+                                                            Modal</a>
 
-                                                        <?php echo "<script type='text/javascript'>
+                                                        <div class="modal fade" id="myMapModal">
+                                                            <div class="modal-dialog modal-dialog-centered">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <button type="button" class="close"
+                                                                            data-dismiss="modal"
+                                                                            aria-hidden="true">×</button>
+                                                                        <h4 class="modal-title">Modal title</h4>
 
-                                                        function loadLocation()
-                                                        {
-                                                            var myLatLng = {lat: -5.363, lng: 131.044};
-                                                            var mapDiv = document.createElement('DIV');
-                                                            var  map = new google.maps.Map(mapDiv, {
-                                                                zoom: 16,
-                                                                center: new google.maps.LatLng(-33.91722, 151.23064),
-                                                                mapTypeId: 'roadmap'
-                                                            });
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        <div class="container"></div>
+                                                                        <div class="container">
+                                                                            <div class="row">
+                                                                              
+                                                                                <div id="map-canvas" class=""></div>
+                                                                            </div>
+                                                                        </div>
+                                                                        
+                                                                    </div>
+                                                                     <?php echo "<script>
+                                                                                                                                                        var map;        
+                                                                                            var myCenter=new google.maps.LatLng(53, -1.33);
+                                                                                var marker=new google.maps.Marker({
+                                                                                    position:myCenter
+                                                                                });
 
-                                                            var marker = new google.maps.Marker({
-                                                                position: myLatLng,
-                                                                map: map,
-                                                                title: 'Hello World!'
-                                                            });
-                                                            console.log(mapDiv);
-                                                             document.getElementById('ads').appendChild(mapDiv);
-                                                        }
-                                                        </script>"; ?>
+
+
+                                                                                function initialize() {
+                                                                                var mapProp = {
+                                                                                    center:myCenter,
+                                                                                    zoom: 14,
+                                                                                    draggable: false,
+                                                                                    scrollwheel: false,
+                                                                                    mapTypeId:google.maps.MapTypeId.ROADMAP
+                                                                                };
+                                                                                
+                                                                                map=new google.maps.Map(document.getElementById('map-canvas'),mapProp);
+                                                                                
+                                                                                                var input = document.getElementById('pac-input');
+                                                                                                        map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+                                                                                                        var searchBox = new google.maps.places.SearchBox(input);
+                                                                                
+                                                                                marker.setMap(map);
+                                                                                    
+                                                                                google.maps.event.addListener(marker, 'click', function() {
+                                                                                    
+                                                                                    infowindow.setContent(contentString);
+                                                                                    infowindow.open(map, marker);
+                                                                                    
+                                                                                }); 
+                                                                                };
+
+                                                                                google.maps.event.addDomListener(window, 'load', initialize);
+
+                                                                                google.maps.event.addDomListener(window, 'resize', resizingMap());
+
+                                                                                $('#myMapModal').on('show.bs.modal', function() {
+                                                                                //Must wait until the render of the modal appear, thats why we use the resizeMap and NOT resizingMap!! ;-)
+                                                                                resizeMap();
+                                                                                })
+
+                                                                                function resizeMap() {
+                                                                                if(typeof map =='undefined') return;
+                                                                                setTimeout( function(){resizingMap();} , 400);
+                                                                                }
+
+                                                                                function resizingMap() {
+                                                                                if(typeof map =='undefined') return;
+                                                                                var center = map.getCenter();
+                                                                                google.maps.event.trigger(map, 'resize');
+                                                                                map.setCenter(center); 
+                                                                                }</script>"?>
+                                                                    <div class="modal-footer">
+                                                                        <button type="button" class="btn btn-default"
+                                                                            data-dismiss="modal">Close</button>
+                                                                        <button type="button"
+                                                                            class="btn btn-primary">Save
+                                                                            changes</button>
+                                                                    </div>
+                                                                </div>
+                                                                <!-- /.modal-content -->
+                                                            </div>
+                                                            <!-- /.modal-dialog -->
+                                                        </div>
+                                                        <!-- /.modal -->
+
+
                                                     </div>
-
-
 
                                                 </div>
                                             </div>
@@ -450,6 +521,7 @@ if ($query->num_rows() > 0) {
 }
 }
 ?>
+
     </tbody>
     </table>
 </div>
