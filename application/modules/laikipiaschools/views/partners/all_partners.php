@@ -101,34 +101,32 @@ if (!empty($validation_errors)) {
 
                 </tfoot>
                 <tbody>
-                    <?php 
-                if($query->num_rows() > 0)
-                {
-                    $count = 0;
-                    foreach($query->result() as $row)
-                    {
-          $count++;
-       ?>
+                    <?php
+if ($query->num_rows() > 0) {
+    $count = 0;
+    foreach ($query->result() as $row) {
+        $count++;
+        ?>
 
                     <tr>
                         <td>
-                            <?php echo $count?>
+                            <?php echo $count ?>
                         </td>
                         <td>
-                            <?php echo $row->partner_type_name;?>
+                            <?php echo $row->partner_type_name; ?>
                         </td>
                         <td>
-                            <?php echo $row->partner_name;?>
+                            <?php echo $row->partner_name; ?>
                         </td>
                         <td>
-                            <?php echo $row->partner_email;?>
+                            <?php echo $row->partner_email; ?>
                         </td>
                         <td>
                             <img src="<?php echo base_url() . 'assets/uploads/' . $row->partner_thumb; ?>">
                         </td>
                         <td>
 
-                            <?php if($row->partner_status == 1){ ?>
+                            <?php if ($row->partner_status == 1) {?>
                             <a href="" class="btn btn-dark btn-sm" data-toggle="modal"
                                 data-target="#modalLoginAvatar<?php echo $row->partner_id; ?>"><i
                                     class="fas fa-eye"></i></a>
@@ -176,29 +174,28 @@ if (!empty($validation_errors)) {
                             </div>
                             <!--Modal: Login with Avatar Form-->
 
-                            <?php echo anchor("administration/edit_partner/". $row->partner_id,"<i class='fas fa-edit'></i>","class='btn btn-warning btn-sm p-left-10'","style='padding-left:10px;'");?>
-                            <?php if($row->partner_status == 1){
-          echo anchor("administration/deactivate-partner/". $row->partner_id . "/" .$row->partner_status ,"<i class='far fa-thumbs-down'></i>",array("class" => "btn btn-info btn-sm p-left-10", "onclick" => "return confirm('Are you sure you want to deactivate?')"));
-        }
-        else{
-         echo anchor("administration/deactivate-partner/". $row->partner_id . "/" .$row->partner_status ,"<i class='far fa-thumbs-up'></i>", array("class" => "btn btn-info btn-sm", "onclick" => "return confirm('Are you sure you want to activate?')"));
+                            <?php echo anchor("administration/edit_partner/" . $row->partner_id, "<i class='fas fa-edit'></i>", "class='btn btn-warning btn-sm p-left-10'", "style='padding-left:10px;'"); ?>
+                            <?php if ($row->partner_status == 1) {
+            echo anchor("administration/deactivate-partner/" . $row->partner_id . "/" . $row->partner_status, "<i class='far fa-thumbs-down'></i>", array("class" => "btn btn-info btn-sm p-left-10", "onclick" => "return confirm('Are you sure you want to deactivate?')"));
+        } else {
+            echo anchor("administration/deactivate-partner/" . $row->partner_id . "/" . $row->partner_status, "<i class='far fa-thumbs-up'></i>", array("class" => "btn btn-info btn-sm", "onclick" => "return confirm('Are you sure you want to activate?')"));
         }?>
                             <?php
-         echo anchor("administration/delete-partner/". $row->partner_id,"<i class='fas fa-trash-alt'></i>",array("class" => "btn btn-danger btn-sm", "onclick" => "return confirm('Are you sure you want to Delete?')"));?>
+echo anchor("administration/delete-partner/" . $row->partner_id, "<i class='fas fa-trash-alt'></i>", array("class" => "btn btn-danger btn-sm", "onclick" => "return confirm('Are you sure you want to Delete?')")); ?>
 
 
                         </td>
                     </tr>
                     <?php
-                    }
-                }
-                ?>
+}
+}
+?>
                 </tbody>
             </table>
         </div>
     </div>
     <p>
-        <?php echo $links;?>
+        <?php echo $links; ?>
     </p>
 </div>
 </div>

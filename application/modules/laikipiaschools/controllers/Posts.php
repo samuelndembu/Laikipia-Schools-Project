@@ -117,6 +117,13 @@ class posts extends MX_Controller
             $v_data["posts"] = $this->posts_model->get_all_posts($table, $where, $start, $config["per_page"], $page, $order, $order_method);
             $v_data["all_posts"] = $this->posts_model->get_all_posts($table, $where, $start, $config["per_page"], $page, $order, $order_method);
 
+            $post_search = array();
+            foreach ($v_data["posts"]->result() as $post) {
+                array_push($post_search, $post->post_title);
+            }
+
+            $v_data['search_options'] = $post_search;
+
             $data = array(
                 "title" => $this->site_model->display_page_title(),
                 "content" => $this->load->view("posts/all_posts", $v_data, true),

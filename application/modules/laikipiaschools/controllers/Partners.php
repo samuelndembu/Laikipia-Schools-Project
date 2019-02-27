@@ -88,8 +88,7 @@ class Partners extends MX_Controller
 
         $partner_type_search = array();
 
-        foreach($v_data["partner_types"]->result() as $partner_type)
-        {
+        foreach ($v_data["partner_types"]->result() as $partner_type) {
             array_push($partner_type_search, $partner_type->partner_type_name);
         }
 
@@ -129,29 +128,23 @@ class Partners extends MX_Controller
 
     public function deactivate_partner($partner_id, $status_id)
     {
-        if($status_id == 1)
-        {
+        if ($status_id == 1) {
             $new_partner_status = 0;
             $message = 'Deactivated';
-        }
-        else
-        {
+        } else {
             $new_partner_status = 1;
             $message = 'Activated';
         }
 
         $result = $this->partners_model->change_partner_status($partner_id, $new_partner_status);
-        if($result == TRUE)
-        {
+        if ($result == true) {
             $this->session->set_flashdata('success', "Partner ID: " . $partner_id . " " . $message . " successfully!");
-        }
-        else
-        {
+        } else {
             $this->session->set_flashdata('error', "Partner ID: " . $partner_id . " failed to " . $message);
         }
 
         redirect('administration/partners');
-        
+
     }
 
     public function export_partners()
@@ -224,7 +217,7 @@ class Partners extends MX_Controller
         $this->form_validation->set_rules("partner_type", "partner_type", "required");
         $this->form_validation->set_rules("partner_name", "partner_name", "required");
         $this->form_validation->set_rules("partner_email", "partner_email", "required");
- 
+
         if ($this->form_validation->run()) {
             $resize = array(
                 "width" => 600,
@@ -262,7 +255,7 @@ class Partners extends MX_Controller
             $this->load->view("laikipiaschools/layouts/layout", $data);
         }
     }
-   
+
     public function edit($partner_id)
     {
         $this->form_validation->set_rules("partner_type", "Partner Type", "required");
@@ -317,6 +310,6 @@ class Partners extends MX_Controller
             $this->session->set_flashdata('error', 'Unable to delete, Try again!!');
             redirect('administration/partners');
         }
-    }   
-    
+    }
+
 }
