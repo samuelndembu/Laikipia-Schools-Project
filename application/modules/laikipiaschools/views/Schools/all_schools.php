@@ -225,13 +225,6 @@ if ($query->num_rows() > 0) {
                                                     <div class="carousel-item">
                                                         <img style="max-width:100%;" src="<?php echo base_url() . 'assets/uploads/' . $image;?>" class="d-block w-100" alt="No Image"/>
                                                     </div>
-                                                    <?php foreach($other_images as $other_image){
-                                                        if($other_image->school_id == $row->school_id){?>
-                                                        <div class="carousel-item">
-                                                            <img src="<?php echo base_url() . 'assets/uploads/' . $other_image->school_image_name;?>" class="d-block w-100" alt="No Image"/>
-                                                        </div>
-                                                    <?php }} ?>
-                                                   
                                                     </div>
                                                     <a class="carousel-control-prev" href="#carouselExampleFade" role="button" data-slide="prev">
                                                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
