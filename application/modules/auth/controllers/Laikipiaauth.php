@@ -9,8 +9,6 @@ class Laikipiaauth extends MX_Controller
      
     }
 
-  
-
     /*
      *
      *    Login a user
@@ -97,15 +95,5 @@ class Laikipiaauth extends MX_Controller
         $this->session->sess_destroy();
         redirect('administration/login');
     }
-
-    /*
-     *
-     *    Dashboard
-     *
-     */
-   
-
-    
-
-    
+  
 }
