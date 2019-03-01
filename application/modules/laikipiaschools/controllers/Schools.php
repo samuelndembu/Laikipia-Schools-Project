@@ -17,6 +17,14 @@ class Schools extends MX_Controller
         $this->load->model("laikipiaschools/schools_model");
         $this->load->library("image_lib");
         $this->load->library('googlemaps');
+        $this->load->library('ckeditor');
+        $this->load->library('ckfinder');
+        $this->ckeditor->basePath = base_url().'asset/ckeditor/';
+        $this->ckeditor->config['language'] = 'en';
+        $this->ckeditor->config['width'] = '730px';
+        $this->ckeditor->config['height'] = '300px'; 
+        //Add Ckfinder to Ckeditor
+        $this->ckfinder->SetupCKEditor($this->ckeditor,'../asset/ckfinder/');
 
         $this->load->model("laikipiaschools/schools_model");
         $this->load->model("laikipiaschools/site_model");
@@ -84,7 +92,7 @@ class Schools extends MX_Controller
             $config['total_rows'] = $this->site_model->count_items($table, $where);
             // $config["total_rows"] = $this->friends_model->countAll();
             $config['uri_segment'] = $segment;
-            $config['per_page'] = 3;
+            $config['per_page'] = 20;
             $config['num_links'] = 5;
 
             $config['full_tag_open'] = '<div class="pagging text-center"><nav aria-label="Page navigation example"><ul class="pagination">';

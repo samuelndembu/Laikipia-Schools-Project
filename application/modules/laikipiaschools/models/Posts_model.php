@@ -96,7 +96,7 @@ class Posts_model extends CI_Model
     {
         $data = array(
             "post_title" => $this->input->post("post_title"),
-            "post_description" => $this->input->post("post_description")
+            "post_description" => $this->input->post("post_description"),
         );
 
         $this->db->set($data);

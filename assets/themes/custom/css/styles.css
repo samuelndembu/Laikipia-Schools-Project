@@ -22,6 +22,14 @@
 	text-anchor: middle;
 }
 
+.file-field.big .file-path-wrapper {
+	height: 3.2rem;
+}
+
+.file-field.big .file-path-wrapper .file-path {
+	height: 3rem;
+}
+
 .button,
 .image-button {
 	margin-left: 1em;
