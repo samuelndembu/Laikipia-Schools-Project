@@ -256,11 +256,54 @@ if ($query->num_rows() > 0) {
                                                         <h6 class="title-price"><small>Number Of Girls</small></h6>
                                                         <label><b>
                                                                 <?php echo $row->school_girls_number; ?></b></label>
+                                                                <h6 class="title-price"><small>School Status</small></h6>
+                                                        <label><b>
+                                                                <?php echo $row->school_status; ?></b></label>
+                                                               
                                                     </div>
 
                                                 </div>
                                             </div>
-
+                                             <div class="col-md-12 col-sm-12">
+                                                <h6 class="title-price mt-4"><small>Write Up</small></h6>
+                                                <div style="width:100%;border-top:1px solid silver">
+                                                    <p class="mt-3">
+                                                        <small>
+                                                            <?php echo $row->school_write_up; ?>
+                                                        </small>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12 col-sm-12">
+                                                <h6 class="title-price mt-4"><small>Location Description</small></h6>
+                                                <div style="width:100%;border-top:1px solid silver">
+                                                    <p class="mt-3">
+                                                        <small>
+                                                            <?php echo $row->school_location_name; ?>
+                                                        </small>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12 col-sm-12">
+                                                <h6 class="title-price mt-4"><small>Longitude</small></h6>
+                                                <div style="width:100%;border-top:1px solid silver">
+                                                    <p class="mt-3">
+                                                        <small>
+                                                            <?php echo $row->school_longitude; ?>
+                                                        </small>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                             <div class="col-md-12 col-sm-12">
+                                                <h6 class="title-price mt-4"><small>Latitude</small></h6>
+                                                <div style="width:100%;border-top:1px solid silver">
+                                                    <p class="mt-3">
+                                                        <small>
+                                                            <?php echo $row->school_latitude; ?>
+                                                        </small>
+                                                    </p>
+                                                </div>
+                                            </div>
                                             <div class="col-md-12 col-sm-12">
                                                 <h6 class="title-price mt-4"><small>Write Up</small></h6>
                                                 <div style="width:100%;border-top:1px solid silver">
