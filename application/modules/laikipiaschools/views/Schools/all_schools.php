@@ -31,6 +31,12 @@ if (!empty($validation_errors)) {
                             <div class="modal-body">
                                 <?php echo form_open_multipart($this->uri->uri_string()); ?>
                                 <div class="form-group">
+                                    <label for="school_name">School Name</label>
+                                    <input type="text" class="form-control" id="school_name"
+                                        aria-describedby="emailHelp" name="school_name"
+                                        placeholder="School Name">
+                                </div>
+                                <div class="form-group">
                                     <label for="school_name">Zone</label>
                                     <select id="inputState" class="form-control" name="school_zone">
                                         <option selected>Choose your zone...</option>
@@ -55,12 +61,12 @@ if (!empty($validation_errors)) {
                                     </select>
                                     <small id="emailHelp" class="form-text text-muted"></small>
                                 </div>
-                                <div class="form-group">
+                                <!-- <div class="form-group">
                                     <label for="school_name">School Name</label>
                                     <!-- <input type="text" class="form-control" id="school_name"
                                         aria-describedby="emailHelp" name="school_boys_number"
                                         placeholder="School Name"> -->
-                                    <select id="inputState" class="form-control" name="school_name">
+                                    <!-- <select id="inputState" class="form-control" name="school_name">
                                         <option selected>Choose your School.</option>
                                         <option value="Draja Academy">Draja Academy</option>
                                         <option value="G.G Kinamba Day sec school"> G.G Kinamba Day Secondary School
@@ -73,7 +79,8 @@ if (!empty($validation_errors)) {
                                         <option value="Shamanei pry school">Shamanei Primary School</option>
                                         <option value="Tandare Day sec school">Tandare Day Secondary School</option>
                                     </select>
-                                </div>
+                                </div> --> 
+                                 
                                 <div class="form-group">
                                     <label for="school_boys_number">Number of boys</label>
                                     <input type="number" class="form-control" id="school_boys_number"
