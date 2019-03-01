@@ -59,7 +59,14 @@ class Webservice extends MX_Controller
             $school_other_images_arr = json_decode($row->school_other_images);
             $responder_phone = $row->responder_phone;
 
-            $school_image_name = $this->schools_model->save_image($school_image, $this->upload_path);
+            if($school_image != null || $school_image != "")
+            {
+                $school_image_name = $this->schools_model->save_image($school_image, $this->upload_path);
+            }
+            else
+            {
+                $school_image_name = 'school_default.jpeg';
+            }
 
             // echo json_encode($school_other_images_arr);die();
 

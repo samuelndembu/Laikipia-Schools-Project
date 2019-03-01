@@ -210,36 +210,33 @@ if ($query->num_rows() > 0) {
                         <?php echo $row->school_girls_number; ?>
                     </td>
 
-                    <td>
-                        <button type="button" class="btn btn-primary btn-sm" data-toggle="modal"
-                            data-target="#modalQuickView<?php echo $row->school_id; ?>"><i
-                                class="fas fa-eye"></i></button>
-                        <!-- Modal: modalQuickView -->
-                        <div class="modal fade" id="modalQuickView<?php echo $row->school_id; ?>" tabindex="-1"
-                            role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title">
-                                            <?php echo $row->school_name; ?>
-                                        </h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <div class="container">
-                                            <div class="row">
-                                                <div class="col-md-5 col-sm-12">
-                                                    <img style="max-width:100%;"
-                                                        src="<?php echo base_url() . 'assets/uploads/' . $image; ?>"
-                                                        class="d-block w-100" alt="No Image" />
-                                                </div>
-                                                <div class="col-md-7 col-sm-12 " style="border:0px solid gray">
-                                                    <div class="form-group">
-                                                        <h6 class="title-price"><small>School</small></h6>
-                                                        <label><b>
-                                                                <?php echo $row->school_name; ?></b></label>
+					<td>
+						<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modalQuickView<?php echo $row->school_id; ?>"><i
+							 class="fas fa-eye"></i></button>
+						<!-- Modal: modalQuickView -->
+						<div class="modal fade" id="modalQuickView<?php echo $row->school_id; ?>" tabindex="-1" role="dialog"
+						 aria-labelledby="exampleModalLabel" aria-hidden="true">
+							<div class="modal-dialog" role="document">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h5 class="modal-title">
+											<?php echo $row->school_name; ?>
+										</h5>
+										<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+											<span aria-hidden="true">&times;</span>
+										</button>
+									</div>
+									<div class="modal-body">
+										<div class="container">
+											<div class="row">
+												<div class="col-md-5 col-sm-12">
+                                                    <img style="max-width:100%;" src="<?php echo base_url() . 'assets/uploads/' . $image;?>" class="d-block w-100" alt="No Image"/>
+												</div>
+												<div class="col-md-7 col-sm-12 " style="border:0px solid gray">
+													<div class="form-group">
+														<h6 class="title-price"><small>School</small></h6>
+														<label><b>
+																<?php echo $row->school_name; ?></b></label>
 
                                                         <h6 class="title-price"><small>Zone</small></h6>
                                                         <label><b>
