@@ -47,10 +47,13 @@ echo $content;?>
     <script src="<?php echo base_url(); ?>assets/vendor/script.js"></script>
     <link href="<?php echo base_url(); ?>assets/fontawesome/css/all.css" rel="stylesheet">
     <script defer src="<?php echo base_url(); ?>assets/fontawesome/js/all.js"></script>
+<<<<<<< HEAD
+=======
 <link href="<?php echo base_url(); ?>assets/themes/bootstrap/js/bootstrap.min.js" rel="stylesheet">
 <link href="<?php echo base_url(); ?>assets/themes/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAMfrWKiELcjgQDzNq1n3LTVMSQAXGSs6E">
     </script>
+>>>>>>> a5edbdddd3d90716b0c56ca4a8c041923ee6af67
 
 </body>
 
