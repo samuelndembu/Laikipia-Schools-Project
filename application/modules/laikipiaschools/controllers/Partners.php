@@ -36,7 +36,7 @@ class Partners extends MX_Controller
         $config['total_rows'] = $this->site_model->count_items($table, $where);
 
         // $config['uri_segment'] = $segment;
-        $config['per_page'] = 3;
+        $config['per_page'] = 20;
         $config['num_links'] = 5;
 
         $config['full_tag_open'] = '<div class="pagging text-center"><nav aria-label="Page navigation example"><ul class="pagination">';
@@ -170,6 +170,36 @@ class Partners extends MX_Controller
         }
 
     }
+
+    //importing file
+
+    function import(){
+         // path where your CSV file is located
+        define('CSV_PATH','./csvfile/');    
+      
+            $csv_file = CSV_PATH . "import.csv"; // Name of your CSV file
+            $csvfile = fopen($csv_file, 'r');
+            $theData = fgets($csvfile);
+            $i = 0;
+            while (!feof($csvfile)) {
+                $csv_data[] = fgets($csvfile);
+                $csv_array = explode(",", $csv_data[$i]);
+                $insert_csv = array();
+                $insert_csv['partner_id'] = $csv_array[0];
+                $insert_csv['partner_type_id'] = $csv_array[1];
+                $insert_csv['partner_name'] = $csv_array[2];
+                $insert_csv['partner_email'] = $csv_array[2];
+                // $insert_csv['partner_logo'] = $csv_array[2];
+                //$query = "INSERT INTO csvdata(ID,name,email) VALUES('','".$insert_csv['name']."','".$insert_csv['email']."')";
+                //$n=mysql_query($query, $connect );
+                //$i++;
+                $this->model->save_data( $insert_csv );
+            }
+            fclose($csvfile);
+
+        echo "File data successfully imported to database!!";
+    }
+
     public function firstview()
     {
 

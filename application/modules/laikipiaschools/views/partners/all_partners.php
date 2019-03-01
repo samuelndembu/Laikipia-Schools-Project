@@ -12,8 +12,16 @@ if (!empty($validation_errors)) {
             <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal">
                 Add Partner
             </button>
+
+            <!-- <input type="file" class="btn btn-default pull-right" placeholder="Import" /> -->
+           
+            
             <a href="<?php echo site_url() . "administration/export-partners" ?>" target="_blank"
             class="btn btn-default pull-right"><i class="fas fa-file-export"></i> Export</a>
+            <!-- <?//php echo form_open_multipart('partners/import'); ?>
+                <input type="file" name="userfile" size="20" />
+                <br /><br />
+                <input type="submit" value="upload" /> -->
         </div>
         
     </div>

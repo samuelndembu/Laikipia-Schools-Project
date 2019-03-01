@@ -46,6 +46,12 @@ class Partners_model extends CI_Model
         return $this->db->get();
 
     }
+    //import function
+   public function save_data( $save_data ){
+        $this->db->insert('partner', $save_data ); #edited here
+        echo $this->db->last_query();
+        return 1;
+    }
 
     public function change_partner_status($partner_id, $new_partner_status)
     {
