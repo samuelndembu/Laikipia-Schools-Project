@@ -6,7 +6,6 @@ if (!empty($validation_errors)) {
 }
 ?>
 
-
 <div class="shadow-lg p-3 mb-5 bg-white rounded">
     <div class=" card-body">
         <div class="card shadow mb-4">
@@ -32,7 +31,6 @@ if (!empty($validation_errors)) {
                                             placeholder="Post Title" required>
                                     </div>
                                 </div>
-
                                 <div class="form-group row">
                                     <div class="col-sm-12 col-md-12">
                                         <label for="category_id">Categories</label>
@@ -50,9 +48,6 @@ if (!empty($validation_errors)) {
                                         </select>
                                     </div>
                                 </div>
-
-
-
                                 <div class="form-group row">
                                     <div class="col-sm-12 col-md-12">
                                         <label for="post_image_name">Post
@@ -193,21 +188,24 @@ if ($query->num_rows() > 0) {
                                 role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div class="modal-dialog modal-lg" role="document">
                                     <div class="modal-content primary">
-                                        <div class="modal-body primary">
+                                        <div class="modal-header">
                                             <strong>
-                                                <h1 class="card text-center"><?php echo $row->post_title; ?>
-                                                </h1>
+                                                <h3 class="text-center"><?php echo $row->post_title; ?>
+                                                </h3>
                                             </strong>
+                                        </div>
+                                        <div class="modal-body primary">
+
                                             <div class="row">
 
-                                                <div class="card-body col-md-6 col-sm-2">
+                                                <div class="card-body col-md-5 col-sm-2">
                                                     <div class="img-responsive left-block row">
-                                                        <img src="<?php echo base_url() . 'assets/uploads/' . $row->post_image_name; ?>"
-                                                            alt="avatar" class="mx-auto d-block">
+                                                        <img src="<?php echo base_url() . 'assets/uploads/' . $row->post_thumb_name; ?>"
+                                                            alt="avatar" class="rounded float-top">
                                                     </div>
                                                 </div>
 
-                                                <div class="card-body col-md-6 col-sm-4">
+                                                <div class="card-body col-md-7 col-sm-4">
                                                     <div class="accordion md-accordion" id="accordionEx" role="tablist"
                                                         aria-multiselectable="true">
                                                     </div>
@@ -223,13 +221,13 @@ if ($query->num_rows() > 0) {
                                                         </p>
                                                     </div>
                                                     <div>
-                                                        <h5><b> Post Description:</h5>
+                                                        <h5><b> Post Description:</b></h5>
                                                         <p><?php echo $row->post_description; ?>
                                                         </p>
                                                     </div>
                                                     <div>
-                                                        <h5> Post
-                                                            Data:</h5>
+                                                        <h5> <b>Post
+                                                                Data:</b></h5>
                                                         <p><?php echo $row->post_data; ?>
                                                         </p>
                                                     </div>
@@ -242,7 +240,7 @@ if ($query->num_rows() > 0) {
                                             </div>
                                         </div>
                                         <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal"><i
+                                            <button type="button" class="btn btn-primary" data-dismiss="modal"><i
                                                     class="fas fa-times"></i>Close</button>
                                         </div>
                                     </div>
@@ -251,19 +249,12 @@ if ($query->num_rows() > 0) {
 
                             </div>
     </div>
-
-
-
-
     <!-- <?php echo anchor("administration/edit-school/" . $row->post_id, "<i class='fas fa-edit'></i>", "class='btn btn-warning btn-sm'"); ?> -->
-
-
     <!-- Button trigger modal -->
     <button type="button" class="class='btn btn-warning btn-sm" data-toggle="modal"
         data-target="#exampleModal<?php echo $row->post_id; ?>">
         <i class='fas fa-edit'></i>
     </button>
-
     <!-- Modal -->
     <div class="modal fade" id="exampleModal<?php echo $row->post_id; ?>" tabindex="-1" role="dialog"
         aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -287,20 +278,16 @@ if ($query->num_rows() > 0) {
                             <?php echo form_input(['name' => 'post_title', 'class' => 'form-control', 'value' => set_value('post_title', $row->post_title)]) ?>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label for="post_description" class="col-sm-2 col-form-label">Post
-                            Description</label>
-                        <div class="col-md-10">
-                            <?php echo form_textarea(['name' => 'post_description', 'id' => 'ckeditor', 'class' => 'ckeditor', 'value' => set_value('post_description', $row->post_description)]) ?>
-                        </div>
-                    </div>
-                    <div class="form-group row">
+
+                    <!-- <div class="form-group row">
                         <label for="post_image_name" class="col-sm-2 col-form-label">Post
                             Image</label>
                         <div class="col-md-10">
-                            <?php echo form_input(['name' => 'post_image_name', 'class' => 'form-control', 'value' => set_value('post_image_name', $row->post_image_name)]) ?>
+                            <?php echo form_input(['name' => 'post_image_name', 'type' => 'file', 'class' => 'form-control']) ?>
                         </div>
-                    </div>
+                    </div> -->
+
+
                     <div class="row">
                         <label class="col-form-label col-sm-2 pt-0">Post Status</label>
                         <div class="form-group">
@@ -309,6 +296,16 @@ if ($query->num_rows() > 0) {
                             <input type="radio" name="status" value="0"
                                 <?php echo ($row->post_status == 'Inactive') ? 'checked' : '' ?>>Inactive
                         </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="post_description">Post Description</label>
+                        <?php echo form_textarea(array('name' => 'post_description', 'placeholder' => 'Write s description of the post', 'id' => 'ckeditor', 'class' => "ckeditor", 'value' => set_value('post_description', $row->post_description))); ?>
+                        <small id="emailHelp" class="form-text text-muted"></small>
+                    </div>
+                    <div class="form-group">
+                        <label for="post_description">Post Data</label>
+                        <?php echo form_textarea(array('name' => 'post_data', 'placeholder' => 'Post data', 'id' => 'ckeditor', 'class' => "ckeditor", 'value' => set_value('post_data', $row->post_data))); ?>
+                        <small id="emailHelp" class="form-text text-muted"></small>
                     </div>
                     <div class="form-group">
                         <label for="post_data" class="col-sm-2 col-form-label">Post
@@ -321,7 +318,6 @@ if ($query->num_rows() > 0) {
 
                         <button type="submit" class="btn btn-primary"><i class="fas fa-check"></i>Save
                             Changes</button>
-
                         <button type="button" class="btn btn-secondary" data-dismiss="modal"><i
                                 class="fas fa-times"></i>Close</button>
                     </div>

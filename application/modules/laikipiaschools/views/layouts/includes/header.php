@@ -8,7 +8,7 @@
 <!-- Custom styles for this template -->
 <link href="https://fonts.googleapis.com/css?family=Work+Sans:300,400,500,600,700" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
-<link href="<?php echo base_url(); ?>assets/themes/custom/styles.css" rel="stylesheet">
+<link href="<?php echo base_url(); ?>assets/themes/custom/css/styles.css" rel="stylesheet">
 <link href="<?php echo base_url(); ?>assets/themes/custom/css/sidenav.css" rel="stylesheet">
 <!-- <link href="<?php echo base_url(); ?>assets/themes/custom/dashboard.css" rel="stylesheet"> -->
 <!-- <link href="<?php echo base_url(); ?>assets/custom/css/partner.css" rel="stylesheet"> -->

@@ -17,6 +17,14 @@ class Schools extends MX_Controller
         $this->load->model("laikipiaschools/schools_model");
         $this->load->library("image_lib");
         $this->load->library('googlemaps');
+        $this->load->library('ckeditor');
+        $this->load->library('ckfinder');
+        $this->ckeditor->basePath = base_url().'asset/ckeditor/';
+        $this->ckeditor->config['language'] = 'en';
+        $this->ckeditor->config['width'] = '730px';
+        $this->ckeditor->config['height'] = '300px'; 
+        //Add Ckfinder to Ckeditor
+        $this->ckfinder->SetupCKEditor($this->ckeditor,'../asset/ckfinder/');
 
         $this->load->model("laikipiaschools/schools_model");
         $this->load->model("laikipiaschools/site_model");
@@ -66,6 +74,7 @@ class Schools extends MX_Controller
 
             if ($upload_response['check'] == false) {
                 $this->session->set_flashdata('error', $upload_response['message']);
+                redirect('laikipiaschools/schools');
             } else {
                 if ($this->schools_model->add_school($upload_response['file_name'], $upload_response['thumb_name'])) {
                     $this->session->set_flashdata('success', 'school Added successfully!!');
@@ -125,9 +134,9 @@ class Schools extends MX_Controller
             $v_data['order'] = $order;
             $v_data['order_method'] = $order_method;
             $v_data['query'] = $query;
+            $v_data['other_images'] = ($this->schools_model->get_other_images())->result();
             $v_data['categories'] = $this->site_model->get_all_categories();
             $v_data['page'] = $page;
-            $v_data["zones"] = $this->schools_model->get_all_zones();
             $v_data['schools']= $this->schools_model->get_all_schools($table, $where, $start, $config["per_page"], $page, $order, $order_method);
             $v_data['map'] = $this->googlemaps->create_map();
             $school_array = array();
@@ -319,44 +328,25 @@ class Schools extends MX_Controller
         $this->form_validation->set_rules("school_write_up", "school Write Up", "required");
         $this->form_validation->set_rules("school_boys_number", "Number of Boys", "required");
         $this->form_validation->set_rules("school_girls_number", "Number of Girls", "required");
-        $this->form_validation->set_rules("school_zone", "School Zone", "school_zone");
+        $this->form_validation->set_rules("school_zone", "School Zone", "required");
         $this->form_validation->set_rules("school_location_name", "Location", "required");
         $this->form_validation->set_rules("school_latitude", "Latitude", "required");
         $this->form_validation->set_rules("school_longitude", "Longitude", "required");
 
         if ($this->form_validation->run()) {
-            $update_status = $this->schools_model->update_school($school_id, $file_name, $thumb_name);
+            $update_status = $this->schools_model->update_school($school_id);
+            
             if ($update_status) {
                 redirect("administration/schools");
             }
-        } else {
-            //name from form is the unique identifier
-            $my_school = $this->schools_model->get_single_school($school_id);
-            if ($my_school->num_rows() > 0) {
-                $row = $my_school->row();
-                $v_data['school_name'] = $row->school_name;
-                $v_data['school_write_up'] = $row->school_write_up;
-                $v_data['school_boys_number'] = $row->school_boys_number;
-                $v_data['school_girls_number'] = $row->school_girls_number;
-                $v_data['school_zone'] = $row->$school_zone;
-                $v_data['school_location_name'] = $row->school_location_name;
-                $v_data['school_latitude'] = $row->school_latitude;
-                $v_data['school_longitude'] = $row->school_longitude;
-                $v_data['school_status'] = $row->school_status;
-                $v_data['school_image_name'] = $row->school_image_name;
-                $v_data['school_image_name'] = $row->school_thumb_name;
-
-                $data = array("title" => "Update school",
-                    "content" => $this->load->view("schools/edit_school", $v_data, true),
-                );
-                // var_dump($data);die();
-                $this->load->view("laikipiaschools/layouts/layout", $data);
-
-            } else {
-                $this->session->set_flashdata("error_message", "couldnt");
-                redirect("schools");
+            else{
+                $this->session->set_flashdata('error', validation_errors());
+                redirect("administration/schools");
             }
-
+            
+        }
+        else{
+            redirect("administration/schools");
         }
 
     }

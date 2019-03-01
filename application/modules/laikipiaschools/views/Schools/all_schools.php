@@ -16,7 +16,7 @@ if (!empty($validation_errors)) {
                     School</button>
                 <input type="file" class="btn btn-default pull-right" placeholder="Import" />
 
-                <a href="<?php echo site_url() . "administration/export-schools" ?>" target="_blank"
+                <a href="<?php echo site_url() . " administration/export-schools" ?>" target="_blank"
                     class="btn btn-default pull-right"><i class="fas fa-file-export"></i> Export</a>
                 <div class="modal fade" id="createDonation" tabindex="-1" role="dialog"
                     aria-labelledby="createDonationLabel" aria-hidden="true">
@@ -30,6 +30,12 @@ if (!empty($validation_errors)) {
                             </div>
                             <div class="modal-body">
                                 <?php echo form_open_multipart($this->uri->uri_string()); ?>
+                                <div class="form-group">
+                                    <label for="school_name">School Name</label>
+                                    <input type="text" class="form-control" id="school_name"
+                                        aria-describedby="emailHelp" name="school_name"
+                                        placeholder="School Name">
+                                </div>
                                 <div class="form-group">
                                     <label for="school_name">Zone</label>
                                     <select id="inputState" class="form-control" name="school_zone">
@@ -55,12 +61,12 @@ if (!empty($validation_errors)) {
                                     </select>
                                     <small id="emailHelp" class="form-text text-muted"></small>
                                 </div>
-                                <div class="form-group">
+                                <!-- <div class="form-group">
                                     <label for="school_name">School Name</label>
                                     <!-- <input type="text" class="form-control" id="school_name"
                                         aria-describedby="emailHelp" name="school_boys_number"
                                         placeholder="School Name"> -->
-                                    <select id="inputState" class="form-control" name="school_name">
+                                    <!-- <select id="inputState" class="form-control" name="school_name">
                                         <option selected>Choose your School.</option>
                                         <option value="Draja Academy">Draja Academy</option>
                                         <option value="G.G Kinamba Day sec school"> G.G Kinamba Day Secondary School
@@ -73,7 +79,8 @@ if (!empty($validation_errors)) {
                                         <option value="Shamanei pry school">Shamanei Primary School</option>
                                         <option value="Tandare Day sec school">Tandare Day Secondary School</option>
                                     </select>
-                                </div>
+                                </div> --> 
+                                 
                                 <div class="form-group">
                                     <label for="school_boys_number">Number of boys</label>
                                     <input type="number" class="form-control" id="school_boys_number"
@@ -137,6 +144,7 @@ if (!empty($validation_errors)) {
                                         <input type="file" id="school_image" name="school_image">
                                     </div>
                                 </div>
+
                                 <div class="form-group">
                                     <label for="school_write_up">School Write Up</label>
                                     <?php echo form_textarea(array('name' => 'school_write_up', 'id' => 'ckeditor', 'class' => "ckeditor")); ?>
@@ -187,6 +195,8 @@ if ($query->num_rows() > 0) {
     foreach ($query->result() as $row) {
         $id = $row->school_id;
         $count++;
+        $image = $row->school_image_name;
+        // $image = 'school_default.jpeg';
         ?>
                 <tr>
                     <td>
@@ -200,135 +210,84 @@ if ($query->num_rows() > 0) {
                         <?php echo $row->school_name; ?>
                     </td>
 
-                    <td><?php echo $row->school_boys_number; ?></td>
-                    <td><?php echo $row->school_girls_number; ?></td>
-
                     <td>
-                        <button type="button" class="btn btn-primary btn-sm" data-toggle="modal"
-                            data-target="#modalQuickView<?php echo $row->school_id; ?>"><i
-                                class="fas fa-eye"></i></button>
-                        <!-- Modal: modalQuickView -->
-                        <div class="modal fade" id="modalQuickView<?php echo $row->school_id; ?>" tabindex="-1"
-                            role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog modal-lg" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-body">
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <div class="container">
-                                                    <div class="row justify-content-center">
-                                                        <h3> <?php echo $row->school_name; ?></h3>
+                        <?php echo $row->school_boys_number; ?>
+                    </td>
+                    <td>
+                        <?php echo $row->school_girls_number; ?>
+                    </td>
+
+					<td>
+						<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modalQuickView<?php echo $row->school_id; ?>"><i
+							 class="fas fa-eye"></i></button>
+						<!-- Modal: modalQuickView -->
+						<div class="modal fade" id="modalQuickView<?php echo $row->school_id; ?>" tabindex="-1" role="dialog"
+						 aria-labelledby="exampleModalLabel" aria-hidden="true">
+							<div class="modal-dialog" role="document">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h5 class="modal-title">
+											<?php echo $row->school_name; ?>
+										</h5>
+										<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+											<span aria-hidden="true">&times;</span>
+										</button>
+									</div>
+									<div class="modal-body">
+										<div class="container">
+											<div class="row">
+												<div class="col-md-5 col-sm-12">
+                                                    <img style="max-width:100%;" src="<?php echo base_url() . 'assets/uploads/' . $image;?>" class="d-block w-100" alt="No Image"/>
+												</div>
+												<div class="col-md-7 col-sm-12 " style="border:0px solid gray">
+													<div class="form-group">
+														<h6 class="title-price"><small>School</small></h6>
+														<label><b>
+																<?php echo $row->school_name; ?></b></label>
+
+                                                        <h6 class="title-price"><small>Zone</small></h6>
+                                                        <label><b>
+                                                                <?php echo $row->school_zone; ?></b></label>
+
+                                                        <h6 class="title-price"><small>Number Of Boys</small></h6>
+                                                        <label><b>
+                                                                <?php echo $row->school_boys_number; ?></b></label>
+
+                                                        <h6 class="title-price"><small>Number Of Girls</small></h6>
+                                                        <label><b>
+                                                                <?php echo $row->school_girls_number; ?></b></label>
                                                     </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-md-5 col-sm-2">
-                                                        <div class="img-responsive center-block row">
-                                                            <img src="<?php echo base_url() . 'assets/uploads/' . $row->school_image_name; ?>"
-                                                                alt="avatar" class="rounded float-left">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-7 col-sm-4">
-                                                        <h5 class="card-title">Details</h5>
-                                                        <div>
-                                                            <h6>Zone:</h6>
-                                                            <p><?php echo $row->school_zone; ?>
-                                                            </p>
-                                                        </div>
-
-
-                                                        <div>
-                                                            <h6>Number Of Boys:</h6>
-                                                            <p><?php echo $row->school_boys_number; ?>
-                                                            </p>
-                                                        </div>
-
-                                                        <div>
-                                                            <h6>Number Of
-                                                                Girls:</h6>
-                                                            <p><?php echo $row->school_girls_number; ?>
-                                                            </p>
-                                                        </div>
-                                                        <div>
-                                                            <h6>Status:</h6>
-                                                            <p><?php echo $row->school_status; ?>
-                                                            </p>
-                                                        </div>
-                                                        <div>
-                                                            <h6>School Write
-                                                                Up: </h6>
-                                                            <p><?php echo $row->school_write_up; ?>
-                                                            </p>
-                                                        </div>
-                                                        <p class="card-text"><small class="text-muted">Date
-                                                                Created:<?php echo $row->created_on; ?></small>
-                                                        </p>
-
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-12">
-                                                <div class="row">
-                                                    <div>
-                                                        <p>Location
-                                                            Description:&nbsp; <?php echo $row->school_location_name; ?>
-                                                        </p>
-                                                    </div>
-                                                    <div>
-                                                        <p>&nbsp;Latitude:&nbsp;
-                                                            <?php echo $row->school_latitude; ?>
-                                                        </p>
-                                                    </div>
-                                                    <div>
-                                                        <p> &nbsp;Longitude:&nbsp;
-                                                            <?php echo $row->school_longitude; ?>
-                                                        </p>
-                                                    </div>
-                                                    <div id="map">34</div>
-                                                    <div>
-                                                        <button class="btn btn-warning btn-sm"
-                                                            onclick="loadLocation()">View on Map</button>
-
-                                                        <?php echo "<script type='text/javascript'>
-
-                                                        function loadLocation()
-                                                        {
-                                                            var myLatLng = {lat: -5.363, lng: 131.044};
-                                                            var mapDiv = document.createElement('DIV');
-                                                            var  map = new google.maps.Map(mapDiv, {
-                                                                zoom: 16,
-                                                                center: new google.maps.LatLng(-33.91722, 151.23064),
-                                                                mapTypeId: 'roadmap'
-                                                            });
-
-                                                            var marker = new google.maps.Marker({
-                                                                position: myLatLng,
-                                                                map: map,
-                                                                title: 'Hello World!'
-                                                            });
-                                                            console.log(mapDiv);
-                                                             document.getElementById('ads').appendChild(mapDiv);
-                                                        }
-                                                        </script>"; ?>
-                                                    </div>
-
-
 
                                                 </div>
                                             </div>
+
+                                            <div class="col-md-12 col-sm-12">
+                                                <h6 class="title-price mt-4"><small>Write Up</small></h6>
+                                                <div style="width:100%;border-top:1px solid silver">
+                                                    <p class="mt-3">
+                                                        <small>
+                                                            <?php echo $row->school_write_up; ?>
+                                                        </small>
+                                                    </p>
+                                                </div>
+                                            </div>
+
                                         </div>
                                     </div>
+
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal"><i
-                                                class="fas fa-times"></i>Close</button>
+                                        <button type="button" class="btn btn-secondary"
+                                            data-dismiss="modal">Close</button>
                                     </div>
                                 </div>
                             </div>
                         </div>
+
     </div>
     <button type="button" class="btn btn-warning btn-sm" data-toggle="modal"
-        data-target="#exampleModal<?php echo $row->school_id; ?>"><i class="fas fa-edit"></i></button>
+        data-target="#editModal<?php echo $row->school_id; ?>"><i class="fas fa-edit"></i></button>
     <!-- Modal -->
-    <div class="modal fade" id="exampleModal<?php echo $row->school_id; ?>" tabindex="-1" role="dialog"
+    <div class="modal fade" id="editModal<?php echo $row->school_id; ?>" tabindex="-1" role="dialog"
         aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -344,8 +303,7 @@ if ($query->num_rows() > 0) {
                     <h5 class="card-title">Enter school Details to
                         update</h5>
 
-                    <?php echo
-        form_open($this->uri->uri_string()); ?>
+                    <?php echo form_open(base_url() . 'administration/edit-school/' . $row->school_id); ?>
                     <div class="form-group row">
                         <label for="school_name" class="col-sm-2 col-form-label">School
                             Name</label>
@@ -354,6 +312,7 @@ if ($query->num_rows() > 0) {
                             <?php echo form_input(['name' => 'school_name', 'placeholder' => 'School Name', 'class' => 'form-control', 'value' => set_value('school_name', $row->school_name)]) ?>
                         </div>
                     </div>
+
                     <div class="form-group row">
                         <label for="school_zone" class="col-sm-2 col-form-label">School
                             Zone</label>
@@ -379,53 +338,50 @@ if ($query->num_rows() > 0) {
                             <?php echo form_input(['name' => 'school_girls_number', 'placeholder' => 'Enter First Name', 'class' => 'form-control', 'value' => set_value('firstname', $row->school_girls_number)]) ?>
                         </div>
                     </div>
+                    <div class="form-group row">
+                        <label for="school_latitude" class="col-sm-2 col-form-label">Latitude</label>
+                        <div class="col-md-10">
+                            <?php echo form_input(['name' => 'school_latitude', 'placeholder' => 'Enter Latitude', 'class' => 'form-control', 'value' => set_value('school_latitude', $row->school_latitude)]) ?>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="school_longitude" class="col-sm-2 col-form-label">Longitude</label>
+                        <div class="col-md-10">
+                            <?php echo form_input(['name' => 'school_longitude', 'placeholder' => 'Longitude', 'class' => 'form-control', 'value' => set_value('school_longitude', $row->school_longitude)]) ?>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="school_location_name" class="col-sm-2 col-form-label">Location
+                            Name</label>
+                        <div class="col-md-10">
+                            <?php echo form_input(['name' => 'school_location_name', 'placeholder' => 'Location Name', 'class' => 'form-control', 'value' => set_value('school_location_name', $row->school_location_name)]) ?>
+                        </div>
+                    </div>
+
                     <div class="row">
                         <legend class="col-form-label col-sm-2 pt-0">
                             School Status
                         </legend>
                         <div class="form-group">
-                            <input type="radio" name="status" value="1"
-                                <?php echo ($row->school_status == 'Active') ? 'checked' : '' ?>>Active
+                            <input type="radio" name="status" value="1" <?php echo ($row->school_status == 'Active') ? 'checked' : ''
+        ?>>Active
                             <input type="radio" name="status" value="0"
                                 <?php echo ($row->school_status == 'Inactive') ? 'checked' : '' ?> ">Inactive
-                                                </div>
+						</div>
                     </div>
-                    <div class="
-                                form-group row">
-                            <label for="school_latitude" class="col-sm-2 col-form-label">Latitude</label>
-                            <div class="col-md-10">
-                                <?php echo form_input(['name' => 'school_latitude', 'placeholder' => 'Enter Latitude', 'class' => 'form-control', 'value' => set_value('school_latitude', $row->school_latitude)]) ?>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="school_longitude" class="col-sm-2 col-form-label">Longitude</label>
-                            <div class="col-md-10">
-                                <?php echo form_input(['name' => 'school_longitude', 'placeholder' => 'Longitude', 'class' => 'form-control', 'value' => set_value('school_longitude', $row->school_longitude)]) ?>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="school_location_name" class="col-sm-2 col-form-label">Location
-                                Name</label>
-                            <div class="col-md-10">
-                                <?php echo form_input(['name' => 'school_location_name', 'placeholder' => 'Location Name', 'class' => 'form-control', 'value' => set_value('school_location_name', $row->school_location_name)]) ?>
-                            </div>
-                        </div>
 
-                        <div class="form-group row">
-                            <label for="school_write_up" class="ckeditor">School
-                                Write up</label>
-                            <div class="col-md-10">
-                                <?php echo form_textarea(['name' => 'school_write_up', 'placeholder' => 'Describe your school briefly', 'class' => 'ckeditor', 'id' => 'ckeditor', 'value' => set_value('school_write_up', $row->school_write_up)]) ?>
-                            </div>
+                    <div class=" form-group">
+                            <label for="school_write_up">School Write Up</label>
+                            <?php echo form_textarea(array('name' => 'school_write_up', 'id' => 'ckeditor', 'class' => "ckeditor", 'value' => set_value('school_write_up', $row->school_write_up))); ?>
+                            <small id="emailHelp" class="form-text text-muted"></small>
                         </div>
-                        <div class="
-                                form-group row">
+                        <div class="form-group row">
                             <div class="col-sm-10">
-                                <button type="submit" class="btn btn-primary"><i class="fas fa-check"></i>Save
-                                    School</button>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal"><i
                                             class="fas fa-times"></i>Close</button>
+                                    <button type="submit" class="btn btn-primary"><i class="fas fa-check"></i>Save
+                                        School</button>
                                 </div>
                             </div>
                         </div>
