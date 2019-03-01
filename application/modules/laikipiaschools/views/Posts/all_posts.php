@@ -126,8 +126,8 @@ if (!empty($validation_errors)) {
                     <th>Post Image</th>
                     <th>Post Title</th>
                     <th>Post Category</th>
+                    <th>Post Status</th>
                     <th>Date Created</th>
-                    <!-- <th>Post Status</th> -->
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -136,10 +136,10 @@ if (!empty($validation_errors)) {
                     <th>#</th>
                     <th>Post Image</th>
                     <th>Post Title</th>
-
                     <th>Post Category</th>
+                    <th>Post Status</th>
                     <th>Date Created</th>
-                    <!-- <th>Post Status</th> -->
+
                     <th>Actions</th>
                 </tr>
             </tfoot>
@@ -174,6 +174,13 @@ if ($query->num_rows() > 0) {
             }
         }
         ?>
+                        </td>
+                        <td>
+                            <?php if ($row->post_status == 1) {?>
+                            <span class="badge badge-pill badge-success">Active</span>
+                            <?php } else {?>
+                            <span class="badge badge-pill badge-secondary">Inactive</span>
+                            <?php }?>
                         </td>
                         <td>
                             <?php echo $row->created_on; ?>
@@ -230,6 +237,13 @@ if ($query->num_rows() > 0) {
                                                                 Data:</b></h5>
                                                         <p><?php echo $row->post_data; ?>
                                                         </p>
+                                                    </div>
+                                                    <div>
+                                                        <?php if ($row->post_status == 1) {?>
+                                                        <span class="badge badge-pill badge-success">Active</span>
+                                                        <?php } else {?>
+                                                        <span class="badge badge-pill badge-secondary">Inactive</span>
+                                                        <?php }?>
                                                     </div>
                                                     <div>
                                                         <p class="card-text"><small class="text-muted">Date

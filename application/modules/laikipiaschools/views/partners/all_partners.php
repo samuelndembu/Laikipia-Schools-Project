@@ -141,7 +141,7 @@ if ($query->num_rows() > 0) {
                             <img src="<?php echo base_url() . 'assets/uploads/' . $row->partner_thumb; ?>">
                         </td>
                         <td>
-                            <?php if ($row->partner_status = 1) {?>
+                            <?php if ($row->partner_status == 1) {?>
                             <span class="badge badge-pill badge-success">Active</span>
                             <?php } else {?>
                             <span class="badge badge-pill badge-secondary">Inactive</span>
@@ -184,11 +184,15 @@ if ($query->num_rows() > 0) {
                                             <div class="ml-1 pb-3" style="font-size:20px;list-style-type:none;">
                                                 <li><b>Partner Email: </b> <br /><?php echo $row->partner_email; ?></li>
                                             </div>
+                                            <div class="ml-1 pb-3" style="font-size:20px;list-style-type:none;">
+                                                <li><b>Partner Status: </b> <br /><?php echo $row->partner_status; ?>
+                                                </li>
+                                            </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-primary"
                                                     data-dismiss="modal">Close</button>
-
                                             </div>
+
                                         </div>
 
                                     </div>

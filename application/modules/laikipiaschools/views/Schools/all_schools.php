@@ -144,6 +144,35 @@ if (!empty($validation_errors)) {
                                     </div>
                                 </div>
 
+
+
+
+                                <div class="form-group row">
+                                    <label>Choose Files</label>
+                                    <input type="file" name="files[]" multiple />
+                                </div>
+                                <div class="form-group">
+                                    <input type="submit" name="school_image_name" value="UPLOAD" />
+                                </div>
+
+                                <div class="row">
+                                    <ul class="gallery">
+                                        <?php if (!empty($files)) {foreach ($files as $file) {?>
+                                        <li class="item">
+                                            <img
+                                                src="<?php echo base_url('assets/uploads/files/' . $file['school_image_name']); ?>">
+                                            <p>Uploaded On <?php echo date("j M Y", strtotime($file['created_on'])); ?>
+                                            </p>
+                                        </li>
+                                        <?php }} else {?>
+                                        <p>Image(s) not found.....</p>
+                                        <?php }?>
+                                    </ul>
+                                </div>
+
+
+
+
                                 <div class="form-group">
                                     <label for="school_write_up">School Write Up</label>
                                     <?php echo form_textarea(array('name' => 'school_write_up', 'id' => 'ckeditor', 'class' => "ckeditor")); ?>
