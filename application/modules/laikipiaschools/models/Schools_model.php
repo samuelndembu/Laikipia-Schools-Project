@@ -76,7 +76,7 @@ class Schools_model extends CI_Model
         // var_dump($where);die();
         // $where = "school.deleted = 0";
         $this->db->select("*");
-        $this->db->from("$table");
+        $this->db->from($table);
         $this->db->where($where);
         $this->db->limit($limit, $page);
         $this->db->order_by($order, $order_method);
@@ -93,6 +93,13 @@ class Schools_model extends CI_Model
         } else {
             return false;
         }
+    }
+
+    public function get_other_images()
+    {
+        $this->db->select("*");
+        $this->db->from("school_images");
+        return $this->db->get();
     }
     public function get_single_school($school_id)
     {
@@ -119,7 +126,7 @@ class Schools_model extends CI_Model
         }
     }
 
-    public function update_school($school_id, $file_name, $thumb_name)
+    public function update_school($school_id)
     {
         $data = array(
             "school_name" => $this->input->post("school_name"),
@@ -129,8 +136,6 @@ class Schools_model extends CI_Model
             "school_location_name" => $this->input->post("school_location_name"),
             "school_latitude" => $this->input->post("school_latitude"),
             "school_longitude" => $this->input->post("school_longitude"),
-            "school_image_name" => $file_name,
-            "school_thumb_name" => $thumb_name,
             "school_status" => $this->input->post("school_status"),
         );
 

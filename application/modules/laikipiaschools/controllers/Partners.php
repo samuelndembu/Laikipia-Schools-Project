@@ -16,6 +16,7 @@ class Partners extends MX_Controller
         $this->upload_path = realpath(APPPATH . "../assets/uploads");
         $this->upload_location = base_url() . "assets/uploads";
         $this->load->library("image_lib");
+    
     }
     //public function index
     public function index($order = 'partner.partner_name', $order_method = 'ASC')
@@ -147,11 +148,11 @@ class Partners extends MX_Controller
 
     public function export_partners()
     {
-        $order = 'partner.partner_name';
+        $order = 'partner.partner_id';
         $order_method = 'DESC';
-        $where = 'parner_id > 0';
+        $where = 'partner_id > 0';
         $table = 'partner';
-        $partnerss_search = $this->session->userdata('partners_search');
+        $partners_search = $this->session->userdata('partners_search');
         $search_title = $this->session->userdata('partners_search_title');
 
         if (!empty($partners_search) && $partners_search != null) {

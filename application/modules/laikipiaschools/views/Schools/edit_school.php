@@ -64,13 +64,11 @@ form_open($this->uri->uri_string()); ?>
                     <?php echo ($school_status == 'Inactive') ? 'checked' : '' ?> size="17">Inactive
             </div>
         </div>
-
-
-        <div class="form-group row">
+        <div class="row">
             <div class="col-sm-10">
-                <button type="submit" class="btn btn-primary">Save School</button>
                 <div class="modal-footer">
                     <?php echo anchor('laikipiaschools/schools', 'Cancel', ['class' => 'btn btn-primary']); ?>
+                    <button type="submit" class="btn btn-primary">Save School</button>
                 </div>
             </div>
         </div>

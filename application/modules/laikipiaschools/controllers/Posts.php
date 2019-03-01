@@ -22,7 +22,7 @@ class posts extends MX_Controller
         $this->load->model("laikipiaschools/file_model");
         // $this->load->model("administration/payments_model");
     }
-    public function index($order = 'post_title', $order_method = 'ASC', $start = null)
+    public function index($order = 'created_on', $order_method = 'ASC', $start = null)
     {
         $where = 'post_id > 0 AND deleted = 0';
         $table = 'post';
@@ -224,79 +224,27 @@ class posts extends MX_Controller
     {
         $this->form_validation->set_rules("post_title", "Post Title", "required");
         $this->form_validation->set_rules("post_description", "Post Description", "required");
-        $this->form_validation->set_rules("post_image_name", "Post Image", "required");
-        // $this->form_validation->set_rules("post_views", "Views", "required");
-        $this->form_validation->set_rules("post_status", "Status", "required");
 
-        if ($this->form_validation->run()) {
-            if ($this->posts_model->update_post($post_id)) {
+        if ($this->form_validation->run()) 
+        {
+            if ($this->posts_model->update_post($post_id)) 
+            {
                 $this->session->set_flashdata('success', 'post ID: ' . $post_id . ' updated successfully');
 
                 redirect('administration/posts');
-
-            } else {
-                $post = $this->posts_model->get_single_post($post_id);
-
-                $row = $post->row();
-                $v_data['post_title'] = $row->post_title;
-                $v_data['post_description'] = $row->post_description;
-                $v_data['post_image_name'] = $row->post_image_name;
-                $v_data['post_views'] = $row->post_views;
-                $v_data['post_status'] = $row->post_status;
-                $v_data['post_image_name'] = $row->post_image_name;
-                $v_data['post_image_name'] = $row->post_thumb_name;
-
-                // $v_data['query'] = $this->posts_model->get_single_post($post_id);
-                // $v_data['posts'] = $this->posts_model->all_posts();
-
-                $data = array(
-                    "title" => $this->site_model->display_page_title(),
-                    "content" => $this->load->view("posts/all_posts", $v_data, true),
-                );
-
-                $this->load->view("administration/layouts/layout", $data);
+            } 
+            else 
+            {
+                $this->session->set_flashdata('error', validation_errors());
+                redirect('administration/posts');
             }
 
         }
+        else 
+        {
+            redirect('administration/posts');
+        }
     }
-    // public function search_posts()
-    // {
-    //     $post_name = $this->input->post('post_name');
-    //     $post_girls_number = $this->input->post('post_girls_number');
-    //     $post_boys_number = $this->input->post('post_boys_number');
-    //     $post_location_name = $this->input->post('post_location_name');
-    //     $post_status = $this->input->post('post_status');
-    //     // $location_radius = $this->input->post('location_radius');
-
-    //     if (!empty($post_name)) {
-    //         $search_title .= ' post: <strong>' . $post_name . '</strong>';
-    //         $post_name = ' AND post.post_name = \'+' . $post_name . '\'';
-    //     }
-
-    //     if (!empty($post_girls_number)) {
-    //         $search_title .= ' Number of Girls <strong>' . $post_girls_number . '</strong>';
-    //         $post_girls_number = ' AND post.post_girls_number = \'' . $post_girls_number . '\'';
-    //     }
-    //     if (!empty($post_boys_number)) {
-    //         $search_title .= ' Number of boys <strong>' . $post_boys_number . '</strong>';
-    //         $post_boys_number = ' AND post.post_boys_number = \'' . $post_boys_number . '\'';
-    //     }
-    //     if (!empty($post_location_name)) {
-    //         $search_title .= ' Number of Girls <strong>' . $post_location_name . '</strong>';
-    //         $post_location_name = ' AND post.post_location_name = \'' . $post_location_name . '\'';
-    //     }
-    //     if (!empty($post_status)) {
-    //         $search_title .= ' Number of Girls <strong>' . $post_status . '</strong>';
-    //         $post_status = ' AND post.post_status = \'' . $post_status . '\'';
-    //     }
-
-    //     $search = $post_name . $post_girls_number . $post_boys_number . $post_location_name . $post_status;
-
-    //     $this->session->set_userdata('posts_search', $search);
-    //     $this->session->set_userdata('posts_search_title', $search_title);
-
-    //     redirect("administration/posts");
-    // }
 
     public function close_search()
     {
