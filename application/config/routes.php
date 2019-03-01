@@ -115,6 +115,7 @@ $route['administration/partners/(:any)/(:any)/(:num)'] = 'laikipiaschools/partne
 $route['administration/partners/(:any)/(:any)'] = 'laikipiaschools/partners/index/$1/$2';
 $route['administration/partners/bulk-actions'] = 'laikipiaschools/partners/bulk_actions';
 $route['administration/delete-partner/(:num)'] = 'laikipiaschools/partners/delete_partner/$1';
+$route['administration/import-partners'] = 'laikipiaschools/partners/import_partners';
 
 
 

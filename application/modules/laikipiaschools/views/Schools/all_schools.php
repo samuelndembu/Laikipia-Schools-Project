@@ -14,9 +14,8 @@ if (!empty($validation_errors)) {
                 <button type="button" class="btn btn-primary btn-sm" data-toggle="modal"
                     data-target="#createDonation">Add
                     School</button>
-                <input type="file" class="btn btn-default pull-right" placeholder="Import" />
-
-                <a href="<?php echo site_url() . " administration/export-schools" ?>" target="_blank"
+                <!-- <input type="file" class="btn btn-default pull-right" placeholder="Import" /> -->
+              <a href="<?php echo site_url() . " administration/export-schools" ?>" target="_blank"
                     class="btn btn-default pull-right"><i class="fas fa-file-export"></i> Export</a>
                 <div class="modal fade" id="createDonation" tabindex="-1" role="dialog"
                     aria-labelledby="createDonationLabel" aria-hidden="true">

@@ -4,8 +4,10 @@
 
 class Partners extends MX_Controller
 {
-    public $upload_path;
-    public $upload_location;
+    public $upload_image_path;
+    public $upload_image_location;
+    public $upload_csv_path;
+    public $upload_csv_location;
 
     public function __construct()
     {
@@ -13,10 +15,12 @@ class Partners extends MX_Controller
         $this->load->model("laikipiaschools/partners_model");
         $this->load->model("laikipiaschools/file_model");
         $this->load->model("laikipiaschools/site_model");
-        $this->upload_path = realpath(APPPATH . "../assets/uploads");
-        $this->upload_location = base_url() . "assets/uploads";
+        $this->upload_image_path = realpath(APPPATH . "../assets/uploads");
+        $this->upload_image_location = base_url() . "assets/uploads";
+        $this->upload_csv_path = realpath(APPPATH . "../assets/csv");
+        $this->upload_csv_location = base_url() . "assets/csv";
         $this->load->library("image_lib");
-    
+
     }
     //public function index
     public function index($order = 'partner.partner_name', $order_method = 'ASC')
@@ -171,33 +175,79 @@ class Partners extends MX_Controller
 
     }
 
-    //importing file
+    public function import_partners()
+    {
 
-    function import(){
-         // path where your CSV file is located
-        define('CSV_PATH','./csvfile/');    
-      
-            $csv_file = CSV_PATH . "import.csv"; // Name of your CSV file
-            $csvfile = fopen($csv_file, 'r');
-            $theData = fgets($csvfile);
-            $i = 0;
-            while (!feof($csvfile)) {
-                $csv_data[] = fgets($csvfile);
-                $csv_array = explode(",", $csv_data[$i]);
-                $insert_csv = array();
-                $insert_csv['partner_id'] = $csv_array[0];
-                $insert_csv['partner_type_id'] = $csv_array[1];
-                $insert_csv['partner_name'] = $csv_array[2];
-                $insert_csv['partner_email'] = $csv_array[2];
-                // $insert_csv['partner_logo'] = $csv_array[2];
-                //$query = "INSERT INTO csvdata(ID,name,email) VALUES('','".$insert_csv['name']."','".$insert_csv['email']."')";
-                //$n=mysql_query($query, $connect );
-                //$i++;
-                $this->model->save_data( $insert_csv );
+        // Check form submit or not
+        if ($this->input->post('upload') != null) {
+            $data = array();
+            if (!empty($_FILES['file']['name'])) {
+                // Set preference
+                $config['upload_path'] = $this->upload_csv_path;
+                $config['allowed_types'] = 'csv';
+                $config['max_size'] = '1000'; // max_size in kb
+                $config['file_name'] = $_FILES['file']['name'];
+
+                // Load upload library
+                $this->load->library('upload', $config);
+
+                // File upload
+                if ($this->upload->do_upload('file')) {
+                    // Get data about the file
+                    $uploadData = $this->upload->data();
+                    $filename = $uploadData['file_name'];
+
+                    // Reading file
+                    $file = fopen($this->upload_csv_path . '/' . $filename, "r");
+                    $i = 0;
+
+                    $importData_arr = array();
+
+                    while (($filedata = fgetcsv($file, 1000, ",")) !== false) {
+                        $num = count($filedata);
+
+                        for ($c = 0; $c < $num; $c++) {
+                            $importData_arr[$i][] = $filedata[$c];
+                        }
+                        $i++;
+                        
+                    }
+                    fclose($file);
+
+                    $skip = 0;
+
+                    // insert import data
+                    foreach ($importData_arr as $partnerdata) 
+                    //var_dump($partnerdata);die();
+                    
+                    {
+                        
+                            if ($this->partners_model->import_record($partnerdata) != false) {
+                                $this->session->set_flashdata("success", 'Bulk import successfully');
+                                redirect('administration/partners');
+
+                            } else {
+                                $this->session->set_flashdata("error", 'Unable to save bulk partners');
+                                redirect('administration/partners');
+                            }
+                        
+
+                        $skip++;
+                    }
+                } else {
+                    $this->session->set_flashdata("error", 'Failed to upload the file!!');
+                    redirect('administration/partners');
+                }
+            } else {
+                $this->session->set_flashdata("error", 'Failed to upload the file!!');
+                redirect('administration/partners');
             }
-            fclose($csvfile);
 
-        echo "File data successfully imported to database!!";
+        } else {
+            $this->session->set_flashdata("error", 'File is required');
+            redirect('administration/partners');
+        }
+
     }
 
     public function firstview()
@@ -253,7 +303,7 @@ class Partners extends MX_Controller
                 "height" => 600,
             );
 
-            $upload_response = $this->file_model->upload_image($this->upload_path, "partner_logo", $resize);
+            $upload_response = $this->file_model->upload_image($this->upload_image_path, "partner_logo", $resize);
 
             if ($upload_response["check"] == false) {
 
@@ -271,18 +321,19 @@ class Partners extends MX_Controller
                     $this->session->set_flashdata("error_message", "unable to add school");
                 }
             }
-        } else {
-
-            $v_data["query"] = $this->partners_model->get_partners();
-            $v_data["partner_types"] = $this->partners_model->get_partner_types();
-
-            $data = array("title" => "Partner",
-                "content" => $this->load->view("partners/all_partners", $v_data, true),
-
-            );
-
-            $this->load->view("laikipiaschools/layouts/layout", $data);
         }
+        //else {
+
+        //     $v_data["query"] = $this->partners_model->get_partners();
+        //     $v_data["partner_types"] = $this->partners_model->get_partner_types();
+
+        //     $data = array("title" => "Partner",
+        //         "content" => $this->load->view("partners/all_partners", $v_data, true),
+
+        //     );
+
+        //     $this->load->view("laikipiaschools/layouts/layout", $data);
+        // }
     }
 
     public function edit($partner_id)

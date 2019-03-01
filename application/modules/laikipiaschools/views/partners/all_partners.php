@@ -8,22 +8,22 @@ if (!empty($validation_errors)) {
 <div class="shadow-lg p-3 mb-5 bg-white rounded">
     <div class="card shadow mb-4">
         <div class="card-header py-3">
+        
             <!-- <button type="button" class="btn btn-success">Add Partner</button> -->
             <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal">
                 Add Partner
             </button>
+   
+        <a href="<?php echo site_url() . "administration/export-partners" ?>" target="_blank"
+        class="btn btn-default pull-right"><i class="fas fa-file-export"></i> Export</a>
+        <!-- import form -->
+    <?php echo form_open_multipart(base_url() . 'administration/import-partners');?>
+        <input type='file' name='file'>
+        <input type='submit' name='upload'>
+    <?php form_close();?>
 
-            <!-- <input type="file" class="btn btn-default pull-right" placeholder="Import" /> -->
-           
-            
-            <a href="<?php echo site_url() . "administration/export-partners" ?>" target="_blank"
-            class="btn btn-default pull-right"><i class="fas fa-file-export"></i> Export</a>
-            <!-- <?//php echo form_open_multipart('partners/import'); ?>
-                <input type="file" name="userfile" size="20" />
-                <br /><br />
-                <input type="submit" value="upload" /> -->
         </div>
-        
+
     </div>
     <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
