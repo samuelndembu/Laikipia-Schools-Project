@@ -48,9 +48,6 @@ echo $content;?>
     <link href="<?php echo base_url(); ?>assets/fontawesome/css/all.css" rel="stylesheet">
     <script defer src="<?php echo base_url(); ?>assets/fontawesome/js/all.js"></script>
 
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAMfrWKiELcjgQDzNq1n3LTVMSQAXGSs6E">
-    </script>
-
 </body>
 
 </html>

@@ -21,3 +21,5 @@
 
 <!-- <script src="<?php echo base_url(); ?>assets/themes/custom/js/script1.js"></script> -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-119386393-1"></script>
+<?php echo '<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAMfrWKiELcjgQDzNq1n3LTVMSQAXGSs6E"></script>'; ?>
+
