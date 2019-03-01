@@ -113,4 +113,67 @@ class Partners_model extends CI_Model
         }
     }
 
+    //import function
+  
+
+        // function importRecord($record){
+       
+        //   if(count($record) > 0){
+       
+        //     // Check partner
+        //     $this->db->select('*');
+        //     $this->db->where('partner_name', $record[0]);
+        //     $q = $this->db->get('partner');
+        //     $response = $q->result_array();
+       
+        //     // Insert record
+        //     if(count($response) == 0){
+        //       $newpartner = array(
+        //         "partner_type_id" => trim($record[0]),
+        //         "partner_name" => trim($record[1]),
+        //         "partner_email" => trim($record[2]),
+               
+        //       );
+      
+        //       $this->db->insert('partner', $newpartner);
+        //     }
+       
+        //   }
+       
+        // }
+        function import_record($record)
+        {
+            // echo json_encode($record);die();
+          if(count($record) > 0){
+              
+            // Check partner
+            $this->db->select('*');
+            $this->db->where('partner_name', $record[1]);
+            $q = $this->db->get('partner');
+            $response = $q->result_array();
+       
+            // Insert record
+            if(count($response) == 0){
+              $newpartner = array(
+                "partner_type_id" => trim($record[0]),
+                "partner_name" => trim($record[1]),
+                "partner_email" => trim($record[2]),
+               
+              );
+              return $this->db->insert('partner', $newpartner);
+            }
+            else
+            {
+                return FALSE;
+            }
+       
+          }
+       
+        }
+      
+      
+      
+      
+      
+
 }
