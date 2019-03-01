@@ -22,6 +22,15 @@ if (!empty($validation_errors)) {
         <input type='submit' name='upload'>
     <?php form_close();?>
 
+            <!-- <input type="file" class="btn btn-default pull-right" placeholder="Import" /> -->
+
+
+            <a href="<?php echo site_url() . "administration/export-partners" ?>" target="_blank"
+                class="btn btn-default pull-right"><i class="fas fa-file-export"></i> Export</a>
+            <!-- <?//php echo form_open_multipart('partners/import'); ?>
+                <input type="file" name="userfile" size="20" />
+                <br /><br />
+                <input type="submit" value="upload" /> -->
         </div>
 
     </div>
@@ -96,9 +105,11 @@ if (!empty($validation_errors)) {
                         <th>Partner Type</th>
                         <!-- <th>Partner Name</th> -->
                         <!-- <th><?php echo anchor("administration/partners/partner.partner_name/" . $order_method, "Partner Name"); ?></th> -->
-                        <th><?php echo anchor("administration/partners/" . $order . "/" . $order_method, "Partner Name"); ?></th>
+                        <th><?php echo anchor("administration/partners/" . $order . "/" . $order_method, "Partner Name"); ?>
+                        </th>
                         <th>Partner Email</th>
                         <th>Partner Logo</th>
+                        <th>Partner Status</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -109,6 +120,7 @@ if (!empty($validation_errors)) {
                         <th>Partner Name</th>
                         <th>Partner Email</th>
                         <th>Partner Logo</th>
+                        <th>Partner Status</th>
                         <th>Actions</th>
                     </tr>
 
@@ -136,6 +148,13 @@ if ($query->num_rows() > 0) {
                         </td>
                         <td>
                             <img src="<?php echo base_url() . 'assets/uploads/' . $row->partner_thumb; ?>">
+                        </td>
+                        <td>
+                            <?php if ($row->partner_status = 1) {?>
+                            <span class="badge badge-pill badge-success">Active</span>
+                            <?php } else {?>
+                            <span class="badge badge-pill badge-secondary">Inactive</span>
+                            <?php }?>
                         </td>
                         <td>
 
@@ -210,5 +229,4 @@ echo anchor("administration/delete-partner/" . $row->partner_id, "<i class='fas 
     <p>
         <?php echo $links; ?>
     </p>
-</div>
 </div>
