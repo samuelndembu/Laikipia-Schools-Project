@@ -33,8 +33,7 @@ if (!empty($validation_errors)) {
                                 <div class="form-group">
                                     <label for="school_name">School Name</label>
                                     <input type="text" class="form-control" id="school_name"
-                                        aria-describedby="emailHelp" name="school_name"
-                                        placeholder="School Name">
+                                        aria-describedby="emailHelp" name="school_name" placeholder="School Name">
                                 </div>
                                 <div class="form-group">
                                     <label for="school_name">Zone</label>
@@ -66,7 +65,7 @@ if (!empty($validation_errors)) {
                                     <!-- <input type="text" class="form-control" id="school_name"
                                         aria-describedby="emailHelp" name="school_boys_number"
                                         placeholder="School Name"> -->
-                                    <!-- <select id="inputState" class="form-control" name="school_name">
+                                <!-- <select id="inputState" class="form-control" name="school_name">
                                         <option selected>Choose your School.</option>
                                         <option value="Draja Academy">Draja Academy</option>
                                         <option value="G.G Kinamba Day sec school"> G.G Kinamba Day Secondary School
@@ -79,8 +78,8 @@ if (!empty($validation_errors)) {
                                         <option value="Shamanei pry school">Shamanei Primary School</option>
                                         <option value="Tandare Day sec school">Tandare Day Secondary School</option>
                                     </select>
-                                </div> --> 
-                                 
+                                </div> -->
+
                                 <div class="form-group">
                                     <label for="school_boys_number">Number of boys</label>
                                     <input type="number" class="form-control" id="school_boys_number"
@@ -166,33 +165,35 @@ if (!empty($validation_errors)) {
         </div>
     </div>
 
-	<div class=" table-responsive">
-		<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-			<thead>
-				<tr>
-					<th>#</th>
-					<th> School Picture</th>
-					<th>School Name</th>
-					<th>Number of Boys</th>
-					<th>Number of Girls</th>
-					<th>Actions</th>
-				</tr>
-			</thead>
-			<tfoot>
-				<tr>
-					<th>#</th>
-					<th>School Picture</th>
-					<th>School Name</th>
-					<th>Number of Boys</th>
-					<th>Number of Girls</th>
-					<th>Actions</th>
-				</tr>
-			</tfoot>
-			<tbody>
-			<?php $this->load->view('view_edit_school'); ?>
-</tbody>
-</table>
-</div>
-<p>
-    <?php echo $links; ?>
-</p>
+    <div class=" table-responsive">
+        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th> School Picture</th>
+                    <th>School Name</th>
+                    <th>Number of Boys</th>
+                    <th>Number of Girls</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tfoot>
+                <tr>
+                    <th>#</th>
+                    <th>School Picture</th>
+                    <th>School Name</th>
+                    <th>Number of Boys</th>
+                    <th>Number of Girls</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </tfoot>
+            <tbody>
+                <?php $this->load->view('view_edit_school');?>
+            </tbody>
+        </table>
+    </div>
+    <p>
+        <?php echo $links; ?>
+    </p>
